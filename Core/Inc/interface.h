@@ -2,7 +2,7 @@
 #define __INTERFACE_H
 
 #include "io_manager.h"
-
+#include "uart_manager.h"
 
 #ifdef __cplusplus
 extern "C" {

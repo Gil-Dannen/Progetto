@@ -14,9 +14,6 @@ extern "C" {
 
 #include "stm32l4xx_hal.h"
 
-#include "../../Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_tsensor.h"
-#include "../../Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_hsensor.h"
-#include "../../Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_psensor.h"
 
 typedef enum MappedFunction{
 	MF_undefined = 0,
@@ -29,6 +26,9 @@ typedef enum bspFunction{
 	BSP_humidity = 0,
 	BSP_temperature,
 	BSP_pressure,
+	BSP_magneto,
+	BSP_gyro,
+	BSP_accellero,
 	BSP_COUNT
 }bspF;
 
@@ -38,7 +38,6 @@ struct IOS_Man_type{
 	double m_factor;
 	double m_offset;
 };
-
 
 void bspFunctionInit();
 float bspGetValue(bspF);

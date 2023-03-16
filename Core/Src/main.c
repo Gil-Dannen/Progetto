@@ -39,7 +39,8 @@
 static const uint8_t dt = 2;
 /* USER CODE END PM */
 
-/* Private variables -----
+/* Private variables ---------------------------------------------------------*/
+
 
 /* USER CODE BEGIN PV */
 
@@ -48,7 +49,7 @@ static const uint8_t dt = 2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -89,15 +90,17 @@ int main(void)
   /* USER CODE BEGIN 2 */
   setup();
   /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-	HAL_Delay(2);
-	beforeLoop(dt);
-	loop(dt);
-	afterLoop(dt);
+	  HAL_Delay(dt);
+	  beforeLoop(dt);
+	  loop(dt);
+	  afterLoop(dt);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -152,7 +155,7 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief USART2 Initialization Function
+  * @brief USART1 Initialization Function
   * @param None
   * @retval None
   */
