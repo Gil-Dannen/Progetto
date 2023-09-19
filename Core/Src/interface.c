@@ -6,7 +6,7 @@
  */
 #include "interface.h"
 
-static const unsigned int timeout = 1000;
+static const unsigned int timeout = 10000;
 static unsigned int timer = 0;
 
 void setup()
@@ -20,6 +20,29 @@ void setup()
  	setMappedFunction(MF_led1,GPIOA, GPIO_PIN_5,0,1);
 }
 
+void testBSPfunctions()
+{
+  char Test[100];
+  sprintf(Test, "     Temperature = %d", (int)bspGetValue(BSP_temperature));
+  sendMessage(Test);
+  sprintf(Test, "     Humidity = %d", (int)bspGetValue(BSP_humidity));
+  sendMessage(Test);
+  sprintf(Test, "     Pressure = %d", (int)bspGetValue(BSP_pressure));
+
+  float * temp;
+  temp = bspGetTripleValue(BSPT_accellero);
+  sendMessage(Test);
+  sprintf(Test, "     Accellerometer = %d,%d,%d", (int)temp[0],(int)temp[1],(int)temp[2]);
+  sendMessage(Test);
+  temp = bspGetTripleValue(BSPT_magneto);
+  sprintf(Test, "     Magneto = %d,%d,%d", (int)temp[0],(int)temp[1],(int)temp[2]);
+  sendMessage(Test);
+
+  temp = bspGetTripleValue(BSPT_gyro);
+  sprintf(Test, "     Gyro = %d,%d,%d", (int)temp[0],(int)temp[1],(int)temp[2]);
+  sendMessage(Test);
+}
+
 void beforeLoop(uint8_t deltaMs)
 {
 	timer+=deltaMs;
@@ -28,24 +51,8 @@ void beforeLoop(uint8_t deltaMs)
 
 void loop(uint8_t deltaMs)
 {
-  char Test[100];
   if(timer >= timeout){
-	  sprintf(Test, "     Temperature = %d", (int)bspGetValue(BSP_temperature));
-	  sendMessage(Test);
-	  sprintf(Test, "     Humidity = %d", (int)bspGetValue(BSP_humidity));
-	  sendMessage(Test);
-	  sprintf(Test, "     Pressure = %d", (int)bspGetValue(BSP_pressure));
-	  sendMessage(Test);
-	  sprintf(Test, "     Accellerometer = %d", (int)bspGetValue(BSP_accellero));
-	  sendMessage(Test);
-	  sprintf(Test, "     Magneto = %d", (int)bspGetValue(BSP_magneto));
-	  sendMessage(Test);
-	  float gyro;
-	  BSP_GYRO_GetXYZ(&gyro);
-	  sprintf(Test, "     Gyro = %d", (int)gyro);
-	  //sprintf(Test, "     Gyro = %d", (int)bspGetValue(BSP_gyro));
-	  sendMessage(Test);
-
+	  testBSPfunctions();
 	  timer = 0;
   }
 

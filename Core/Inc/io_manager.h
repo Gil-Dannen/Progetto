@@ -26,11 +26,15 @@ typedef enum bspFunction{
 	BSP_humidity = 0,
 	BSP_temperature,
 	BSP_pressure,
-	BSP_magneto,
-	BSP_gyro,
-	BSP_accellero,
-	BSP_COUNT
+	BSP_COUNT,
 }bspF;
+
+typedef enum bspTripleFunction{
+	BSPT_magneto = 0,
+	BSPT_gyro,
+	BSPT_accellero,
+	BSPT_COUNT,
+}bspTF;
 
 struct IOS_Man_type{
 	GPIO_TypeDef * m_type;
@@ -41,6 +45,7 @@ struct IOS_Man_type{
 
 void bspFunctionInit();
 float bspGetValue(bspF);
+float * bspGetTripleValue(bspTF);
 
 void setMappedFunction(MF mf,GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin,double offset,double factor);
 

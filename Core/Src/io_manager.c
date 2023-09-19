@@ -19,8 +19,9 @@ float (*bspFunctionArray[BSP_COUNT])(void);
 
 static struct IOS_Man_type ios_manager[MF_COUNT];
 
-int16_t value = 0;
-float place_holder;
+
+static int16_t placeHolderInt16[3];
+static float placeHolderFloat[3];
 
 
 
@@ -35,9 +36,6 @@ void bspFunctionInit()
 	BSP_ACCELERO_Init();
 	BSP_GYRO_Init();
 	BSP_MAGNETO_Init();
-	place_holder = 0.f;
-
-
 }
 
 
@@ -67,27 +65,33 @@ GPIO_PinState readDigital(MF mf)
 
 float bspGetValue(bspF function)
 {
+
+	if(function >= BSP_COUNT)
+			return 404;
+	return (bspFunctionArray[function])();
+}
+
+float * bspGetTripleValue(bspTF function)
+{
 	switch(function)
 	{
-	case BSP_gyro:
-		BSP_GYRO_GetXYZ(&place_holder);
-		return place_holder;
+	case BSPT_gyro:
+		BSP_GYRO_GetXYZ(&placeHolderFloat);
+		return placeHolderFloat;
 		break;
-	case BSP_magneto:
-		BSP_MAGNETO_GetXYZ(&value);
-		return (float)value;
+	case BSPT_magneto:
+		BSP_MAGNETO_GetXYZ(&placeHolderInt16);
 		break;
-	case BSP_accellero:
-		BSP_ACCELERO_AccGetXYZ(&value);
-		return (float)value;
+	case BSPT_accellero:
+		BSP_ACCELERO_AccGetXYZ(&placeHolderInt16);
 		break;
 	default:
 		//Not handled
 		break;
 	}
-	if(function >= BSP_magneto)
-			return 404;
-	return (bspFunctionArray[function])();
+	for(int i=0; i< 3; i++)
+		placeHolderFloat[i] = placeHolderInt16[i];
+	return placeHolderFloat;
 }
 
 
