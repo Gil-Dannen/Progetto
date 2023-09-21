@@ -1,0 +1,44 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"obj_*": true,
+			".settings": true,
+			".cproject": true,
+			".project": true,
+			"*.arxml": true,
+			"*.code-workspace": true,
+			".vscode": true
+		},
+		"C_Cpp.intelliSenseEngineFallback": "Enabled",
+		"C_Cpp.vcFormat.indent.preserveComments": true,
+		"editor.detectIndentation": false,
+		"files.autoGuessEncoding": true,
+		"files.associations": {
+			"*.s": "arm",
+			"*.hpp": "cpp",
+			"*.cpp": "cpp",
+			"*.c": "c",
+			"*.h": "c",
+			"cstd*": "c",
+			"cstdlib": "cpp",
+			"cstdint": "c",
+			"cstring": "c",
+			"cassert": "cpp",
+			"cfloat": "cpp",
+			"cmath": "cpp",
+			"cstdarg": "cpp"
+		},
+		"window.title": "${dirty}${folderName}${separator}${activeEditorShort}${separator}${rootName}${separator}${appName}",
+		"liveshare.allowGuestTaskControl": true,
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+		"editor.formatOnPaste": true,
+		"search.quickOpen.includeHistory": false,
+		"search.quickOpen.history.filterSortOrder": "recency"
+	}
+}
