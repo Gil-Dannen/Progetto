@@ -1,9 +1,3 @@
-/*
- * uart_manager.h
- *
- *  Created on: Mar 16, 2023
- *      Author: david
- */
 
 #ifndef INC_UART_MANAGER_H_
 #define INC_UART_MANAGER_H_
