@@ -1,9 +1,3 @@
-/*
- * io_manager.c
- *
- *  Created on: Mar 2, 2023
- *      Author: david
- */
 
 #include "io_manager.h"
 

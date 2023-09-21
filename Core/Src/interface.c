@@ -1,9 +1,3 @@
-/*
- * interface.c
- *
- *  Created on: Mar 2, 2023
- *      Author: david
- */
 #include "interface.h"
 
 static const unsigned int timeout = 10000;
