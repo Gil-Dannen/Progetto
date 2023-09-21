@@ -73,6 +73,8 @@ float bspGetValue(bspF function)
 
 float * bspGetTripleValue(bspTF function)
 {
+    if(function >= BSPT_COUNT)
+			return 404;
 	switch(function)
 	{
 	case BSPT_gyro:
