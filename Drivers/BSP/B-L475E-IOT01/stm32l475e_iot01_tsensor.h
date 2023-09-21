@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_TSENSOR_H
 #define __STM32L475E_IOT01_TSENSOR_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"
 #ifdef USE_LPS22HB_TEMP
 #include "../Components/lps22hb/lps22hb.h"
@@ -66,10 +66,10 @@ typedef enum
 /** @defgroup STM32L475E_IOT01_TEMPERATURE_Exported_Functions TEMPERATURE Exported Constants
   * @{
   */
-/* Exported macros -----------------------------------------------------------*/
-/* Private macros ------------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/
-/* Sensor Configuration Functions */
+
+
+
+
 uint32_t BSP_TSENSOR_Init(void);
 float BSP_TSENSOR_ReadTemp(void);
 /**
@@ -94,4 +94,4 @@ float BSP_TSENSOR_ReadTemp(void);
 
 #endif /* __STM32L475E_IOT01_TSENSOR_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

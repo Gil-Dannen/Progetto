@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32_HAL_LEGACY
 #define STM32_HAL_LEGACY
 
@@ -25,9 +25,9 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
+
+
+
 
 /** @defgroup HAL_AES_Aliased_Defines HAL CRYP Aliased Defines maintained for legacy purpose
   * @{
@@ -44,7 +44,7 @@ extern "C" {
 #define CRYP_DATATYPE_1B                CRYP_BIT_SWAP
 #define CRYP_CCF_CLEAR                  CRYP_CLEAR_CCF
 #define CRYP_ERR_CLEAR                  CRYP_CLEAR_RWEIF
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -103,13 +103,13 @@ extern "C" {
 
 #if defined(STM32H7)
 #define ADC_CHANNEL_VBAT_DIV4           ADC_CHANNEL_VBAT
-#endif /* STM32H7 */
+#endif
 
 #if defined(STM32U5)
 #define ADC_SAMPLETIME_5CYCLE           ADC_SAMPLETIME_5CYCLES
 #define ADC_SAMPLETIME_391CYCLES_5      ADC_SAMPLETIME_391CYCLES
 #define ADC4_SAMPLETIME_160CYCLES_5     ADC4_SAMPLETIME_814CYCLES_5
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -137,13 +137,13 @@ extern "C" {
 #define COMP_EXTI_LINE_COMP6_EVENT     COMP_EXTI_LINE_COMP6
 #define COMP_EXTI_LINE_COMP7_EVENT     COMP_EXTI_LINE_COMP7
 #if defined(STM32L0)
-#define COMP_LPTIMCONNECTION_ENABLED   ((uint32_t)0x00000003U)    /*!< COMPX output generic naming: connected to LPTIM input 1 for COMP1, LPTIM input 2 for COMP2 */
+#define COMP_LPTIMCONNECTION_ENABLED   ((uint32_t)0x00000003U)
 #endif
 #define COMP_OUTPUT_COMP6TIM2OCREFCLR  COMP_OUTPUT_COMP6_TIM2OCREFCLR
 #if defined(STM32F373xC) || defined(STM32F378xx)
 #define COMP_OUTPUT_TIM3IC1            COMP_OUTPUT_COMP1_TIM3IC1
 #define COMP_OUTPUT_TIM3OCREFCLR       COMP_OUTPUT_COMP1_TIM3OCREFCLR
-#endif /* STM32F373xC || STM32F378xx */
+#endif
 
 #if defined(STM32L0) || defined(STM32L4)
 #define COMP_WINDOWMODE_ENABLE         COMP_WINDOWMODE_COMP1_INPUT_PLUS_COMMON
@@ -165,9 +165,9 @@ extern "C" {
 #define COMP_INVERTINGINPUT_DAC2        COMP_INPUT_MINUS_DAC1_CH2
 #define COMP_INVERTINGINPUT_IO1         COMP_INPUT_MINUS_IO1
 #if defined(STM32L0)
-/* Issue fixed on STM32L0 COMP driver: only 2 dedicated IO (IO1 and IO2),     */
-/* IO2 was wrongly assigned to IO shared with DAC and IO3 was corresponding   */
-/* to the second dedicated IO (only for COMP2).                               */
+
+
+
 #define COMP_INVERTINGINPUT_IO2         COMP_INPUT_MINUS_DAC1_CH2
 #define COMP_INVERTINGINPUT_IO3         COMP_INPUT_MINUS_IO2
 #else
@@ -180,8 +180,8 @@ extern "C" {
 #define COMP_OUTPUTLEVEL_LOW            COMP_OUTPUT_LEVEL_LOW
 #define COMP_OUTPUTLEVEL_HIGH           COMP_OUTPUT_LEVEL_HIGH
 
-/* Note: Literal "COMP_FLAG_LOCK" kept for legacy purpose.                    */
-/*       To check COMP lock state, use macro "__HAL_COMP_IS_LOCKED()".        */
+
+
 #if defined(COMP_CSR_LOCK)
 #define COMP_FLAG_LOCK                 COMP_CSR_LOCK
 #elif defined(COMP_CSR_COMP1LOCK)
@@ -223,7 +223,7 @@ extern "C" {
 #define  MPU_DEVICE_nGnRnE          MPU_DEVICE_NGNRNE
 #define  MPU_DEVICE_nGnRE           MPU_DEVICE_NGNRE
 #define  MPU_DEVICE_nGRE            MPU_DEVICE_NGRE
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -231,8 +231,8 @@ extern "C" {
 /** @defgroup CRC_Aliases CRC API aliases
   * @{
   */
-#define HAL_CRC_Input_Data_Reverse   HAL_CRCEx_Input_Data_Reverse    /*!< Aliased to HAL_CRCEx_Input_Data_Reverse for inter STM32 series compatibility  */
-#define HAL_CRC_Output_Data_Reverse  HAL_CRCEx_Output_Data_Reverse   /*!< Aliased to HAL_CRCEx_Output_Data_Reverse for inter STM32 series compatibility */
+#define HAL_CRC_Input_Data_Reverse   HAL_CRCEx_Input_Data_Reverse
+#define HAL_CRC_Output_Data_Reverse  HAL_CRCEx_Output_Data_Reverse
 
 /**
   * @}
@@ -344,7 +344,7 @@ extern "C" {
 #define DMA_REQUEST_DCMI_PSSI                    DMA_REQUEST_DCMI
 #endif
 
-#endif /* STM32L4 */
+#endif
 
 #if defined(STM32G0)
 #define DMA_REQUEST_DAC1_CHANNEL1                DMA_REQUEST_DAC1_CH1
@@ -416,11 +416,11 @@ extern "C" {
 #define DAC_TRIGGER_LP1_OUT                        DAC_TRIGGER_LPTIM1_OUT
 #define DAC_TRIGGER_LP2_OUT                        DAC_TRIGGER_LPTIM2_OUT
 
-#endif /* STM32H7 */
+#endif
 
 #if defined(STM32U5)
 #define GPDMA1_REQUEST_DCMI                        GPDMA1_REQUEST_DCMI_PSSI
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -516,7 +516,7 @@ extern "C" {
 #define FLASH_FLAG_STRBER_BANK2R      FLASH_FLAG_STRBERR_BANK2
 #define FLASH_FLAG_WDW                FLASH_FLAG_WBNE
 #define OB_WRP_SECTOR_All             OB_WRP_SECTOR_ALL
-#endif /* STM32H7 */
+#endif
 #if defined(STM32U5)
 #define OB_USER_nRST_STOP             OB_USER_NRST_STOP
 #define OB_USER_nRST_STDBY            OB_USER_NRST_STDBY
@@ -525,7 +525,7 @@ extern "C" {
 #define OB_USER_nBOOT0                OB_USER_NBOOT0
 #define OB_nBOOT0_RESET               OB_NBOOT0_RESET
 #define OB_nBOOT0_SET                 OB_NBOOT0_SET
-#endif /* STM32U5 */
+#endif
 
 /**
   * @}
@@ -542,7 +542,7 @@ extern "C" {
 #define __HAL_RCC_JPEG_RELEASE_RESET            __HAL_RCC_JPGDECRST_RELEASE_RESET
 #define __HAL_RCC_JPEG_CLK_SLEEP_ENABLE         __HAL_RCC_JPGDEC_CLK_SLEEP_ENABLE
 #define __HAL_RCC_JPEG_CLK_SLEEP_DISABLE        __HAL_RCC_JPGDEC_CLK_SLEEP_DISABLE
-#endif /* STM32H7 */
+#endif
 
 /**
   * @}
@@ -567,7 +567,7 @@ extern "C" {
 #define HAL_SYSCFG_DisableIOAnalogSwitchBooster   HAL_SYSCFG_DisableIOSwitchBooster
 #define HAL_SYSCFG_EnableIOAnalogSwitchVDD        HAL_SYSCFG_EnableIOSwitchVDD
 #define HAL_SYSCFG_DisableIOAnalogSwitchVDD       HAL_SYSCFG_DisableIOSwitchVDD
-#endif /* STM32G4 */
+#endif
 
 /**
   * @}
@@ -636,8 +636,8 @@ extern "C" {
 #define GPIO_AF10_OTG2_HS  GPIO_AF10_OTG2_FS
 #define GPIO_AF10_OTG1_FS  GPIO_AF10_OTG1_HS
 #define GPIO_AF12_OTG2_FS  GPIO_AF12_OTG1_FS
-#endif /*STM32H743xx || STM32H753xx || STM32H750xx || STM32H742xx || STM32H745xx || STM32H755xx || STM32H747xx || STM32H757xx */
-#endif /* STM32H7 */
+#endif
+#endif
 
 #define GPIO_AF0_LPTIM                            GPIO_AF0_LPTIM1
 #define GPIO_AF1_LPTIM                            GPIO_AF1_LPTIM1
@@ -648,30 +648,30 @@ extern "C" {
 #define  GPIO_SPEED_MEDIUM                        GPIO_SPEED_FREQ_MEDIUM
 #define  GPIO_SPEED_FAST                          GPIO_SPEED_FREQ_HIGH
 #define  GPIO_SPEED_HIGH                          GPIO_SPEED_FREQ_VERY_HIGH
-#endif /* STM32L0 || STM32L4 || STM32F4 || STM32F2 || STM32F7 || STM32G4 || STM32H7 || STM32WB || STM32U5*/
+#endif
 
 #if defined(STM32L1)
 #define  GPIO_SPEED_VERY_LOW    GPIO_SPEED_FREQ_LOW
 #define  GPIO_SPEED_LOW         GPIO_SPEED_FREQ_MEDIUM
 #define  GPIO_SPEED_MEDIUM      GPIO_SPEED_FREQ_HIGH
 #define  GPIO_SPEED_HIGH        GPIO_SPEED_FREQ_VERY_HIGH
-#endif /* STM32L1 */
+#endif
 
 #if defined(STM32F0) || defined(STM32F3) || defined(STM32F1)
 #define  GPIO_SPEED_LOW    GPIO_SPEED_FREQ_LOW
 #define  GPIO_SPEED_MEDIUM GPIO_SPEED_FREQ_MEDIUM
 #define  GPIO_SPEED_HIGH   GPIO_SPEED_FREQ_HIGH
-#endif /* STM32F0 || STM32F3 || STM32F1 */
+#endif
 
 #define GPIO_AF6_DFSDM                            GPIO_AF6_DFSDM1
 
 #if defined(STM32U5)
 #define GPIO_AF0_RTC_50Hz                         GPIO_AF0_RTC_50HZ
-#endif /* STM32U5 */
+#endif
 #if defined(STM32U5)
 #define GPIO_AF0_S2DSTOP                          GPIO_AF0_SRDSTOP
 #define GPIO_AF11_LPGPIO                          GPIO_AF11_LPGPIO1
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -681,7 +681,7 @@ extern "C" {
   */
 #if defined(STM32U5)
 #define GTZC_PERIPH_DCMI                      GTZC_PERIPH_DCMI_PSSI
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -717,7 +717,7 @@ extern "C" {
 #define HRTIM_TIMEEVENT_B                       HRTIM_EVENTCOUNTER_B
 #define HRTIM_TIMEEVENTRESETMODE_UNCONDITIONAL  HRTIM_EVENTCOUNTER_RSTMODE_UNCONDITIONAL
 #define HRTIM_TIMEEVENTRESETMODE_CONDITIONAL    HRTIM_EVENTCOUNTER_RSTMODE_CONDITIONAL
-#endif /* STM32G4 */
+#endif
 
 #if defined(STM32H7)
 #define HRTIM_OUTPUTSET_TIMAEV1_TIMBCMP1 HRTIM_OUTPUTSET_TIMEV_1
@@ -829,7 +829,7 @@ extern "C" {
 #define HRTIM_OUTPUTRESET_TIMFEV7_TIMDCMP4 HRTIM_OUTPUTSET_TIMEV_7
 #define HRTIM_OUTPUTRESET_TIMFEV8_TIMECMP2 HRTIM_OUTPUTSET_TIMEV_8
 #define HRTIM_OUTPUTRESET_TIMFEV9_TIMECMP3 HRTIM_OUTPUTSET_TIMEV_9
-#endif /* STM32H7 */
+#endif
 
 #if defined(STM32F3)
 /** @brief Constants defining available sources associated to external events.
@@ -846,7 +846,7 @@ extern "C" {
 #define HRTIM_CALIBRATIONRATE_114              (HRTIM_DLLCR_CALRTE_1)
 #define HRTIM_CALIBRATIONRATE_14               (HRTIM_DLLCR_CALRTE_1 | HRTIM_DLLCR_CALRTE_0)
 
-#endif /* STM32F3 */
+#endif
 /**
   * @}
   */
@@ -913,8 +913,8 @@ extern "C" {
 #define LPTIM_TRIGSAMPLETIME_4TRANSISTIONS      LPTIM_TRIGSAMPLETIME_4TRANSITIONS
 #define LPTIM_TRIGSAMPLETIME_8TRANSISTIONS      LPTIM_TRIGSAMPLETIME_8TRANSITIONS
 
-/* The following 3 definition have also been present in a temporary version of lptim.h */
-/* They need to be renamed also to the right name, just in case */
+
+
 #define LPTIM_TRIGSAMPLETIME_2TRANSITION        LPTIM_TRIGSAMPLETIME_2TRANSITIONS
 #define LPTIM_TRIGSAMPLETIME_4TRANSITION        LPTIM_TRIGSAMPLETIME_4TRANSITIONS
 #define LPTIM_TRIGSAMPLETIME_8TRANSITION        LPTIM_TRIGSAMPLETIME_8TRANSITIONS
@@ -932,7 +932,7 @@ extern "C" {
 #define LPTIM_ISR_CC1        LPTIM_ISR_CC1IF
 #define LPTIM_ISR_CC2        LPTIM_ISR_CC2IF
 #define LPTIM_CHANNEL_ALL    0x00000000U
-#endif /* STM32U5 */
+#endif
 /**
   * @}
   */
@@ -1039,7 +1039,7 @@ extern "C" {
   * @{
   */
 
-/* Compact Flash-ATA registers description */
+
 #define CF_DATA                       ATA_DATA
 #define CF_SECTOR_COUNT               ATA_SECTOR_COUNT
 #define CF_SECTOR_NUMBER              ATA_SECTOR_NUMBER
@@ -1050,7 +1050,7 @@ extern "C" {
 #define CF_STATUS_CMD_ALTERNATE       ATA_STATUS_CMD_ALTERNATE
 #define CF_COMMON_DATA_AREA           ATA_COMMON_DATA_AREA
 
-/* Compact Flash-ATA commands */
+
 #define CF_READ_SECTOR_CMD            ATA_READ_SECTOR_CMD
 #define CF_WRITE_SECTOR_CMD           ATA_WRITE_SECTOR_CMD
 #define CF_ERASE_SECTOR_CMD           ATA_ERASE_SECTOR_CMD
@@ -1104,7 +1104,7 @@ extern "C" {
 #define RTC_TAMPER2_INTERRUPT      RTC_IT_TAMP2
 #define RTC_TAMPER3_INTERRUPT      RTC_IT_TAMP3
 #define RTC_ALL_TAMPER_INTERRUPT   RTC_IT_TAMPALL
-#endif /* STM32H7 */
+#endif
 
 /**
   * @}
@@ -1175,7 +1175,7 @@ extern "C" {
 #define SPI_FRLVL_HALF_FULL             SPI_RX_FIFO_2PACKET
 #define SPI_FRLVL_FULL                  SPI_RX_FIFO_3PACKET
 
-#endif /* STM32H7 */
+#endif
 
 /**
   * @}
@@ -1384,36 +1384,36 @@ extern "C" {
 #define ETH_MMCRFAECR          0x00000198U
 #define ETH_MMCRGUFCR          0x000001C4U
 
-#define ETH_MAC_TXFIFO_FULL                             0x02000000U  /* Tx FIFO full */
-#define ETH_MAC_TXFIFONOT_EMPTY                         0x01000000U  /* Tx FIFO not empty */
-#define ETH_MAC_TXFIFO_WRITE_ACTIVE                     0x00400000U  /* Tx FIFO write active */
-#define ETH_MAC_TXFIFO_IDLE                             0x00000000U  /* Tx FIFO read status: Idle */
-#define ETH_MAC_TXFIFO_READ                             0x00100000U  /* Tx FIFO read status: Read (transferring data to the MAC transmitter) */
-#define ETH_MAC_TXFIFO_WAITING                          0x00200000U  /* Tx FIFO read status: Waiting for TxStatus from MAC transmitter */
-#define ETH_MAC_TXFIFO_WRITING                          0x00300000U  /* Tx FIFO read status: Writing the received TxStatus or flushing the TxFIFO */
-#define ETH_MAC_TRANSMISSION_PAUSE                      0x00080000U  /* MAC transmitter in pause */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_IDLE            0x00000000U  /* MAC transmit frame controller: Idle */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING         0x00020000U  /* MAC transmit frame controller: Waiting for Status of previous frame or IFG/backoff period to be over */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF   0x00040000U  /* MAC transmit frame controller: Generating and transmitting a Pause control frame (in full duplex mode) */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING    0x00060000U  /* MAC transmit frame controller: Transferring input frame for transmission */
-#define ETH_MAC_MII_TRANSMIT_ACTIVE           0x00010000U  /* MAC MII transmit engine active */
-#define ETH_MAC_RXFIFO_EMPTY                  0x00000000U  /* Rx FIFO fill level: empty */
-#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U  /* Rx FIFO fill level: fill-level below flow-control de-activate threshold */
-#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U  /* Rx FIFO fill level: fill-level above flow-control activate threshold */
-#define ETH_MAC_RXFIFO_FULL                   0x00000300U  /* Rx FIFO fill level: full */
+#define ETH_MAC_TXFIFO_FULL                             0x02000000U
+#define ETH_MAC_TXFIFONOT_EMPTY                         0x01000000U
+#define ETH_MAC_TXFIFO_WRITE_ACTIVE                     0x00400000U
+#define ETH_MAC_TXFIFO_IDLE                             0x00000000U
+#define ETH_MAC_TXFIFO_READ                             0x00100000U
+#define ETH_MAC_TXFIFO_WAITING                          0x00200000U
+#define ETH_MAC_TXFIFO_WRITING                          0x00300000U
+#define ETH_MAC_TRANSMISSION_PAUSE                      0x00080000U
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_IDLE            0x00000000U
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING         0x00020000U
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF   0x00040000U
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING    0x00060000U
+#define ETH_MAC_MII_TRANSMIT_ACTIVE           0x00010000U
+#define ETH_MAC_RXFIFO_EMPTY                  0x00000000U
+#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U
+#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U
+#define ETH_MAC_RXFIFO_FULL                   0x00000300U
 #if defined(STM32F1)
 #else
-#define ETH_MAC_READCONTROLLER_IDLE           0x00000000U  /* Rx FIFO read controller IDLE state */
-#define ETH_MAC_READCONTROLLER_READING_DATA   0x00000020U  /* Rx FIFO read controller Reading frame data */
-#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U  /* Rx FIFO read controller Reading frame status (or time-stamp) */
+#define ETH_MAC_READCONTROLLER_IDLE           0x00000000U
+#define ETH_MAC_READCONTROLLER_READING_DATA   0x00000020U
+#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U
 #endif
-#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U  /* Rx FIFO read controller Flushing the frame data and status */
-#define ETH_MAC_RXFIFO_WRITE_ACTIVE           0x00000010U  /* Rx FIFO write controller active */
-#define ETH_MAC_SMALL_FIFO_NOTACTIVE          0x00000000U  /* MAC small FIFO read / write controllers not active */
-#define ETH_MAC_SMALL_FIFO_READ_ACTIVE        0x00000002U  /* MAC small FIFO read controller active */
-#define ETH_MAC_SMALL_FIFO_WRITE_ACTIVE       0x00000004U  /* MAC small FIFO write controller active */
-#define ETH_MAC_SMALL_FIFO_RW_ACTIVE          0x00000006U  /* MAC small FIFO read / write controllers active */
-#define ETH_MAC_MII_RECEIVE_PROTOCOL_ACTIVE   0x00000001U  /* MAC MII receive protocol engine active */
+#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U
+#define ETH_MAC_RXFIFO_WRITE_ACTIVE           0x00000010U
+#define ETH_MAC_SMALL_FIFO_NOTACTIVE          0x00000000U
+#define ETH_MAC_SMALL_FIFO_READ_ACTIVE        0x00000002U
+#define ETH_MAC_SMALL_FIFO_WRITE_ACTIVE       0x00000004U
+#define ETH_MAC_SMALL_FIFO_RW_ACTIVE          0x00000006U
+#define ETH_MAC_MII_RECEIVE_PROTOCOL_ACTIVE   0x00000001U
 
 /**
   * @}
@@ -1461,7 +1461,7 @@ extern "C" {
 /**
   * @}
   */
-#endif  /* STM32L4 ||  STM32F7 ||  STM32F4 ||  STM32H7 */
+#endif
 
 #if defined(STM32L4) || defined(STM32F7) || defined(STM32F427xx) || defined(STM32F437xx) \
   || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
@@ -1475,7 +1475,7 @@ extern "C" {
   * @}
   */
 
-#endif  /* STM32L4 ||  STM32F7 ||  STM32F4 ||  STM32H7 || STM32U5 */
+#endif
 
 /** @defgroup HAL_PPP_Aliased_Defines HAL PPP Aliased Defines maintained for legacy purpose
   * @{
@@ -1485,7 +1485,7 @@ extern "C" {
   * @}
   */
 
-/* Exported functions --------------------------------------------------------*/
+
 
 /** @defgroup HAL_CRYP_Aliased_Functions HAL CRYP Aliased Functions maintained for legacy purpose
   * @{
@@ -1502,7 +1502,7 @@ extern "C" {
 #if defined(STM32U5)
 #define HAL_DCACHE_CleanInvalidateByAddr     HAL_DCACHE_CleanInvalidByAddr
 #define HAL_DCACHE_CleanInvalidateByAddr_IT  HAL_DCACHE_CleanInvalidByAddr_IT
-#endif /* STM32U5 */
+#endif
 
 /**
   * @}
@@ -1512,12 +1512,12 @@ extern "C" {
 /** @defgroup HASH_alias HASH API alias
   * @{
   */
-#define HAL_HASHEx_IRQHandler   HAL_HASH_IRQHandler  /*!< Redirection for compatibility with legacy code */
+#define HAL_HASHEx_IRQHandler   HAL_HASH_IRQHandler
 /**
   *
   * @}
   */
-#endif /* STM32F2 */
+#endif
 /** @defgroup HAL_HASH_Aliased_Functions HAL HASH Aliased Functions maintained for legacy purpose
   * @{
   */
@@ -1528,7 +1528,7 @@ extern "C" {
 #define HAL_HMAC_SHA224_Finish       HAL_HASH_SHA224_Finish
 #define HAL_HMAC_SHA256_Finish       HAL_HASH_SHA256_Finish
 
-/*HASH Algorithm Selection*/
+
 
 #define HASH_AlgoSelection_SHA1      HASH_ALGOSELECTION_SHA1
 #define HASH_AlgoSelection_SHA224    HASH_ALGOSELECTION_SHA224
@@ -1563,7 +1563,7 @@ extern "C" {
 #define HAL_HASHEx_SHA256_Accumulate_IT        HAL_HASHEx_SHA256_Accmlt_IT
 #define HAL_HASHEx_SHA256_Accumulate_End_IT    HAL_HASHEx_SHA256_Accmlt_End_IT
 
-#endif  /* STM32L4 || STM32L5 || STM32F2 || STM32F4 || STM32F7 || STM32H7 */
+#endif
 /**
   * @}
   */
@@ -1593,7 +1593,7 @@ extern "C" {
 #define HAL_DisableSRDomainDBGStopMode     HAL_DisableDomain3DBGStopMode
 #define HAL_EnableSRDomainDBGStandbyMode   HAL_EnableDomain3DBGStandbyMode
 #define HAL_DisableSRDomainDBGStandbyMode  HAL_DisableDomain3DBGStandbyMode
-#endif /* STM32H7A3xx || STM32H7B3xx || STM32H7B0xx || STM32H7A3xxQ || STM32H7B3xxQ  || STM32H7B0xxQ */
+#endif
 
 /**
   * @}
@@ -1630,13 +1630,13 @@ extern "C" {
 #define HAL_I2C_Master_Sequential_Receive_IT   HAL_I2C_Master_Seq_Receive_IT
 #define HAL_I2C_Slave_Sequential_Transmit_IT   HAL_I2C_Slave_Seq_Transmit_IT
 #define HAL_I2C_Slave_Sequential_Receive_IT    HAL_I2C_Slave_Seq_Receive_IT
-#endif /* STM32H7 || STM32WB  || STM32G0 || STM32F0 || STM32F1 || STM32F2 || STM32F3 || STM32F4 || STM32F7 || STM32L0 || STM32L4 || STM32L5 || STM32G4 || STM32L1 */
+#endif
 #if defined(STM32H7) || defined(STM32WB) || defined(STM32G0) || defined(STM32F4) || defined(STM32F7) || defined(STM32L0) || defined(STM32L4) || defined(STM32L5) || defined(STM32G4)|| defined(STM32L1)
 #define HAL_I2C_Master_Sequential_Transmit_DMA HAL_I2C_Master_Seq_Transmit_DMA
 #define HAL_I2C_Master_Sequential_Receive_DMA  HAL_I2C_Master_Seq_Receive_DMA
 #define HAL_I2C_Slave_Sequential_Transmit_DMA  HAL_I2C_Slave_Seq_Transmit_DMA
 #define HAL_I2C_Slave_Sequential_Receive_DMA   HAL_I2C_Slave_Seq_Receive_DMA
-#endif /* STM32H7 || STM32WB  || STM32G0 || STM32F4 || STM32F7 || STM32L0 || STM32L4 || STM32L5 || STM32G4 || STM32L1 */
+#endif
 
 #if defined(STM32F4)
 #define HAL_FMPI2C_Master_Sequential_Transmit_IT  HAL_FMPI2C_Master_Seq_Transmit_IT
@@ -1647,7 +1647,7 @@ extern "C" {
 #define HAL_FMPI2C_Master_Sequential_Receive_DMA  HAL_FMPI2C_Master_Seq_Receive_DMA
 #define HAL_FMPI2C_Slave_Sequential_Transmit_DMA  HAL_FMPI2C_Slave_Seq_Transmit_DMA
 #define HAL_FMPI2C_Slave_Sequential_Receive_DMA   HAL_FMPI2C_Slave_Seq_Receive_DMA
-#endif /* STM32F4 */
+#endif
 /**
   * @}
  */
@@ -1814,7 +1814,7 @@ extern "C" {
 #define HAL_TIMEx_ConfigCommutationEvent                HAL_TIMEx_ConfigCommutEvent
 #define HAL_TIMEx_ConfigCommutationEvent_IT             HAL_TIMEx_ConfigCommutEvent_IT
 #define HAL_TIMEx_ConfigCommutationEvent_DMA            HAL_TIMEx_ConfigCommutEvent_DMA
-#endif /* STM32H7 || STM32G0 || STM32F0 || STM32F1 || STM32F2 || STM32F3 || STM32F4 || STM32F7 || STM32L0 */
+#endif
 /**
   * @}
   */
@@ -1847,7 +1847,7 @@ extern "C" {
   * @}
   */
 
-/* Exported macros ------------------------------------------------------------*/
+
 
 /** @defgroup HAL_AES_Aliased_Macros HAL CRYP Aliased Macros maintained for legacy purpose
   * @{
@@ -2038,7 +2038,7 @@ extern "C" {
 #define __HAL_UNFREEZE_WWDG_DBGMCU __HAL_DBGMCU_UNFREEZE_WWDG
 #define __HAL_FREEZE_IWDG_DBGMCU __HAL_DBGMCU_FREEZE_IWDG
 #define __HAL_UNFREEZE_IWDG_DBGMCU __HAL_DBGMCU_UNFREEZE_IWDG
-#endif /* STM32H7 */
+#endif
 #define __HAL_FREEZE_I2C1_TIMEOUT_DBGMCU __HAL_DBGMCU_FREEZE_I2C1_TIMEOUT
 #define __HAL_UNFREEZE_I2C1_TIMEOUT_DBGMCU __HAL_DBGMCU_UNFREEZE_I2C1_TIMEOUT
 #define __HAL_FREEZE_I2C2_TIMEOUT_DBGMCU __HAL_DBGMCU_FREEZE_I2C2_TIMEOUT
@@ -2222,10 +2222,10 @@ extern "C" {
 #define __HAL_COMP_GET_EXTI_LINE  COMP_GET_EXTI_LINE
 
 #if defined(STM32L0) || defined(STM32L4)
-/* Note: On these STM32 families, the only argument of this macro             */
-/*       is COMP_FLAG_LOCK.                                                   */
-/*       This macro is replaced by __HAL_COMP_IS_LOCKED with only HAL handle  */
-/*       argument.                                                            */
+
+
+
+
 #define __HAL_COMP_GET_FLAG(__HANDLE__, __FLAG__)  (__HAL_COMP_IS_LOCKED(__HANDLE__))
 #endif
 /**
@@ -2236,8 +2236,8 @@ extern "C" {
 /** @defgroup HAL_COMP_Aliased_Functions HAL COMP Aliased Functions maintained for legacy purpose
   * @{
   */
-#define HAL_COMP_Start_IT       HAL_COMP_Start /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
-#define HAL_COMP_Stop_IT        HAL_COMP_Stop  /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
+#define HAL_COMP_Start_IT       HAL_COMP_Start
+#define HAL_COMP_Stop_IT        HAL_COMP_Stop
 /**
   * @}
   */
@@ -2280,7 +2280,7 @@ extern "C" {
 #define __HAL_I2C_FREQ_RANGE            I2C_FREQRANGE
 #else
 #define __HAL_I2C_FREQ_RANGE            I2C_FREQ_RANGE
-#endif /* STM32F1 */
+#endif
 #define __HAL_I2C_RISE_TIME             I2C_RISE_TIME
 #define __HAL_I2C_SPEED_STANDARD        I2C_SPEED_STANDARD
 #define __HAL_I2C_SPEED_FAST            I2C_SPEED_FAST
@@ -2428,7 +2428,7 @@ extern "C" {
 #define __HAL_PVD_EXTI_ENABLE_IT                                 __HAL_PWR_PVD_EXTI_ENABLE_IT
 #define __HAL_PVD_EXTI_GENERATE_SWIT                             __HAL_PWR_PVD_EXTI_GENERATE_SWIT
 #define __HAL_PVD_EXTI_GET_FLAG                                  __HAL_PWR_PVD_EXTI_GET_FLAG
-#endif /* STM32F4 */
+#endif
 /**
   * @}
   */
@@ -2716,7 +2716,7 @@ extern "C" {
 #define __HAL_RCC_QSPI_IS_CLK_SLEEP_ENABLED   __HAL_RCC_QUADSPI_IS_CLK_SLEEP_ENABLED
 #define __HAL_RCC_QSPI_IS_CLK_SLEEP_DISABLED  __HAL_RCC_QUADSPI_IS_CLK_SLEEP_DISABLED
 #define QSPI_IRQHandler QUADSPI_IRQHandler
-#endif /* __HAL_RCC_QUADSPI_CLK_ENABLE */
+#endif
 
 #define __RNG_CLK_DISABLE __HAL_RCC_RNG_CLK_DISABLE
 #define __RNG_CLK_ENABLE __HAL_RCC_RNG_CLK_ENABLE
@@ -2941,8 +2941,8 @@ extern "C" {
 #define __HAL_RCC_WWDG_CLK_SLEEP_DISABLE  __HAL_RCC_WWDG1_CLK_SLEEP_DISABLE
 #define __HAL_RCC_WWDG_CLK_SLEEP_ENABLE  __HAL_RCC_WWDG1_CLK_SLEEP_ENABLE
 
-#define __HAL_RCC_WWDG_FORCE_RESET    ((void)0U)  /* Not available on the STM32H7*/
-#define __HAL_RCC_WWDG_RELEASE_RESET ((void)0U) /* Not available on the STM32H7*/
+#define __HAL_RCC_WWDG_FORCE_RESET    ((void)0U)
+#define __HAL_RCC_WWDG_RELEASE_RESET ((void)0U)
 
 
 #define  __HAL_RCC_WWDG_IS_CLK_ENABLED    __HAL_RCC_WWDG1_IS_CLK_ENABLED
@@ -3125,7 +3125,7 @@ extern "C" {
 #define __DMA2D_CLK_SLEEP_ENABLE       __HAL_RCC_DMA2D_CLK_SLEEP_ENABLE
 #define __DMA2D_CLK_SLEEP_DISABLE      __HAL_RCC_DMA2D_CLK_SLEEP_DISABLE
 
-/* alias define maintained for legacy */
+
 #define __HAL_RCC_OTGFS_FORCE_RESET    __HAL_RCC_USB_OTG_FS_FORCE_RESET
 #define __HAL_RCC_OTGFS_RELEASE_RESET  __HAL_RCC_USB_OTG_FS_RELEASE_RESET
 
@@ -3295,7 +3295,7 @@ extern "C" {
 #define __HAL_RCC_CRYP_CLK_SLEEP_ENABLE    __HAL_RCC_AES_CLK_SLEEP_ENABLE
 #define __HAL_RCC_CRYP_FORCE_RESET         __HAL_RCC_AES_FORCE_RESET
 #define __HAL_RCC_CRYP_RELEASE_RESET       __HAL_RCC_AES_RELEASE_RESET
-#endif /* STM32L1 */
+#endif
 
 #if defined(STM32F4)
 #define __HAL_RCC_SDMMC1_FORCE_RESET       __HAL_RCC_SDIO_FORCE_RESET
@@ -3601,7 +3601,7 @@ extern "C" {
 #define __HAL_RTC_EXTI_GENERATE_SWIT(__EXTI_LINE__)   (((__EXTI_LINE__) == RTC_EXTI_LINE_ALARM_EVENT) ? __HAL_RTC_ALARM_EXTI_GENERATE_SWIT() : \
                                                        (((__EXTI_LINE__) == RTC_EXTI_LINE_WAKEUPTIMER_EVENT) ? __HAL_RTC_WAKEUPTIMER_EXTI_GENERATE_SWIT() :  \
                                                         __HAL_RTC_TAMPER_TIMESTAMP_EXTI_GENERATE_SWIT()))
-#endif   /* STM32F1 */
+#endif
 
 #define IS_ALARM                                  IS_RTC_ALARM
 #define IS_ALARM_MASK                             IS_RTC_ALARM_MASK
@@ -3662,7 +3662,7 @@ extern "C" {
 #define  SDMMC_STATIC_FLAGS         SDIO_STATIC_FLAGS
 #define  SDMMC_CMD0TIMEOUT          SDIO_CMD0TIMEOUT
 #define  SD_SDMMC_SEND_IF_COND      SD_SDIO_SEND_IF_COND
-/* alias CMSIS */
+
 #define  SDMMC1_IRQn                SDIO_IRQn
 #define  SDMMC1_IRQHandler          SDIO_IRQHandler
 #endif
@@ -3688,7 +3688,7 @@ extern "C" {
 #define  SDIO_STATIC_FLAGS          SDMMC_STATIC_FLAGS
 #define  SDIO_CMD0TIMEOUT           SDMMC_CMD0TIMEOUT
 #define  SD_SDIO_SEND_IF_COND       SD_SDMMC_SEND_IF_COND
-/* alias CMSIS for compatibilities */
+
 #define  SDIO_IRQn                  SDMMC1_IRQn
 #define  SDIO_IRQHandler            SDMMC1_IRQHandler
 #endif
@@ -3799,7 +3799,7 @@ extern "C" {
 
 #define IS_USART_OVERSAMPLING(__SAMPLING__) (((__SAMPLING__) == USART_OVERSAMPLING_16) || \
                                              ((__SAMPLING__) == USART_OVERSAMPLING_8))
-#endif /* STM32F0 || STM32F3 || STM32F7 */
+#endif
 /**
   * @}
   */
@@ -3964,7 +3964,7 @@ extern "C" {
   */
 #if defined (STM32L4) || defined (STM32F4) || defined (STM32F7) || defined(STM32H7)
 #define HAL_QPSI_TIMEOUT_DEFAULT_VALUE HAL_QSPI_TIMEOUT_DEFAULT_VALUE
-#endif /* STM32L4 || STM32F4 || STM32F7 */
+#endif
 /**
   * @}
   */
@@ -3981,6 +3981,6 @@ extern "C" {
 }
 #endif
 
-#endif /* STM32_HAL_LEGACY */
+#endif
 
 

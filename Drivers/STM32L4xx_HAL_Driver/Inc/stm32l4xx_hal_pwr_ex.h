@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_PWR_EX_H
 #define STM32L4xx_HAL_PWR_EX_H
 
@@ -24,7 +24,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -36,7 +36,7 @@
   */
 
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /** @defgroup PWREx_Exported_Types PWR Extended Exported Types
   * @{
@@ -65,7 +65,7 @@ typedef struct
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 
 /** @defgroup PWREx_Exported_Constants  PWR Extended Exported Constants
   * @{
@@ -74,7 +74,7 @@ typedef struct
 /** @defgroup PWREx_WUP_Polarity Shift to apply to retrieve polarity information from PWR_WAKEUP_PINy_xxx constants
   * @{
   */
-#define PWR_WUP_POLARITY_SHIFT                  0x05   /*!< Internal constant used to retrieve wakeup pin polariry */
+#define PWR_WUP_POLARITY_SHIFT                  0x05
 /**
   * @}
   */
@@ -83,21 +83,21 @@ typedef struct
 /** @defgroup PWREx_WakeUp_Pins  PWR wake-up pins
   * @{
   */
-#define PWR_WAKEUP_PIN1                 PWR_CR3_EWUP1  /*!< Wakeup pin 1 (with high level polarity) */
-#define PWR_WAKEUP_PIN2                 PWR_CR3_EWUP2  /*!< Wakeup pin 2 (with high level polarity) */
-#define PWR_WAKEUP_PIN3                 PWR_CR3_EWUP3  /*!< Wakeup pin 3 (with high level polarity) */
-#define PWR_WAKEUP_PIN4                 PWR_CR3_EWUP4  /*!< Wakeup pin 4 (with high level polarity) */
-#define PWR_WAKEUP_PIN5                 PWR_CR3_EWUP5  /*!< Wakeup pin 5 (with high level polarity) */
-#define PWR_WAKEUP_PIN1_HIGH            PWR_CR3_EWUP1  /*!< Wakeup pin 1 (with high level polarity) */
-#define PWR_WAKEUP_PIN2_HIGH            PWR_CR3_EWUP2  /*!< Wakeup pin 2 (with high level polarity) */
-#define PWR_WAKEUP_PIN3_HIGH            PWR_CR3_EWUP3  /*!< Wakeup pin 3 (with high level polarity) */
-#define PWR_WAKEUP_PIN4_HIGH            PWR_CR3_EWUP4  /*!< Wakeup pin 4 (with high level polarity) */
-#define PWR_WAKEUP_PIN5_HIGH            PWR_CR3_EWUP5  /*!< Wakeup pin 5 (with high level polarity) */
-#define PWR_WAKEUP_PIN1_LOW             (uint32_t)((PWR_CR4_WP1<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP1) /*!< Wakeup pin 1 (with low level polarity) */
-#define PWR_WAKEUP_PIN2_LOW             (uint32_t)((PWR_CR4_WP2<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP2) /*!< Wakeup pin 2 (with low level polarity) */
-#define PWR_WAKEUP_PIN3_LOW             (uint32_t)((PWR_CR4_WP3<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP3) /*!< Wakeup pin 3 (with low level polarity) */
-#define PWR_WAKEUP_PIN4_LOW             (uint32_t)((PWR_CR4_WP4<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP4) /*!< Wakeup pin 4 (with low level polarity) */
-#define PWR_WAKEUP_PIN5_LOW             (uint32_t)((PWR_CR4_WP5<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP5) /*!< Wakeup pin 5 (with low level polarity) */
+#define PWR_WAKEUP_PIN1                 PWR_CR3_EWUP1
+#define PWR_WAKEUP_PIN2                 PWR_CR3_EWUP2
+#define PWR_WAKEUP_PIN3                 PWR_CR3_EWUP3
+#define PWR_WAKEUP_PIN4                 PWR_CR3_EWUP4
+#define PWR_WAKEUP_PIN5                 PWR_CR3_EWUP5
+#define PWR_WAKEUP_PIN1_HIGH            PWR_CR3_EWUP1
+#define PWR_WAKEUP_PIN2_HIGH            PWR_CR3_EWUP2
+#define PWR_WAKEUP_PIN3_HIGH            PWR_CR3_EWUP3
+#define PWR_WAKEUP_PIN4_HIGH            PWR_CR3_EWUP4
+#define PWR_WAKEUP_PIN5_HIGH            PWR_CR3_EWUP5
+#define PWR_WAKEUP_PIN1_LOW             (uint32_t)((PWR_CR4_WP1<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP1)
+#define PWR_WAKEUP_PIN2_LOW             (uint32_t)((PWR_CR4_WP2<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP2)
+#define PWR_WAKEUP_PIN3_LOW             (uint32_t)((PWR_CR4_WP3<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP3)
+#define PWR_WAKEUP_PIN4_LOW             (uint32_t)((PWR_CR4_WP4<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP4)
+#define PWR_WAKEUP_PIN5_LOW             (uint32_t)((PWR_CR4_WP5<<PWR_WUP_POLARITY_SHIFT) | PWR_CR3_EWUP5)
 /**
   * @}
   */
@@ -106,13 +106,13 @@ typedef struct
   * @{
   */
 #if defined(PWR_CR2_PVME1)
-#define PWR_PVM_1                  PWR_CR2_PVME1  /*!< Peripheral Voltage Monitoring 1 enable: VDDUSB versus 1.2 V (applicable when USB feature is supported) */
-#endif /* PWR_CR2_PVME1 */
+#define PWR_PVM_1                  PWR_CR2_PVME1
+#endif
 #if defined(PWR_CR2_PVME2)
-#define PWR_PVM_2                  PWR_CR2_PVME2  /*!< Peripheral Voltage Monitoring 2 enable: VDDIO2 versus 0.9 V (applicable when VDDIO2 is present on device) */
-#endif /* PWR_CR2_PVME2 */
-#define PWR_PVM_3                  PWR_CR2_PVME3  /*!< Peripheral Voltage Monitoring 3 enable: VDDA versus 1.62 V */
-#define PWR_PVM_4                  PWR_CR2_PVME4  /*!< Peripheral Voltage Monitoring 4 enable: VDDA versus 2.2 V  */
+#define PWR_PVM_2                  PWR_CR2_PVME2
+#endif
+#define PWR_PVM_3                  PWR_CR2_PVME3
+#define PWR_PVM_4                  PWR_CR2_PVME4
 /**
   * @}
   */
@@ -120,13 +120,13 @@ typedef struct
 /** @defgroup PWREx_PVM_Mode  PWR PVM interrupt and event mode
   * @{
   */
-#define PWR_PVM_MODE_NORMAL                 ((uint32_t)0x00000000)   /*!< basic mode is used */
-#define PWR_PVM_MODE_IT_RISING              ((uint32_t)0x00010001)   /*!< External Interrupt Mode with Rising edge trigger detection */
-#define PWR_PVM_MODE_IT_FALLING             ((uint32_t)0x00010002)   /*!< External Interrupt Mode with Falling edge trigger detection */
-#define PWR_PVM_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003)   /*!< External Interrupt Mode with Rising/Falling edge trigger detection */
-#define PWR_PVM_MODE_EVENT_RISING           ((uint32_t)0x00020001)   /*!< Event Mode with Rising edge trigger detection */
-#define PWR_PVM_MODE_EVENT_FALLING          ((uint32_t)0x00020002)   /*!< Event Mode with Falling edge trigger detection */
-#define PWR_PVM_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003)   /*!< Event Mode with Rising/Falling edge trigger detection */
+#define PWR_PVM_MODE_NORMAL                 ((uint32_t)0x00000000)
+#define PWR_PVM_MODE_IT_RISING              ((uint32_t)0x00010001)
+#define PWR_PVM_MODE_IT_FALLING             ((uint32_t)0x00010002)
+#define PWR_PVM_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003)
+#define PWR_PVM_MODE_EVENT_RISING           ((uint32_t)0x00020001)
+#define PWR_PVM_MODE_EVENT_FALLING          ((uint32_t)0x00020002)
+#define PWR_PVM_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003)
 /**
   * @}
   */
@@ -137,10 +137,10 @@ typedef struct
   * @{
   */
 #if defined(PWR_CR5_R1MODE)
-#define PWR_REGULATOR_VOLTAGE_SCALE1_BOOST  ((uint32_t)0x00000000)  /*!< Voltage scaling range 1 boost mode  */
+#define PWR_REGULATOR_VOLTAGE_SCALE1_BOOST  ((uint32_t)0x00000000)
 #endif
-#define PWR_REGULATOR_VOLTAGE_SCALE1        PWR_CR1_VOS_0           /*!< Voltage scaling range 1 normal mode */
-#define PWR_REGULATOR_VOLTAGE_SCALE2        PWR_CR1_VOS_1           /*!< Voltage scaling range 2             */
+#define PWR_REGULATOR_VOLTAGE_SCALE1        PWR_CR1_VOS_0
+#define PWR_REGULATOR_VOLTAGE_SCALE2        PWR_CR1_VOS_1
 /**
   * @}
   */
@@ -149,8 +149,8 @@ typedef struct
 /** @defgroup PWREx_VBAT_Battery_Charging_Selection PWR battery charging resistor selection
   * @{
   */
-#define PWR_BATTERY_CHARGING_RESISTOR_5          ((uint32_t)0x00000000) /*!< VBAT charging through a 5 kOhms resistor   */
-#define PWR_BATTERY_CHARGING_RESISTOR_1_5         PWR_CR4_VBRS          /*!< VBAT charging through a 1.5 kOhms resistor */
+#define PWR_BATTERY_CHARGING_RESISTOR_5          ((uint32_t)0x00000000)
+#define PWR_BATTERY_CHARGING_RESISTOR_1_5         PWR_CR4_VBRS
 /**
   * @}
   */
@@ -167,22 +167,22 @@ typedef struct
 /** @defgroup PWREx_GPIO_Bit_Number GPIO bit number for I/O setting in standby/shutdown mode
   * @{
   */
-#define PWR_GPIO_BIT_0   PWR_PUCRA_PA0    /*!< GPIO port I/O pin 0  */
-#define PWR_GPIO_BIT_1   PWR_PUCRA_PA1    /*!< GPIO port I/O pin 1  */
-#define PWR_GPIO_BIT_2   PWR_PUCRA_PA2    /*!< GPIO port I/O pin 2  */
-#define PWR_GPIO_BIT_3   PWR_PUCRA_PA3    /*!< GPIO port I/O pin 3  */
-#define PWR_GPIO_BIT_4   PWR_PUCRA_PA4    /*!< GPIO port I/O pin 4  */
-#define PWR_GPIO_BIT_5   PWR_PUCRA_PA5    /*!< GPIO port I/O pin 5  */
-#define PWR_GPIO_BIT_6   PWR_PUCRA_PA6    /*!< GPIO port I/O pin 6  */
-#define PWR_GPIO_BIT_7   PWR_PUCRA_PA7    /*!< GPIO port I/O pin 7  */
-#define PWR_GPIO_BIT_8   PWR_PUCRA_PA8    /*!< GPIO port I/O pin 8  */
-#define PWR_GPIO_BIT_9   PWR_PUCRA_PA9    /*!< GPIO port I/O pin 9  */
-#define PWR_GPIO_BIT_10  PWR_PUCRA_PA10   /*!< GPIO port I/O pin 10 */
-#define PWR_GPIO_BIT_11  PWR_PUCRA_PA11   /*!< GPIO port I/O pin 11 */
-#define PWR_GPIO_BIT_12  PWR_PUCRA_PA12   /*!< GPIO port I/O pin 12 */
-#define PWR_GPIO_BIT_13  PWR_PUCRA_PA13   /*!< GPIO port I/O pin 13 */
-#define PWR_GPIO_BIT_14  PWR_PDCRA_PA14   /*!< GPIO port I/O pin 14 */
-#define PWR_GPIO_BIT_15  PWR_PUCRA_PA15   /*!< GPIO port I/O pin 15 */
+#define PWR_GPIO_BIT_0   PWR_PUCRA_PA0
+#define PWR_GPIO_BIT_1   PWR_PUCRA_PA1
+#define PWR_GPIO_BIT_2   PWR_PUCRA_PA2
+#define PWR_GPIO_BIT_3   PWR_PUCRA_PA3
+#define PWR_GPIO_BIT_4   PWR_PUCRA_PA4
+#define PWR_GPIO_BIT_5   PWR_PUCRA_PA5
+#define PWR_GPIO_BIT_6   PWR_PUCRA_PA6
+#define PWR_GPIO_BIT_7   PWR_PUCRA_PA7
+#define PWR_GPIO_BIT_8   PWR_PUCRA_PA8
+#define PWR_GPIO_BIT_9   PWR_PUCRA_PA9
+#define PWR_GPIO_BIT_10  PWR_PUCRA_PA10
+#define PWR_GPIO_BIT_11  PWR_PUCRA_PA11
+#define PWR_GPIO_BIT_12  PWR_PUCRA_PA12
+#define PWR_GPIO_BIT_13  PWR_PUCRA_PA13
+#define PWR_GPIO_BIT_14  PWR_PDCRA_PA14
+#define PWR_GPIO_BIT_15  PWR_PUCRA_PA15
 /**
   * @}
   */
@@ -190,24 +190,24 @@ typedef struct
 /** @defgroup PWREx_GPIO GPIO port
   * @{
   */
-#define PWR_GPIO_A   0x00000000U      /*!< GPIO port A */
-#define PWR_GPIO_B   0x00000001U      /*!< GPIO port B */
-#define PWR_GPIO_C   0x00000002U      /*!< GPIO port C */
+#define PWR_GPIO_A   0x00000000U
+#define PWR_GPIO_B   0x00000001U
+#define PWR_GPIO_C   0x00000002U
 #if defined(GPIOD_BASE)
-#define PWR_GPIO_D   0x00000003U      /*!< GPIO port D */
+#define PWR_GPIO_D   0x00000003U
 #endif
 #if defined(GPIOE_BASE)
-#define PWR_GPIO_E   0x00000004U      /*!< GPIO port E */
+#define PWR_GPIO_E   0x00000004U
 #endif
 #if defined(GPIOF_BASE)
-#define PWR_GPIO_F   0x00000005U      /*!< GPIO port F */
+#define PWR_GPIO_F   0x00000005U
 #endif
 #if defined(GPIOG_BASE)
-#define PWR_GPIO_G   0x00000006U      /*!< GPIO port G */
+#define PWR_GPIO_G   0x00000006U
 #endif
-#define PWR_GPIO_H   0x00000007U      /*!< GPIO port H */
+#define PWR_GPIO_H   0x00000007U
 #if defined(GPIOI_BASE)
-#define PWR_GPIO_I   0x00000008U      /*!< GPIO port I */
+#define PWR_GPIO_I   0x00000008U
 #endif
 /**
   * @}
@@ -217,13 +217,13 @@ typedef struct
   * @{
   */
 #if defined(PWR_CR2_PVME1)
-#define PWR_EXTI_LINE_PVM1  ((uint32_t)0x00000008)  /*!< External interrupt line 35 Connected to the PVM1 EXTI Line   */
-#endif /* PWR_CR2_PVME1 */
+#define PWR_EXTI_LINE_PVM1  ((uint32_t)0x00000008)
+#endif
 #if defined(PWR_CR2_PVME2)
-#define PWR_EXTI_LINE_PVM2  ((uint32_t)0x00000010)  /*!< External interrupt line 36 Connected to the PVM2 EXTI Line   */
-#endif /* PWR_CR2_PVME2 */
-#define PWR_EXTI_LINE_PVM3  ((uint32_t)0x00000020)  /*!< External interrupt line 37 Connected to the PVM3 EXTI Line   */
-#define PWR_EXTI_LINE_PVM4  ((uint32_t)0x00000040)  /*!< External interrupt line 38 Connected to the PVM4 EXTI Line   */
+#define PWR_EXTI_LINE_PVM2  ((uint32_t)0x00000010)
+#endif
+#define PWR_EXTI_LINE_PVM3  ((uint32_t)0x00000020)
+#define PWR_EXTI_LINE_PVM4  ((uint32_t)0x00000040)
 /**
   * @}
   */
@@ -232,13 +232,13 @@ typedef struct
   * @{
   */
 #if defined(PWR_CR2_PVME1)
-#define PWR_EVENT_LINE_PVM1 ((uint32_t)0x00000008)  /*!< Event line 35 Connected to the PVM1 EXTI Line */
-#endif /* PWR_CR2_PVME1 */
+#define PWR_EVENT_LINE_PVM1 ((uint32_t)0x00000008)
+#endif
 #if defined(PWR_CR2_PVME2)
-#define PWR_EVENT_LINE_PVM2 ((uint32_t)0x00000010)  /*!< Event line 36 Connected to the PVM2 EXTI Line */
-#endif /* PWR_CR2_PVME2 */
-#define PWR_EVENT_LINE_PVM3 ((uint32_t)0x00000020)  /*!< Event line 37 Connected to the PVM3 EXTI Line */
-#define PWR_EVENT_LINE_PVM4 ((uint32_t)0x00000040)  /*!< Event line 38 Connected to the PVM4 EXTI Line */
+#define PWR_EVENT_LINE_PVM2 ((uint32_t)0x00000010)
+#endif
+#define PWR_EVENT_LINE_PVM3 ((uint32_t)0x00000020)
+#define PWR_EVENT_LINE_PVM4 ((uint32_t)0x00000040)
 /**
   * @}
   */
@@ -253,30 +253,30 @@ typedef struct
   *        wake-up flags and set to PWR_SR1_WUF.
   * @{
   */
-#define PWR_FLAG_WUF1                       ((uint32_t)0x0020)   /*!< Wakeup event on wakeup pin 1 */
-#define PWR_FLAG_WUF2                       ((uint32_t)0x0021)   /*!< Wakeup event on wakeup pin 2 */
-#define PWR_FLAG_WUF3                       ((uint32_t)0x0022)   /*!< Wakeup event on wakeup pin 3 */
-#define PWR_FLAG_WUF4                       ((uint32_t)0x0023)   /*!< Wakeup event on wakeup pin 4 */
-#define PWR_FLAG_WUF5                       ((uint32_t)0x0024)   /*!< Wakeup event on wakeup pin 5 */
-#define PWR_FLAG_WU                         PWR_SR1_WUF          /*!< Encompass wakeup event on all wakeup pins */
-#define PWR_FLAG_SB                         ((uint32_t)0x0028)   /*!< Standby flag */
+#define PWR_FLAG_WUF1                       ((uint32_t)0x0020)
+#define PWR_FLAG_WUF2                       ((uint32_t)0x0021)
+#define PWR_FLAG_WUF3                       ((uint32_t)0x0022)
+#define PWR_FLAG_WUF4                       ((uint32_t)0x0023)
+#define PWR_FLAG_WUF5                       ((uint32_t)0x0024)
+#define PWR_FLAG_WU                         PWR_SR1_WUF
+#define PWR_FLAG_SB                         ((uint32_t)0x0028)
 #if defined(PWR_SR1_EXT_SMPS_RDY)
-#define PWR_FLAG_EXT_SMPS                   ((uint32_t)0x002D)   /*!< Switching to external SMPS ready flag */
-#endif /* PWR_SR1_EXT_SMPS_RDY */
-#define PWR_FLAG_WUFI                       ((uint32_t)0x002F)   /*!< Wakeup on internal wakeup line */
+#define PWR_FLAG_EXT_SMPS                   ((uint32_t)0x002D)
+#endif
+#define PWR_FLAG_WUFI                       ((uint32_t)0x002F)
 
-#define PWR_FLAG_REGLPS                     ((uint32_t)0x0048)   /*!< Low-power regulator start flag */
-#define PWR_FLAG_REGLPF                     ((uint32_t)0x0049)   /*!< Low-power regulator flag */
-#define PWR_FLAG_VOSF                       ((uint32_t)0x004A)   /*!< Voltage scaling flag */
-#define PWR_FLAG_PVDO                       ((uint32_t)0x004B)   /*!< Power Voltage Detector output flag */
+#define PWR_FLAG_REGLPS                     ((uint32_t)0x0048)
+#define PWR_FLAG_REGLPF                     ((uint32_t)0x0049)
+#define PWR_FLAG_VOSF                       ((uint32_t)0x004A)
+#define PWR_FLAG_PVDO                       ((uint32_t)0x004B)
 #if defined(PWR_CR2_PVME1)
-#define PWR_FLAG_PVMO1                      ((uint32_t)0x004C)   /*!< Power Voltage Monitoring 1 output flag */
-#endif /* PWR_CR2_PVME1 */
+#define PWR_FLAG_PVMO1                      ((uint32_t)0x004C)
+#endif
 #if defined(PWR_CR2_PVME2)
-#define PWR_FLAG_PVMO2                      ((uint32_t)0x004D)   /*!< Power Voltage Monitoring 2 output flag */
-#endif /* PWR_CR2_PVME2 */
-#define PWR_FLAG_PVMO3                      ((uint32_t)0x004E)   /*!< Power Voltage Monitoring 3 output flag */
-#define PWR_FLAG_PVMO4                      ((uint32_t)0x004F)   /*!< Power Voltage Monitoring 4 output flag */
+#define PWR_FLAG_PVMO2                      ((uint32_t)0x004D)
+#endif
+#define PWR_FLAG_PVMO3                      ((uint32_t)0x004E)
+#define PWR_FLAG_PVMO4                      ((uint32_t)0x004F)
 /**
   * @}
   */
@@ -284,13 +284,13 @@ typedef struct
 /** @defgroup PWREx_SRAM2_Retention PWR SRAM2 Retention in Standby mode
   * @{
   */
-#define PWR_NO_SRAM2_RETENTION         ((uint32_t)0x00000000)  /*!< SRAM2 is powered off in Standby mode (SRAM2 content is lost) */  
+#define PWR_NO_SRAM2_RETENTION         ((uint32_t)0x00000000)
 #if defined(PWR_CR3_RRS_1)
-#define PWR_FULL_SRAM2_RETENTION       PWR_CR3_RRS_0      /*!< Full SRAM2 is powered by the low-power regulator in Standby mode */
-#define PWR_4KBYTES_SRAM2_RETENTION    PWR_CR3_RRS_1      /*!< Only 4 Kbytes of SRAM2 is powered by the low-power regulator in Standby mode */
+#define PWR_FULL_SRAM2_RETENTION       PWR_CR3_RRS_0
+#define PWR_4KBYTES_SRAM2_RETENTION    PWR_CR3_RRS_1
 #else
-#define PWR_FULL_SRAM2_RETENTION       PWR_CR3_RRS        /*!< Full SRAM2 is powered by the low-power regulator in Standby mode */
-#endif /* PWR_CR3_RRS_1 */
+#define PWR_FULL_SRAM2_RETENTION       PWR_CR3_RRS
+#endif
 /**
   * @}
   */
@@ -299,7 +299,7 @@ typedef struct
   * @}
   */
 
-/* Exported macros -----------------------------------------------------------*/
+
 /** @defgroup PWREx_Exported_Macros PWR Extended Exported Macros
  * @{
  */
@@ -393,7 +393,7 @@ typedef struct
   */
 #define __HAL_PWR_PVM1_EXTI_CLEAR_FLAG()  WRITE_REG(EXTI->PR2, PWR_EXTI_LINE_PVM1)
 
-#endif /* PWR_CR2_PVME1 */
+#endif
 
 
 #if defined(PWR_CR2_PVME2)
@@ -485,7 +485,7 @@ typedef struct
   */
 #define __HAL_PWR_PVM2_EXTI_CLEAR_FLAG()  WRITE_REG(EXTI->PR2, PWR_EXTI_LINE_PVM2)
 
-#endif /* PWR_CR2_PVME2 */
+#endif
 
 
 /**
@@ -696,7 +696,7 @@ typedef struct
   * @}
   */
 
-/* Private macros --------------------------------------------------------*/
+
 /** @addtogroup  PWREx_Private_Macros   PWR Extended Private Macros
   * @{
   */
@@ -832,7 +832,7 @@ typedef struct
   */
 
 
-/* Peripheral Control functions  **********************************************/
+
 uint32_t HAL_PWREx_GetVoltageRange(void);
 HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling);
 void HAL_PWREx_EnableBatteryCharging(uint32_t ResistorSelection);
@@ -840,11 +840,11 @@ void HAL_PWREx_DisableBatteryCharging(void);
 #if defined(PWR_CR2_USV)
 void HAL_PWREx_EnableVddUSB(void);
 void HAL_PWREx_DisableVddUSB(void);
-#endif /* PWR_CR2_USV */
+#endif
 #if defined(PWR_CR2_IOSV)
 void HAL_PWREx_EnableVddIO2(void);
 void HAL_PWREx_DisableVddIO2(void);
-#endif /* PWR_CR2_IOSV */
+#endif
 void HAL_PWREx_EnableInternalWakeUpLine(void);
 void HAL_PWREx_DisableInternalWakeUpLine(void);
 HAL_StatusTypeDef HAL_PWREx_EnableGPIOPullUp(uint32_t GPIO, uint32_t GPIONumber);
@@ -859,19 +859,19 @@ HAL_StatusTypeDef HAL_PWREx_SetSRAM2ContentRetention(uint32_t SRAM2Size);
 #if defined(PWR_CR1_RRSTP)
 void HAL_PWREx_EnableSRAM3ContentRetention(void);
 void HAL_PWREx_DisableSRAM3ContentRetention(void);
-#endif /* PWR_CR1_RRSTP */
+#endif
 #if defined(PWR_CR3_DSIPDEN)
 void HAL_PWREx_EnableDSIPinsPDActivation(void);
 void HAL_PWREx_DisableDSIPinsPDActivation(void);
-#endif /* PWR_CR3_DSIPDEN */
+#endif
 #if defined(PWR_CR2_PVME1)
 void HAL_PWREx_EnablePVM1(void);
 void HAL_PWREx_DisablePVM1(void);
-#endif /* PWR_CR2_PVME1 */
+#endif
 #if defined(PWR_CR2_PVME2)
 void HAL_PWREx_EnablePVM2(void);
 void HAL_PWREx_DisablePVM2(void);
-#endif /* PWR_CR2_PVME2 */
+#endif
 void HAL_PWREx_EnablePVM3(void);
 void HAL_PWREx_DisablePVM3(void);
 void HAL_PWREx_EnablePVM4(void);
@@ -880,14 +880,14 @@ HAL_StatusTypeDef HAL_PWREx_ConfigPVM(PWR_PVMTypeDef *sConfigPVM);
 #if defined(PWR_CR3_ENULP)
 void HAL_PWREx_EnableBORPVD_ULP(void);
 void HAL_PWREx_DisableBORPVD_ULP(void);
-#endif /* PWR_CR3_ENULP */
+#endif
 #if defined(PWR_CR4_EXT_SMPS_ON)
 void HAL_PWREx_EnableExtSMPS_0V95(void);
 void HAL_PWREx_DisableExtSMPS_0V95(void);
-#endif /* PWR_CR4_EXT_SMPS_ON */
+#endif
 
 
-/* Low Power modes configuration functions ************************************/
+
 void HAL_PWREx_EnableLowPowerRunMode(void);
 HAL_StatusTypeDef HAL_PWREx_DisableLowPowerRunMode(void);
 void HAL_PWREx_EnterSTOP0Mode(uint8_t STOPEntry);
@@ -898,10 +898,10 @@ void HAL_PWREx_EnterSHUTDOWNMode(void);
 void HAL_PWREx_PVD_PVM_IRQHandler(void);
 #if defined(PWR_CR2_PVME1)
 void HAL_PWREx_PVM1Callback(void);
-#endif /* PWR_CR2_PVME1 */
+#endif
 #if defined(PWR_CR2_PVME2)
 void HAL_PWREx_PVM2Callback(void);
-#endif /* PWR_CR2_PVME2 */
+#endif
 void HAL_PWREx_PVM3Callback(void);
 void HAL_PWREx_PVM4Callback(void);
 
@@ -926,4 +926,4 @@ void HAL_PWREx_PVM4Callback(void);
 #endif
 
 
-#endif /* STM32L4xx_HAL_PWR_EX_H */
+#endif

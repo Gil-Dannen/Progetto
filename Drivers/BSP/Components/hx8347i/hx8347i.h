@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef HX8347I_H
 #define HX8347I_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/lcd.h"
 
 /** @addtogroup BSP
@@ -211,10 +211,10 @@ void     hx8347i_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, 
 uint16_t hx8347i_GetLcdPixelWidth(void);
 uint16_t hx8347i_GetLcdPixelHeight(void);
 
-/* LCD driver structure */
+
 extern LCD_DrvTypeDef   hx8347i_drv;
 
-/* LCD IO functions */
+
 void     LCD_IO_Init(void);
 void     LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size);
 void     LCD_IO_WriteReg(uint8_t Reg);
@@ -242,4 +242,4 @@ void     LCD_Delay (uint32_t delay);
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __IO_H
 #define __IO_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -61,7 +61,7 @@ typedef enum
    IO_MODE_IT_FALLING_EDGE,  /* float input - irq detect on falling edge */
    IO_MODE_IT_LOW_LEVEL,     /* float input - irq detect on low level */
    IO_MODE_IT_HIGH_LEVEL,    /* float input - irq detect on high level */
-   /* following modes only available on MFX*/
+
    IO_MODE_ANALOG,           /* analog mode */
    IO_MODE_OFF,              /* when pin isn't used*/
    IO_MODE_INPUT_PU,         /* input with internal pull up resistor */
@@ -129,4 +129,4 @@ typedef struct
 
 #endif /* __IO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

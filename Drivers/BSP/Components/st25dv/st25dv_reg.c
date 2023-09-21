@@ -29,7 +29,7 @@ int32_t st25dv_WriteReg (st25dv_ctx_t *ctx, uint16_t reg, uint8_t const *data, u
 }
 
 
-/**** Copy generated code hereafter ****/
+
 int32_t st25dv_get_icref (st25dv_ctx_t *ctx, uint8_t *value)
 {
   if( st25dv_readreg(ctx, (ST25DV_ICREF_REG), (uint8_t *)value, 1))

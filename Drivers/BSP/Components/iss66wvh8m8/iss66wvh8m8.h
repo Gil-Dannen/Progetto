@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __ISS66WVH8M8_H
 #define __ISS66WVH8M8_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 
 /** @addtogroup BSP
   * @{
@@ -69,7 +69,7 @@
 /** 
   * @brief  ISS66WVH8M8 Registers  
   */ 
-/* Device Identification Register 0 */
+
 #define ISS66WVH8M8_DIR0_ADDRESS      ((uint32_t)0x00000000)
 
 #define ISS66WVH8M8_DIR0_MANUFACTURER ((uint16_t)0x000F)     /*!< Manufacturer */
@@ -77,12 +77,12 @@
 #define ISS66WVH8M8_DIR0_RABC         ((uint16_t)0x1F00)     /*!< Row Address Bit Count */
 #define ISS66WVH8M8_DIR0_DADDR        ((uint16_t)0xC000)     /*!< Die Address */
 
-/* Device Identification Register 1 */
+
 #define ISS66WVH8M8_DIR1_ADDRESS      ((uint32_t)0x00000001)
 
 #define ISS66WVH8M8_DIR1_DTYPE        ((uint16_t)0x000F)     /*!< Device Type */
 
-/* Configuration Register 0 */
+
 #define ISS66WVH8M8_CR0_ADDRESS       ((uint32_t)0x00000800)
 
 #define ISS66WVH8M8_CR0_BLENGTH       ((uint16_t)0x0003)     /*!< Burst length */
@@ -96,7 +96,7 @@
 #define ISS66WVH8M8_CR0_DS            ((uint16_t)0x7000)     /*!< Drive strength */
 #define ISS66WVH8M8_CR0_DPDE          ((uint16_t)0x8000)     /*!< Deep Power down enable */
 
-/* Configuration Register 1 */
+
 #define ISS66WVH8M8_CR1_ADDRESS       ((uint32_t)0x00000801)
 
 #define ISS66WVH8M8_CR1_DRI           ((uint16_t)0x0003)     /*!< Distributed refresh interval */
@@ -130,4 +130,4 @@
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

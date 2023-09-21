@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "ov9655.h"
 
 /** @addtogroup BSP
@@ -77,7 +77,7 @@ CAMERA_DrvTypeDef   ov9655_drv =
   ov9655_Config,
 };
 
-/* Initialization sequence for VGA resolution (640x480)*/
+
 const unsigned char OV9655_VGA[][2]=
 {
   {0x00, 0x00},
@@ -229,7 +229,7 @@ const unsigned char OV9655_VGA[][2]=
   {0xbf, 0x01},
 };
 
-/* Initialization sequence for QVGA resolution (320x240) */
+
 const unsigned char OV9655_QVGA[][2]=
 {
   {0x00, 0x00},
@@ -384,7 +384,7 @@ const unsigned char OV9655_QVGA[][2]=
   {0x40, 0x10},
 };
 
-/* Initialization sequence for QQVGA resolution (160x120) */
+
 const char OV9655_QQVGA[][2]=
 {
   {0x00, 0x00},
@@ -557,14 +557,14 @@ void ov9655_Init(uint16_t DeviceAddr, uint32_t resolution)
 {
   uint32_t index;
   
-  /* Initialize I2C */
+
   CAMERA_IO_Init();    
   
-  /* Prepare the camera to be configured by resetting all its registers */
+
   CAMERA_IO_Write(DeviceAddr, OV9655_SENSOR_COM7, 0x80);
   CAMERA_Delay(200);
   
-  /* Initialize OV9655 */
+
   switch (resolution)
   {
   case CAMERA_R160x120:
@@ -587,7 +587,7 @@ void ov9655_Init(uint16_t DeviceAddr, uint32_t resolution)
     }
   case CAMERA_R480x272:
     {
-      /* Not supported resolution */
+
       break;
     }
   case CAMERA_R640x480:
@@ -620,7 +620,7 @@ void ov9655_Config(uint16_t DeviceAddr, uint32_t feature, uint32_t value, uint32
   uint64_t value_tmp;
   uint32_t br_value;
   
-  /* Convert the input value into ov9655 parameters */
+
   value_tmp = ov9655_ConvertValue(feature, value); 
   br_value = (uint32_t)ov9655_ConvertValue(CAMERA_CONTRAST_BRIGHTNESS, brightness_value);
     
@@ -665,10 +665,10 @@ void ov9655_Config(uint16_t DeviceAddr, uint32_t feature, uint32_t value, uint32
   */
 uint16_t ov9655_ReadID(uint16_t DeviceAddr)
 {
-  /* Initialize I2C */
+
   CAMERA_IO_Init();
   
-  /* Get the camera ID */
+
   return (CAMERA_IO_Read(DeviceAddr, OV9655_SENSOR_PIDH));
 }
 
@@ -840,4 +840,4 @@ static uint64_t ov9655_ConvertValue(uint32_t feature, uint32_t value)
   * @}
   */  
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

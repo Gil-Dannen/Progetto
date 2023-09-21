@@ -17,11 +17,11 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __CS43L22_H
 #define __CS43L22_H
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/audio.h"
 
 /** @addtogroup BSP
@@ -48,16 +48,16 @@
   * @{
   */ 
 
-/******************************************************************************/
-/***************************  Codec User defines ******************************/
-/******************************************************************************/
-/* Codec output DEVICE */
+
+
+
+
 #define OUTPUT_DEVICE_SPEAKER         1
 #define OUTPUT_DEVICE_HEADPHONE       2
 #define OUTPUT_DEVICE_BOTH            3
 #define OUTPUT_DEVICE_AUTO            4
 
-/* Volume Levels values */
+
 #define DEFAULT_VOLMIN                0x00
 #define DEFAULT_VOLMAX                0xFF
 #define DEFAULT_VOLSTEP               0x04
@@ -65,15 +65,15 @@
 #define AUDIO_PAUSE                   0
 #define AUDIO_RESUME                  1
 
-/* Codec POWER DOWN modes */
+
 #define CODEC_PDWN_HW                 1
 #define CODEC_PDWN_SW                 2
 
-/* MUTE commands */
+
 #define AUDIO_MUTE_ON                 1
 #define AUDIO_MUTE_OFF                0
 
-/* AUDIO FREQUENCY */
+
 #define AUDIO_FREQUENCY_192K          ((uint32_t)192000)
 #define AUDIO_FREQUENCY_96K           ((uint32_t)96000)
 #define AUDIO_FREQUENCY_48K           ((uint32_t)48000)
@@ -84,7 +84,7 @@
 #define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
 #define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
 
-/** CS43l22 Registers  ***/
+
 #define   CS43L22_REG_ID                  0x01
 #define   CS43L22_REG_POWER_CTL1          0x02
 #define   CS43L22_REG_POWER_CTL2          0x04
@@ -124,9 +124,9 @@
 #define   CS43L22_REG_THERMAL_FOLDBACK    0x33
 #define   CS43L22_REG_CHARGE_PUMP_FREQ    0x34
 
-/******************************************************************************/
-/****************************** REGISTER MAPPING ******************************/
-/******************************************************************************/
+
+
+
 /** 
   * @brief  CS43L22 ID  
   */  
@@ -166,7 +166,7 @@
 /*------------------------------------------------------------------------------
                            Audio Codec functions 
 ------------------------------------------------------------------------------*/
-/* High Layer codec functions */
+
 uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
 void     cs43l22_DeInit(void);
 uint32_t cs43l22_ReadID(uint16_t DeviceAddr);
@@ -180,13 +180,13 @@ uint32_t cs43l22_SetMute(uint16_t DeviceAddr, uint32_t Cmd);
 uint32_t cs43l22_SetOutputMode(uint16_t DeviceAddr, uint8_t Output);
 uint32_t cs43l22_Reset(uint16_t DeviceAddr);
 
-/* AUDIO IO functions */
+
 void      AUDIO_IO_Init(void);
 void      AUDIO_IO_DeInit(void);
 void      AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 uint8_t   AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
 
-/* Audio driver structure */
+
 extern AUDIO_DrvTypeDef   cs43l22_drv;
 
 #endif /* __CS43L22_H */
@@ -207,4 +207,4 @@ extern AUDIO_DrvTypeDef   cs43l22_drv;
   * @}
   */ 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

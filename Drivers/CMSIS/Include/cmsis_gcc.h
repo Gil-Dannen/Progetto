@@ -25,18 +25,18 @@
 #ifndef __CMSIS_GCC_H
 #define __CMSIS_GCC_H
 
-/* ignore some GCC warnings */
+
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsign-conversion"
 #pragma GCC diagnostic ignored "-Wconversion"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-/* Fallback for __has_builtin */
+
 #ifndef __has_builtin
   #define __has_builtin(x) (0)
 #endif
 
-/* CMSIS compiler specific defines */
+
 #ifndef   __ASM
   #define __ASM                                  __asm
 #endif
@@ -117,7 +117,7 @@
   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
 #endif
 
-/* #########################  Startup and Lowlevel Init  ######################## */
+
 
 #ifndef __PROGRAM_START
 
@@ -182,7 +182,7 @@ __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
 #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
 #endif
 
-/* ###########################  Core Function Access  ########################### */
+
 /** \ingroup  CMSIS_Core_FunctionInterface
     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
   @{
@@ -837,7 +837,7 @@ __STATIC_FORCEINLINE uint32_t __get_FPSCR(void)
 #if __has_builtin(__builtin_arm_get_fpscr) 
 // Re-enable using built-in when GCC has been fixed
 // || (__GNUC__ > 7) || (__GNUC__ == 7 && __GNUC_MINOR__ >= 2)
-  /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
+
   return __builtin_arm_get_fpscr();
 #else
   uint32_t result;
@@ -863,7 +863,7 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
 #if __has_builtin(__builtin_arm_set_fpscr)
 // Re-enable using built-in when GCC has been fixed
 // || (__GNUC__ > 7) || (__GNUC__ == 7 && __GNUC_MINOR__ >= 2)
-  /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
+
   __builtin_arm_set_fpscr(fpscr);
 #else
   __ASM volatile ("VMSR fpscr, %0" : : "r" (fpscr) : "vfpcc", "memory");
@@ -874,10 +874,10 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
 }
 
 
-/*@} end of CMSIS_Core_RegAccFunctions */
 
 
-/* ##########################  Core Instruction Access  ######################### */
+
+
 /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
   Access to dedicated instructions
   @{
@@ -1607,10 +1607,10 @@ __STATIC_FORCEINLINE uint32_t __STLEX(uint32_t value, volatile uint32_t *ptr)
 #endif /* ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
            (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    ) */
 
-/*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 
 
-/* ###################  Compiler specific Intrinsics  ########################### */
+
+
 /** \defgroup CMSIS_SIMD_intrinsics CMSIS SIMD Intrinsics
   Access to dedicated SIMD instructions
   @{
@@ -2160,7 +2160,7 @@ __STATIC_FORCEINLINE int32_t __SMMLA (int32_t op1, int32_t op2, int32_t op3)
 }
 
 #endif /* (__ARM_FEATURE_DSP == 1) */
-/*@} end of group CMSIS_SIMD_intrinsics */
+
 
 
 #pragma GCC diagnostic pop

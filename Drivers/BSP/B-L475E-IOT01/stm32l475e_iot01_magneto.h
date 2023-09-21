@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_MAGNETO_H
 #define __STM32L475E_IOT01_MAGNETO_H
 
@@ -25,9 +25,9 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"   
-/* Include Magnetometer component driver */
+
 #include "../Components/lis3mdl/lis3mdl.h"  
    
 /** @addtogroup BSP
@@ -45,7 +45,7 @@
 /** @defgroup STM32L475_IOT01_MAGNETO_Exported_Types MAGNETO Exported Types
   * @{
   */   
-/* Exported types ------------------------------------------------------------*/
+
 typedef enum 
 {
   MAGNETO_OK = 0,
@@ -86,4 +86,4 @@ void BSP_MAGNETO_GetXYZ(int16_t *pDataXYZ);
 
 #endif /* __STM32L475E_IOT01_MAGNETO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

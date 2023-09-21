@@ -18,7 +18,7 @@
  ******************************************************************************
  */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "hts221.h"
 
 /** @addtogroup BSP
@@ -36,7 +36,7 @@
 /** @defgroup HTS221_Private_Variables HTS221 Private Variables
   * @{
   */
-/* HTS221 Humidity Private Variables */
+
 HSENSOR_DrvTypeDef HTS221_H_Drv =
 {
   HTS221_H_Init,
@@ -44,7 +44,7 @@ HSENSOR_DrvTypeDef HTS221_H_Drv =
   HTS221_H_ReadHumidity
 };
 
-/* HTS221_Temperature_Private_Variables */ 
+
 TSENSOR_DrvTypeDef HTS221_T_Drv =
 {
   HTS221_T_Init,
@@ -66,21 +66,21 @@ void HTS221_H_Init(uint16_t DeviceAddr)
 {
   uint8_t tmp;
   
-  /* Read CTRL_REG1 */
+
   tmp = SENSOR_IO_Read(DeviceAddr, HTS221_CTRL_REG1);
   
-  /* Enable BDU */
+
   tmp &= ~HTS221_BDU_MASK;
   tmp |= (1 << HTS221_BDU_BIT);
   
-  /* Set default ODR */
+
   tmp &= ~HTS221_ODR_MASK;
   tmp |= (uint8_t)0x01; /* Set ODR to 1Hz */
   
-  /* Activate the device */
+
   tmp |= HTS221_PD_MASK;
   
-  /* Apply settings to CTRL_REG1 */
+
   SENSOR_IO_Write(DeviceAddr, HTS221_CTRL_REG1, tmp);
 }
 
@@ -92,10 +92,10 @@ uint8_t HTS221_H_ReadID(uint16_t DeviceAddr)
 {  
   uint8_t ctrl = 0x00;
  
-  /* IO interface initialization */
+
   SENSOR_IO_Init(); 
   
-  /* Read value at Who am I register address */
+
   ctrl = SENSOR_IO_Read(DeviceAddr, HTS221_WHO_AM_I_REG);
   
   return ctrl;
@@ -158,21 +158,21 @@ void HTS221_T_Init(uint16_t DeviceAddr, TSENSOR_InitTypeDef *pInitStruct)
 {  
   uint8_t tmp;
   
-  /* Read CTRL_REG1 */
+
   tmp = SENSOR_IO_Read(DeviceAddr, HTS221_CTRL_REG1);
   
-  /* Enable BDU */
+
   tmp &= ~HTS221_BDU_MASK;
   tmp |= (1 << HTS221_BDU_BIT);
   
-  /* Set default ODR */
+
   tmp &= ~HTS221_ODR_MASK;
   tmp |= (uint8_t)0x01; /* Set ODR to 1Hz */
   
-  /* Activate the device */
+
   tmp |= HTS221_PD_MASK;
   
-  /* Apply settings to CTRL_REG1 */
+
   SENSOR_IO_Write(DeviceAddr, HTS221_CTRL_REG1, tmp);
 }
 
@@ -226,4 +226,4 @@ float HTS221_T_ReadTemp(uint16_t DeviceAddr)
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

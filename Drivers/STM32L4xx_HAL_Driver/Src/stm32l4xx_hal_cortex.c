@@ -100,7 +100,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -113,12 +113,12 @@
 
 #ifdef HAL_CORTEX_MODULE_ENABLED
 
-/* Private types -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private constants ---------------------------------------------------------*/
-/* Private macros ------------------------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/
+
+
+
+
+
+
 
 /** @addtogroup CORTEX_Exported_Functions
   * @{
@@ -162,10 +162,10 @@
   */
 void HAL_NVIC_SetPriorityGrouping(uint32_t PriorityGroup)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_PRIORITY_GROUP(PriorityGroup));
 
-  /* Set the PRIGROUP[10:8] bits according to the PriorityGroup parameter value */
+
   NVIC_SetPriorityGrouping(PriorityGroup);
 }
 
@@ -186,7 +186,7 @@ void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t Sub
 {
   uint32_t prioritygroup = 0x00;
 
-  /* Check the parameters */
+
   assert_param(IS_NVIC_SUB_PRIORITY(SubPriority));
   assert_param(IS_NVIC_PREEMPTION_PRIORITY(PreemptPriority));
 
@@ -206,10 +206,10 @@ void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t Sub
   */
 void HAL_NVIC_EnableIRQ(IRQn_Type IRQn)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
   
-  /* Enable interrupt */
+
   NVIC_EnableIRQ(IRQn);
 }
 
@@ -222,10 +222,10 @@ void HAL_NVIC_EnableIRQ(IRQn_Type IRQn)
   */
 void HAL_NVIC_DisableIRQ(IRQn_Type IRQn)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
   
-  /* Disable interrupt */
+
   NVIC_DisableIRQ(IRQn);
 }
 
@@ -235,7 +235,7 @@ void HAL_NVIC_DisableIRQ(IRQn_Type IRQn)
   */
 void HAL_NVIC_SystemReset(void)
 {
-  /* System Reset */
+
   NVIC_SystemReset();
 }
 
@@ -276,7 +276,7 @@ uint32_t HAL_SYSTICK_Config(uint32_t TicksNumb)
   */
 uint32_t HAL_NVIC_GetPriorityGrouping(void)
 {
-  /* Get the PRIGROUP[10:8] field value */
+
   return NVIC_GetPriorityGrouping();
 }
 
@@ -303,9 +303,9 @@ uint32_t HAL_NVIC_GetPriorityGrouping(void)
   */
 void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t *pPreemptPriority, uint32_t *pSubPriority)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_PRIORITY_GROUP(PriorityGroup));
- /* Get priority for Cortex-M system or device specific interrupts */
+
   NVIC_DecodePriority(NVIC_GetPriority(IRQn), PriorityGroup, pPreemptPriority, pSubPriority);
 }
 
@@ -318,10 +318,10 @@ void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t *pPre
   */
 void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
   
-  /* Set interrupt pending */
+
   NVIC_SetPendingIRQ(IRQn);
 }
 
@@ -336,10 +336,10 @@ void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn)
   */
 uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
   
-  /* Return 1 if pending else 0 */
+
   return NVIC_GetPendingIRQ(IRQn);
 }
 
@@ -352,10 +352,10 @@ uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
   */
 void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn)
 {
-  /* Check the parameters */
+
   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
   
-  /* Clear pending interrupt */
+
   NVIC_ClearPendingIRQ(IRQn);
 }
 
@@ -369,7 +369,7 @@ void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn)
   */
 uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn)
 {
-  /* Return 1 if active else 0 */
+
   return NVIC_GetActive(IRQn);
 }
 
@@ -383,7 +383,7 @@ uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn)
   */
 void HAL_SYSTICK_CLKSourceConfig(uint32_t CLKSource)
 {
-  /* Check the parameters */
+
   assert_param(IS_SYSTICK_CLK_SOURCE(CLKSource));
   if (CLKSource == SYSTICK_CLKSOURCE_HCLK)
   {
@@ -429,10 +429,10 @@ __weak void HAL_SYSTICK_Callback(void)
   */
 void HAL_MPU_Enable(uint32_t MPU_Control)
 {
-  /* Enable the MPU */
+
   MPU->CTRL = (MPU_Control | MPU_CTRL_ENABLE_Msk);
 
-  /* Ensure MPU setting take effects */
+
   __DSB();
   __ISB();
 }
@@ -444,10 +444,10 @@ void HAL_MPU_Enable(uint32_t MPU_Control)
   */
 void HAL_MPU_Disable(void)
 {
-  /* Make sure outstanding transfers are done */
+
   __DMB();
 
-  /* Disable the MPU and clear the control register*/
+
   MPU->CTRL  = 0;
 }
 
@@ -460,16 +460,16 @@ void HAL_MPU_Disable(void)
   */
 void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init)
 {
-  /* Check the parameters */
+
   assert_param(IS_MPU_REGION_NUMBER(MPU_Init->Number));
   assert_param(IS_MPU_REGION_ENABLE(MPU_Init->Enable));
 
-  /* Set the Region number */
+
   MPU->RNR = MPU_Init->Number;
 
   if ((MPU_Init->Enable) != RESET)
   {
-    /* Check the parameters */
+
     assert_param(IS_MPU_INSTRUCTION_ACCESS(MPU_Init->DisableExec));
     assert_param(IS_MPU_REGION_PERMISSION_ATTRIBUTE(MPU_Init->AccessPermission));
     assert_param(IS_MPU_TEX_LEVEL(MPU_Init->TypeExtField));
@@ -496,7 +496,7 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init)
     MPU->RASR = 0x00;
   }
 }
-#endif /* __MPU_PRESENT */
+#endif
 
 /**
   * @}
@@ -506,7 +506,7 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init)
   * @}
   */
 
-#endif /* HAL_CORTEX_MODULE_ENABLED */
+#endif
 /**
   * @}
   */

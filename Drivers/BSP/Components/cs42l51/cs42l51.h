@@ -17,11 +17,11 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __CS42L51_H
 #define __CS42L51_H
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/audio.h"
 
 /** @addtogroup BSP
@@ -48,16 +48,16 @@
   * @{
   */ 
 
-/******************************************************************************/
-/***************************  Codec User defines ******************************/
-/******************************************************************************/
-/* Codec output devices */
+
+
+
+
 #define OUTPUT_DEVICE_HEADPHONE       0x01
 
-/* Codec input devices */
+
 #define INPUT_DEVICE_MIC1             0x10
 
-/* Volume Levels values */
+
 #define DEFAULT_VOLMIN                0x00
 #define DEFAULT_VOLMAX                0xFF
 #define DEFAULT_VOLSTEP               0x04
@@ -65,15 +65,15 @@
 #define AUDIO_PAUSE                   0
 #define AUDIO_RESUME                  1
 
-/* Codec POWER DOWN modes */
+
 #define CODEC_PDWN_HW                 1
 #define CODEC_PDWN_SW                 2
 
-/* MUTE commands */
+
 #define AUDIO_MUTE_ON                 1
 #define AUDIO_MUTE_OFF                0
 
-/* AUDIO FREQUENCY */
+
 #define AUDIO_FREQUENCY_192K          ((uint32_t)192000)
 #define AUDIO_FREQUENCY_96K           ((uint32_t)96000)
 #define AUDIO_FREQUENCY_48K           ((uint32_t)48000)
@@ -84,9 +84,9 @@
 #define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
 #define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
 
-/******************************************************************************/
-/****************************** REGISTER MAPPING ******************************/
-/******************************************************************************/
+
+
+
 /** 
   * @brief  CS42L51 ID  
   */  
@@ -126,7 +126,7 @@
 /*------------------------------------------------------------------------------
                            Audio Codec functions 
 ------------------------------------------------------------------------------*/
-/* High Layer codec functions */
+
 uint32_t cs42l51_Init(uint16_t DeviceAddr, uint16_t Device, uint8_t Volume, uint32_t AudioFreq);
 void     cs42l51_DeInit(void);
 uint32_t cs42l51_ReadID(uint16_t DeviceAddr);
@@ -140,14 +140,14 @@ uint32_t cs42l51_SetMute(uint16_t DeviceAddr, uint32_t Cmd);
 uint32_t cs42l51_SetOutputMode(uint16_t DeviceAddr, uint8_t Output);
 uint32_t cs42l51_Reset(uint16_t DeviceAddr);
 
-/* AUDIO IO functions */
+
 void      AUDIO_IO_Init(void);
 void      AUDIO_IO_DeInit(void);
 void      AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 uint8_t   AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
 void      AUDIO_IO_Delay(uint32_t Delay);
 
-/* Audio driver structure */
+
 extern AUDIO_DrvTypeDef   cs42l51_drv;
 
 /**
@@ -168,4 +168,4 @@ extern AUDIO_DrvTypeDef   cs42l51_drv;
 
 #endif /* __CS42L51_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

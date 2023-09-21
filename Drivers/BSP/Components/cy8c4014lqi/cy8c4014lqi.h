@@ -34,7 +34,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __CY8C4014LQI_H
 #define __CY8C4014LQI_H
 
@@ -42,7 +42,7 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/ts.h"
 
 /** @addtogroup BSP
@@ -57,8 +57,8 @@ extern "C" {
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
+
+
 
 /** @defgroup CY8C4014LQI_Exported_Constants
   * @{
@@ -77,7 +77,7 @@ extern "C" {
 #define DATA_VALUE_FLAG           (0x0B)
 
 
-/* Possible values of global variable 'TS_I2C_Initialized' */
+
 #define CY8C4014LQI_I2C_NOT_INITIALIZED          0x00U
 #define CY8C4014LQI_I2C_INITIALIZED              0x01U
 
@@ -86,8 +86,8 @@ extern "C" {
   * @}
   */
 
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/
+
+
 
 /** @defgroup CY8C4014LQI_Exported_Functions
   * @{
@@ -115,13 +115,13 @@ void     cy8c4014lqi_TS_GetTouchInfo(uint16_t   DeviceAddr,
   * @}
   */
 
-/* Imported TS IO functions --------------------------------------------------------*/
+
 
 /** @defgroup CY8C4014LQI_Imported_Functions
   * @{
   */
 
-/* TouchScreen (TS) external IO functions */
+
 extern void     TS_IO_Init(void);
 extern void     TS_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 extern uint8_t  TS_IO_Read(uint8_t Addr, uint8_t Reg);
@@ -132,13 +132,13 @@ extern void     TS_IO_Delay(uint32_t Delay);
   * @}
   */
 
-/* Imported global variables --------------------------------------------------------*/
+
 
 /** @defgroup CY8C4014LQI_Imported_Globals
   * @{
   */
 
-/* Touch screen driver structure */
+
 extern TS_DrvTypeDef cy8c4014lqi_ts_drv;
 
 /**
@@ -162,4 +162,4 @@ extern TS_DrvTypeDef cy8c4014lqi_ts_drv;
 #endif
 #endif /* __CY8C4014LQI_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -22,18 +22,18 @@
  * limitations under the License.
  */
 
-/*lint -esym(9058, IRQn)*/ /* disable MISRA 2012 Rule 2.4 for IRQn */
+
 
 #ifndef __CMSIS_ARMCLANG_H
 #define __CMSIS_ARMCLANG_H
 
-#pragma clang system_header   /* treat file as system include file */
+#pragma clang system_header
 
 #ifndef __ARM_COMPAT_H
-#include <arm_compat.h>    /* Compatibility header for Arm Compiler 5 intrinsics */
+#include <arm_compat.h>
 #endif
 
-/* CMSIS compiler specific defines */
+
 #ifndef   __ASM
   #define __ASM                                  __asm
 #endif
@@ -64,10 +64,10 @@
 #ifndef   __PACKED_UNION
   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
 #endif
-#ifndef   __UNALIGNED_UINT32        /* deprecated */
+#ifndef   __UNALIGNED_UINT32
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wpacked"
-/*lint -esym(9058, T_UINT32)*/ /* disable MISRA 2012 Rule 2.4 for T_UINT32 */
+
   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
   #pragma clang diagnostic pop
   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
@@ -75,7 +75,7 @@
 #ifndef   __UNALIGNED_UINT16_WRITE
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wpacked"
-/*lint -esym(9058, T_UINT16_WRITE)*/ /* disable MISRA 2012 Rule 2.4 for T_UINT16_WRITE */
+
   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
   #pragma clang diagnostic pop
   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))->v) = (val))
@@ -83,7 +83,7 @@
 #ifndef   __UNALIGNED_UINT16_READ
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wpacked"
-/*lint -esym(9058, T_UINT16_READ)*/ /* disable MISRA 2012 Rule 2.4 for T_UINT16_READ */
+
   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
   #pragma clang diagnostic pop
   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(addr))->v)
@@ -91,7 +91,7 @@
 #ifndef   __UNALIGNED_UINT32_WRITE
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wpacked"
-/*lint -esym(9058, T_UINT32_WRITE)*/ /* disable MISRA 2012 Rule 2.4 for T_UINT32_WRITE */
+
   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
   #pragma clang diagnostic pop
   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))->v) = (val))
@@ -99,7 +99,7 @@
 #ifndef   __UNALIGNED_UINT32_READ
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wpacked"
-/*lint -esym(9058, T_UINT32_READ)*/ /* disable MISRA 2012 Rule 2.4 for T_UINT32_READ */
+
   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
   #pragma clang diagnostic pop
   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(addr))->v)
@@ -114,7 +114,7 @@
   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
 #endif
 
-/* #########################  Startup and Lowlevel Init  ######################## */
+
 
 #ifndef __PROGRAM_START
 #define __PROGRAM_START           __main
@@ -137,7 +137,7 @@
 #endif
 
 
-/* ###########################  Core Function Access  ########################### */
+
 /** \ingroup  CMSIS_Core_FunctionInterface
     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
   @{
@@ -148,7 +148,7 @@
   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-/* intrinsic void __enable_irq();  see arm_compat.h */
+
 
 
 /**
@@ -156,7 +156,7 @@
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-/* intrinsic void __disable_irq();  see arm_compat.h */
+
 
 
 /**
@@ -452,7 +452,7 @@ __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask)
   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-#define __enable_fault_irq                __enable_fiq   /* see arm_compat.h */
+#define __enable_fault_irq                __enable_fiq
 
 
 /**
@@ -460,7 +460,7 @@ __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask)
   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-#define __disable_fault_irq               __disable_fiq   /* see arm_compat.h */
+#define __disable_fault_irq               __disable_fiq
 
 
 /**
@@ -792,10 +792,10 @@ __STATIC_FORCEINLINE void __TZ_set_MSPLIM_NS(uint32_t MainStackPtrLimit)
 #endif
 
 
-/*@} end of CMSIS_Core_RegAccFunctions */
 
 
-/* ##########################  Core Instruction Access  ######################### */
+
+
 /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
   Access to dedicated instructions
   @{
@@ -1079,7 +1079,7 @@ __STATIC_FORCEINLINE uint8_t __LDRBT(volatile uint8_t *ptr)
   uint32_t result;
 
   __ASM volatile ("ldrbt %0, %1" : "=r" (result) : "Q" (*ptr) );
-  return ((uint8_t) result);    /* Add explicit type cast here */
+  return ((uint8_t) result);
 }
 
 
@@ -1094,7 +1094,7 @@ __STATIC_FORCEINLINE uint16_t __LDRHT(volatile uint16_t *ptr)
   uint32_t result;
 
   __ASM volatile ("ldrht %0, %1" : "=r" (result) : "Q" (*ptr) );
-  return ((uint16_t) result);    /* Add explicit type cast here */
+  return ((uint16_t) result);
 }
 
 
@@ -1351,10 +1351,10 @@ __STATIC_FORCEINLINE void __STL(uint32_t value, volatile uint32_t *ptr)
 #endif /* ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
            (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    ) */
 
-/*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 
 
-/* ###################  Compiler specific Intrinsics  ########################### */
+
+
 /** \defgroup CMSIS_SIMD_intrinsics CMSIS SIMD Intrinsics
   Access to dedicated SIMD instructions
   @{
@@ -1754,9 +1754,9 @@ __STATIC_FORCEINLINE uint64_t __SMLALD (uint32_t op1, uint32_t op2, uint64_t acc
   } llr;
   llr.w64 = acc;
 
-#ifndef __ARMEB__   /* Little endian */
+#ifndef __ARMEB__
   __ASM volatile ("smlald %0, %1, %2, %3" : "=r" (llr.w32[0]), "=r" (llr.w32[1]): "r" (op1), "r" (op2) , "0" (llr.w32[0]), "1" (llr.w32[1]) );
-#else               /* Big endian */
+#else
   __ASM volatile ("smlald %0, %1, %2, %3" : "=r" (llr.w32[1]), "=r" (llr.w32[0]): "r" (op1), "r" (op2) , "0" (llr.w32[1]), "1" (llr.w32[0]) );
 #endif
 
@@ -1771,9 +1771,9 @@ __STATIC_FORCEINLINE uint64_t __SMLALDX (uint32_t op1, uint32_t op2, uint64_t ac
   } llr;
   llr.w64 = acc;
 
-#ifndef __ARMEB__   /* Little endian */
+#ifndef __ARMEB__
   __ASM volatile ("smlaldx %0, %1, %2, %3" : "=r" (llr.w32[0]), "=r" (llr.w32[1]): "r" (op1), "r" (op2) , "0" (llr.w32[0]), "1" (llr.w32[1]) );
-#else               /* Big endian */
+#else
   __ASM volatile ("smlaldx %0, %1, %2, %3" : "=r" (llr.w32[1]), "=r" (llr.w32[0]): "r" (op1), "r" (op2) , "0" (llr.w32[1]), "1" (llr.w32[0]) );
 #endif
 
@@ -1820,9 +1820,9 @@ __STATIC_FORCEINLINE uint64_t __SMLSLD (uint32_t op1, uint32_t op2, uint64_t acc
   } llr;
   llr.w64 = acc;
 
-#ifndef __ARMEB__   /* Little endian */
+#ifndef __ARMEB__
   __ASM volatile ("smlsld %0, %1, %2, %3" : "=r" (llr.w32[0]), "=r" (llr.w32[1]): "r" (op1), "r" (op2) , "0" (llr.w32[0]), "1" (llr.w32[1]) );
-#else               /* Big endian */
+#else
   __ASM volatile ("smlsld %0, %1, %2, %3" : "=r" (llr.w32[1]), "=r" (llr.w32[0]): "r" (op1), "r" (op2) , "0" (llr.w32[1]), "1" (llr.w32[0]) );
 #endif
 
@@ -1837,9 +1837,9 @@ __STATIC_FORCEINLINE uint64_t __SMLSLDX (uint32_t op1, uint32_t op2, uint64_t ac
   } llr;
   llr.w64 = acc;
 
-#ifndef __ARMEB__   /* Little endian */
+#ifndef __ARMEB__
   __ASM volatile ("smlsldx %0, %1, %2, %3" : "=r" (llr.w32[0]), "=r" (llr.w32[1]): "r" (op1), "r" (op2) , "0" (llr.w32[0]), "1" (llr.w32[1]) );
-#else               /* Big endian */
+#else
   __ASM volatile ("smlsldx %0, %1, %2, %3" : "=r" (llr.w32[1]), "=r" (llr.w32[0]): "r" (op1), "r" (op2) , "0" (llr.w32[1]), "1" (llr.w32[0]) );
 #endif
 
@@ -1884,8 +1884,8 @@ __STATIC_FORCEINLINE int32_t __SMMLA (int32_t op1, int32_t op2, int32_t op3)
   return(result);
 }
 
-#endif /* (__ARM_FEATURE_DSP == 1) */
-/*@} end of group CMSIS_SIMD_intrinsics */
+#endif
 
 
-#endif /* __CMSIS_ARMCLANG_H */
+
+#endif

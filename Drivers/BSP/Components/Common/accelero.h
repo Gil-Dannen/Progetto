@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __ACCELERO_H
 #define __ACCELERO_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -71,7 +71,7 @@ typedef struct
   * @{
   */
 
-/* ACCELERO struct */
+
 typedef struct
 {
   uint8_t Power_Mode;                         /* Power-down/Normal Mode */
@@ -84,7 +84,7 @@ typedef struct
   uint8_t Communication_Mode;
 }ACCELERO_InitTypeDef;
 
-/* ACCELERO High Pass Filter struct */
+
 typedef struct
 {
   uint8_t HighPassFilter_Mode_Selection;      /* Internal filter mode */
@@ -122,4 +122,4 @@ typedef struct
 
 #endif /* __ACCELERO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

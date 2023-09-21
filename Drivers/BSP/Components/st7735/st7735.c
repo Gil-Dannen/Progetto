@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "st7735.h"
 
 /** @addtogroup BSP
@@ -108,11 +108,11 @@ void st7735_Init(void)
 {    
   uint8_t data = 0;
   
-  /* Initialize ST7735 low level bus layer -----------------------------------*/
+
   LCD_IO_Init();
-  /* Out of sleep mode, 0 args, no delay */
+
   st7735_WriteReg(LCD_REG_17, 0x00); 
-  /* Frame rate ctrl - normal mode, 3 args:Rate = fosc/(1x2+40) * (LINE+2C+2D)*/
+
   LCD_IO_WriteReg(LCD_REG_177);
   data = 0x01;
   LCD_IO_WriteMultipleData(&data, 1);
@@ -120,41 +120,41 @@ void st7735_Init(void)
   LCD_IO_WriteMultipleData(&data, 1);
   data = 0x2D;
   LCD_IO_WriteMultipleData(&data, 1);
-  /* Frame rate control - idle mode, 3 args:Rate = fosc/(1x2+40) * (LINE+2C+2D) */    
+
   st7735_WriteReg(LCD_REG_178, 0x01);
   st7735_WriteReg(LCD_REG_178, 0x2C);
   st7735_WriteReg(LCD_REG_178, 0x2D);
-  /* Frame rate ctrl - partial mode, 6 args: Dot inversion mode, Line inversion mode */ 
+
   st7735_WriteReg(LCD_REG_179, 0x01);
   st7735_WriteReg(LCD_REG_179, 0x2C);
   st7735_WriteReg(LCD_REG_179, 0x2D);
   st7735_WriteReg(LCD_REG_179, 0x01);
   st7735_WriteReg(LCD_REG_179, 0x2C);
   st7735_WriteReg(LCD_REG_179, 0x2D);
-  /* Display inversion ctrl, 1 arg, no delay: No inversion */
+
   st7735_WriteReg(LCD_REG_180, 0x07);
-  /* Power control, 3 args, no delay: -4.6V , AUTO mode */
+
   st7735_WriteReg(LCD_REG_192, 0xA2);
   st7735_WriteReg(LCD_REG_192, 0x02);
   st7735_WriteReg(LCD_REG_192, 0x84);
-  /* Power control, 1 arg, no delay: VGH25 = 2.4C VGSEL = -10 VGH = 3 * AVDD */
+
   st7735_WriteReg(LCD_REG_193, 0xC5);
-  /* Power control, 2 args, no delay: Opamp current small, Boost frequency */ 
+
   st7735_WriteReg(LCD_REG_194, 0x0A);
   st7735_WriteReg(LCD_REG_194, 0x00);
-  /* Power control, 2 args, no delay: BCLK/2, Opamp current small & Medium low */  
+
   st7735_WriteReg(LCD_REG_195, 0x8A);
   st7735_WriteReg(LCD_REG_195, 0x2A);
-  /* Power control, 2 args, no delay */
+
   st7735_WriteReg(LCD_REG_196, 0x8A);
   st7735_WriteReg(LCD_REG_196, 0xEE);
-  /* Power control, 1 arg, no delay */
+
   st7735_WriteReg(LCD_REG_197, 0x0E);
-  /* Don't invert display, no args, no delay */
+
   LCD_IO_WriteReg(LCD_REG_32);
-  /* Set color mode, 1 arg, no delay: 16-bit color */
+
   st7735_WriteReg(LCD_REG_58, 0x05);
-  /* Column addr set, 4 args, no delay: XSTART = 0, XEND = 127 */
+
   LCD_IO_WriteReg(LCD_REG_42);
   data = 0x00;
   LCD_IO_WriteMultipleData(&data, 1);
@@ -162,7 +162,7 @@ void st7735_Init(void)
   LCD_IO_WriteMultipleData(&data, 1);
   data = 0x7F;
   LCD_IO_WriteMultipleData(&data, 1);
-  /* Row addr set, 4 args, no delay: YSTART = 0, YEND = 159 */
+
   LCD_IO_WriteReg(LCD_REG_43);
   data = 0x00;
   LCD_IO_WriteMultipleData(&data, 1);
@@ -170,7 +170,7 @@ void st7735_Init(void)
   LCD_IO_WriteMultipleData(&data, 1);
   data = 0x9F;
   LCD_IO_WriteMultipleData(&data, 1);
-  /* Magical unicorn dust, 16 args, no delay */
+
   st7735_WriteReg(LCD_REG_224, 0x02); 
   st7735_WriteReg(LCD_REG_224, 0x1c);  
   st7735_WriteReg(LCD_REG_224, 0x07); 
@@ -187,7 +187,7 @@ void st7735_Init(void)
   st7735_WriteReg(LCD_REG_224, 0x01);  
   st7735_WriteReg(LCD_REG_224, 0x03);  
   st7735_WriteReg(LCD_REG_224, 0x10);
-  /* Sparkles and rainbows, 16 args, no delay */
+
   st7735_WriteReg(LCD_REG_225, 0x03);
   st7735_WriteReg(LCD_REG_225, 0x1d);  
   st7735_WriteReg(LCD_REG_225, 0x07);  
@@ -204,11 +204,11 @@ void st7735_Init(void)
   st7735_WriteReg(LCD_REG_225, 0x00);  
   st7735_WriteReg(LCD_REG_225, 0x02);  
   st7735_WriteReg(LCD_REG_225, 0x10);
-  /* Normal display on, no args, no delay */
+
   st7735_WriteReg(LCD_REG_19, 0x00);
-  /* Main screen turn on, no delay */
+
   st7735_WriteReg(LCD_REG_41, 0x00);
-  /* Memory access control: MY = 1, MX = 1, MV = 0, ML = 0 */
+
   st7735_WriteReg(LCD_REG_54, 0xC0);
 }
 
@@ -283,7 +283,7 @@ void st7735_WritePixel(uint16_t Xpos, uint16_t Ypos, uint16_t RGBCode)
     return;
   }
   
-  /* Set Cursor */
+
   st7735_SetCursor(Xpos, Ypos);
   
   data = RGBCode >> 8;
@@ -316,7 +316,7 @@ void st7735_WriteReg(uint8_t LCDReg, uint8_t LCDRegValue)
 void st7735_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
   uint8_t data = 0;
-  /* Column addr set, 4 args, no delay: XSTART = Xpos, XEND = (Xpos + Width - 1) */
+
   LCD_IO_WriteReg(LCD_REG_42);
   data = (Xpos) >> 8;
   LCD_IO_WriteMultipleData(&data, 1);
@@ -326,7 +326,7 @@ void st7735_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint1
   LCD_IO_WriteMultipleData(&data, 1);
   data = (Xpos + Width - 1) & 0xFF;
   LCD_IO_WriteMultipleData(&data, 1);
-  /* Row addr set, 4 args, no delay: YSTART = Ypos, YEND = (Ypos + Height - 1) */
+
   LCD_IO_WriteReg(LCD_REG_43);
   data = (Ypos) >> 8;
   LCD_IO_WriteMultipleData(&data, 1);
@@ -352,7 +352,7 @@ void st7735_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t L
   
   if(Xpos + Length > ST7735_LCD_PIXEL_WIDTH) return;
   
-  /* Set Cursor */
+
   st7735_SetCursor(Xpos, Ypos);
   
   for(counter = 0; counter < Length; counter++)
@@ -410,26 +410,26 @@ void st7735_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
 {
   uint32_t index = 0, size = 0;
   
-  /* Read bitmap size */
+
   size = *(volatile uint16_t *) (pbmp + 2);
   size |= (*(volatile uint16_t *) (pbmp + 4)) << 16;
-  /* Get bitmap data address offset */
+
   index = *(volatile uint16_t *) (pbmp + 10);
   index |= (*(volatile uint16_t *) (pbmp + 12)) << 16;
   size = (size - index)/2;
   pbmp += index;
   
-  /* Set GRAM write direction and BGR = 0 */
-  /* Memory access control: MY = 0, MX = 1, MV = 0, ML = 0 */
+
+
   st7735_WriteReg(LCD_REG_54, 0x40);
 
-  /* Set Cursor */
+
   st7735_SetCursor(Xpos, Ypos);  
  
   LCD_IO_WriteMultipleData((uint8_t*)pbmp, size*2);
  
-  /* Set GRAM write direction and BGR = 0 */
-  /* Memory access control: MY = 1, MX = 1, MV = 0, ML = 0 */
+
+
   st7735_WriteReg(LCD_REG_54, 0xC0);
 }
 
@@ -449,5 +449,5 @@ void st7735_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
 * @}
 */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
 

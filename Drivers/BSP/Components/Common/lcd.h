@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __LCD_H
 #define __LCD_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
    
 /** @addtogroup BSP
@@ -57,7 +57,7 @@ typedef struct
   void     (*WritePixel)(uint16_t, uint16_t, uint16_t);
   uint16_t (*ReadPixel)(uint16_t, uint16_t);
   
-   /* Optimized operation */
+
   void     (*SetDisplayWindow)(uint16_t, uint16_t, uint16_t, uint16_t);
   void     (*DrawHLine)(uint16_t, uint16_t, uint16_t, uint16_t);
   void     (*DrawVLine)(uint16_t, uint16_t, uint16_t, uint16_t);
@@ -93,4 +93,4 @@ typedef struct
 
 #endif /* __LCD_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

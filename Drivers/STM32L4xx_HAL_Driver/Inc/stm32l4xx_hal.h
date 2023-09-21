@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_H
 #define STM32L4xx_HAL_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_conf.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -36,7 +36,7 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 /** @defgroup HAL_Exported_Types HAL Exported Types
   * @{
   */
@@ -59,7 +59,7 @@ typedef enum
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 
 /** @defgroup HAL_Exported_Constants HAL Exported Constants
   * @{
@@ -80,10 +80,10 @@ typedef enum
     defined (STM32L4P5xx) || defined (STM32L4Q5xx) || \
     defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
 #define SYSCFG_BOOT_FMC                SYSCFG_MEMRMP_MEM_MODE_1
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx || */
-       /* STM32L496xx || STM32L4A6xx || */
-       /* STM32L4P5xx || STM32L4Q5xx || */
-       /* STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
+
+
+
 
 #define SYSCFG_BOOT_SRAM               (SYSCFG_MEMRMP_MEM_MODE_1 | SYSCFG_MEMRMP_MEM_MODE_0)
 
@@ -92,7 +92,7 @@ typedef enum
 #define SYSCFG_BOOT_OCTOPSPI2          (SYSCFG_MEMRMP_MEM_MODE_2 | SYSCFG_MEMRMP_MEM_MODE_0)
 #else
 #define SYSCFG_BOOT_QUADSPI            (SYSCFG_MEMRMP_MEM_MODE_2 | SYSCFG_MEMRMP_MEM_MODE_1)
-#endif /* STM32L4P5xx || STM32L4Q5xx || STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
 
 /**
   * @}
@@ -101,12 +101,12 @@ typedef enum
 /** @defgroup SYSCFG_FPU_Interrupts FPU Interrupts
   * @{
   */
-#define SYSCFG_IT_FPU_IOC              SYSCFG_CFGR1_FPU_IE_0  /*!< Floating Point Unit Invalid operation Interrupt */
-#define SYSCFG_IT_FPU_DZC              SYSCFG_CFGR1_FPU_IE_1  /*!< Floating Point Unit Divide-by-zero Interrupt */
-#define SYSCFG_IT_FPU_UFC              SYSCFG_CFGR1_FPU_IE_2  /*!< Floating Point Unit Underflow Interrupt */
-#define SYSCFG_IT_FPU_OFC              SYSCFG_CFGR1_FPU_IE_3  /*!< Floating Point Unit Overflow Interrupt */
-#define SYSCFG_IT_FPU_IDC              SYSCFG_CFGR1_FPU_IE_4  /*!< Floating Point Unit Input denormal Interrupt */
-#define SYSCFG_IT_FPU_IXC              SYSCFG_CFGR1_FPU_IE_5  /*!< Floating Point Unit Inexact Interrupt */
+#define SYSCFG_IT_FPU_IOC              SYSCFG_CFGR1_FPU_IE_0
+#define SYSCFG_IT_FPU_DZC              SYSCFG_CFGR1_FPU_IE_1
+#define SYSCFG_IT_FPU_UFC              SYSCFG_CFGR1_FPU_IE_2
+#define SYSCFG_IT_FPU_OFC              SYSCFG_CFGR1_FPU_IE_3
+#define SYSCFG_IT_FPU_IDC              SYSCFG_CFGR1_FPU_IE_4
+#define SYSCFG_IT_FPU_IXC              SYSCFG_CFGR1_FPU_IE_5
 
 /**
   * @}
@@ -115,40 +115,40 @@ typedef enum
 /** @defgroup SYSCFG_SRAM2WRP SRAM2 Page Write protection (0 to 31)
   * @{
   */
-#define SYSCFG_SRAM2WRP_PAGE0          SYSCFG_SWPR_PAGE0 /*!< SRAM2 Write protection page 0 */
-#define SYSCFG_SRAM2WRP_PAGE1          SYSCFG_SWPR_PAGE1 /*!< SRAM2 Write protection page 1 */
-#define SYSCFG_SRAM2WRP_PAGE2          SYSCFG_SWPR_PAGE2 /*!< SRAM2 Write protection page 2 */
-#define SYSCFG_SRAM2WRP_PAGE3          SYSCFG_SWPR_PAGE3 /*!< SRAM2 Write protection page 3 */
-#define SYSCFG_SRAM2WRP_PAGE4          SYSCFG_SWPR_PAGE4 /*!< SRAM2 Write protection page 4 */
-#define SYSCFG_SRAM2WRP_PAGE5          SYSCFG_SWPR_PAGE5 /*!< SRAM2 Write protection page 5 */
-#define SYSCFG_SRAM2WRP_PAGE6          SYSCFG_SWPR_PAGE6 /*!< SRAM2 Write protection page 6 */
-#define SYSCFG_SRAM2WRP_PAGE7          SYSCFG_SWPR_PAGE7 /*!< SRAM2 Write protection page 7 */
-#define SYSCFG_SRAM2WRP_PAGE8          SYSCFG_SWPR_PAGE8 /*!< SRAM2 Write protection page 8 */
-#define SYSCFG_SRAM2WRP_PAGE9          SYSCFG_SWPR_PAGE9 /*!< SRAM2 Write protection page 9 */
-#define SYSCFG_SRAM2WRP_PAGE10         SYSCFG_SWPR_PAGE10 /*!< SRAM2 Write protection page 10 */
-#define SYSCFG_SRAM2WRP_PAGE11         SYSCFG_SWPR_PAGE11 /*!< SRAM2 Write protection page 11 */
-#define SYSCFG_SRAM2WRP_PAGE12         SYSCFG_SWPR_PAGE12 /*!< SRAM2 Write protection page 12 */
-#define SYSCFG_SRAM2WRP_PAGE13         SYSCFG_SWPR_PAGE13 /*!< SRAM2 Write protection page 13 */
-#define SYSCFG_SRAM2WRP_PAGE14         SYSCFG_SWPR_PAGE14 /*!< SRAM2 Write protection page 14 */
-#define SYSCFG_SRAM2WRP_PAGE15         SYSCFG_SWPR_PAGE15 /*!< SRAM2 Write protection page 15 */
+#define SYSCFG_SRAM2WRP_PAGE0          SYSCFG_SWPR_PAGE0
+#define SYSCFG_SRAM2WRP_PAGE1          SYSCFG_SWPR_PAGE1
+#define SYSCFG_SRAM2WRP_PAGE2          SYSCFG_SWPR_PAGE2
+#define SYSCFG_SRAM2WRP_PAGE3          SYSCFG_SWPR_PAGE3
+#define SYSCFG_SRAM2WRP_PAGE4          SYSCFG_SWPR_PAGE4
+#define SYSCFG_SRAM2WRP_PAGE5          SYSCFG_SWPR_PAGE5
+#define SYSCFG_SRAM2WRP_PAGE6          SYSCFG_SWPR_PAGE6
+#define SYSCFG_SRAM2WRP_PAGE7          SYSCFG_SWPR_PAGE7
+#define SYSCFG_SRAM2WRP_PAGE8          SYSCFG_SWPR_PAGE8
+#define SYSCFG_SRAM2WRP_PAGE9          SYSCFG_SWPR_PAGE9
+#define SYSCFG_SRAM2WRP_PAGE10         SYSCFG_SWPR_PAGE10
+#define SYSCFG_SRAM2WRP_PAGE11         SYSCFG_SWPR_PAGE11
+#define SYSCFG_SRAM2WRP_PAGE12         SYSCFG_SWPR_PAGE12
+#define SYSCFG_SRAM2WRP_PAGE13         SYSCFG_SWPR_PAGE13
+#define SYSCFG_SRAM2WRP_PAGE14         SYSCFG_SWPR_PAGE14
+#define SYSCFG_SRAM2WRP_PAGE15         SYSCFG_SWPR_PAGE15
 #if defined(SYSCFG_SWPR_PAGE31)
-#define SYSCFG_SRAM2WRP_PAGE16         SYSCFG_SWPR_PAGE16 /*!< SRAM2 Write protection page 16 */
-#define SYSCFG_SRAM2WRP_PAGE17         SYSCFG_SWPR_PAGE17 /*!< SRAM2 Write protection page 17 */
-#define SYSCFG_SRAM2WRP_PAGE18         SYSCFG_SWPR_PAGE18 /*!< SRAM2 Write protection page 18 */
-#define SYSCFG_SRAM2WRP_PAGE19         SYSCFG_SWPR_PAGE19 /*!< SRAM2 Write protection page 19 */
-#define SYSCFG_SRAM2WRP_PAGE20         SYSCFG_SWPR_PAGE20 /*!< SRAM2 Write protection page 20 */
-#define SYSCFG_SRAM2WRP_PAGE21         SYSCFG_SWPR_PAGE21 /*!< SRAM2 Write protection page 21 */
-#define SYSCFG_SRAM2WRP_PAGE22         SYSCFG_SWPR_PAGE22 /*!< SRAM2 Write protection page 22 */
-#define SYSCFG_SRAM2WRP_PAGE23         SYSCFG_SWPR_PAGE23 /*!< SRAM2 Write protection page 23 */
-#define SYSCFG_SRAM2WRP_PAGE24         SYSCFG_SWPR_PAGE24 /*!< SRAM2 Write protection page 24 */
-#define SYSCFG_SRAM2WRP_PAGE25         SYSCFG_SWPR_PAGE25 /*!< SRAM2 Write protection page 25 */
-#define SYSCFG_SRAM2WRP_PAGE26         SYSCFG_SWPR_PAGE26 /*!< SRAM2 Write protection page 26 */
-#define SYSCFG_SRAM2WRP_PAGE27         SYSCFG_SWPR_PAGE27 /*!< SRAM2 Write protection page 27 */
-#define SYSCFG_SRAM2WRP_PAGE28         SYSCFG_SWPR_PAGE28 /*!< SRAM2 Write protection page 28 */
-#define SYSCFG_SRAM2WRP_PAGE29         SYSCFG_SWPR_PAGE29 /*!< SRAM2 Write protection page 29 */
-#define SYSCFG_SRAM2WRP_PAGE30         SYSCFG_SWPR_PAGE30 /*!< SRAM2 Write protection page 30 */
-#define SYSCFG_SRAM2WRP_PAGE31         SYSCFG_SWPR_PAGE31 /*!< SRAM2 Write protection page 31 */
-#endif /* SYSCFG_SWPR_PAGE31 */
+#define SYSCFG_SRAM2WRP_PAGE16         SYSCFG_SWPR_PAGE16
+#define SYSCFG_SRAM2WRP_PAGE17         SYSCFG_SWPR_PAGE17
+#define SYSCFG_SRAM2WRP_PAGE18         SYSCFG_SWPR_PAGE18
+#define SYSCFG_SRAM2WRP_PAGE19         SYSCFG_SWPR_PAGE19
+#define SYSCFG_SRAM2WRP_PAGE20         SYSCFG_SWPR_PAGE20
+#define SYSCFG_SRAM2WRP_PAGE21         SYSCFG_SWPR_PAGE21
+#define SYSCFG_SRAM2WRP_PAGE22         SYSCFG_SWPR_PAGE22
+#define SYSCFG_SRAM2WRP_PAGE23         SYSCFG_SWPR_PAGE23
+#define SYSCFG_SRAM2WRP_PAGE24         SYSCFG_SWPR_PAGE24
+#define SYSCFG_SRAM2WRP_PAGE25         SYSCFG_SWPR_PAGE25
+#define SYSCFG_SRAM2WRP_PAGE26         SYSCFG_SWPR_PAGE26
+#define SYSCFG_SRAM2WRP_PAGE27         SYSCFG_SWPR_PAGE27
+#define SYSCFG_SRAM2WRP_PAGE28         SYSCFG_SWPR_PAGE28
+#define SYSCFG_SRAM2WRP_PAGE29         SYSCFG_SWPR_PAGE29
+#define SYSCFG_SRAM2WRP_PAGE30         SYSCFG_SWPR_PAGE30
+#define SYSCFG_SRAM2WRP_PAGE31         SYSCFG_SWPR_PAGE31
+#endif
 
 /**
   * @}
@@ -158,50 +158,50 @@ typedef enum
 /** @defgroup SYSCFG_SRAM2WRP_32_63 SRAM2 Page Write protection (32 to 63)
   * @{
   */
-#define SYSCFG_SRAM2WRP_PAGE32         SYSCFG_SWPR2_PAGE32 /*!< SRAM2 Write protection page 32 */
-#define SYSCFG_SRAM2WRP_PAGE33         SYSCFG_SWPR2_PAGE33 /*!< SRAM2 Write protection page 33 */
-#define SYSCFG_SRAM2WRP_PAGE34         SYSCFG_SWPR2_PAGE34 /*!< SRAM2 Write protection page 34 */
-#define SYSCFG_SRAM2WRP_PAGE35         SYSCFG_SWPR2_PAGE35 /*!< SRAM2 Write protection page 35 */
-#define SYSCFG_SRAM2WRP_PAGE36         SYSCFG_SWPR2_PAGE36 /*!< SRAM2 Write protection page 36 */
-#define SYSCFG_SRAM2WRP_PAGE37         SYSCFG_SWPR2_PAGE37 /*!< SRAM2 Write protection page 37 */
-#define SYSCFG_SRAM2WRP_PAGE38         SYSCFG_SWPR2_PAGE38 /*!< SRAM2 Write protection page 38 */
-#define SYSCFG_SRAM2WRP_PAGE39         SYSCFG_SWPR2_PAGE39 /*!< SRAM2 Write protection page 39 */
-#define SYSCFG_SRAM2WRP_PAGE40         SYSCFG_SWPR2_PAGE40 /*!< SRAM2 Write protection page 40 */
-#define SYSCFG_SRAM2WRP_PAGE41         SYSCFG_SWPR2_PAGE41 /*!< SRAM2 Write protection page 41 */
-#define SYSCFG_SRAM2WRP_PAGE42         SYSCFG_SWPR2_PAGE42 /*!< SRAM2 Write protection page 42 */
-#define SYSCFG_SRAM2WRP_PAGE43         SYSCFG_SWPR2_PAGE43 /*!< SRAM2 Write protection page 43 */
-#define SYSCFG_SRAM2WRP_PAGE44         SYSCFG_SWPR2_PAGE44 /*!< SRAM2 Write protection page 44 */
-#define SYSCFG_SRAM2WRP_PAGE45         SYSCFG_SWPR2_PAGE45 /*!< SRAM2 Write protection page 45 */
-#define SYSCFG_SRAM2WRP_PAGE46         SYSCFG_SWPR2_PAGE46 /*!< SRAM2 Write protection page 46 */
-#define SYSCFG_SRAM2WRP_PAGE47         SYSCFG_SWPR2_PAGE47 /*!< SRAM2 Write protection page 47 */
-#define SYSCFG_SRAM2WRP_PAGE48         SYSCFG_SWPR2_PAGE48 /*!< SRAM2 Write protection page 48 */
-#define SYSCFG_SRAM2WRP_PAGE49         SYSCFG_SWPR2_PAGE49 /*!< SRAM2 Write protection page 49 */
-#define SYSCFG_SRAM2WRP_PAGE50         SYSCFG_SWPR2_PAGE50 /*!< SRAM2 Write protection page 50 */
-#define SYSCFG_SRAM2WRP_PAGE51         SYSCFG_SWPR2_PAGE51 /*!< SRAM2 Write protection page 51 */
-#define SYSCFG_SRAM2WRP_PAGE52         SYSCFG_SWPR2_PAGE52 /*!< SRAM2 Write protection page 52 */
-#define SYSCFG_SRAM2WRP_PAGE53         SYSCFG_SWPR2_PAGE53 /*!< SRAM2 Write protection page 53 */
-#define SYSCFG_SRAM2WRP_PAGE54         SYSCFG_SWPR2_PAGE54 /*!< SRAM2 Write protection page 54 */
-#define SYSCFG_SRAM2WRP_PAGE55         SYSCFG_SWPR2_PAGE55 /*!< SRAM2 Write protection page 55 */
-#define SYSCFG_SRAM2WRP_PAGE56         SYSCFG_SWPR2_PAGE56 /*!< SRAM2 Write protection page 56 */
-#define SYSCFG_SRAM2WRP_PAGE57         SYSCFG_SWPR2_PAGE57 /*!< SRAM2 Write protection page 57 */
-#define SYSCFG_SRAM2WRP_PAGE58         SYSCFG_SWPR2_PAGE58 /*!< SRAM2 Write protection page 58 */
-#define SYSCFG_SRAM2WRP_PAGE59         SYSCFG_SWPR2_PAGE59 /*!< SRAM2 Write protection page 59 */
-#define SYSCFG_SRAM2WRP_PAGE60         SYSCFG_SWPR2_PAGE60 /*!< SRAM2 Write protection page 60 */
-#define SYSCFG_SRAM2WRP_PAGE61         SYSCFG_SWPR2_PAGE61 /*!< SRAM2 Write protection page 61 */
-#define SYSCFG_SRAM2WRP_PAGE62         SYSCFG_SWPR2_PAGE62 /*!< SRAM2 Write protection page 62 */
-#define SYSCFG_SRAM2WRP_PAGE63         SYSCFG_SWPR2_PAGE63 /*!< SRAM2 Write protection page 63 */
+#define SYSCFG_SRAM2WRP_PAGE32         SYSCFG_SWPR2_PAGE32
+#define SYSCFG_SRAM2WRP_PAGE33         SYSCFG_SWPR2_PAGE33
+#define SYSCFG_SRAM2WRP_PAGE34         SYSCFG_SWPR2_PAGE34
+#define SYSCFG_SRAM2WRP_PAGE35         SYSCFG_SWPR2_PAGE35
+#define SYSCFG_SRAM2WRP_PAGE36         SYSCFG_SWPR2_PAGE36
+#define SYSCFG_SRAM2WRP_PAGE37         SYSCFG_SWPR2_PAGE37
+#define SYSCFG_SRAM2WRP_PAGE38         SYSCFG_SWPR2_PAGE38
+#define SYSCFG_SRAM2WRP_PAGE39         SYSCFG_SWPR2_PAGE39
+#define SYSCFG_SRAM2WRP_PAGE40         SYSCFG_SWPR2_PAGE40
+#define SYSCFG_SRAM2WRP_PAGE41         SYSCFG_SWPR2_PAGE41
+#define SYSCFG_SRAM2WRP_PAGE42         SYSCFG_SWPR2_PAGE42
+#define SYSCFG_SRAM2WRP_PAGE43         SYSCFG_SWPR2_PAGE43
+#define SYSCFG_SRAM2WRP_PAGE44         SYSCFG_SWPR2_PAGE44
+#define SYSCFG_SRAM2WRP_PAGE45         SYSCFG_SWPR2_PAGE45
+#define SYSCFG_SRAM2WRP_PAGE46         SYSCFG_SWPR2_PAGE46
+#define SYSCFG_SRAM2WRP_PAGE47         SYSCFG_SWPR2_PAGE47
+#define SYSCFG_SRAM2WRP_PAGE48         SYSCFG_SWPR2_PAGE48
+#define SYSCFG_SRAM2WRP_PAGE49         SYSCFG_SWPR2_PAGE49
+#define SYSCFG_SRAM2WRP_PAGE50         SYSCFG_SWPR2_PAGE50
+#define SYSCFG_SRAM2WRP_PAGE51         SYSCFG_SWPR2_PAGE51
+#define SYSCFG_SRAM2WRP_PAGE52         SYSCFG_SWPR2_PAGE52
+#define SYSCFG_SRAM2WRP_PAGE53         SYSCFG_SWPR2_PAGE53
+#define SYSCFG_SRAM2WRP_PAGE54         SYSCFG_SWPR2_PAGE54
+#define SYSCFG_SRAM2WRP_PAGE55         SYSCFG_SWPR2_PAGE55
+#define SYSCFG_SRAM2WRP_PAGE56         SYSCFG_SWPR2_PAGE56
+#define SYSCFG_SRAM2WRP_PAGE57         SYSCFG_SWPR2_PAGE57
+#define SYSCFG_SRAM2WRP_PAGE58         SYSCFG_SWPR2_PAGE58
+#define SYSCFG_SRAM2WRP_PAGE59         SYSCFG_SWPR2_PAGE59
+#define SYSCFG_SRAM2WRP_PAGE60         SYSCFG_SWPR2_PAGE60
+#define SYSCFG_SRAM2WRP_PAGE61         SYSCFG_SWPR2_PAGE61
+#define SYSCFG_SRAM2WRP_PAGE62         SYSCFG_SWPR2_PAGE62
+#define SYSCFG_SRAM2WRP_PAGE63         SYSCFG_SWPR2_PAGE63
 
 /**
   * @}
   */
-#endif /* SYSCFG_SWPR2_PAGE63 */
+#endif
 
 #if defined(VREFBUF)
 /** @defgroup SYSCFG_VREFBUF_VoltageScale VREFBUF Voltage Scale
   * @{
   */
-#define SYSCFG_VREFBUF_VOLTAGE_SCALE0  0U               /*!< Voltage reference scale 0 (VREF_OUT1) */
-#define SYSCFG_VREFBUF_VOLTAGE_SCALE1  VREFBUF_CSR_VRS  /*!< Voltage reference scale 1 (VREF_OUT2) */
+#define SYSCFG_VREFBUF_VOLTAGE_SCALE0  0U
+#define SYSCFG_VREFBUF_VOLTAGE_SCALE1  VREFBUF_CSR_VRS
 
 /**
   * @}
@@ -210,20 +210,20 @@ typedef enum
 /** @defgroup SYSCFG_VREFBUF_HighImpedance VREFBUF High Impedance
   * @{
   */
-#define SYSCFG_VREFBUF_HIGH_IMPEDANCE_DISABLE  0U               /*!< VREF_plus pin is internally connected to Voltage reference buffer output */
-#define SYSCFG_VREFBUF_HIGH_IMPEDANCE_ENABLE   VREFBUF_CSR_HIZ  /*!< VREF_plus pin is high impedance */
+#define SYSCFG_VREFBUF_HIGH_IMPEDANCE_DISABLE  0U
+#define SYSCFG_VREFBUF_HIGH_IMPEDANCE_ENABLE   VREFBUF_CSR_HIZ
 
 /**
   * @}
   */
-#endif /* VREFBUF */
+#endif
 
 /** @defgroup SYSCFG_flags_definition Flags
   * @{
   */
 
-#define SYSCFG_FLAG_SRAM2_PE            SYSCFG_CFGR2_SPF       /*!< SRAM2 parity error */
-#define SYSCFG_FLAG_SRAM2_BUSY          SYSCFG_SCSR_SRAM2BSY   /*!< SRAM2 busy by erase operation */
+#define SYSCFG_FLAG_SRAM2_PE            SYSCFG_CFGR2_SPF
+#define SYSCFG_FLAG_SRAM2_BUSY          SYSCFG_SCSR_SRAM2BSY
 
 /**
   * @}
@@ -235,14 +235,14 @@ typedef enum
 
 /** @brief  Fast-mode Plus driving capability on a specific GPIO
   */
-#define SYSCFG_FASTMODEPLUS_PB6        SYSCFG_CFGR1_I2C_PB6_FMP  /*!< Enable Fast-mode Plus on PB6 */
-#define SYSCFG_FASTMODEPLUS_PB7        SYSCFG_CFGR1_I2C_PB7_FMP  /*!< Enable Fast-mode Plus on PB7 */
+#define SYSCFG_FASTMODEPLUS_PB6        SYSCFG_CFGR1_I2C_PB6_FMP
+#define SYSCFG_FASTMODEPLUS_PB7        SYSCFG_CFGR1_I2C_PB7_FMP
 #if defined(SYSCFG_CFGR1_I2C_PB8_FMP)
-#define SYSCFG_FASTMODEPLUS_PB8        SYSCFG_CFGR1_I2C_PB8_FMP  /*!< Enable Fast-mode Plus on PB8 */
-#endif /* SYSCFG_CFGR1_I2C_PB8_FMP */
+#define SYSCFG_FASTMODEPLUS_PB8        SYSCFG_CFGR1_I2C_PB8_FMP
+#endif
 #if defined(SYSCFG_CFGR1_I2C_PB9_FMP)
-#define SYSCFG_FASTMODEPLUS_PB9        SYSCFG_CFGR1_I2C_PB9_FMP  /*!< Enable Fast-mode Plus on PB9 */
-#endif /* SYSCFG_CFGR1_I2C_PB9_FMP */
+#define SYSCFG_FASTMODEPLUS_PB9        SYSCFG_CFGR1_I2C_PB9_FMP
+#endif
 
 /**
  * @}
@@ -256,7 +256,7 @@ typedef enum
   * @}
   */
 
-/* Exported macros -----------------------------------------------------------*/
+
 /** @defgroup HAL_Exported_Macros HAL Exported Macros
   * @{
   */
@@ -406,10 +406,10 @@ typedef enum
   */
 #define __HAL_SYSCFG_REMAPMEMORY_FMC()         MODIFY_REG(SYSCFG->MEMRMP, SYSCFG_MEMRMP_MEM_MODE, SYSCFG_MEMRMP_MEM_MODE_1)
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx || */
-       /* STM32L496xx || STM32L4A6xx || */
-       /* STM32L4P5xx || STM32L4Q5xx || */
-       /* STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
+
+
+
 
 #if defined (STM32L4P5xx) || defined (STM32L4Q5xx) || defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
 
@@ -424,7 +424,7 @@ typedef enum
   */
 #define __HAL_SYSCFG_REMAPMEMORY_QUADSPI()     MODIFY_REG(SYSCFG->MEMRMP, SYSCFG_MEMRMP_MEM_MODE, (SYSCFG_MEMRMP_MEM_MODE_2|SYSCFG_MEMRMP_MEM_MODE_1))
 
-#endif /* STM32L4P5xx || STM32L4Q5xx || STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
 
 /**
   * @brief  Return the boot mode as configured by user.
@@ -467,7 +467,7 @@ typedef enum
 #define __HAL_SYSCFG_SRAM2_WRP_32_63_ENABLE(__SRAM2WRP__)   do {assert_param(IS_SYSCFG_SRAM2WRP_PAGE((__SRAM2WRP__)));\
                                                                 SET_BIT(SYSCFG->SWPR2, (__SRAM2WRP__));\
                                                             }while(0)
-#endif /* SYSCFG_SWPR2_PAGE63 */
+#endif
 
 /** @brief  SRAM2 page write protection unlock prior to erase
   * @note   Writing a wrong key reactivates the write protection
@@ -552,7 +552,7 @@ typedef enum
   * @}
   */
 
-/* Private macros ------------------------------------------------------------*/
+
 /** @defgroup HAL_Private_Macros HAL Private Macros
   * @{
   */
@@ -583,7 +583,7 @@ typedef enum
                                                       ((__VALUE__) == SYSCFG_VREFBUF_HIGH_IMPEDANCE_ENABLE))
 
 #define IS_SYSCFG_VREFBUF_TRIMMING(__VALUE__)  (((__VALUE__) > 0U) && ((__VALUE__) <= VREFBUF_CCR_TRIM))
-#endif /* VREFBUF */
+#endif
 
 #if defined(SYSCFG_FASTMODEPLUS_PB8) && defined(SYSCFG_FASTMODEPLUS_PB9)
 #define IS_SYSCFG_FASTMODEPLUS(__PIN__) ((((__PIN__) & SYSCFG_FASTMODEPLUS_PB6) == SYSCFG_FASTMODEPLUS_PB6) || \
@@ -610,7 +610,7 @@ typedef enum
   * @}
   */
 
-/* Exported variables --------------------------------------------------------*/
+
 
 /** @addtogroup HAL_Exported_Variables
   * @{
@@ -622,7 +622,7 @@ extern HAL_TickFreqTypeDef uwTickFreq;
   * @}
   */
 
-/* Exported functions --------------------------------------------------------*/
+
 
 /** @addtogroup HAL_Exported_Functions
   * @{
@@ -632,7 +632,7 @@ extern HAL_TickFreqTypeDef uwTickFreq;
   * @{
   */
 
-/* Initialization and de-initialization functions  ******************************/
+
 HAL_StatusTypeDef HAL_Init(void);
 HAL_StatusTypeDef HAL_DeInit(void);
 void              HAL_MspInit(void);
@@ -647,7 +647,7 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority);
   * @{
   */
 
-/* Peripheral Control functions  ************************************************/
+
 void               HAL_IncTick(void);
 void               HAL_Delay(uint32_t Delay);
 uint32_t           HAL_GetTick(void);
@@ -671,7 +671,7 @@ uint32_t           HAL_GetUIDw2(void);
   * @{
   */
 
-/* DBGMCU Peripheral Control functions  *****************************************/
+
 void              HAL_DBGMCU_EnableDBGSleepMode(void);
 void              HAL_DBGMCU_DisableDBGSleepMode(void);
 void              HAL_DBGMCU_EnableDBGStopMode(void);
@@ -687,7 +687,7 @@ void              HAL_DBGMCU_DisableDBGStandbyMode(void);
   * @{
   */
 
-/* SYSCFG Control functions  ****************************************************/
+
 void              HAL_SYSCFG_SRAM2Erase(void);
 void              HAL_SYSCFG_EnableMemorySwappingBank(void);
 void              HAL_SYSCFG_DisableMemorySwappingBank(void);
@@ -698,7 +698,7 @@ void              HAL_SYSCFG_VREFBUF_HighImpedanceConfig(uint32_t Mode);
 void              HAL_SYSCFG_VREFBUF_TrimmingConfig(uint32_t TrimmingValue);
 HAL_StatusTypeDef HAL_SYSCFG_EnableVREFBUF(void);
 void              HAL_SYSCFG_DisableVREFBUF(void);
-#endif /* VREFBUF */
+#endif
 
 void              HAL_SYSCFG_EnableIOAnalogSwitchBooster(void);
 void              HAL_SYSCFG_DisableIOAnalogSwitchBooster(void);
@@ -723,4 +723,4 @@ void              HAL_SYSCFG_DisableIOAnalogSwitchBooster(void);
 }
 #endif
 
-#endif /* STM32L4xx_HAL_H */
+#endif

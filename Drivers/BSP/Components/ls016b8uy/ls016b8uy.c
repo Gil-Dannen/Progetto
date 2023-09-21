@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "ls016b8uy.h"
 
 /** @addtogroup BSP
@@ -115,7 +115,7 @@ void ls016b8uy_Init(void)
 {
   uint8_t   parameter[4];
 
-  /* Initialize LS016B8UY low level bus layer ----------------------------------*/
+
   LCD_IO_Init();
   
   parameter[0] = 0x00;     /* VSYNC output */
@@ -234,7 +234,7 @@ uint16_t ls016b8uy_GetLcdPixelHeight(void)
 uint16_t ls016b8uy_ReadID(void)
 {
   LCD_IO_Init(); 
-  /* TODO : LCD read ID command not known for now, so assumption that the connected LCD is LS016B8UY */
+
   return (LS016B8UY_ID);
 }
 
@@ -276,17 +276,17 @@ void ls016b8uy_WritePixel(uint16_t Xpos, uint16_t Ypos, uint16_t RGBCode)
   g = (RGBCode & 0x07E0) >> 5;         /* Extract green component from RGB565 pixel data  */
   b = (RGBCode & 0x001F) >> 0;         /* Extract blue component from RGB565 pixel data  */
 
-  /* Prepare data to write with new pixel components and read old pixel component */
+
   rgb888_part1 = (r << 11) + (g << 2);
   rgb888_part2 = (b << 11);
 
-  /* Set Cursor */
+
   ls016b8uy_SetCursor(Xpos, Ypos);
 
-  /* Prepare to write to LCD RAM */
+
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
-  /* Write RAM data */
+
   LCD_IO_WriteData(rgb888_part1);
   LCD_IO_WriteData(rgb888_part2);
 }
@@ -303,13 +303,13 @@ uint16_t ls016b8uy_ReadPixel(uint16_t Xpos, uint16_t Ypos)
   uint8_t          r, g, b;
   uint16_t         rgb565;
 
-  /* Set Cursor */
+
   ls016b8uy_SetCursor(Xpos, Ypos);
   
-  /* Read RGB888 data from LCD RAM */
+
   rgb888 = ls016b8uy_ReadPixel_rgb888(Xpos, Ypos);
   
-  /* Convert RGB888 to RGB565 */
+
   r = ((rgb888.red & 0xF8) >> 3);    /* Extract the red component 5 most significant bits */
   g = ((rgb888.green & 0xFC) >> 2);  /* Extract the green component 6 most significant bits */
   b = ((rgb888.blue & 0xF8) >> 3);   /* Extract the blue component 5 most significant bits */
@@ -330,10 +330,10 @@ void ls016b8uy_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParamete
 {
   uint8_t   i;
 
-  /* Send command */
+
   LCD_IO_WriteReg(Command);
   
-  /* Send command's parameters if any */
+
   for (i=0; i<NbParameters; i++)
   {
     LCD_IO_WriteData(Parameters[i]);
@@ -347,13 +347,13 @@ void ls016b8uy_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParamete
   */
 uint8_t ls016b8uy_ReadReg(uint8_t Command)
 {
-  /* Send command */
+
   LCD_IO_WriteReg(Command);
 
-  /* Read dummy data */
+
   LCD_IO_ReadData();
   
-  /* Read register value */
+
   return (LCD_IO_ReadData());
 }
 
@@ -426,16 +426,16 @@ void ls016b8uy_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
   rgb888_part2 = (b << 11) + (r << 3); /* Build pattern second part to write in LCD RAM */
   rgb888_part3 = (g << 10) + (b << 3); /* Build pattern third part to write in LCD RAM */
 
-  /* Set Cursor */
+
   ls016b8uy_SetCursor(Xpos, Ypos); 
   
-  /* Prepare to write to LCD RAM */
+
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
-  /* Sent a complete line */
+
   for(counter = 0; counter < Length; counter+=2)
   {
-    /* Write 2 pixels at a time by performing 3 access (pixels coded on 24 bits in LCD RAM whereas access are coded on 16 bits) */
+
     LCD_IO_WriteData(rgb888_part1);
     LCD_IO_WriteData(rgb888_part2);
     if (counter != (Length-1))  /* When writing last pixel when Length is odd, the third part is not written */
@@ -457,13 +457,13 @@ void ls016b8uy_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
 {
   uint16_t counter = 0;
 
-  /* Set Cursor */
+
   ls016b8uy_SetCursor(Xpos, Ypos);
   
-  /* Prepare to write to LCD RAM */
+
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
-  /* Fill a complete vertical line */
+
   for(counter = 0; counter < Length; counter++)
   {
     ls016b8uy_WritePixel(Xpos, Ypos + counter, RGBCode);
@@ -485,10 +485,10 @@ void ls016b8uy_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
   uint16_t Xsize = WindowsXend - WindowsXstart + 1;
   uint16_t Ysize = WindowsYend - WindowsYstart + 1;
 
-  /* Read bitmap size */
+
   size = *(volatile uint16_t *) (pbmp + 2);
   size |= (*(volatile uint16_t *) (pbmp + 4)) << 16;
-  /* Get bitmap data address offset */
+
   index = *(volatile uint16_t *) (pbmp + 10);
   index |= (*(volatile uint16_t *) (pbmp + 12)) << 16;
   size = (size - index)/2;
@@ -496,10 +496,10 @@ void ls016b8uy_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
 
   for (posY = (Ypos + Ysize); posY > Ypos; posY--)  /* In BMP files the line order is inverted */
   {
-    /* Set Cursor */
+
     ls016b8uy_SetCursor(Xpos, posY - 1);
 
-    /* Draw one line of the picture */
+
     ls016b8uy_DrawRGBHLine(Xpos, posY - 1, Xsize, (pbmp + (nb_line * Xsize * 2)));
     nb_line++;
   }
@@ -521,10 +521,10 @@ void ls016b8uy_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize, uint16
 
   for (posY = Ypos; posY < (Ypos + Ysize); posY ++)
   {
-    /* Set Cursor */
+
     ls016b8uy_SetCursor(Xpos, posY);
 
-    /* Draw one line of the picture */
+
     ls016b8uy_DrawRGBHLine(Xpos, posY, Xsize, (pdata + (nb_line * Xsize * 2)));
     nb_line++;
   }
@@ -553,22 +553,22 @@ static LS016B8UY_Rgb888 ls016b8uy_ReadPixel_rgb888(uint16_t Xpos, uint16_t Ypos)
    * address 2 :   green pixel 1    X  X  |    blue pixel 1   X  X
    */
 
-  /* Set Cursor */
+
   ls016b8uy_SetCursor(Xpos, Ypos);
-  /* Prepare to read LCD RAM */
+
   ls016b8uy_WriteReg(LCD_CMD_READ_RAM, (uint8_t*)NULL, 0);   /* RAM read data command */
-  /* Dummy read */
+
   LCD_IO_ReadData();
-  /* Read first part of the RGB888 data */
+
   rgb888_part1 = LCD_IO_ReadData();
-  /* Read first part of the RGB888 data */
+
   rgb888_part2 = LCD_IO_ReadData();
 
-  /* red component */
+
   rgb888.red   = (rgb888_part1 & 0xFC00) >> 8;
-  /* green component */
+
   rgb888.green = (rgb888_part1 & 0x00FC) >> 0;
-  /* blue component */
+
   rgb888.blue  = (rgb888_part2 & 0xFC00) >> 8;
 
   return rgb888;
@@ -590,7 +590,7 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
   uint16_t rgb888_part;
   uint16_t *rgb565 = (uint16_t*)pdata;
 
-  /* Prepare to write to LCD RAM */
+
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
   for (posX = Xpos; posX < (Xsize + Xpos); posX += 2)
@@ -598,8 +598,8 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
     if ((posX >= WindowsXstart) && (Ypos >= WindowsYstart) &&     /* Check we are in the defined window */
         (posX <= WindowsXend) && (Ypos <= WindowsYend))
     {
-      /* Write pixels in LCD RAM after RGB565 -> RGB888 conversion */
-      /* As data in LCD RAM are 24bits packed, three 16 bits writes access are needed to transmit 2 pixels data */
+
+
 
       r = (rgb565[i] & 0xF800) >> 11;      /* Extract red component from first RGB565 pixel data */
       g = (rgb565[i] & 0x07E0) >> 5;       /* Extract green component from first RGB565 pixel data  */
@@ -640,4 +640,4 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

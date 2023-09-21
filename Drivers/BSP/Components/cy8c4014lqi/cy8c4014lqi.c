@@ -34,7 +34,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "cy8c4014lqi.h"
 
 /** @addtogroup BSP
@@ -49,21 +49,21 @@
   * @{
   */
 
-/* Private typedef -----------------------------------------------------------*/
+
 
 /** @defgroup CY8C4014LQI_Private_Types_Definitions
   * @{
   */
 
-/* cy8c4014lqi Handle definition. */
+
 typedef struct
 {
   uint8_t i2cInitialized;
 
-  /* field holding the current number of simultaneous active touches */
+
   uint8_t currActiveTouchNb;
 
-  /* field holding the touch index currently managed */
+
   uint8_t currActiveTouchIdx;
 
 } cy8c4014lqi_handle_TypeDef;
@@ -72,9 +72,9 @@ typedef struct
   * @}
   */
 
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+
+
+
 volatile uint8_t is_touch = 0;
 
 
@@ -82,7 +82,7 @@ volatile uint8_t is_touch = 0;
   * @{
   */
 
-/* Touch screen driver structure initialization */
+
 TS_DrvTypeDef cy8c4014lqi_ts_drv =
 {
   cy8c4014lqi_Init,
@@ -97,14 +97,14 @@ TS_DrvTypeDef cy8c4014lqi_ts_drv =
   cy8c4014lqi_TS_DisableIT
 };
 
-/* Global cy8c4014lqi handle */
+
 static cy8c4014lqi_handle_TypeDef cy8c4014lqi_handle = { CY8C4014LQI_I2C_NOT_INITIALIZED, 0U, 0U};
 
 /**
   * @}
   */
 
-/* Private functions prototypes-----------------------------------------------*/
+
 
 /** @defgroup CY8C4014LQI_Private_Functions
   * @{
@@ -117,7 +117,7 @@ static void     cy8c4014lqi_I2C_InitializeIfRequired(void);
   * @}
   */
 
-/* Exported functions --------------------------------------------------------*/
+
 
 /** @addtogroup CY8C4014LQI_Exported_Functions
   * @{
@@ -131,7 +131,7 @@ static void     cy8c4014lqi_I2C_InitializeIfRequired(void);
   */
 void cy8c4014lqi_Init(uint16_t DeviceAddr)
 {
-  /* Initialize I2C link if needed */
+
   cy8c4014lqi_I2C_InitializeIfRequired();
 }
 
@@ -143,8 +143,8 @@ void cy8c4014lqi_Init(uint16_t DeviceAddr)
   */
 void cy8c4014lqi_Reset(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* No software reset sequence available in CY8C4014LQI IC */
+
+
 }
 
 /**
@@ -155,10 +155,10 @@ void cy8c4014lqi_Reset(uint16_t DeviceAddr)
   */
 uint16_t cy8c4014lqi_ReadID(uint16_t DeviceAddr)
 {
-  /* Initialize I2C link if needed */
+
   cy8c4014lqi_I2C_InitializeIfRequired();
 
-  /* Return the device ID value */
+
   return(TS_IO_Read(DeviceAddr, CY8C4014LQI_ADEVICE_ID));
 }
 
@@ -169,8 +169,8 @@ uint16_t cy8c4014lqi_ReadID(uint16_t DeviceAddr)
   */
 void cy8c4014lqi_TS_Start(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* No software available in CY8C4014LQI IC */
+
+
 }
 
 /**
@@ -209,8 +209,8 @@ void cy8c4014lqi_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
   */
 void cy8c4014lqi_TS_EnableIT(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* Action done by BSP software */
+
+
 }
 
 /**
@@ -221,8 +221,8 @@ void cy8c4014lqi_TS_EnableIT(uint16_t DeviceAddr)
   */
 void cy8c4014lqi_TS_DisableIT(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* Action done by BSP software */
+
+
 }
 
 /**
@@ -235,7 +235,7 @@ void cy8c4014lqi_TS_DisableIT(uint16_t DeviceAddr)
   */
 uint8_t cy8c4014lqi_TS_ITStatus(uint16_t DeviceAddr)
 {
-  /* Always return 0 as feature not applicable to CY8C4014LQI */
+
   return 0U;
 }
 
@@ -248,8 +248,8 @@ uint8_t cy8c4014lqi_TS_ITStatus(uint16_t DeviceAddr)
   */
 void cy8c4014lqi_TS_ClearIT(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* Action done by BSP software */
+
+
 }
 
 /**
@@ -261,8 +261,8 @@ void cy8c4014lqi_TS_ClearIT(uint16_t DeviceAddr)
   */
 void cy8c4014lqi_TS_GestureConfig(uint16_t DeviceAddr, uint32_t Activation)
 {
-  /* Do nothing */
-  /* No software available in CY8C4014LQI IC */
+
+
 }
 
 /**
@@ -273,8 +273,8 @@ void cy8c4014lqi_TS_GestureConfig(uint16_t DeviceAddr, uint32_t Activation)
   */
 void cy8c4014lqi_TS_GetGestureID(uint16_t DeviceAddr, uint32_t * pGestureId)
 {
-  /* Do nothing */
-  /* No software available in CY8C4014LQI IC */
+
+
 }
 
 /**
@@ -298,15 +298,15 @@ void cy8c4014lqi_TS_GetTouchInfo(uint16_t   DeviceAddr,
                             uint32_t * pArea,
                             uint32_t * pEvent)
 {
-  /* Do nothing */
-  /* No software available in CY8C4014LQI IC */
+
+
 }
 
 /**
   * @}
   */
 
-/* Private functions bodies---------------------------------------------------*/
+
 
 /** @addtogroup CY8C4014LQI_Private_Functions
   * @{
@@ -331,10 +331,10 @@ static void cy8c4014lqi_I2C_InitializeIfRequired(void)
 {
   if(cy8c4014lqi_Get_I2C_InitializedStatus() == CY8C4014LQI_I2C_NOT_INITIALIZED)
   {
-    /* Initialize TS IO BUS layer (I2C) */
+
     TS_IO_Init();
 
-    /* Set state to initialized */
+
     cy8c4014lqi_handle.i2cInitialized = CY8C4014LQI_I2C_INITIALIZED;
   }
 }
@@ -356,4 +356,4 @@ static void cy8c4014lqi_I2C_InitializeIfRequired(void)
   */
 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

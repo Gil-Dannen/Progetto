@@ -17,7 +17,7 @@
  ******************************************************************************
  */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __LPS22HB__H
 #define __LPS22HB__H
 
@@ -25,7 +25,7 @@
 extern "C" {
 #endif
   
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/psensor.h"
 #include "../Common/tsensor.h"  
 
@@ -445,7 +445,7 @@ extern "C" {
 /** @defgroup LPS22HB_Pressure_Exported_Functions LPS22HB Pressure Exported Functions
   * @{
   */  
-/* PRESSURE functions */
+
 void    LPS22HB_P_Init(uint16_t DeviceAddr);
 uint8_t LPS22HB_P_ReadID(uint16_t DeviceAddr);
 float   LPS22HB_P_ReadPressure(uint16_t DeviceAddr);
@@ -456,7 +456,7 @@ float   LPS22HB_P_ReadPressure(uint16_t DeviceAddr);
 /** @defgroup HTS221_PressImported_Globals  PRESSURE Imported Globals
   * @{
   */
-/* PRESSURE driver structure */
+
 extern PSENSOR_DrvTypeDef LPS22HB_P_Drv;
 /**
   * @}
@@ -465,7 +465,7 @@ extern PSENSOR_DrvTypeDef LPS22HB_P_Drv;
 /** @defgroup LPS22HB_Temperature_Exported_Functions LPS22HB Temperature Exported Functions
   * @{
   */
-/* TEMPERATURE functions */
+
 void  LPS22HB_T_Init(uint16_t DeviceAddr, TSENSOR_InitTypeDef *pInitStruct);
 float LPS22HB_T_ReadTemp(uint16_t DeviceAddr);
 /**
@@ -475,7 +475,7 @@ float LPS22HB_T_ReadTemp(uint16_t DeviceAddr);
 /** @defgroup HTS221_TempImported_Globals  Temperature Imported Globals
   * @{
   */
-/* Temperature driver structure */
+
 extern TSENSOR_DrvTypeDef LPS22HB_T_Drv;
 /**
   * @}
@@ -484,7 +484,7 @@ extern TSENSOR_DrvTypeDef LPS22HB_T_Drv;
 /** @defgroup LPS22HB_Imported_Functions LPS22HB Imported Functions
   * @{
   */
-/* IO functions */
+
 extern void     SENSOR_IO_Init(void);
 extern void     SENSOR_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 extern uint8_t  SENSOR_IO_Read(uint8_t Addr, uint8_t Reg);
@@ -513,4 +513,4 @@ extern void     SENSOR_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buff
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

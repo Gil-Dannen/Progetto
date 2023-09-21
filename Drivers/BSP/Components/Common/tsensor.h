@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __TSENSOR_H
 #define __TSENSOR_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -97,4 +97,4 @@ typedef struct
 
 #endif /* __TSENSOR_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

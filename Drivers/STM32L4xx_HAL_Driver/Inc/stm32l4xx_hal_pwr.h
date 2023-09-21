@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_PWR_H
 #define STM32L4xx_HAL_PWR_H
 
@@ -24,7 +24,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -35,7 +35,7 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /** @defgroup PWR_Exported_Types PWR Exported Types
   * @{
@@ -58,7 +58,7 @@ typedef struct
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 
 /** @defgroup PWR_Exported_Constants PWR Exported Constants
   * @{
@@ -68,14 +68,14 @@ typedef struct
 /** @defgroup PWR_PVD_detection_level Programmable Voltage Detection levels
   * @{
   */
-#define PWR_PVDLEVEL_0                  PWR_CR2_PLS_LEV0  /*!< PVD threshold around 2.0 V */
-#define PWR_PVDLEVEL_1                  PWR_CR2_PLS_LEV1  /*!< PVD threshold around 2.2 V */
-#define PWR_PVDLEVEL_2                  PWR_CR2_PLS_LEV2  /*!< PVD threshold around 2.4 V */
-#define PWR_PVDLEVEL_3                  PWR_CR2_PLS_LEV3  /*!< PVD threshold around 2.5 V */
-#define PWR_PVDLEVEL_4                  PWR_CR2_PLS_LEV4  /*!< PVD threshold around 2.6 V */
-#define PWR_PVDLEVEL_5                  PWR_CR2_PLS_LEV5  /*!< PVD threshold around 2.8 V */
-#define PWR_PVDLEVEL_6                  PWR_CR2_PLS_LEV6  /*!< PVD threshold around 2.9 V */
-#define PWR_PVDLEVEL_7                  PWR_CR2_PLS_LEV7  /*!< External input analog voltage (compared internally to VREFINT) */
+#define PWR_PVDLEVEL_0                  PWR_CR2_PLS_LEV0
+#define PWR_PVDLEVEL_1                  PWR_CR2_PLS_LEV1
+#define PWR_PVDLEVEL_2                  PWR_CR2_PLS_LEV2
+#define PWR_PVDLEVEL_3                  PWR_CR2_PLS_LEV3
+#define PWR_PVDLEVEL_4                  PWR_CR2_PLS_LEV4
+#define PWR_PVDLEVEL_5                  PWR_CR2_PLS_LEV5
+#define PWR_PVDLEVEL_6                  PWR_CR2_PLS_LEV6
+#define PWR_PVDLEVEL_7                  PWR_CR2_PLS_LEV7
 /**
   * @}
   */
@@ -83,13 +83,13 @@ typedef struct
 /** @defgroup PWR_PVD_Mode  PWR PVD interrupt and event mode
   * @{
   */
-#define PWR_PVD_MODE_NORMAL                 ((uint32_t)0x00000000)   /*!< Basic mode is used */
-#define PWR_PVD_MODE_IT_RISING              ((uint32_t)0x00010001)   /*!< External Interrupt Mode with Rising edge trigger detection */
-#define PWR_PVD_MODE_IT_FALLING             ((uint32_t)0x00010002)   /*!< External Interrupt Mode with Falling edge trigger detection */
-#define PWR_PVD_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003)   /*!< External Interrupt Mode with Rising/Falling edge trigger detection */
-#define PWR_PVD_MODE_EVENT_RISING           ((uint32_t)0x00020001)   /*!< Event Mode with Rising edge trigger detection */
-#define PWR_PVD_MODE_EVENT_FALLING          ((uint32_t)0x00020002)   /*!< Event Mode with Falling edge trigger detection */
-#define PWR_PVD_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003)   /*!< Event Mode with Rising/Falling edge trigger detection */
+#define PWR_PVD_MODE_NORMAL                 ((uint32_t)0x00000000)
+#define PWR_PVD_MODE_IT_RISING              ((uint32_t)0x00010001)
+#define PWR_PVD_MODE_IT_FALLING             ((uint32_t)0x00010002)
+#define PWR_PVD_MODE_IT_RISING_FALLING      ((uint32_t)0x00010003)
+#define PWR_PVD_MODE_EVENT_RISING           ((uint32_t)0x00020001)
+#define PWR_PVD_MODE_EVENT_FALLING          ((uint32_t)0x00020002)
+#define PWR_PVD_MODE_EVENT_RISING_FALLING   ((uint32_t)0x00020003)
 /**
   * @}
   */
@@ -100,8 +100,8 @@ typedef struct
 /** @defgroup PWR_Regulator_state_in_SLEEP_STOP_mode  PWR regulator mode
   * @{
   */
-#define PWR_MAINREGULATOR_ON            ((uint32_t)0x00000000) /*!< Regulator in main mode      */
-#define PWR_LOWPOWERREGULATOR_ON        PWR_CR1_LPR            /*!< Regulator in low-power mode */
+#define PWR_MAINREGULATOR_ON            ((uint32_t)0x00000000)
+#define PWR_LOWPOWERREGULATOR_ON        PWR_CR1_LPR
 /**
   * @}
   */
@@ -109,8 +109,8 @@ typedef struct
 /** @defgroup PWR_SLEEP_mode_entry  PWR SLEEP mode entry
   * @{
   */
-#define PWR_SLEEPENTRY_WFI              ((uint8_t)0x01)        /*!< Wait For Interruption instruction to enter Sleep mode */
-#define PWR_SLEEPENTRY_WFE              ((uint8_t)0x02)        /*!< Wait For Event instruction to enter Sleep mode        */
+#define PWR_SLEEPENTRY_WFI              ((uint8_t)0x01)
+#define PWR_SLEEPENTRY_WFE              ((uint8_t)0x02)
 /**
   * @}
   */
@@ -118,8 +118,8 @@ typedef struct
 /** @defgroup PWR_STOP_mode_entry  PWR STOP mode entry
   * @{
   */
-#define PWR_STOPENTRY_WFI               ((uint8_t)0x01)       /*!< Wait For Interruption instruction to enter Stop mode */
-#define PWR_STOPENTRY_WFE               ((uint8_t)0x02)       /*!< Wait For Event instruction to enter Stop mode        */
+#define PWR_STOPENTRY_WFI               ((uint8_t)0x01)
+#define PWR_STOPENTRY_WFE               ((uint8_t)0x02)
 /**
   * @}
   */
@@ -128,7 +128,7 @@ typedef struct
 /** @defgroup PWR_PVD_EXTI_LINE  PWR PVD external interrupt line
   * @{
   */
-#define PWR_EXTI_LINE_PVD  ((uint32_t)0x00010000)   /*!< External interrupt line 16 Connected to the PVD EXTI Line */
+#define PWR_EXTI_LINE_PVD  ((uint32_t)0x00010000)
 /**
   * @}
   */
@@ -136,7 +136,7 @@ typedef struct
 /** @defgroup PWR_PVD_EVENT_LINE  PWR PVD event line
   * @{
   */
-#define PWR_EVENT_LINE_PVD  ((uint32_t)0x00010000)  /*!< Event line 16 Connected to the PVD Event Line */
+#define PWR_EVENT_LINE_PVD  ((uint32_t)0x00010000)
 /**
   * @}
   */
@@ -145,7 +145,7 @@ typedef struct
   * @}
   */
 
-/* Exported macros -----------------------------------------------------------*/
+
 /** @defgroup PWR_Exported_Macros  PWR Exported Macros
   * @{
   */
@@ -309,7 +309,7 @@ typedef struct
   */
 
 
-/* Private macros --------------------------------------------------------*/
+
 /** @addtogroup  PWR_Private_Macros   PWR Private Macros
   * @{
   */
@@ -338,10 +338,10 @@ typedef struct
   * @}
   */
 
-/* Include PWR HAL Extended module */
+
 #include "stm32l4xx_hal_pwr_ex.h"
 
-/* Exported functions --------------------------------------------------------*/
+
 
 /** @addtogroup PWR_Exported_Functions PWR Exported Functions
   * @{
@@ -351,7 +351,7 @@ typedef struct
   * @{
   */
 
-/* Initialization and de-initialization functions *******************************/
+
 void HAL_PWR_DeInit(void);
 void HAL_PWR_EnableBkUpAccess(void);
 void HAL_PWR_DisableBkUpAccess(void);
@@ -364,17 +364,17 @@ void HAL_PWR_DisableBkUpAccess(void);
   * @{
   */
 
-/* Peripheral Control functions  ************************************************/
+
 HAL_StatusTypeDef HAL_PWR_ConfigPVD(PWR_PVDTypeDef *sConfigPVD);
 void HAL_PWR_EnablePVD(void);
 void HAL_PWR_DisablePVD(void);
 
 
-/* WakeUp pins configuration functions ****************************************/
+
 void HAL_PWR_EnableWakeUpPin(uint32_t WakeUpPinPolarity);
 void HAL_PWR_DisableWakeUpPin(uint32_t WakeUpPinx);
 
-/* Low Power modes configuration functions ************************************/
+
 void HAL_PWR_EnterSLEEPMode(uint32_t Regulator, uint8_t SLEEPEntry);
 void HAL_PWR_EnterSTOPMode(uint32_t Regulator, uint8_t STOPEntry);
 void HAL_PWR_EnterSTANDBYMode(void);
@@ -408,4 +408,4 @@ void HAL_PWR_PVDCallback(void);
 #endif
 
 
-#endif /* STM32L4xx_HAL_PWR_H */
+#endif

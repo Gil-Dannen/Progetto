@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "ft5336.h"
 
 /** @addtogroup BSP
@@ -33,31 +33,31 @@
   * @{
   */
 
-/* Private typedef -----------------------------------------------------------*/
+
 
 /** @defgroup FT5336_Private_Types_Definitions
   * @{
   */
 
-/* Private define ------------------------------------------------------------*/
+
 
 /** @defgroup FT5336_Private_Defines
   * @{
   */
 
-/* Private macro -------------------------------------------------------------*/
+
 
 /** @defgroup FT5336_Private_Macros
   * @{
   */
 
-/* Private variables ---------------------------------------------------------*/
+
 
 /** @defgroup FT5336_Private_Variables
   * @{
   */
 
-/* Touch screen driver structure initialization */
+
 TS_DrvTypeDef ft5336_ts_drv =
 {
   ft5336_Init,
@@ -75,7 +75,7 @@ TS_DrvTypeDef ft5336_ts_drv =
 
 };
 
-/* Global ft5336 handle */
+
 static ft5336_handle_TypeDef ft5336_handle = { FT5336_I2C_NOT_INITIALIZED, 0, 0};
 
 /**
@@ -86,7 +86,7 @@ static ft5336_handle_TypeDef ft5336_handle = { FT5336_I2C_NOT_INITIALIZED, 0, 0}
   * @{
   */
 
-/* Private functions prototypes-----------------------------------------------*/
+
 
 /**
   * @brief  Return the status of I2C was initialized or not.
@@ -117,7 +117,7 @@ static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr);
   * @{
   */
 
-/* Public functions bodies-----------------------------------------------*/
+
 
 
 /**
@@ -132,7 +132,7 @@ void ft5336_Init(uint16_t DeviceAddr)
    * Trsi timing (Time of starting to report point after resetting) from FT5336GQQ datasheet */
   TS_IO_Delay(200);
 
-  /* Initialize I2C link if needed */
+
   ft5336_I2C_InitializeIfRequired();
 }
 
@@ -144,8 +144,8 @@ void ft5336_Init(uint16_t DeviceAddr)
   */
 void ft5336_Reset(uint16_t DeviceAddr)
 {
-  /* Do nothing */
-  /* No software reset sequence available in FT5336 IC */
+
+
 }
 
 /**
@@ -160,24 +160,24 @@ uint16_t ft5336_ReadID(uint16_t DeviceAddr)
   uint8_t nbReadAttempts = 0;
   uint8_t bFoundDevice = 0; /* Device not found by default */
 
-  /* Initialize I2C link if needed */
+
   ft5336_I2C_InitializeIfRequired();
 
-  /* At maximum 4 attempts to read ID : exit at first finding of the searched device ID */
+
   for(nbReadAttempts = 0; ((nbReadAttempts < 3) && !(bFoundDevice)); nbReadAttempts++)
   {
-    /* Read register FT5336_CHIP_ID_REG as DeviceID detection */
+
     ucReadId = TS_IO_Read(DeviceAddr, FT5336_CHIP_ID_REG);
 
-    /* Found the searched device ID ? */
+
     if(ucReadId == FT5336_ID_VALUE)
     {
-      /* Set device as found */
+
       bFoundDevice = 1;
     }
   }
 
-  /* Return the device ID value */
+
   return (ucReadId);
 }
 
@@ -188,11 +188,11 @@ uint16_t ft5336_ReadID(uint16_t DeviceAddr)
   */
 void ft5336_TS_Start(uint16_t DeviceAddr)
 {
-  /* Minimum static configuration of FT5336 */
+
   FT5336_ASSERT(ft5336_TS_Configure(DeviceAddr));
 
-  /* By default set FT5336 IC in Polling mode : no INT generation on FT5336 for new touch available */
-  /* Note TS_INT is active low                                                                      */
+
+
   ft5336_TS_DisableIT(DeviceAddr);
 }
 
@@ -207,20 +207,20 @@ uint8_t ft5336_TS_DetectTouch(uint16_t DeviceAddr)
 {
   volatile uint8_t nbTouch = 0;
 
-  /* Read register FT5336_TD_STAT_REG to check number of touches detection */
+
   nbTouch = TS_IO_Read(DeviceAddr, FT5336_TD_STAT_REG);
   nbTouch &= FT5336_TD_STAT_MASK;
 
   if(nbTouch > FT5336_MAX_DETECTABLE_TOUCH)
   {
-    /* If invalid number of touch detected, set it to zero */
+
     nbTouch = 0;
   }
 
-  /* Update ft5336 driver internal global : current number of active touches */
+
   ft5336_handle.currActiveTouchNb = nbTouch;
 
-  /* Reset current active touch index on which to work on */
+
   ft5336_handle.currActiveTouchIdx = 0;
 
   return(nbTouch);
@@ -323,26 +323,26 @@ void ft5336_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
 
     } /* end switch(ft5336_handle.currActiveTouchIdx) */
 
-    /* Read low part of X position */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressXLow);
     coord = (ucReadData & FT5336_TOUCH_POS_LSB_MASK) >> FT5336_TOUCH_POS_LSB_SHIFT;
 
-    /* Read high part of X position */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressXHigh);
     coord |= ((ucReadData & FT5336_TOUCH_POS_MSB_MASK) >> FT5336_TOUCH_POS_MSB_SHIFT) << 8;
 
-    /* Send back ready X position to caller */
+
     *X = coord;
 
-    /* Read low part of Y position */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressYLow);
     coord = (ucReadData & FT5336_TOUCH_POS_LSB_MASK) >> FT5336_TOUCH_POS_LSB_SHIFT;
 
-    /* Read high part of Y position */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressYHigh);
     coord |= ((ucReadData & FT5336_TOUCH_POS_MSB_MASK) >> FT5336_TOUCH_POS_MSB_SHIFT) << 8;
 
-    /* Send back ready Y position to caller */
+
     *Y = coord;
 
     ft5336_handle.currActiveTouchIdx++; /* next call will work on next touch */
@@ -361,7 +361,7 @@ void ft5336_TS_EnableIT(uint16_t DeviceAddr)
    uint8_t regValue = 0;
    regValue = (FT5336_G_MODE_INTERRUPT_TRIGGER & (FT5336_G_MODE_INTERRUPT_MASK >> FT5336_G_MODE_INTERRUPT_SHIFT)) << FT5336_G_MODE_INTERRUPT_SHIFT;
 
-   /* Set interrupt trigger mode in FT5336_GMODE_REG */
+
    TS_IO_Write(DeviceAddr, FT5336_GMODE_REG, regValue);
 }
 
@@ -376,7 +376,7 @@ void ft5336_TS_DisableIT(uint16_t DeviceAddr)
   uint8_t regValue = 0;
   regValue = (FT5336_G_MODE_INTERRUPT_POLLING & (FT5336_G_MODE_INTERRUPT_MASK >> FT5336_G_MODE_INTERRUPT_SHIFT)) << FT5336_G_MODE_INTERRUPT_SHIFT;
 
-  /* Set interrupt polling mode in FT5336_GMODE_REG */
+
   TS_IO_Write(DeviceAddr, FT5336_GMODE_REG, regValue);
 }
 
@@ -390,7 +390,7 @@ void ft5336_TS_DisableIT(uint16_t DeviceAddr)
   */
 uint8_t ft5336_TS_ITStatus(uint16_t DeviceAddr)
 {
-  /* Always return 0 as feature not applicable to FT5336 */
+
   return 0;
 }
 
@@ -403,10 +403,10 @@ uint8_t ft5336_TS_ITStatus(uint16_t DeviceAddr)
   */
 void ft5336_TS_ClearIT(uint16_t DeviceAddr)
 {
-  /* Nothing to be done here for FT5336 */
+
 }
 
-/**** NEW FEATURES enabled when Multi-touch support is enabled ****/
+
 
 #if (TS_MULTI_TOUCH_SUPPORTED == 1)
 
@@ -520,15 +520,15 @@ void ft5336_TS_GetTouchInfo(uint16_t   DeviceAddr,
 
     } /* end switch(touchIdx) */
 
-    /* Read Event Id of touch index */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressXHigh);
     * pEvent = (ucReadData & FT5336_TOUCH_EVT_FLAG_MASK) >> FT5336_TOUCH_EVT_FLAG_SHIFT;
 
-    /* Read weight of touch index */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressPWeight);
     * pWeight = (ucReadData & FT5336_TOUCH_WEIGHT_MASK) >> FT5336_TOUCH_WEIGHT_SHIFT;
 
-    /* Read area of touch index */
+
     ucReadData = TS_IO_Read(DeviceAddr, regAddressPMisc);
     * pArea = (ucReadData & FT5336_TOUCH_AREA_MASK) >> FT5336_TOUCH_AREA_SHIFT;
 
@@ -541,7 +541,7 @@ void ft5336_TS_GetTouchInfo(uint16_t   DeviceAddr,
   * @{
   */
 
-/* Static functions bodies-----------------------------------------------*/
+
 
 
 /**
@@ -563,10 +563,10 @@ static void ft5336_I2C_InitializeIfRequired(void)
 {
   if(ft5336_Get_I2C_InitializedStatus() == FT5336_I2C_NOT_INITIALIZED)
   {
-    /* Initialize TS IO BUS layer (I2C) */
+
     TS_IO_Init();
 
-    /* Set state to initialized */
+
     ft5336_handle.i2cInitialized = FT5336_I2C_INITIALIZED;
   }
 }
@@ -580,7 +580,7 @@ static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr)
 {
   uint32_t status = FT5336_STATUS_OK;
 
-  /* Nothing special to be done for FT5336 */
+
 
   return(status);
 }
@@ -604,4 +604,4 @@ static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

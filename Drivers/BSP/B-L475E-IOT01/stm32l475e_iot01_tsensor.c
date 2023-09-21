@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01_tsensor.h"
 
 /** @addtogroup BSP
@@ -58,10 +58,10 @@ uint32_t BSP_TSENSOR_Init(void)
   tsensor_drv = &HTS221_T_Drv; 
 #endif
 
-  /* Low level init */
+
   SENSOR_IO_Init();
 
-  /* TSENSOR Init */   
+
   tsensor_drv->Init(TSENSOR_I2C_ADDRESS, NULL);
 
   ret = TSENSOR_OK;
@@ -93,4 +93,4 @@ float BSP_TSENSOR_ReadTemp(void)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

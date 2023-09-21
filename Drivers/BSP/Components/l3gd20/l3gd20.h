@@ -18,7 +18,7 @@
   */
   
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __L3GD20_H
 #define __L3GD20_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/gyro.h"
 
 /** @addtogroup BSP
@@ -45,9 +45,9 @@
   * @{
   */
 
-/******************************************************************************/
-/*************************** START REGISTER MAPPING  **************************/
-/******************************************************************************/
+
+
+
 #define L3GD20_WHO_AM_I_ADDR          0x0F  /* device identification register */
 #define L3GD20_CTRL_REG1_ADDR         0x20  /* Control register 1 */
 #define L3GD20_CTRL_REG2_ADDR         0x21  /* Control register 2 */
@@ -76,9 +76,9 @@
 #define L3GD20_INT1_TSH_ZL_ADDR       0x37  /* Interrupt 1 Threshold Z register */
 #define L3GD20_INT1_DURATION_ADDR     0x38  /* Interrupt 1 DURATION register */
 
-/******************************************************************************/
-/**************************** END REGISTER MAPPING  ***************************/
-/******************************************************************************/
+
+
+
 
 #define I_AM_L3GD20                 ((uint8_t)0xD4)
 #define I_AM_L3GD20_TR              ((uint8_t)0xD5)
@@ -254,31 +254,31 @@
 /** @defgroup L3GD20_Exported_Functions
   * @{
   */
-/* Sensor Configuration Functions */ 
+
 void    L3GD20_Init(uint16_t InitStruct);
 void    L3GD20_DeInit(void);
 void    L3GD20_LowPower(uint16_t InitStruct);
 uint8_t L3GD20_ReadID(void);
 void    L3GD20_RebootCmd(void);
 
-/* Interrupt Configuration Functions */
+
 void    L3GD20_INT1InterruptConfig(uint16_t Int1Config);
 void    L3GD20_EnableIT(uint8_t IntSel);
 void    L3GD20_DisableIT(uint8_t IntSel);
 
-/* High Pass Filter Configuration Functions */
+
 void    L3GD20_FilterConfig(uint8_t FilterStruct);
 void    L3GD20_FilterCmd(uint8_t HighPassFilterState);
 void    L3GD20_ReadXYZAngRate(float *pfData);
 uint8_t L3GD20_GetDataStatus(void);
 
-/* Gyroscope IO functions */
+
 void    GYRO_IO_Init(void);
 void    GYRO_IO_DeInit(void);
 void    GYRO_IO_Write(uint8_t *pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
 void    GYRO_IO_Read(uint8_t *pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
 
-/* Gyroscope driver structure */
+
 extern GYRO_DrvTypeDef L3gd20Drv;
 
 /**
@@ -303,4 +303,4 @@ extern GYRO_DrvTypeDef L3gd20Drv;
   
 #endif /* __L3GD20_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 
+

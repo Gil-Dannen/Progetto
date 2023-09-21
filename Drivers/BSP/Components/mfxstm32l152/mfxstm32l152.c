@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "mfxstm32l152.h"
 
 /** @addtogroup BSP
@@ -33,32 +33,32 @@
   * @{
   */
 
-/* Private typedef -----------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Types_Definitions
   * @{
   */
 
-/* Private define ------------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Defines
   * @{
   */
 #define MFXSTM32L152_MAX_INSTANCE         3
 
-/* Private macro -------------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Macros
   * @{
   */
 
-/* Private variables ---------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Variables
   * @{
   */
 
-/* Touch screen driver structure initialization */
+
 TS_DrvTypeDef mfxstm32l152_ts_drv =
 {
   mfxstm32l152_Init,
@@ -75,7 +75,7 @@ TS_DrvTypeDef mfxstm32l152_ts_drv =
   mfxstm32l152_TS_DisableIT,
 };
 
-/* IO driver structure initialization */
+
 IO_DrvTypeDef mfxstm32l152_io_drv =
 {
   mfxstm32l152_Init,
@@ -93,7 +93,7 @@ IO_DrvTypeDef mfxstm32l152_io_drv =
   mfxstm32l152_IO_ClearIT,
 };
 
-/* IDD driver structure initialization */
+
 IDD_DrvTypeDef mfxstm32l152_idd_drv =
 {
   mfxstm32l152_Init,
@@ -121,13 +121,13 @@ IDD_DrvTypeDef mfxstm32l152_idd_drv =
 };
 
 
-/* mfxstm32l152 instances by address */
+
 uint8_t mfxstm32l152[MFXSTM32L152_MAX_INSTANCE] = {0};
 /**
   * @}
   */
 
-/* Private function prototypes -----------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Function_Prototypes
   * @{
@@ -136,7 +136,7 @@ static uint8_t mfxstm32l152_GetInstance(uint16_t DeviceAddr);
 static uint8_t  mfxstm32l152_ReleaseInstance(uint16_t DeviceAddr);
 static void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, uint32_t PinPosition, uint8_t PinValue );
 
-/* Private functions ---------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Private_Functions
   * @{
@@ -152,21 +152,21 @@ void mfxstm32l152_Init(uint16_t DeviceAddr)
   uint8_t instance;
   uint8_t empty;
 
-  /* Check if device instance already exists */
+
   instance = mfxstm32l152_GetInstance(DeviceAddr);
 
-  /* To prevent double initialization */
+
   if(instance == 0xFF)
   {
-    /* Look for empty instance */
+
     empty = mfxstm32l152_GetInstance(0);
 
     if(empty < MFXSTM32L152_MAX_INSTANCE)
     {
-      /* Register the current device instance */
+
       mfxstm32l152[empty] = DeviceAddr;
 
-      /* Initialize IO BUS layer */
+
       MFX_IO_Init();
     }
   }
@@ -184,13 +184,13 @@ void mfxstm32l152_DeInit(uint16_t DeviceAddr)
 {
   uint8_t instance;
 
-  /* release existing instance */
+
   instance = mfxstm32l152_ReleaseInstance(DeviceAddr);
 
-  /* De-Init only if instance was previously registered */
+
   if(instance != 0xFF)
   {
-    /* De-Initialize IO BUS layer */
+
     MFX_IO_DeInit();
   }
 }
@@ -202,10 +202,10 @@ void mfxstm32l152_DeInit(uint16_t DeviceAddr)
   */
 void mfxstm32l152_Reset(uint16_t DeviceAddr)
 {
-  /* Soft Reset */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, MFXSTM32L152_SWRST);
 
-  /* Wait for a delay to ensure registers erasing */
+
   MFX_IO_Delay(10);
 }
 
@@ -216,10 +216,10 @@ void mfxstm32l152_Reset(uint16_t DeviceAddr)
   */
 void  mfxstm32l152_LowPower(uint16_t DeviceAddr)
 {
-  /* Enter standby mode */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, MFXSTM32L152_STANDBY);
 
-  /* enable wakeup pin */
+
   MFX_IO_EnableWakeupPin();
 }
 
@@ -232,17 +232,17 @@ void  mfxstm32l152_WakeUp(uint16_t DeviceAddr)
 {
   uint8_t instance;
 
-  /* Check if device instance already exists */
+
   instance = mfxstm32l152_GetInstance(DeviceAddr);
 
-  /* if instance does not exist, first initialize pins*/
+
   if(instance == 0xFF)
   {
-    /* enable wakeup pin */
+
     MFX_IO_EnableWakeupPin();
   }
 
-  /* toggle wakeup pin */
+
   MFX_IO_Wakeup();
 }
 
@@ -255,15 +255,15 @@ uint16_t mfxstm32l152_ReadID(uint16_t DeviceAddr)
 {
   uint8_t id;
 
-  /* Wait for a delay to ensure the state of registers */
+
   MFX_IO_Delay(1);
 
-  /* Initialize IO BUS layer */
+
   MFX_IO_Init();
 
   id = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_ID);
 
-  /* Return the device ID value */
+
   return (id);
 }
 
@@ -278,7 +278,7 @@ uint16_t mfxstm32l152_ReadFwVersion(uint16_t DeviceAddr)
 
   MFX_IO_ReadMultiple((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_FW_VERSION_MSB, data, sizeof(data)) ;
 
-  /* Recompose MFX firmware value */
+
   return ((data[0] << 8) | data[1]);
 }
 
@@ -300,13 +300,13 @@ void mfxstm32l152_EnableITSource(uint16_t DeviceAddr, uint8_t Source)
 {
   uint8_t tmp = 0;
 
-  /* Get the current value of the INT_EN register */
+
   tmp = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_SRC_EN);
 
-  /* Set the interrupts to be Enabled */
+
   tmp |= Source;
 
-  /* Set the register */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_SRC_EN, tmp);
 }
 
@@ -328,13 +328,13 @@ void mfxstm32l152_DisableITSource(uint16_t DeviceAddr, uint8_t Source)
 {
   uint8_t tmp = 0;
 
-  /* Get the current value of the INT_EN register */
+
   tmp = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_SRC_EN);
 
-  /* Set the interrupts to be Enabled */
+
   tmp &= ~Source;
 
-  /* Set the register */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_SRC_EN, tmp);
 }
 
@@ -355,7 +355,7 @@ void mfxstm32l152_DisableITSource(uint16_t DeviceAddr, uint8_t Source)
   */
 uint8_t mfxstm32l152_GlobalITStatus(uint16_t DeviceAddr, uint8_t Source)
 {
-  /* Return the global IT source status (pending or not)*/
+
   return((MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_PENDING) & Source));
 }
 
@@ -377,7 +377,7 @@ uint8_t mfxstm32l152_GlobalITStatus(uint16_t DeviceAddr, uint8_t Source)
   */
 void mfxstm32l152_ClearGlobalIT(uint16_t DeviceAddr, uint8_t Source)
 {
-  /* Write 1 to the bits that have to be cleared */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_IRQ_ACK, Source);
 }
 
@@ -393,19 +393,19 @@ void mfxstm32l152_SetIrqOutPinPolarity(uint16_t DeviceAddr, uint8_t Polarity)
 {
   uint8_t tmp = 0;
 
-  /* Get the current register value */
+
   tmp = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_MFX_IRQ_OUT);
 
-  /* Mask the polarity bits */
+
   tmp &= ~(uint8_t)0x02;
 
-  /* Modify the Interrupt Output line configuration */
+
   tmp |= Polarity;
 
-  /* Set the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_MFX_IRQ_OUT, tmp);
 
-  /* Wait for 1 ms for MFX to change IRQ_out pin config, before activate it */
+
   MFX_IO_Delay(1);
 
 }
@@ -422,27 +422,27 @@ void mfxstm32l152_SetIrqOutPinType(uint16_t DeviceAddr, uint8_t Type)
 {
   uint8_t tmp = 0;
 
-  /* Get the current register value */
+
   tmp = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_MFX_IRQ_OUT);
 
-  /* Mask the type bits */
+
   tmp &= ~(uint8_t)0x01;
 
-  /* Modify the Interrupt Output line configuration */
+
   tmp |= Type;
 
-  /* Set the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_MFX_IRQ_OUT, tmp);
 
-  /* Wait for 1 ms for MFX to change IRQ_out pin config, before activate it */
+
   MFX_IO_Delay(1);
 
 }
 
 
-/* ------------------------------------------------------------------ */
-/* ----------------------- GPIO ------------------------------------- */
-/* ------------------------------------------------------------------ */
+
+
+
 
 
 /**
@@ -455,20 +455,20 @@ void mfxstm32l152_IO_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t mode;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL);
 
-  /* Set the IO Functionalities to be Enabled */
+
   mode |= MFXSTM32L152_GPIO_EN;
 
-  /* Enable ALTERNATE functions */
-  /* AGPIO[0..3] can be either IDD or GPIO */
-  /* AGPIO[4..7] can be either TS or GPIO */
-  /* if IDD or TS are enabled no matter the value this bit GPIO are not available for those pins */
-  /*  however the MFX will waste some cycles to to handle these potential GPIO (pooling, etc) */
-  /* so if IDD and TS are both active it is better to let ALTERNATE off (0) */
-  /* if however IDD or TS are not connected then set it on gives more GPIOs availability */
-  /* remind that AGPIO are less efficient then normal GPIO (They use pooling rather then EXTI */
+
+
+
+
+
+
+
+
   if (IO_Pin > 0xFFFF)
   {
     mode |= MFXSTM32L152_ALTERNATE_GPIO_EN;
@@ -478,10 +478,10 @@ void mfxstm32l152_IO_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
     mode &= ~MFXSTM32L152_ALTERNATE_GPIO_EN;
   }
 
-  /* Write the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, mode);
 
-  /* Wait for 1 ms for MFX to change IRQ_out pin config, before activate it */
+
   MFX_IO_Delay(1);
 }
 
@@ -518,7 +518,7 @@ uint8_t mfxstm32l152_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeType
 {
   uint8_t error_code = 0;
 
-  /* Configure IO pin according to selected IO mode */
+
   switch(IO_Mode)
   {
   case IO_MODE_OFF: /* Off or analog mode */
@@ -767,15 +767,15 @@ void mfxstm32l152_IO_SetIrqTypeMode(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_
   */
 void mfxstm32l152_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinState)
 {
-  /* Apply the bit value to the selected pin */
+
   if (PinState != 0)
   {
-    /* Set the SET register */
+
 	mfxstm32l152_reg24_setPinValue(DeviceAddr, MFXSTM32L152_REG_ADR_GPO_SET1, IO_Pin, 1);
   }
   else
   {
-    /* Set the CLEAR register */
+
 	mfxstm32l152_reg24_setPinValue(DeviceAddr, MFXSTM32L152_REG_ADR_GPO_CLR1, IO_Pin, 1);
   }
 }
@@ -821,7 +821,7 @@ void mfxstm32l152_IO_EnableIT(uint16_t DeviceAddr)
 {
   MFX_IO_ITConfig();
 
-  /* Enable global IO IT source */
+
   mfxstm32l152_EnableITSource(DeviceAddr, MFXSTM32L152_IRQ_GPIO);
 }
 
@@ -832,7 +832,7 @@ void mfxstm32l152_IO_EnableIT(uint16_t DeviceAddr)
   */
 void mfxstm32l152_IO_DisableIT(uint16_t DeviceAddr)
 {
-  /* Disable global IO IT source */
+
   mfxstm32l152_DisableITSource(DeviceAddr, MFXSTM32L152_IRQ_GPIO);
 }
 
@@ -872,7 +872,7 @@ void mfxstm32l152_IO_DisablePinIT(uint16_t DeviceAddr, uint32_t IO_Pin)
   */
 uint32_t mfxstm32l152_IO_ITStatus(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
-  /* Get the Interrupt status */
+
   uint8_t   tmp1 = 0;
   uint16_t  tmp2 = 0;
   uint32_t  tmp3 = 0;
@@ -904,9 +904,9 @@ uint32_t mfxstm32l152_IO_ITStatus(uint16_t DeviceAddr, uint32_t IO_Pin)
   */
 void mfxstm32l152_IO_ClearIT(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
-  /* Clear the IO IT pending bit(s) by acknowledging */
-  /* it cleans automatically also the Global IRQ_GPIO */
-  /* normally this function is called under interrupt */
+
+
+
   uint8_t pin_0_7, pin_8_15, pin_16_23;
 
   pin_0_7   = IO_Pin & 0x0000ff;
@@ -938,20 +938,20 @@ void mfxstm32l152_IO_EnableAF(uint16_t DeviceAddr)
 {
   uint8_t mode;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL);
 
-  /* Enable ALTERNATE functions */
-  /* AGPIO[0..3] can be either IDD or GPIO */
-  /* AGPIO[4..7] can be either TS or GPIO */
-  /* if IDD or TS are enabled no matter the value this bit GPIO are not available for those pins */
-  /*  however the MFX will waste some cycles to to handle these potential GPIO (pooling, etc) */
-  /* so if IDD and TS are both active it is better to let ALTERNATE disabled (0) */
-  /* if however IDD or TS are not connected then set it on gives more GPIOs availability */
-  /* remind that AGPIO are less efficient then normal GPIO (they use pooling rather then EXTI) */
+
+
+
+
+
+
+
+
   mode |= MFXSTM32L152_ALTERNATE_GPIO_EN;
 
-  /* Write the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, mode);
 }
 
@@ -964,28 +964,28 @@ void mfxstm32l152_IO_EnableAF(uint16_t DeviceAddr)
 {
   uint8_t mode;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL);
 
-  /* Enable ALTERNATE functions */
-  /* AGPIO[0..3] can be either IDD or GPIO */
-  /* AGPIO[4..7] can be either TS or GPIO */
-  /* if IDD or TS are enabled no matter the value this bit GPIO are not available for those pins */
-  /*  however the MFX will waste some cycles to to handle these potential GPIO (pooling, etc) */
-  /* so if IDD and TS are both active it is better to let ALTERNATE disabled (0) */
-  /* if however IDD or TS are not connected then set it on gives more GPIOs availability */
-  /* remind that AGPIO are less efficient then normal GPIO (they use pooling rather then EXTI) */
+
+
+
+
+
+
+
+
   mode &= ~MFXSTM32L152_ALTERNATE_GPIO_EN;
 
-  /* Write the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, mode);
 
 }
 
 
-/* ------------------------------------------------------------------ */
-/* --------------------- TOUCH SCREEN ------------------------------- */
-/* ------------------------------------------------------------------ */
+
+
+
 
 /**
   * @brief  Configures the touch Screen Controller (Single point detection)
@@ -996,19 +996,19 @@ void mfxstm32l152_TS_Start(uint16_t DeviceAddr)
 {
   uint8_t mode;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL);
 
-  /* Set the Functionalities to be Enabled */
+
   mode |= MFXSTM32L152_TS_EN;
 
-  /* Set the new register value */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, mode);
 
-  /* Wait for 2 ms */
+
   MFX_IO_Delay(2);
 
-  /* Select 2 nF filter capacitor */
+
   /* Configuration:
      - Touch average control    : 4 samples
      - Touch delay time         : 500 uS
@@ -1018,10 +1018,10 @@ void mfxstm32l152_TS_Start(uint16_t DeviceAddr)
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_TOUCH_DET_DELAY, 0x5);
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_AVE, 0x04);
 
-  /* Configure the Touch FIFO threshold: single point reading */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_FIFO_TH, 0x01);
 
-  /* Clear the FIFO memory content. */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_FIFO_TH, MFXSTM32L152_TS_CLEAR_FIFO);
 
   /* Touch screen control configuration :
@@ -1030,10 +1030,10 @@ void mfxstm32l152_TS_Start(uint16_t DeviceAddr)
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_TRACK, 0x00);
 
 
-  /*  Clear all the IT status pending bits if any */
+
   mfxstm32l152_IO_ClearIT(DeviceAddr, 0xFFFFFF);
 
-  /* Wait for 1 ms delay */
+
   MFX_IO_Delay(1);
 }
 
@@ -1074,11 +1074,11 @@ void mfxstm32l152_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
 
   MFX_IO_ReadMultiple(DeviceAddr, MFXSTM32L152_TS_XY_DATA, data_xy, sizeof(data_xy)) ;
 
-  /* Calculate positions values */
+
   *X = (data_xy[1]<<4) + (data_xy[0]>>4);
   *Y = (data_xy[2]<<4) + (data_xy[0]&4);
 
-  /* Reset the FIFO memory content. */
+
   MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_FIFO_TH, MFXSTM32L152_TS_CLEAR_FIFO);
 }
 
@@ -1091,7 +1091,7 @@ void mfxstm32l152_TS_EnableIT(uint16_t DeviceAddr)
 {
   MFX_IO_ITConfig();
 
-  /* Enable global TS IT source */
+
   mfxstm32l152_EnableITSource(DeviceAddr, MFXSTM32L152_IRQ_TS_DET);
 }
 
@@ -1102,7 +1102,7 @@ void mfxstm32l152_TS_EnableIT(uint16_t DeviceAddr)
   */
 void mfxstm32l152_TS_DisableIT(uint16_t DeviceAddr)
 {
-  /* Disable global TS IT source */
+
   mfxstm32l152_DisableITSource(DeviceAddr, MFXSTM32L152_IRQ_TS_DET);
 }
 
@@ -1113,7 +1113,7 @@ void mfxstm32l152_TS_DisableIT(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_TS_ITStatus(uint16_t DeviceAddr)
 {
-  /* Return TS interrupts status */
+
   return(mfxstm32l152_GlobalITStatus(DeviceAddr, MFXSTM32L152_IRQ_TS));
 }
 
@@ -1124,13 +1124,13 @@ uint8_t mfxstm32l152_TS_ITStatus(uint16_t DeviceAddr)
   */
 void mfxstm32l152_TS_ClearIT(uint16_t DeviceAddr)
 {
-  /* Clear the global TS IT source */
+
   mfxstm32l152_ClearGlobalIT(DeviceAddr, MFXSTM32L152_IRQ_TS);
 }
 
-/* ------------------------------------------------------------------ */
-/* --------------------- IDD MEASUREMENT ---------------------------- */
-/* ------------------------------------------------------------------ */
+
+
+
 
 /**
   * @brief  Launch IDD current measurement
@@ -1141,13 +1141,13 @@ void mfxstm32l152_IDD_Start(uint16_t DeviceAddr)
 {
   uint8_t mode = 0;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL);
 
-  /* Set the Functionalities to be enabled */
+
   mode |= MFXSTM32L152_IDD_CTRL_REQ;
 
-  /* Start measurement campaign */
+
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL, mode);
 }
 
@@ -1162,101 +1162,101 @@ void mfxstm32l152_IDD_Config(uint16_t DeviceAddr, IDD_ConfigTypeDef MfxIddConfig
   uint8_t value = 0;
   uint8_t mode = 0;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL);
 
   if((mode & MFXSTM32L152_IDD_EN) != MFXSTM32L152_IDD_EN)
   {
-    /* Set the Functionalities to be enabled */
+
     mode |= MFXSTM32L152_IDD_EN;
 
-    /* Set the new register value */
+
     MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_SYS_CTRL, mode);
   }
 
-  /* Control register setting: number of shunts */
+
   value =  ((MfxIddConfig.ShuntNbUsed << 1) & MFXSTM32L152_IDD_CTRL_SHUNT_NB);
   value |= (MfxIddConfig.VrefMeasurement & MFXSTM32L152_IDD_CTRL_VREF_DIS);
   value |= (MfxIddConfig.Calibration & MFXSTM32L152_IDD_CTRL_CAL_DIS);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL, value);
 
-  /* Idd pre delay configuration: unit and value*/
+
   value = (MfxIddConfig.PreDelayUnit & MFXSTM32L152_IDD_PREDELAY_UNIT) |
           (MfxIddConfig.PreDelayValue & MFXSTM32L152_IDD_PREDELAY_VALUE);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_PRE_DELAY, value);
 
-  /* Shunt 0 register value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.Shunt0Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT0_MSB, value);
   value = (uint8_t) (MfxIddConfig.Shunt0Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT0_LSB, value);
 
-  /* Shunt 1 register value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.Shunt1Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT1_MSB, value);
   value = (uint8_t) (MfxIddConfig.Shunt1Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT1_LSB, value);
 
-  /* Shunt 2 register value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.Shunt2Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT2_MSB, value);
   value = (uint8_t) (MfxIddConfig.Shunt2Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT2_LSB, value);
 
-  /* Shunt 3 register value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.Shunt3Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT3_MSB, value);
   value = (uint8_t) (MfxIddConfig.Shunt3Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT3_LSB, value);
 
-  /* Shunt 4 register value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.Shunt4Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT4_MSB, value);
   value = (uint8_t) (MfxIddConfig.Shunt4Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT4_LSB, value);
 
-  /* Shunt 0 stabilization delay */
+
   value = MfxIddConfig.Shunt0StabDelay;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH0_STABILIZATION, value);
 
-  /* Shunt 1 stabilization delay */
+
   value = MfxIddConfig.Shunt1StabDelay;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH1_STABILIZATION, value);
 
-  /* Shunt 2 stabilization delay */
+
   value = MfxIddConfig.Shunt2StabDelay;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH2_STABILIZATION, value);
 
-  /* Shunt 3 stabilization delay */
+
   value = MfxIddConfig.Shunt3StabDelay;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH3_STABILIZATION, value);
 
-  /* Shunt 4 stabilization delay */
+
   value = MfxIddConfig.Shunt4StabDelay;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH4_STABILIZATION, value);
 
-  /* Idd ampli gain value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.AmpliGain >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_GAIN_MSB, value);
   value = (uint8_t) (MfxIddConfig.AmpliGain);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_GAIN_LSB, value);
 
-  /* Idd VDD min value: MSB then LSB */
+
   value = (uint8_t) (MfxIddConfig.VddMin >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_VDD_MIN_MSB, value);
   value = (uint8_t) (MfxIddConfig.VddMin);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_VDD_MIN_LSB, value);
 
-  /* Idd number of measurements */
+
   value = MfxIddConfig.MeasureNb;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_NBR_OF_MEAS, value);
 
-  /* Idd delta delay configuration: unit and value */
+
   value = (MfxIddConfig.DeltaDelayUnit & MFXSTM32L152_IDD_DELTADELAY_UNIT) |
           (MfxIddConfig.DeltaDelayValue & MFXSTM32L152_IDD_DELTADELAY_VALUE);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_MEAS_DELTA_DELAY, value);
 
-  /* Idd number of shut on board */
+
   value = MfxIddConfig.ShuntNbOnBoard;
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNTS_ON_BOARD, value);
 }
@@ -1270,16 +1270,16 @@ void mfxstm32l152_IDD_ConfigShuntNbLimit(uint16_t DeviceAddr, uint8_t ShuntNbLim
 {
   uint8_t mode = 0;
 
-  /* Get the current register value */
+
   mode = MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL);
 
-  /* Clear number of shunt limit */
+
   mode &= ~(MFXSTM32L152_IDD_CTRL_SHUNT_NB);
 
-  /* Clear number of shunt limit */
+
   mode |= ((ShuntNbLimit << 1) & MFXSTM32L152_IDD_CTRL_SHUNT_NB);
 
-  /* Write noewx desired limit */
+
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL, mode);
 }
 
@@ -1295,7 +1295,7 @@ void mfxstm32l152_IDD_GetValue(uint16_t DeviceAddr, uint32_t *ReadValue)
 
   MFX_IO_ReadMultiple((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_VALUE_MSB, data, sizeof(data)) ;
 
-  /* Recompose Idd current value */
+
   *ReadValue = (data[0] << 16) | (data[1] << 8) | data[2];
 
 }
@@ -1319,7 +1319,7 @@ void mfxstm32l152_IDD_EnableIT(uint16_t DeviceAddr)
 {
   MFX_IO_ITConfig();
 
-  /* Enable global IDD interrupt source */
+
   mfxstm32l152_EnableITSource(DeviceAddr, MFXSTM32L152_IRQ_IDD);
 }
 
@@ -1330,7 +1330,7 @@ void mfxstm32l152_IDD_EnableIT(uint16_t DeviceAddr)
   */
 void mfxstm32l152_IDD_ClearIT(uint16_t DeviceAddr)
 {
-  /* Clear the global IDD interrupt source */
+
   mfxstm32l152_ClearGlobalIT(DeviceAddr, MFXSTM32L152_IRQ_IDD);
 }
 
@@ -1341,7 +1341,7 @@ void mfxstm32l152_IDD_ClearIT(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_IDD_GetITStatus(uint16_t DeviceAddr)
 {
-  /* Return IDD interrupt status */
+
   return(mfxstm32l152_GlobalITStatus(DeviceAddr, MFXSTM32L152_IRQ_IDD));
 }
 
@@ -1352,14 +1352,14 @@ uint8_t mfxstm32l152_IDD_GetITStatus(uint16_t DeviceAddr)
   */
 void mfxstm32l152_IDD_DisableIT(uint16_t DeviceAddr)
 {
-  /* Disable global IDD interrupt source */
+
   mfxstm32l152_DisableITSource(DeviceAddr, MFXSTM32L152_IRQ_IDD);
 }
 
 
-/* ------------------------------------------------------------------ */
-/* --------------------- ERROR MANAGEMENT --------------------------- */
-/* ------------------------------------------------------------------ */
+
+
+
 
 /**
   * @brief  Read Error Source.
@@ -1368,7 +1368,7 @@ void mfxstm32l152_IDD_DisableIT(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_Error_ReadSrc(uint16_t DeviceAddr)
 {
-  /* Get the current source register value */
+
   return(MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_ERROR_SRC));
 }
 
@@ -1379,7 +1379,7 @@ uint8_t mfxstm32l152_Error_ReadSrc(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_Error_ReadMsg(uint16_t DeviceAddr)
 {
-  /* Get the current message register value */
+
   return(MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_ERROR_MSG));
 }
 
@@ -1393,7 +1393,7 @@ void mfxstm32l152_Error_EnableIT(uint16_t DeviceAddr)
 {
   MFX_IO_ITConfig();
 
-  /* Enable global Error interrupt source */
+
   mfxstm32l152_EnableITSource(DeviceAddr, MFXSTM32L152_IRQ_ERROR);
 }
 
@@ -1404,7 +1404,7 @@ void mfxstm32l152_Error_EnableIT(uint16_t DeviceAddr)
   */
 void mfxstm32l152_Error_ClearIT(uint16_t DeviceAddr)
 {
-  /* Clear the global Error interrupt source */
+
   mfxstm32l152_ClearGlobalIT(DeviceAddr, MFXSTM32L152_IRQ_ERROR);
 }
 
@@ -1415,7 +1415,7 @@ void mfxstm32l152_Error_ClearIT(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_Error_GetITStatus(uint16_t DeviceAddr)
 {
-  /* Return Error interrupt status */
+
   return(mfxstm32l152_GlobalITStatus(DeviceAddr, MFXSTM32L152_IRQ_ERROR));
 }
 
@@ -1426,7 +1426,7 @@ uint8_t mfxstm32l152_Error_GetITStatus(uint16_t DeviceAddr)
   */
 void mfxstm32l152_Error_DisableIT(uint16_t DeviceAddr)
 {
-  /* Disable global Error interrupt source */
+
   mfxstm32l152_DisableITSource(DeviceAddr, MFXSTM32L152_IRQ_ERROR);
 }
 
@@ -1435,19 +1435,19 @@ void mfxstm32l152_Error_DisableIT(uint16_t DeviceAddr)
   */
 uint8_t mfxstm32l152_ReadReg(uint16_t DeviceAddr, uint8_t RegAddr)
 {
-  /* Get the current register value */
+
   return(MFX_IO_Read((uint8_t) DeviceAddr, RegAddr));
 }
 
 void mfxstm32l152_WriteReg(uint16_t DeviceAddr, uint8_t RegAddr, uint8_t Value)
 {
-  /* set the current register value */
+
   MFX_IO_Write((uint8_t) DeviceAddr, RegAddr, Value);
 }
 
-/* ------------------------------------------------------------------ */
-/* ----------------------- Private functions ------------------------ */
-/* ------------------------------------------------------------------ */
+
+
+
 /**
   * @brief  Check if the device instance of the selected address is already registered
   *         and return its index
@@ -1458,7 +1458,7 @@ static uint8_t mfxstm32l152_GetInstance(uint16_t DeviceAddr)
 {
   uint8_t idx;
 
-  /* Check all the registered instances */
+
   for(idx = 0; idx < MFXSTM32L152_MAX_INSTANCE ; idx ++)
   {
     if(mfxstm32l152[idx] == DeviceAddr)
@@ -1479,7 +1479,7 @@ static uint8_t mfxstm32l152_ReleaseInstance(uint16_t DeviceAddr)
 {
   uint8_t idx;
 
-  /* Check for all the registered instances */
+
   for(idx = 0; idx < MFXSTM32L152_MAX_INSTANCE ; idx ++)
   {
     if(mfxstm32l152[idx] == DeviceAddr)
@@ -1511,10 +1511,10 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
 
   if (pin_0_7)
   {
-    /* Get the current register value */
+
     tmp = MFX_IO_Read(DeviceAddr, RegisterAddr);
 
-    /* Set the selected pin direction */
+
     if (PinValue != 0)
     {
       tmp |= (uint8_t)pin_0_7;
@@ -1524,16 +1524,16 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
       tmp &= ~(uint8_t)pin_0_7;
     }
 
-    /* Set the new register value */
+
     MFX_IO_Write(DeviceAddr, RegisterAddr, tmp);
   }
 
   if (pin_8_15)
   {
-    /* Get the current register value */
+
     tmp = MFX_IO_Read(DeviceAddr, RegisterAddr+1);
 
-    /* Set the selected pin direction */
+
     if (PinValue != 0)
     {
       tmp |= (uint8_t)pin_8_15;
@@ -1543,16 +1543,16 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
       tmp &= ~(uint8_t)pin_8_15;
     }
 
-    /* Set the new register value */
+
     MFX_IO_Write(DeviceAddr, RegisterAddr+1, tmp);
   }
 
   if (pin_16_23)
   {
-    /* Get the current register value */
+
     tmp = MFX_IO_Read(DeviceAddr, RegisterAddr+2);
 
-    /* Set the selected pin direction */
+
     if (PinValue != 0)
     {
       tmp |= (uint8_t)pin_16_23;
@@ -1562,7 +1562,7 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
       tmp &= ~(uint8_t)pin_16_23;
     }
 
-    /* Set the new register value */
+
     MFX_IO_Write(DeviceAddr, RegisterAddr+2, tmp);
   }
 }
@@ -1583,4 +1583,4 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

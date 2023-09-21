@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_H
 #define __STM32L475E_IOT01_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup BSP
@@ -94,7 +94,7 @@ typedef enum
 
 #define LEDx_GPIO_CLK_DISABLE(__INDEX__)  do{if((__INDEX__) == 0) LED2_GPIO_CLK_DISABLE();}while(0)
 
-/* Only one User/Wakeup button */
+
 #define BUTTONn                             ((uint8_t)1)
 
 /**
@@ -151,8 +151,8 @@ typedef enum
 #define DISCOVERY_COMx_RX_GPIO_CLK_DISABLE(__INDEX__)   do { if((__INDEX__) == COM1) {DISCOVERY_COM1_RX_GPIO_CLK_DISABLE();}} while(0)
 
 
-/* User can use this section to tailor I2Cx instance used and associated resources */
-/* Definition for I2Cx resources */
+
+
 #define DISCOVERY_I2Cx                             I2C2
 #define DISCOVERY_I2Cx_CLK_ENABLE()                __HAL_RCC_I2C2_CLK_ENABLE()
 #define DISCOVERY_I2Cx_CLK_DISABLE()               __HAL_RCC_I2C2_CLK_DISABLE()   
@@ -163,13 +163,13 @@ typedef enum
 #define DISCOVERY_I2Cx_FORCE_RESET()               __HAL_RCC_I2C2_FORCE_RESET()
 #define DISCOVERY_I2Cx_RELEASE_RESET()             __HAL_RCC_I2C2_RELEASE_RESET()
 
-/* Definition for I2Cx Pins */
+
 #define DISCOVERY_I2Cx_SCL_PIN                     GPIO_PIN_10
 #define DISCOVERY_I2Cx_SDA_PIN                     GPIO_PIN_11                                               
 #define DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT           GPIOB
 #define DISCOVERY_I2Cx_SCL_SDA_AF                  GPIO_AF4_I2C2
 
-/* I2C interrupt requests */
+
 #define DISCOVERY_I2Cx_EV_IRQn                     I2C2_EV_IRQn
 #define DISCOVERY_I2Cx_ER_IRQn                     I2C2_ER_IRQn
 
@@ -186,21 +186,21 @@ typedef enum
 #endif /* DISCOVERY_I2Cx_TIMING */ 
 
 
-/* I2C Sensors address */
-/* LPS22HB (Pressure) I2C Address */
+
+
 #define LPS22HB_I2C_ADDRESS  (uint8_t)0xBA
-/* HTS221 (Humidity) I2C Address */
+
 #define HTS221_I2C_ADDRESS   (uint8_t)0xBE
 
 #ifdef USE_LPS22HB_TEMP
-/* LPS22HB Sensor hardware I2C address */ 
+
 #define TSENSOR_I2C_ADDRESS     LPS22HB_I2C_ADDRESS
 #else /* USE_HTS221_TEMP */
-/* HTS221 Sensor hardware I2C address */ 
+
 #define TSENSOR_I2C_ADDRESS     HTS221_I2C_ADDRESS
 #endif
 
-/* NFC I2C address and specific config parameters */
+
 #define M24SR_I2C_ADDR             (uint8_t)  0xAC /*!< M24SR address */
 #define NFC_I2C_STATUS_SUCCESS     (uint16_t) 0x0000
 #define NFC_I2C_ERROR_TIMEOUT      (uint16_t) 0x0011
@@ -213,11 +213,11 @@ typedef enum
   * @}
   */
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macros -----------------------------------------------------------*/
-/* Private macros ------------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/
+
+
+
+
+
                                                
 /** @defgroup STM32L475E_IOT01_LOW_LEVEL_Exported_Functions LOW LEVEL Exported Functions
   * @{
@@ -254,4 +254,4 @@ void             BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart);
 
 #endif /* __STM32L475E_IOT01_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

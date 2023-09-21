@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "st7789h2.h"
 
 /** @addtogroup BSP
@@ -115,49 +115,49 @@ void ST7789H2_Init(void)
 {
   uint8_t   parameter[14];
   
-  /* Initialize st7789h2 low level bus layer ----------------------------------*/
+
   LCD_IO_Init();
-  /* Sleep In Command */ 
+
   ST7789H2_WriteReg(ST7789H2_SLEEP_IN, (uint8_t*)NULL, 0); 
-  /* Wait for 10ms */
+
   LCD_IO_Delay(10);  
   
-  /* SW Reset Command */
+
   ST7789H2_WriteReg(0x01, (uint8_t*)NULL, 0); 
-  /* Wait for 200ms */
+
   LCD_IO_Delay(200);
   
-  /* Sleep Out Command */
+
   ST7789H2_WriteReg(ST7789H2_SLEEP_OUT, (uint8_t*)NULL, 0); 
-  /* Wait for 120ms */
+
   LCD_IO_Delay(120); 
 
-  /* Normal display for Driver Down side */
+
   parameter[0] = 0x00;     
   ST7789H2_WriteReg(ST7789H2_NORMAL_DISPLAY, parameter, 1);
  
-  /* Color mode 16bits/pixel */
+
   parameter[0] = 0x05;     
   ST7789H2_WriteReg(ST7789H2_COLOR_MODE, parameter, 1);
   
-  /* Display inversion On */
+
   ST7789H2_WriteReg(ST7789H2_DISPLAY_INVERSION, (uint8_t*)NULL, 0);     
   
-  /* Set Column address CASET */  
+
   parameter[0] = 0x00;
   parameter[1] = 0x00;
   parameter[2] = 0x00;
   parameter[3] = 0xEF;
   ST7789H2_WriteReg(ST7789H2_CASET, parameter, 4);
-  /* Set Row address RASET */  
+
   parameter[0] = 0x00;
   parameter[1] = 0x00;
   parameter[2] = 0x00;
   parameter[3] = 0xEF;
   ST7789H2_WriteReg(ST7789H2_RASET, parameter, 4);
 
-  /*--------------- ST7789H2 Frame rate setting -------------------------------*/
-  /* PORCH control setting */      
+
+
   parameter[0] = 0x0C;
   parameter[1] = 0x0C;
   parameter[2] = 0x00;
@@ -165,39 +165,39 @@ void ST7789H2_Init(void)
   parameter[4] = 0x33; 
   ST7789H2_WriteReg(ST7789H2_PORCH_CTRL, parameter, 5);
   
-  /* GATE control setting */
+
   parameter[0] = 0x35; 
   ST7789H2_WriteReg(ST7789H2_GATE_CTRL, parameter, 1);
   
-  /*--------------- ST7789H2 Power setting ------------------------------------*/
-  /* VCOM setting */ 
+
+
   parameter[0] = 0x1F; 
   ST7789H2_WriteReg(ST7789H2_VCOM_SET, parameter, 1); 
   
-  /* LCM Control setting */ 
+
   parameter[0] = 0x2C; 
   ST7789H2_WriteReg(ST7789H2_LCM_CTRL, parameter, 1);
   
-  /* VDV and VRH Command Enable */ 
+
   parameter[0] = 0x01;
   parameter[1] = 0xC3;
   ST7789H2_WriteReg(ST7789H2_VDV_VRH_EN, parameter, 2);
   
-  /* VDV Set */ 
+
   parameter[0] = 0x20; 
   ST7789H2_WriteReg(ST7789H2_VDV_SET, parameter, 1); 
   
-  /* Frame Rate Control in normal mode */ 
+
   parameter[0] = 0x0F; 
   ST7789H2_WriteReg(ST7789H2_FR_CTRL, parameter, 1); 
   
-  /* Power Control */     
+
   parameter[0] = 0xA4;
   parameter[1] = 0xA1;
   ST7789H2_WriteReg(ST7789H2_POWER_CTRL, parameter, 2); 
   
-  /*--------------- ST7789H2 Gamma setting ------------------------------------*/
-  /* Positive Voltage Gamma Control */ 
+
+
   parameter[0] = 0xD0;
   parameter[1] = 0x08;
   parameter[2] = 0x11;
@@ -214,7 +214,7 @@ void ST7789H2_Init(void)
   parameter[13] = 0x2D;
   ST7789H2_WriteReg(ST7789H2_PV_GAMMA_CTRL, parameter, 14); 
   
-  /* Negative Voltage Gamma Control */     
+
   parameter[0] = 0xD0;
   parameter[1] = 0x08;
   parameter[2] = 0x10;
@@ -231,10 +231,10 @@ void ST7789H2_Init(void)
   parameter[13] = 0x31;
   ST7789H2_WriteReg(ST7789H2_NV_GAMMA_CTRL, parameter, 14); 
   
-  /* Display ON command */
+
   ST7789H2_DisplayOn();  
   
-  /* Tearing Effect Line On: Option (00h:VSYNC Interface OFF, 01h:VSYNC Interface ON) */
+
   parameter[0] = 0x00;     
   ST7789H2_WriteReg(ST7789H2_TEARING_EFFECT, parameter, 1);
 
@@ -256,20 +256,20 @@ void ST7789H2_SetOrientation(uint32_t orientation)
   }
   else if(orientation == ST7789H2_ORIENTATION_LANDSCAPE_ROT180)
   {
-    /* Vertical Scrolling Definition */
-    /* TFA describes the Top Fixed Area */
+
+
     parameter[0] = 0x00;
     parameter[1] = 0x00;
-    /* VSA describes the height of the Vertical Scrolling Area */
+
     parameter[2] = 0x01;
     parameter[3] = 0xF0;
-    /* BFA describes the Bottom Fixed Area */
+
     parameter[4] = 0x00;
     parameter[5] = 0x00; 
     ST7789H2_WriteReg(ST7789H2_VSCRDEF, parameter, 6);
 
-    /* Vertical Scroll Start Address of RAM */
-    /* GRAM row nbr (320) - Display row nbr (240) = 80 = 0x50 */
+
+
     parameter[0] = 0x00;
     parameter[1] = 0x50;
     ST7789H2_WriteReg(ST7789H2_VSCSAD, parameter, 2);
@@ -290,10 +290,10 @@ void ST7789H2_SetOrientation(uint32_t orientation)
   */
 void ST7789H2_DisplayOn(void)
 {
-  /* Display ON command */
+
   ST7789H2_WriteReg(ST7789H2_DISPLAY_ON, (uint8_t*)NULL, 0);
 
-  /* Sleep Out command */
+
   ST7789H2_WriteReg(ST7789H2_SLEEP_OUT, (uint8_t*)NULL, 0);
 }
 
@@ -306,11 +306,11 @@ void ST7789H2_DisplayOff(void)
 {
   uint8_t   parameter[1];
   parameter[0] = 0xFE;
-  /* Display OFF command */
+
   ST7789H2_WriteReg(ST7789H2_DISPLAY_OFF, parameter, 1);  
-  /* Sleep In Command */
+
   ST7789H2_WriteReg(ST7789H2_SLEEP_IN, (uint8_t*)NULL, 0); 
-  /* Wait for 10ms */
+
   LCD_IO_Delay(10);  
 }
 
@@ -355,13 +355,13 @@ uint16_t ST7789H2_ReadID(void)
 void ST7789H2_SetCursor(uint16_t Xpos, uint16_t Ypos)
 {
   uint8_t   parameter[4];
-  /* CASET: Comumn Addrses Set */
+
   parameter[0] = 0x00;     
   parameter[1] = 0x00 + Xpos;
   parameter[2] = 0x00;
   parameter[3] = 0xEF + Xpos;
   ST7789H2_WriteReg(ST7789H2_CASET, parameter, 4);
-  /* RASET: Row Addrses Set */  
+
   parameter[0] = 0x00;
   parameter[1] = 0x00 + Ypos;
   parameter[2] = 0x00;
@@ -378,13 +378,13 @@ void ST7789H2_SetCursor(uint16_t Xpos, uint16_t Ypos)
   */
 void ST7789H2_WritePixel(uint16_t Xpos, uint16_t Ypos, uint16_t RGBCode)
 {
-  /* Set Cursor */
+
   ST7789H2_SetCursor(Xpos, Ypos);
 
-  /* Prepare to write to LCD RAM */
+
   ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
-  /* Write RAM data */
+
   LCD_IO_WriteData(RGBCode);
 }
 
@@ -400,13 +400,13 @@ uint16_t ST7789H2_ReadPixel(uint16_t Xpos, uint16_t Ypos)
   uint8_t          r, g, b;
   uint16_t         rgb565;
 
-  /* Set Cursor */
+
   ST7789H2_SetCursor(Xpos, Ypos);
   
-  /* Read RGB888 data from LCD RAM */
+
   rgb888 = ST7789H2_ReadPixel_rgb888(Xpos, Ypos);
   
-  /* Convert RGB888 to RGB565 */
+
   r = ((rgb888.red & 0xF8) >> 3);    /* Extract the red component 5 most significant bits */
   g = ((rgb888.green & 0xFC) >> 2);  /* Extract the green component 6 most significant bits */
   b = ((rgb888.blue & 0xF8) >> 3);   /* Extract the blue component 5 most significant bits */
@@ -427,10 +427,10 @@ void ST7789H2_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParameter
 {
   uint8_t   i;
 
-  /* Send command */
+
   LCD_IO_WriteReg(Command);
   
-  /* Send command's parameters if any */
+
   for (i=0; i<NbParameters; i++)
   {
     LCD_IO_WriteData(Parameters[i]);
@@ -444,13 +444,13 @@ void ST7789H2_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParameter
   */
 uint8_t ST7789H2_ReadReg(uint8_t Command)
 {
-  /* Send command */
+
   LCD_IO_WriteReg(Command);
 
-  /* Read dummy data */
+
   LCD_IO_ReadData();
   
-  /* Read register value */
+
   return (LCD_IO_ReadData());
 }
 
@@ -513,13 +513,13 @@ void ST7789H2_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t
 {
   uint16_t counter;
   
-  /* Set Cursor */
+
   ST7789H2_SetCursor(Xpos, Ypos); 
   
-  /* Prepare to write to LCD RAM */
+
   ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
   
-  /* Sent a complete line */
+
   for(counter = 0; counter < Length; counter++)
   {
     LCD_IO_WriteData(RGBCode);
@@ -538,13 +538,13 @@ void ST7789H2_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t
 {
   uint16_t counter;
 
-  /* Set Cursor */
+
   ST7789H2_SetCursor(Xpos, Ypos);
   
-  /* Prepare to write to LCD RAM */
+
   ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
-  /* Fill a complete vertical line */
+
   for(counter = 0; counter < Length; counter++)
   {
     ST7789H2_WritePixel(Xpos, Ypos + counter, RGBCode);
@@ -566,10 +566,10 @@ void ST7789H2_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
   uint16_t Xsize = WindowsXend - WindowsXstart + 1;
   uint16_t Ysize = WindowsYend - WindowsYstart + 1;
 
-  /* Read bitmap size */
+
   size = *(volatile uint16_t *) (pbmp + 2);
   size |= (*(volatile uint16_t *) (pbmp + 4)) << 16;
-  /* Get bitmap data address offset */
+
   index = *(volatile uint16_t *) (pbmp + 10);
   index |= (*(volatile uint16_t *) (pbmp + 12)) << 16;
   size = (size - index)/2;
@@ -577,10 +577,10 @@ void ST7789H2_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
 
   for (posY = (Ypos + Ysize); posY > Ypos; posY--)  /* In BMP files the line order is inverted */
   {
-    /* Set Cursor */
+
     ST7789H2_SetCursor(Xpos, posY - 1);
 
-    /* Draw one line of the picture */
+
     ST7789H2_DrawRGBHLine(Xpos, posY - 1, Xsize, (pbmp + (nb_line * Xsize * 2)));
     nb_line++;
   }
@@ -602,10 +602,10 @@ void ST7789H2_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize, uint16_
 
   for (posY = Ypos; posY < (Ypos + Ysize); posY ++)
   {
-    /* Set Cursor */
+
     ST7789H2_SetCursor(Xpos, posY);
 
-    /* Draw one line of the picture */
+
     ST7789H2_DrawRGBHLine(Xpos, posY, Xsize, (pdata + (nb_line * Xsize * 2)));
     nb_line++;
   }
@@ -635,22 +635,22 @@ static ST7789H2_Rgb888 ST7789H2_ReadPixel_rgb888(uint16_t Xpos, uint16_t Ypos)
    * address 2 :   green pixel 1    X  X  |    blue pixel 1   X  X
    */
 
-  /* Set Cursor */
+
   ST7789H2_SetCursor(Xpos, Ypos);
-  /* Prepare to read LCD RAM */
+
   ST7789H2_WriteReg(ST7789H2_READ_RAM, (uint8_t*)NULL, 0);   /* RAM read data command */
-  /* Dummy read */
+
   LCD_IO_ReadData();
-  /* Read first part of the RGB888 data */
+
   rgb888_part1 = LCD_IO_ReadData();
-  /* Read first part of the RGB888 data */
+
   rgb888_part2 = LCD_IO_ReadData();
 
-  /* red component */
+
   rgb888.red   = (rgb888_part1 & 0xFC00) >> 8;
-  /* green component */
+
   rgb888.green = (rgb888_part1 & 0x00FC) >> 0;
-  /* blue component */
+
   rgb888.blue  = (rgb888_part2 & 0xFC00) >> 8;
 
   return rgb888;
@@ -671,7 +671,7 @@ static void ST7789H2_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize, 
   uint32_t posX;
   uint16_t *rgb565 = (uint16_t*)pdata;
   
-  /* Prepare to write to LCD RAM */
+
   ST7789H2_WriteReg(ST7789H2_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
   
   for (posX = Xpos; posX < (Xsize + Xpos); posX++)
@@ -704,4 +704,4 @@ static void ST7789H2_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize, 
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __USBTYPECSWITCH_H
 #define __USBTYPECSWITCH_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -111,4 +111,4 @@ typedef struct
 
 #endif /* __USBTYPECSWITCH_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

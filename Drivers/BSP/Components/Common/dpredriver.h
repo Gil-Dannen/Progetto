@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __DPREDRIVER_H
 #define __DPREDRIVER_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -101,4 +101,4 @@ typedef struct
 
 #endif /* __DPREDRIVER_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

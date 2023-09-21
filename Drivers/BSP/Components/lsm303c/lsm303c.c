@@ -17,7 +17,7 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+
 #include "lsm303c.h"
 
 /** @addtogroup BSP
@@ -117,14 +117,14 @@ void LSM303C_AccInit(uint16_t InitStruct)
 {  
   uint8_t ctrl = 0x00;
   
-  /*  Low level init */
+
   ACCELERO_IO_Init();
   
-  /* Write value to ACC MEMS CTRL_REG1 register */
+
   ctrl = (uint8_t) InitStruct;
   ACCELERO_IO_Write(LSM303C_CTRL_REG1_A, ctrl);
   
-  /* Write value to ACC MEMS CTRL_REG4 register */
+
   ctrl = ((uint8_t) (InitStruct >> 8));
   ACCELERO_IO_Write(LSM303C_CTRL_REG4_A, ctrl);
 }
@@ -147,13 +147,13 @@ uint8_t LSM303C_AccReadID(void)
 {  
   uint8_t ctrl = 0x00;
   
-  /* Low level init */
+
   ACCELERO_IO_Init();
   
-  /* Enabled SPI/I2C read communication */
+
   ACCELERO_IO_Write(LSM303C_CTRL_REG4_A, 0x5);
   
-  /* Read value at Who am I register address */
+
   ctrl = ACCELERO_IO_Read(LSM303C_WHO_AM_I_ADDR);
   
   return ctrl;
@@ -169,16 +169,16 @@ void LSM303C_AccLowPower(uint16_t Mode)
 {  
   uint8_t ctrl = 0x00;
   
-  /* Read control register 1 value */
+
   ctrl = ACCELERO_IO_Read(LSM303C_CTRL_REG1_A);
 
-  /* Clear ODR bits */
+
   ctrl &= ~(LSM303C_ACC_ODR_BITPOSITION);
 
-  /* Set Power down */
+
   ctrl |= (uint8_t)Mode;
   
-  /* write back control register */
+
   ACCELERO_IO_Write(LSM303C_CTRL_REG1_A, ctrl);
 }
 
@@ -191,13 +191,13 @@ void LSM303C_AccFilterConfig(uint8_t FilterStruct)
 {
   uint8_t tmpreg;
   
-//  /* Read CTRL_REG2 register */
+//
 //  tmpreg = ACCELERO_IO_Read(LSM303C_CTRL_REG2_A);
-//  
+
 //  tmpreg &= 0x0C;
   tmpreg = FilterStruct;
   
-  /* Write value to ACC MEMS CTRL_REG2 register */
+
   ACCELERO_IO_Write(LSM303C_CTRL_REG2_A, tmpreg);
 }
 
@@ -214,11 +214,11 @@ void LSM303C_AccReadXYZ(int16_t* pData)
   uint8_t i = 0;
   uint8_t sensitivity = LSM303C_ACC_SENSITIVITY_2G;
   
-  /* Read the acceleration control register content */
+
   ctrlx[0] = ACCELERO_IO_Read(LSM303C_CTRL_REG4_A);
   ctrlx[1] = ACCELERO_IO_Read(LSM303C_CTRL_REG5_A);
   
-  /* Read output register X, Y & Z acceleration */
+
   buffer[0] = ACCELERO_IO_Read(LSM303C_OUT_X_L_A); 
   buffer[1] = ACCELERO_IO_Read(LSM303C_OUT_X_H_A);
   buffer[2] = ACCELERO_IO_Read(LSM303C_OUT_Y_L_A);
@@ -231,8 +231,8 @@ void LSM303C_AccReadXYZ(int16_t* pData)
     pnRawData[i]=((int16_t)((uint16_t)buffer[2*i+1] << 8) + buffer[2*i]);
   }
   
-  /* Normal mode */
-  /* Switch the sensitivity value set in the CRTL4 */
+
+
   switch(ctrlx[0] & LSM303C_ACC_FULLSCALE_8G)
   {
   case LSM303C_ACC_FULLSCALE_2G:
@@ -246,7 +246,7 @@ void LSM303C_AccReadXYZ(int16_t* pData)
     break;
   }
   
-  /* Obtain the mg value for the three axis */
+
   for(i=0; i<3; i++)
   {
     pData[i]=(pnRawData[i] * sensitivity);
@@ -288,13 +288,13 @@ void LSM303C_MagDeInit(void)
   */
 uint8_t LSM303C_MagReadID(void)
 {  
-  /* Low level init */
+
   MAGNETO_IO_Init();
   
-  /* Enabled the SPI/I2C read operation */
+
   MAGNETO_IO_Write(LSM303C_CTRL_REG3_M, 0x84);
   
-  /* Read value at Who am I register address */
+
   return MAGNETO_IO_Read(LSM303C_WHO_AM_I_ADDR);
 }
 
@@ -308,16 +308,16 @@ void LSM303C_MagLowPower(uint16_t Mode)
 {  
   uint8_t ctrl = 0x00;
   
-  /* Read control register 1 value */
+
   ctrl = MAGNETO_IO_Read(LSM303C_CTRL_REG3_M);
 
-  /* Clear ODR bits */
+
   ctrl &= ~(LSM303C_MAG_SELECTION_MODE);
 
-  /* Set mode */
+
   ctrl |= (uint8_t)Mode;
   
-  /* write back control register */
+
   MAGNETO_IO_Write(LSM303C_CTRL_REG3_M, ctrl);
 }
 
@@ -328,7 +328,7 @@ void LSM303C_MagLowPower(uint16_t Mode)
   */
 uint8_t LSM303C_MagGetDataStatus(void)
 {
-  /* Read Mag STATUS register */
+
   return MAGNETO_IO_Read(LSM303C_STATUS_REG_M);
 }
 
@@ -343,10 +343,10 @@ void LSM303C_MagReadXYZ(int16_t* pData)
   uint8_t buffer[6];
   uint8_t i=0;
   
-  /* Read the magnetometer control register content */
+
   ctrlx = MAGNETO_IO_Read(LSM303C_CTRL_REG4_M);
 
-  /* Read output register X, Y & Z magnetometer */
+
   buffer[0] = MAGNETO_IO_Read(LSM303C_OUT_X_L_M); 
   buffer[1] = MAGNETO_IO_Read(LSM303C_OUT_X_H_M);
   buffer[2] = MAGNETO_IO_Read(LSM303C_OUT_Y_L_M);
@@ -354,7 +354,7 @@ void LSM303C_MagReadXYZ(int16_t* pData)
   buffer[4] = MAGNETO_IO_Read(LSM303C_OUT_Z_L_M);
   buffer[5] = MAGNETO_IO_Read(LSM303C_OUT_Z_H_M);
   
-  /* Check in the control register4 the data alignment*/
+
   if((ctrlx & LSM303C_MAG_BLE_MSB)) 
   {
     for(i=0; i<3; i++)
@@ -387,4 +387,4 @@ void LSM303C_MagReadXYZ(int16_t* pData)
   * @}
   */ 
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/     
+

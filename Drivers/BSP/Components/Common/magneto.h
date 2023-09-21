@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __MAGNETO_H
 #define __MAGNETO_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -104,4 +104,4 @@ typedef struct
 
 #endif /* __MAGNETO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

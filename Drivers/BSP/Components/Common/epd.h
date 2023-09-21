@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __EPD_H
 #define __EPD_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -57,7 +57,7 @@ typedef struct
   void     (*Init)(void);
   void     (*WritePixel)(uint8_t);
 
-  /* Optimized operation */
+
   void     (*SetDisplayWindow)(uint16_t, uint16_t, uint16_t, uint16_t);
   void     (*RefreshDisplay)(void);
   void     (*CloseChargePump)(void);
@@ -94,4 +94,4 @@ EPD_DrvTypeDef;
 
 #endif /* EPD_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

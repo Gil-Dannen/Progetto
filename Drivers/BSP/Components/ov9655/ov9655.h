@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __OV9655_H
 #define __OV9655_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/camera.h"
    
 /** @addtogroup BSP
@@ -60,7 +60,7 @@
   * @brief  OV9655 Registers  
   */
 
-/* OV9655 Registers definition */
+
 #define OV9655_SENSOR_PIDH              0x0A
 #define OV9655_SENSOR_PIDL              0x0B
 #define OV9655_SENSOR_COM7              0x12
@@ -116,7 +116,7 @@ void     CAMERA_IO_Write(uint8_t addr, uint8_t reg, uint8_t value);
 uint8_t  CAMERA_IO_Read(uint8_t addr, uint8_t reg);
 void     CAMERA_Delay(uint32_t delay);
 
-/* CAMERA driver structure */
+
 extern CAMERA_DrvTypeDef   ov9655_drv;
 /**
   * @}
@@ -138,4 +138,4 @@ extern CAMERA_DrvTypeDef   ov9655_drv;
   * @}
   */ 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

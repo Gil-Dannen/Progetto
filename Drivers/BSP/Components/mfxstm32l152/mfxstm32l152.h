@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __MFXSTM32L152_H
 #define __MFXSTM32L152_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/ts.h"
 #include "../Common/io.h"
 #include "../Common/idd.h"
@@ -43,7 +43,7 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Exported_Types
   * @{
@@ -84,7 +84,7 @@ typedef struct
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Exported_Constants
   * @{
@@ -229,8 +229,8 @@ typedef struct
   /**
   * @brief  GPIO IRQ_GPIs
   */
-/* GPIOs can INDIVIDUALLY generate interruption to the Main MCU thanks to the MFXSTM32L152_IRQ_OUT signal */
-/* the general MFXSTM32L152_IRQ_GPIO_SRC_EN shall be enabled too          */
+
+
   /**
   * @brief  GPIO IRQ_GPI_SRC1/2/3 (R/W): registers enable or not the feature to generate irq
   */
@@ -504,7 +504,7 @@ typedef struct
   */
 
 
-/* Exported macro ------------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Exported_Macros
   * @{
@@ -514,7 +514,7 @@ typedef struct
   * @}
   */
 
-/* Exported functions --------------------------------------------------------*/
+
 
 /** @defgroup MFXSTM32L152_Exported_Functions
   * @{
@@ -616,13 +616,13 @@ uint16_t MFX_IO_ReadMultiple(uint16_t addr, uint8_t reg, uint8_t *buffer, uint16
   * @}
   */
 
-/* Touch screen driver structure */
+
 extern TS_DrvTypeDef mfxstm32l152_ts_drv;
 
-/* IO driver structure */
+
 extern IO_DrvTypeDef mfxstm32l152_io_drv;
 
-/* IDD driver structure */
+
 extern IDD_DrvTypeDef mfxstm32l152_idd_drv;
 
 
@@ -647,4 +647,4 @@ extern IDD_DrvTypeDef mfxstm32l152_idd_drv;
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __MX25LM51245G_H
 #define __MX25LM51245G_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 
 /** @addtogroup BSP
   * @{
@@ -78,7 +78,7 @@
 /** 
   * @brief  MX25LM51245G Commands  
   */  
-/* Read Operations */
+
 #define READ_CMD                                  0x03
 #define READ_4_BYTE_ADDR_CMD                      0x13
 
@@ -88,13 +88,13 @@
 #define OCTAL_IO_READ_CMD                         0xEC13
 #define OCTAL_IO_DTR_READ_CMD                     0xEE11
 
-/* Program Operations */
+
 #define PAGE_PROG_CMD                             0x02
 #define PAGE_PROG_4_BYTE_ADDR_CMD                 0x12
 
 #define OCTAL_PAGE_PROG_CMD                       0x12ED
 
-/* Erase Operations */
+
 #define SECTOR_ERASE_CMD                          0x20
 #define SECTOR_ERASE_4_BYTE_ADDR_CMD              0x21
 
@@ -117,21 +117,21 @@
 #define OCTAL_PROG_ERASE_RESUME_CMD               0x30CF
 #define OCTAL_PROG_ERASE_SUSPEND_CMD              0xB04F
 
-/* Identification Operations */
+
 #define READ_ID_CMD                               0x9F
 #define READ_SERIAL_FLASH_DISCO_PARAM_CMD         0x5A
 
 #define OCTAL_READ_ID_CMD                         0x9F60
 #define OCTAL_READ_SERIAL_FLASH_DISCO_PARAM_CMD   0x5AA5  
 
-/* Write Operations */
+
 #define WRITE_ENABLE_CMD                          0x06
 #define WRITE_DISABLE_CMD                         0x04
 
 #define OCTAL_WRITE_ENABLE_CMD                    0x06F9
 #define OCTAL_WRITE_DISABLE_CMD                   0x04FB
 
-/* Register Operations */
+
 #define READ_STATUS_REG_CMD                       0x05
 #define READ_CFG_REG_CMD                          0x15
 #define WRITE_STATUS_CFG_REG_CMD                  0x01
@@ -180,37 +180,37 @@
 #define OCTAL_READ_DPB_REG_CMD                    0xE01F
 #define OCTAL_WRITE_DPB_REG_CMD                   0xE11E
 
-/* Power Down Operations */
+
 #define DEEP_POWER_DOWN_CMD                       0xB9
 #define RELEASE_DEEP_POWER_DOWN_CMD               0xAB
 
 #define OCTAL_ENTER_DEEP_POWER_DOWN_CMD           0xB946
 
-/* Burst Operations */
+
 #define SET_BURST_LENGTH_CMD                      0xC0
 
 #define OCTAL_SET_BURST_LENGTH_CMD                0xC03F
 
-/* One-Time Programmable Operations */
+
 #define ENTER_SECURED_OTP_CMD                     0xB1
 #define EXIT_SECURED_OTP_CMD                      0xC1
 
 #define OCTAL_ENTER_SECURED_OTP_CMD               0xB14E
 #define OCTAL_EXIT_SECURED_OTP_CMD                0xC13E
 
-/* No Operation */
+
 #define NO_OPERATION_CMD                          0x00
 
 #define OCTAL_NO_OPERATION_CMD                    0x00FF
 
-/* Reset Operations */
+
 #define RESET_ENABLE_CMD                          0x66
 #define RESET_MEMORY_CMD                          0x99
 
 #define OCTAL_RESET_ENABLE_CMD                    0x6699
 #define OCTAL_RESET_MEMORY_CMD                    0x9966
 
-/* Protection Operations */
+
 #define WRITE_PROTECT_SEL_CMD                     0x68
 
 #define OCTAL_WRITE_PROTECT_SEL_CMD               0x6897
@@ -224,25 +224,25 @@
 /** 
   * @brief  MX25LM51245G Registers  
   */ 
-/* Status Register */
+
 #define MX25LM51245G_SR_WIP                       ((uint8_t)0x01)        /*!< Write in progress */
 #define MX25LM51245G_SR_WEL                       ((uint8_t)0x02)        /*!< Write enable latch */
 #define MX25LM51245G_SR_BP                        ((uint8_t)0x3C)        /*!< Block protect */
 
-/* Configuration Register 1 */
+
 #define MX25LM51245G_CR1_ODS                      ((uint8_t)0x07)        /*!< Output driver strength */
 #define MX25LM51245G_CR1_TB                       ((uint8_t)0x08)        /*!< Top / bottom */
 
-/* Configuration Register 2 */
-/* Address : 0x00000000 */
+
+
 #define MX25LM51245G_CR2_REG1_ADDR                ((uint32_t)0x00000000) /*!< CR2 register address 0x00000000 */
 #define MX25LM51245G_CR2_SOPI                     ((uint8_t)0x01)        /*!< STR OPI Enable */
 #define MX25LM51245G_CR2_DOPI                     ((uint8_t)0x02)        /*!< DTR OPI Enable */
-/* Address : 0x00000200 */
+
 #define MX25LM51245G_CR2_REG2_ADDR                ((uint32_t)0x00000200) /*!< CR2 register address 0x00000200 */
 #define MX25LM51245G_CR2_DQSPRC                   ((uint8_t)0x01)        /*!< DTR DQS pre-cycle */
 #define MX25LM51245G_CR2_DOS                      ((uint8_t)0x02)        /*!< DQS on STR mode */
-/* Address : 0x00000300 */
+
 #define MX25LM51245G_CR2_REG3_ADDR                ((uint32_t)0x00000300) /*!< CR2 register address 0x00000300 */
 #define MX25LM51245G_CR2_DC                       ((uint8_t)0x07)        /*!< Dummy cycle */
 #define MX25LM51245G_CR2_DC_20_CYCLES             ((uint8_t)0x00)        /*!< 20 Dummy cycles */
@@ -253,15 +253,15 @@
 #define MX25LM51245G_CR2_DC_10_CYCLES             ((uint8_t)0x05)        /*!< 10 Dummy cycles */
 #define MX25LM51245G_CR2_DC_8_CYCLES              ((uint8_t)0x06)        /*!< 8 Dummy cycles */
 #define MX25LM51245G_CR2_DC_6_CYCLES              ((uint8_t)0x07)        /*!< 6 Dummy cycles */
-/* Address : 0x00000500 */
+
 #define MX25LM51245G_CR2_REG4_ADDR                ((uint32_t)0x00000500) /*!< CR2 register address 0x00000500 */
 #define MX25LM51245G_CR2_PPTSEL                   ((uint8_t)0x01)        /*!< Preamble pattern selection */
-/* Address : 0x40000000 */
+
 #define MX25LM51245G_CR2_REG5_ADDR                ((uint32_t)0x40000000) /*!< CR2 register address 0x40000000 */
 #define MX25LM51245G_CR2_DEFSOPI                  ((uint8_t)0x01)        /*!< Enable SOPI after power on reset */
 #define MX25LM51245G_CR2_DEFDOPI                  ((uint8_t)0x02)        /*!< Enable DOPI after power on reset */
 
-/* Security Register */
+
 #define MX25LM51245G_SECR_SOI                     ((uint8_t)0x01)        /*!< Secured OTP indicator */
 #define MX25LM51245G_SECR_LDSO                    ((uint8_t)0x02)        /*!< Lock-down secured OTP */
 #define MX25LM51245G_SECR_PSB                     ((uint8_t)0x04)        /*!< Program suspend bit */
@@ -298,4 +298,4 @@
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -17,7 +17,7 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+
 #include "l3gd20.h"
 
 /** @addtogroup BSP
@@ -102,14 +102,14 @@ void L3GD20_Init(uint16_t InitStruct)
 {  
   uint8_t ctrl = 0x00;
   
-  /* Configure the low level interface */
+
   GYRO_IO_Init();
   
-  /* Write value to MEMS CTRL_REG1 register */
+
   ctrl = (uint8_t) InitStruct;
   GYRO_IO_Write(&ctrl, L3GD20_CTRL_REG1_ADDR, 1);
   
-  /* Write value to MEMS CTRL_REG4 register */  
+
   ctrl = (uint8_t) (InitStruct >> 8);
   GYRO_IO_Write(&ctrl, L3GD20_CTRL_REG4_ADDR, 1);
 }
@@ -134,13 +134,13 @@ uint8_t L3GD20_ReadID(void)
 {
   uint8_t tmp;
   
-  /* Configure the low level interface */
+
   GYRO_IO_Init();
   
-  /* Read WHO I AM register */
+
   GYRO_IO_Read(&tmp, L3GD20_WHO_AM_I_ADDR, 1);
   
-  /* Return the ID */
+
   return (uint8_t)tmp;
 }
 
@@ -153,13 +153,13 @@ void L3GD20_RebootCmd(void)
 {
   uint8_t tmpreg;
   
-  /* Read CTRL_REG5 register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_CTRL_REG5_ADDR, 1);
   
-  /* Enable or Disable the reboot memory */
+
   tmpreg |= L3GD20_BOOT_REBOOTMEMORY;
   
-  /* Write value to MEMS CTRL_REG5 register */
+
   GYRO_IO_Write(&tmpreg, L3GD20_CTRL_REG5_ADDR, 1);
 }
 
@@ -172,7 +172,7 @@ void L3GD20_LowPower(uint16_t InitStruct)
 {  
   uint8_t ctrl = 0x00;
 
-  /* Write value to MEMS CTRL_REG1 register */
+
   ctrl = (uint8_t) InitStruct;
   GYRO_IO_Write(&ctrl, L3GD20_CTRL_REG1_ADDR, 1);
 }
@@ -186,10 +186,10 @@ void L3GD20_INT1InterruptConfig(uint16_t Int1Config)
 {
   uint8_t ctrl_cfr = 0x00, ctrl3 = 0x00;
   
-  /* Read INT1_CFG register */
+
   GYRO_IO_Read(&ctrl_cfr, L3GD20_INT1_CFG_ADDR, 1);
   
-  /* Read CTRL_REG3 register */
+
   GYRO_IO_Read(&ctrl3, L3GD20_CTRL_REG3_ADDR, 1);
   
   ctrl_cfr &= 0x80;
@@ -198,10 +198,10 @@ void L3GD20_INT1InterruptConfig(uint16_t Int1Config)
   ctrl3 &= 0xDF;
   ctrl3 |= ((uint8_t) Int1Config);   
   
-  /* Write value to MEMS INT1_CFG register */
+
   GYRO_IO_Write(&ctrl_cfr, L3GD20_INT1_CFG_ADDR, 1);
   
-  /* Write value to MEMS CTRL_REG3 register */
+
   GYRO_IO_Write(&ctrl3, L3GD20_CTRL_REG3_ADDR, 1);
 }
 
@@ -217,7 +217,7 @@ void L3GD20_EnableIT(uint8_t IntSel)
 {  
   uint8_t tmpreg;
   
-  /* Read CTRL_REG3 register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_CTRL_REG3_ADDR, 1);
   
   if(IntSel == L3GD20_INT1)
@@ -231,7 +231,7 @@ void L3GD20_EnableIT(uint8_t IntSel)
     tmpreg |= L3GD20_INT2INTERRUPT_ENABLE;
   }
   
-  /* Write value to MEMS CTRL_REG3 register */
+
   GYRO_IO_Write(&tmpreg, L3GD20_CTRL_REG3_ADDR, 1);
 }
 
@@ -247,7 +247,7 @@ void L3GD20_DisableIT(uint8_t IntSel)
 {  
   uint8_t tmpreg;
   
-  /* Read CTRL_REG3 register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_CTRL_REG3_ADDR, 1);
   
   if(IntSel == L3GD20_INT1)
@@ -261,7 +261,7 @@ void L3GD20_DisableIT(uint8_t IntSel)
     tmpreg |= L3GD20_INT2INTERRUPT_DISABLE;
   }
   
-  /* Write value to MEMS CTRL_REG3 register */
+
   GYRO_IO_Write(&tmpreg, L3GD20_CTRL_REG3_ADDR, 1);
 }
 
@@ -274,15 +274,15 @@ void L3GD20_FilterConfig(uint8_t FilterStruct)
 {
   uint8_t tmpreg;
   
-  /* Read CTRL_REG2 register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_CTRL_REG2_ADDR, 1);
   
   tmpreg &= 0xC0;
   
-  /* Configure MEMS: mode and cutoff frequency */
+
   tmpreg |= FilterStruct;
   
-  /* Write value to MEMS CTRL_REG2 register */
+
   GYRO_IO_Write(&tmpreg, L3GD20_CTRL_REG2_ADDR, 1);
 }
 
@@ -298,14 +298,14 @@ void L3GD20_FilterCmd(uint8_t HighPassFilterState)
 {
   uint8_t tmpreg;
   
-  /* Read CTRL_REG5 register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_CTRL_REG5_ADDR, 1);
   
   tmpreg &= 0xEF;
   
   tmpreg |= HighPassFilterState;
   
-  /* Write value to MEMS CTRL_REG5 register */
+
   GYRO_IO_Write(&tmpreg, L3GD20_CTRL_REG5_ADDR, 1);
 }
 
@@ -318,7 +318,7 @@ uint8_t L3GD20_GetDataStatus(void)
 {
   uint8_t tmpreg;
   
-  /* Read STATUS_REG register */
+
   GYRO_IO_Read(&tmpreg, L3GD20_STATUS_REG_ADDR, 1);
   
   return tmpreg;
@@ -341,7 +341,7 @@ void L3GD20_ReadXYZAngRate(float *pfData)
   
   GYRO_IO_Read(tmpbuffer,L3GD20_OUT_X_L_ADDR,6);
   
-  /* check in the control register 4 the data alignment (Big Endian or Little Endian)*/
+
   if(!(tmpreg & L3GD20_BLE_MSB))
   {
     for(i=0; i<3; i++)
@@ -357,7 +357,7 @@ void L3GD20_ReadXYZAngRate(float *pfData)
     }
   }
   
-  /* Switch the sensitivity value set in the CRTL4 */
+
   switch(tmpreg & L3GD20_FULLSCALE_SELECTION)
   {
   case L3GD20_FULLSCALE_250:
@@ -372,7 +372,7 @@ void L3GD20_ReadXYZAngRate(float *pfData)
     sensitivity=L3GD20_SENSITIVITY_2000DPS;
     break;
   }
-  /* Divide by sensitivity */
+
   for(i=0; i<3; i++)
   {
     pfData[i]=(float)(RawData[i] * sensitivity);
@@ -395,4 +395,4 @@ void L3GD20_ReadXYZAngRate(float *pfData)
   * @}
   */ 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/     
+

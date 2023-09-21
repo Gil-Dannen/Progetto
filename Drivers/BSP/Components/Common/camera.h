@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __CAMERA_H
 #define __CAMERA_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -120,4 +120,4 @@ typedef struct
 
 #endif /* __CAMERA_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -15,7 +15,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_FLASH_EX_H
 #define STM32L4xx_HAL_FLASH_EX_H
 
@@ -23,7 +23,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -34,9 +34,9 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
 
-/* Exported constants --------------------------------------------------------*/
+
+
 #if defined (FLASH_CFGR_LVEN)
 /** @addtogroup FLASHEx_Exported_Constants
   * @{
@@ -44,8 +44,8 @@
 /** @defgroup FLASHEx_LVE_PIN_CFG FLASHEx LVE pin configuration
   * @{
   */
-#define FLASH_LVE_PIN_CTRL     0x00000000U       /*!< LVE FLASH pin controlled by power controller       */
-#define FLASH_LVE_PIN_FORCED   FLASH_CFGR_LVEN   /*!< LVE FLASH pin enforced to low (external SMPS used) */
+#define FLASH_LVE_PIN_CTRL     0x00000000U
+#define FLASH_LVE_PIN_FORCED   FLASH_CFGR_LVEN
 /**
   * @}
   */
@@ -53,16 +53,16 @@
 /**
   * @}
   */
-#endif /* FLASH_CFGR_LVEN */
+#endif
 
-/* Exported macro ------------------------------------------------------------*/
 
-/* Exported functions --------------------------------------------------------*/
+
+
 /** @addtogroup FLASHEx_Exported_Functions
   * @{
   */
 
-/* Extended Program operation functions  *************************************/
+
 /** @addtogroup FLASHEx_Exported_Functions_Group1
   * @{
   */
@@ -82,13 +82,13 @@ HAL_StatusTypeDef HAL_FLASHEx_ConfigLVEPin(uint32_t ConfigLVE);
 /**
   * @}
   */
-#endif /* FLASH_CFGR_LVEN */
+#endif
 
 /**
   * @}
   */
 
-/* Private function ----------------------------------------------------------*/
+
 /** @addtogroup FLASHEx_Private_Functions FLASHEx Private Functions
  * @{
  */
@@ -98,13 +98,13 @@ void FLASH_FlushCaches(void);
   * @}
   */
 
-/* Private macros ------------------------------------------------------------*/
+
 /**
   @cond 0
   */
 #if defined (FLASH_CFGR_LVEN)
 #define IS_FLASH_LVE_PIN(CFG)  (((CFG) == FLASH_LVE_PIN_CTRL) || ((CFG) == FLASH_LVE_PIN_FORCED))
-#endif /* FLASH_CFGR_LVEN */
+#endif
 /**
   @endcond
   */
@@ -121,5 +121,5 @@ void FLASH_FlushCaches(void);
 }
 #endif
 
-#endif /* STM32L4xx_HAL_FLASH_EX_H */
+#endif
 

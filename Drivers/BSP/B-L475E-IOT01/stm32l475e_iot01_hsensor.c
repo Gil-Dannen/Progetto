@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01_hsensor.h"
 
 /** @addtogroup BSP
@@ -59,7 +59,7 @@ uint32_t BSP_HSENSOR_Init(void)
   else
   {
     Hsensor_drv = &HTS221_H_Drv;
-    /* HSENSOR Init */   
+
     Hsensor_drv->Init(HTS221_I2C_ADDRESS);
     ret = HSENSOR_OK;
   }
@@ -99,4 +99,4 @@ float BSP_HSENSOR_ReadHumidity(void)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

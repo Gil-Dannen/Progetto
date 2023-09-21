@@ -17,7 +17,7 @@
  ******************************************************************************
  */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __HTS221__H
 #define __HTS221__H
 
@@ -25,7 +25,7 @@
 extern "C" {
 #endif
   
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/hsensor.h"
 #include "../Common/tsensor.h"  
 
@@ -249,7 +249,7 @@ extern "C" {
 /** @defgroup HTS221_Humidity_Exported_Functions HTS221 Humidity Exported Functions
   * @{
   */  
-/* HUMIDITY functions */
+
 void HTS221_H_Init(uint16_t DeviceAddr);
 uint8_t HTS221_H_ReadID(uint16_t DeviceAddr);
 float HTS221_H_ReadHumidity(uint16_t DeviceAddr);
@@ -260,7 +260,7 @@ float HTS221_H_ReadHumidity(uint16_t DeviceAddr);
 /** @defgroup HTS221_HumImported_Globals  Humidity Imported Globals
   * @{
   */
-/* Humidity driver structure */
+
 extern HSENSOR_DrvTypeDef HTS221_H_Drv;
 /**
   * @}
@@ -269,7 +269,7 @@ extern HSENSOR_DrvTypeDef HTS221_H_Drv;
 /** @defgroup HTS221_Temperature_Exported_Functions HTS221 Temperature Exported Functions
   * @{
   */
-/* TEMPERATURE functions */
+
 void HTS221_T_Init(uint16_t DeviceAddr, TSENSOR_InitTypeDef *pInitStruct);
 float HTS221_T_ReadTemp(uint16_t DeviceAddr);
 /**
@@ -279,7 +279,7 @@ float HTS221_T_ReadTemp(uint16_t DeviceAddr);
 /** @defgroup HTS221_TempImported_Globals  Temperature Imported Globals
   * @{
   */
-/* Temperature driver structure */
+
 extern TSENSOR_DrvTypeDef HTS221_T_Drv;
 
 /**
@@ -289,7 +289,7 @@ extern TSENSOR_DrvTypeDef HTS221_T_Drv;
 /** @defgroup HTS221_Imported_Functions HTS221 Imported Functions
   * @{
   */
-/* IO functions */
+
 extern void     SENSOR_IO_Init(void);
 extern void     SENSOR_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 extern uint8_t  SENSOR_IO_Read(uint8_t Addr, uint8_t Reg);
@@ -317,4 +317,4 @@ extern void     SENSOR_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buff
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

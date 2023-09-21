@@ -6,21 +6,21 @@
  ******************************************************************************/
 
 //------------------------------------------------------------------------------
-//
+
 // Copyright (c) 2017-2019 IAR Systems
 // Copyright (c) 2017-2019 Arm Limited. All rights reserved. 
-//
+
 // Licensed under the Apache License, Version 2.0 (the "License")
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 //------------------------------------------------------------------------------
 
 
@@ -45,7 +45,7 @@
   #if __ICCARM_V8
     #define __ALIGNED(x) __attribute__((aligned(x)))
   #elif (__VER__ >= 7080000)
-    /* Needs IAR language extensions */
+
     #define __ALIGNED(x) __attribute__((aligned(x)))
   #else
     #warning No compiler specific solution for __ALIGNED.__ALIGNED is ignored.
@@ -57,7 +57,7 @@
 /* Define compiler macros for CPU architecture, used in CMSIS 5.
  */
 #if __ARM_ARCH_6M__ || __ARM_ARCH_7M__ || __ARM_ARCH_7EM__ || __ARM_ARCH_8M_BASE__ || __ARM_ARCH_8M_MAIN__
-/* Macros already defined */
+
 #else
   #if defined(__ARM8M_MAINLINE__) || defined(__ARM8EM_MAINLINE__)
     #define __ARM_ARCH_8M_MAIN__ 1
@@ -76,7 +76,7 @@
   #endif /* __ARM_ARCH_PROFILE == 'M' */
 #endif
 
-/* Alternativ core deduction for older ICCARM's */
+
 #if !defined(__ARM_ARCH_6M__) && !defined(__ARM_ARCH_7M__) && !defined(__ARM_ARCH_7EM__) && \
     !defined(__ARM_ARCH_8M_BASE__) && !defined(__ARM_ARCH_8M_MAIN__)
   #if defined(__ARM6M__) && (__CORE__ == __ARM6M__)
@@ -131,7 +131,7 @@
   #if __ICCARM_V8
     #define __PACKED __attribute__((packed, aligned(1)))
   #else
-    /* Needs IAR language extensions */
+
     #define __PACKED __packed
   #endif
 #endif
@@ -140,7 +140,7 @@
   #if __ICCARM_V8
     #define __PACKED_STRUCT struct __attribute__((packed, aligned(1)))
   #else
-    /* Needs IAR language extensions */
+
     #define __PACKED_STRUCT __packed struct
   #endif
 #endif
@@ -149,7 +149,7 @@
   #if __ICCARM_V8
     #define __PACKED_UNION union __attribute__((packed, aligned(1)))
   #else
-    /* Needs IAR language extensions */
+
     #define __PACKED_UNION __packed union
   #endif
 #endif
@@ -158,7 +158,7 @@
   #if __ICCARM_V8
     #define __RESTRICT            __restrict
   #else
-    /* Needs IAR language extensions */
+
     #define __RESTRICT            restrict
   #endif
 #endif
@@ -493,7 +493,7 @@ __packed struct  __iar_u32 { uint32_t v; };
 #else /* __ICCARM_INTRINSICS_VERSION__ == 2 */
 
   #if __IAR_M0_FAMILY
-   /* Avoid clash between intrinsics.h and arm_math.h when compiling for Cortex-M0. */
+
     #define __CLZ  __cmsis_iar_clz_not_active
     #define __SSAT __cmsis_iar_ssat_not_active
     #define __USAT __cmsis_iar_usat_not_active
@@ -515,7 +515,7 @@ __packed struct  __iar_u32 { uint32_t v; };
   #include <intrinsics.h>
 
   #if __IAR_M0_FAMILY
-   /* Avoid clash between intrinsics.h and arm_math.h when compiling for Cortex-M0. */
+
     #undef __CLZ
     #undef __SSAT
     #undef __USAT
@@ -590,7 +590,7 @@ __packed struct  __iar_u32 { uint32_t v; };
   #endif
 
 
-  /* __CORTEX_M is defined in core_cm0.h, core_cm3.h and core_cm4.h. */
+
   #if (__CORTEX_M >= 0x03)
 
     __IAR_FT uint32_t __RRX(uint32_t value)

@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01_psensor.h"
 
 /** @addtogroup BSP
@@ -60,7 +60,7 @@ uint32_t BSP_PSENSOR_Init(void)
   {
      Psensor_drv = &LPS22HB_P_Drv;
      
-    /* PSENSOR Init */   
+
     Psensor_drv->Init(LPS22HB_I2C_ADDRESS);
     ret = PSENSOR_OK;
   }
@@ -100,4 +100,4 @@ float BSP_PSENSOR_ReadPressure(void)
 /**
   * @}
   */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __TS_H
 #define __TS_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h> 
 
 /** @addtogroup BSP
@@ -86,4 +86,4 @@ typedef struct
 
 #endif /* __TS_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -23,18 +23,18 @@
  */
 
 #if   defined ( __ICCARM__ )
-  #pragma system_include         /* treat file as system include file for MISRA check */
+  #pragma system_include
 #elif defined (__clang__)
-  #pragma clang system_header    /* treat file as system include file */
+  #pragma clang system_header
 #endif
 
 #ifndef ARM_MPU_ARMV8_H
 #define ARM_MPU_ARMV8_H
 
-/** \brief Attribute for device memory (outer only) */
+
 #define ARM_MPU_ATTR_DEVICE                           ( 0U )
 
-/** \brief Attribute for non-cacheable, normal memory */
+
 #define ARM_MPU_ATTR_NON_CACHEABLE                    ( 4U )
 
 /** \brief Attribute for normal memory (outer and inner)
@@ -46,16 +46,16 @@
 #define ARM_MPU_ATTR_MEMORY_(NT, WB, RA, WA) \
   (((NT & 1U) << 3U) | ((WB & 1U) << 2U) | ((RA & 1U) << 1U) | (WA & 1U))
 
-/** \brief Device memory type non Gathering, non Re-ordering, non Early Write Acknowledgement */
+
 #define ARM_MPU_ATTR_DEVICE_nGnRnE (0U)
 
-/** \brief Device memory type non Gathering, non Re-ordering, Early Write Acknowledgement */
+
 #define ARM_MPU_ATTR_DEVICE_nGnRE  (1U)
 
-/** \brief Device memory type non Gathering, Re-ordering, Early Write Acknowledgement */
+
 #define ARM_MPU_ATTR_DEVICE_nGRE   (2U)
 
-/** \brief Device memory type Gathering, Re-ordering, Early Write Acknowledgement */
+
 #define ARM_MPU_ATTR_DEVICE_GRE    (3U)
 
 /** \brief Memory Attribute
@@ -64,13 +64,13 @@
 */
 #define ARM_MPU_ATTR(O, I) (((O & 0xFU) << 4U) | (((O & 0xFU) != 0U) ? (I & 0xFU) : ((I & 0x3U) << 2U)))
 
-/** \brief Normal memory non-shareable  */
+
 #define ARM_MPU_SH_NON   (0U)
 
-/** \brief Normal memory outer shareable  */
+
 #define ARM_MPU_SH_OUTER (2U)
 
-/** \brief Normal memory inner shareable  */
+
 #define ARM_MPU_SH_INNER (3U)
 
 /** \brief Memory access permissions
@@ -120,8 +120,8 @@
 * Struct for a single MPU Region
 */
 typedef struct {
-  uint32_t RBAR;                   /*!< Region Base Address Register value */
-  uint32_t RLAR;                   /*!< Region Limit Address Register value */
+  uint32_t RBAR;
+  uint32_t RLAR;
 } ARM_MPU_Region_t;
     
 /** Enable the MPU.

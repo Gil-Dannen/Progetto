@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef ST25DV_H
 #define ST25DV_H
 
@@ -25,7 +25,7 @@
   extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "st25dv_reg.h"
 
 /** @addtogroup BSP
@@ -37,7 +37,7 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /**
  * @brief  ST25DV Enable Disable enumerator definition.
@@ -329,15 +329,15 @@ typedef struct
 
 #endif
 
-/* Exported constants --------------------------------------------------------*/
-/** @brief ST25DV 4Kbits ICref */
+
+
 #define I_AM_ST25DV04                        0x24
-/** @brief ST25DV 16/64Kbits ICref */
+
 #define I_AM_ST25DV64                        0x26
 
-/** @brief Check ST25DV Open Drain version */
+
 #define ST25DV_AM_I_OPEN_DRAIN(x)     (((x) == 0x26) || ((x) == 0x24))
-/** @brief Check ST25DV CMOS version */
+
 #define ST25DV_AM_I_CMOS(x)           (((x) == 0x27) || ((x) == 0x25))
 
 
@@ -345,31 +345,31 @@ typedef struct
 #define NULL      (void *) 0
 #endif
 
-/** @brief I2C address to be used for ST25DV Data accesses. */
+
 #define ST25DV_ADDR_DATA_I2C                 0xA6
-/** @brief I2C address to be used for ST25DV System accesses. */
+
 #define ST25DV_ADDR_SYST_I2C                 0xAE
 
-/** @brief I2C Time out (ms), min value : (Max write bytes) / (Internal page write) * tw   (256/4)*5. */
+
 #define ST25DV_WRITE_TIMEOUT                   320 
 
-/** @brief Size of the ST25DV write buffer. */
+
 #define ST25DV_MAX_WRITE_BYTE                256
-/** @brief Size of the ST25DVMailbox memory. */
+
 #define ST25DV_MAX_MAILBOX_LENGTH            256
 
-/** @brief Offset of ST25DV dynamic registers. */
+
 #define ST25DV_IS_DYNAMIC_REGISTER          0x2000
 
   
-/* External variables --------------------------------------------------------*/
-/* NFCTAG driver structure */
+
+
 extern ST25DV_Drv_t St25Dv_Drv;
 
-/* Exported macro ------------------------------------------------------------*/
-/* Imported functions ------------------------------------------------------- */
 
-/* Exported functions ------------------------------------------------------- */
+
+
+
 int32_t ST25DV_ReadRegister( ST25DV_Object_t*, uint8_t * const, const uint16_t, const uint16_t );
 int32_t ST25DV_WriteRegister( ST25DV_Object_t*, const uint8_t * const, const uint16_t, const uint16_t );
 int32_t ST25DV_RegisterBusIO (ST25DV_Object_t* pObj, ST25DV_IO_t *pIO);
@@ -456,4 +456,4 @@ int32_t ST25DV_ReadMBLength_Dyn( ST25DV_Object_t* pObj, uint8_t * const pMBLengt
 #endif
 #endif /* ST25DV_H */
 
-/******************* (C) COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/
+

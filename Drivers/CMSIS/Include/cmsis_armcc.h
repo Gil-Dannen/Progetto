@@ -30,7 +30,7 @@
   #error "Please use Arm Compiler Toolchain V4.0.677 or later!"
 #endif
 
-/* CMSIS compiler control architecture macros */
+
 #if ((defined (__TARGET_ARCH_6_M  ) && (__TARGET_ARCH_6_M   == 1)) || \
      (defined (__TARGET_ARCH_6S_M ) && (__TARGET_ARCH_6S_M  == 1))   )
   #define __ARM_ARCH_6M__           1
@@ -44,15 +44,15 @@
   #define __ARM_ARCH_7EM__          1
 #endif
 
-  /* __ARM_ARCH_8M_BASE__  not applicable */
-  /* __ARM_ARCH_8M_MAIN__  not applicable */
 
-/* CMSIS compiler control DSP macros */
+
+
+
 #if ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
   #define __ARM_FEATURE_DSP         1
 #endif
 
-/* CMSIS compiler specific defines */
+
 #ifndef   __ASM
   #define __ASM                                  __asm
 #endif
@@ -108,7 +108,7 @@
   #define __COMPILER_BARRIER()                   __memory_changed()
 #endif
 
-/* #########################  Startup and Lowlevel Init  ######################## */
+
 
 #ifndef __PROGRAM_START
 #define __PROGRAM_START           __main
@@ -130,7 +130,7 @@
 #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section("RESET")))
 #endif
 
-/* ###########################  Core Function Access  ########################### */
+
 /** \ingroup  CMSIS_Core_FunctionInterface
     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
   @{
@@ -141,7 +141,7 @@
   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-/* intrinsic void __enable_irq();     */
+
 
 
 /**
@@ -149,7 +149,7 @@
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
            Can only be executed in Privileged modes.
  */
-/* intrinsic void __disable_irq();    */
+
 
 /**
   \brief   Get Control Register
@@ -400,10 +400,10 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
 }
 
 
-/*@} end of CMSIS_Core_RegAccFunctions */
 
 
-/* ##########################  Core Instruction Access  ######################### */
+
+
 /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
   Access to dedicated instructions
   @{
@@ -807,10 +807,10 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __USAT(int32_t val, uint
 #endif /* ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
            (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
 
-/*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 
 
-/* ###################  Compiler specific Intrinsics  ########################### */
+
+
 /** \defgroup CMSIS_SIMD_intrinsics CMSIS SIMD Intrinsics
   Access to dedicated SIMD instructions
   @{
@@ -888,7 +888,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __USAT(int32_t val, uint
                                                       ((int64_t)(ARG3) << 32U)     ) >> 32U))
 
 #endif /* ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
-/*@} end of group CMSIS_SIMD_intrinsics */
+
 
 
 #endif /* __CMSIS_ARMCC_H */

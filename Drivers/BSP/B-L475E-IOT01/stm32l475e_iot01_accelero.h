@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_ACCELERO_H
 #define __STM32L475E_IOT01_ACCELERO_H
 
@@ -25,9 +25,9 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"
-/* Include Accelero component driver */
+
 #include "../Components/lsm6dsl/lsm6dsl.h"
    
 /** @addtogroup BSP
@@ -60,7 +60,7 @@ ACCELERO_StatusTypeDef;
 /** @defgroup STM32L475E_IOT01_ACCELERO_Exported_Functions ACCELERO Exported Functions
   * @{
   */
-/* Sensor Configuration Functions */
+
 ACCELERO_StatusTypeDef BSP_ACCELERO_Init(void);
 void BSP_ACCELERO_DeInit(void);
 void BSP_ACCELERO_LowPower(uint16_t status); /* 0 Means Disable Low Power Mode, otherwise Low Power Mode is enabled */
@@ -86,4 +86,4 @@ void BSP_ACCELERO_AccGetXYZ(int16_t *pDataXYZ);
 
 #endif /* __STM32L475E_IOT01_ACCELERO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

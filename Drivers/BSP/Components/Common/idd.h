@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __IDD_H
 #define __IDD_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -147,4 +147,4 @@ typedef struct
 
 #endif /* __IDD_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

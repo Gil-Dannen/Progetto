@@ -8,7 +8,7 @@
 /*
   Browsers resets and base typography.
 */
-/* Core module CSS variable definitions */
+
 :root {
   --fore-color: #111;
   --secondary-fore-color: #444;
@@ -83,7 +83,7 @@ h2 {
 h3 {
   font-size: calc(1rem * var(--heading-ratio));
   padding-left: calc(2 * var(--universal-margin)); 
-  /* background: var(--border-color); */
+
     }
 
 h4 {
@@ -563,7 +563,7 @@ a {
 
   .col-lg-last {
     order: 999; } }
-/* Card component CSS variable definitions */
+
 :root {
   --card-back-color: #f8f8f8;
   --card-fore-color: #111;
@@ -617,7 +617,7 @@ a {
   width: auto; }
 
 .card.warning {
-/*  --card-back-color: #ffca28; */
+
   --card-back-color: #e5b8b7;
   --card-border-color: #e8b825; }
 
@@ -635,7 +635,7 @@ a {
 /*
   Definitions for forms and input elements.
 */
-/* Input_control module CSS variable definitions */
+
 :root {
   --form-back-color: #f0f0f0;
   --form-fore-color: #111;
@@ -872,7 +872,7 @@ button.large, [type="button"].large, [type="submit"].large, [type="reset"].large
 /*
   Definitions for navigation elements.
 */
-/* Navigation module CSS variable definitions */
+
 :root {
   --header-back-color: #f8f8f8;
   --header-hover-back-color: #f0f0f0;
@@ -1058,7 +1058,7 @@ footer.sticky {
 /*
   Definitions for the responsive table component.
 */
-/* Table module CSS variable definitions. */
+
 :root {
   --table-border-color: #aaa;
   --table-border-separator-color: #666;
@@ -1232,7 +1232,7 @@ table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focu
 /*
   Definitions for contextual background elements, toasts and tooltips.
 */
-/* Contextual module CSS variable definitions */
+
 :root {
   --mark-back-color: #0277bd;
   --mark-fore-color: #fafafa; }
@@ -1463,7 +1463,7 @@ mark.tag {
 /*
   Definitions for progress elements and spinners.
 */
-/* Progess module CSS variable definitions */
+
 :root {
   --progress-back-color: #ddd;
   --progress-fore-color: #555; }
@@ -1601,7 +1601,7 @@ span.icon-user {
 /*
   Definitions for utilities and helper classes.
 */
-/* Utility module CSS variable definitions */
+
 :root {
   --generic-border-color: rgba(0, 0, 0, 0.3);
   --generic-box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.125), 0 0.125rem 0.125rem -0.125rem rgba(0, 0, 0, 0.25); }
@@ -1697,4 +1697,4 @@ span.icon-user {
     clip-path: inset(100%) !important;
     overflow: hidden !important; } }
 
-/*# sourceMappingURL=mini-default.css.map */
+

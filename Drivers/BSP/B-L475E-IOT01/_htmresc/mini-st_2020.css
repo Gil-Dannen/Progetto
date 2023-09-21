@@ -7,7 +7,7 @@
 /*
   Browsers resets and base typography.
 */
-/* Core module CSS variable definitions */
+
 :root {
   --fore-color: #03234b;
   --secondary-fore-color: #03234b;
@@ -561,7 +561,7 @@ a {
 
   .col-lg-last {
     order: 999; } }
-/* Card component CSS variable definitions */
+
 :root {
   --card-back-color: #3cb4e6;
   --card-fore-color: #03234b;
@@ -634,7 +634,7 @@ a {
 /*
   Definitions for forms and input elements.
 */
-/* Input_control module CSS variable definitions */
+
 :root {
   --form-back-color: #ffe97f;
   --form-fore-color: #03234b;
@@ -871,7 +871,7 @@ button.large, [type="button"].large, [type="submit"].large, [type="reset"].large
 /*
   Definitions for navigation elements.
 */
-/* Navigation module CSS variable definitions */
+
 :root {
   --header-back-color: #03234b;
   --header-hover-back-color: #ffd200;
@@ -1057,7 +1057,7 @@ footer.sticky {
 /*
   Definitions for the responsive table component.
 */
-/* Table module CSS variable definitions. */
+
 :root {
   --table-border-color: #03234b;
   --table-border-separator-color: #03234b;
@@ -1227,7 +1227,7 @@ table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focu
 /*
   Definitions for contextual background elements, toasts and tooltips.
 */
-/* Contextual module CSS variable definitions */
+
 :root {
   --mark-back-color: #3cb4e6;
   --mark-fore-color: #ffffff; }
@@ -1456,7 +1456,7 @@ mark.tag {
 /*
   Definitions for progress elements and spinners.
 */
-/* Progress module CSS variable definitions */
+
 :root {
   --progress-back-color: #3cb4e6;
   --progress-fore-color: #555; }
@@ -1602,7 +1602,7 @@ span.icon-st-add {
 /*
   Definitions for utilities and helper classes.
 */
-/* Utility module CSS variable definitions */
+
 :root {
   --generic-border-color: rgba(0, 0, 0, 0.3);
   --generic-box-shadow: 0 0.2857142857rem 0.2857142857rem 0 rgba(0, 0, 0, 0.125), 0 0.1428571429rem 0.1428571429rem -0.1428571429rem rgba(0, 0, 0, 0.125); }
@@ -1698,7 +1698,7 @@ span.icon-st-add {
     clip-path: inset(100%) !important;
     overflow: hidden !important; } }
 
-/*# sourceMappingURL=mini-custom.css.map */
+
 
 img[alt="ST logo"] { display: block; margin: auto; width: 75%; max-width: 250px; min-width: 71px; }
 img[alt="Cube logo"] { float: right; width: 30%; max-width: 10rem; min-width: 8rem; padding-right: 1rem;}

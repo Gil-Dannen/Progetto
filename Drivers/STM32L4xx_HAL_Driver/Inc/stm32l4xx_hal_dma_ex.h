@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_DMA_EX_H
 #define STM32L4xx_HAL_DMA_EX_H
 
@@ -26,7 +26,7 @@ extern "C" {
 
 #if defined(DMAMUX1)
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -37,7 +37,7 @@ extern "C" {
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 /** @defgroup DMAEx_Exported_Types DMAEx Exported Types
   * @{
   */
@@ -92,7 +92,7 @@ typedef struct
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 /** @defgroup DMAEx_Exported_Constants DMAEx Exported Constants
   * @{
   */
@@ -100,34 +100,34 @@ typedef struct
 /** @defgroup DMAEx_DMAMUX_SyncSignalID_selection DMAMUX SyncSignalID selection
   * @{
   */
-#define HAL_DMAMUX1_SYNC_EXTI0                0U           /*!<  Synchronization Signal is EXTI0  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI1                1U           /*!<  Synchronization Signal is EXTI1  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI2                2U           /*!<  Synchronization Signal is EXTI2  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI3                3U           /*!<  Synchronization Signal is EXTI3  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI4                4U           /*!<  Synchronization Signal is EXTI4  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI5                5U           /*!<  Synchronization Signal is EXTI5  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI6                6U           /*!<  Synchronization Signal is EXTI6  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI7                7U           /*!<  Synchronization Signal is EXTI7  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI8                8U           /*!<  Synchronization Signal is EXTI8  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI9                9U           /*!<  Synchronization Signal is EXTI9  IT   */
-#define HAL_DMAMUX1_SYNC_EXTI10              10U           /*!<  Synchronization Signal is EXTI10 IT   */
-#define HAL_DMAMUX1_SYNC_EXTI11              11U           /*!<  Synchronization Signal is EXTI11 IT   */
-#define HAL_DMAMUX1_SYNC_EXTI12              12U           /*!<  Synchronization Signal is EXTI12 IT   */
-#define HAL_DMAMUX1_SYNC_EXTI13              13U           /*!<  Synchronization Signal is EXTI13 IT   */
-#define HAL_DMAMUX1_SYNC_EXTI14              14U           /*!<  Synchronization Signal is EXTI14 IT   */
-#define HAL_DMAMUX1_SYNC_EXTI15              15U           /*!<  Synchronization Signal is EXTI15 IT   */
-#define HAL_DMAMUX1_SYNC_DMAMUX1_CH0_EVT     16U           /*!<  Synchronization Signal is DMAMUX1 Channel0 Event  */
-#define HAL_DMAMUX1_SYNC_DMAMUX1_CH1_EVT     17U           /*!<  Synchronization Signal is DMAMUX1 Channel1 Event  */
-#define HAL_DMAMUX1_SYNC_DMAMUX1_CH2_EVT     18U           /*!<  Synchronization Signal is DMAMUX1 Channel2 Event  */
-#define HAL_DMAMUX1_SYNC_DMAMUX1_CH3_EVT     19U           /*!<  Synchronization Signal is DMAMUX1 Channel3 Event  */
-#define HAL_DMAMUX1_SYNC_LPTIM1_OUT          20U           /*!<  Synchronization Signal is LPTIM1 OUT */
-#define HAL_DMAMUX1_SYNC_LPTIM2_OUT          21U           /*!<  Synchronization Signal is LPTIM2 OUT */
+#define HAL_DMAMUX1_SYNC_EXTI0                0U
+#define HAL_DMAMUX1_SYNC_EXTI1                1U
+#define HAL_DMAMUX1_SYNC_EXTI2                2U
+#define HAL_DMAMUX1_SYNC_EXTI3                3U
+#define HAL_DMAMUX1_SYNC_EXTI4                4U
+#define HAL_DMAMUX1_SYNC_EXTI5                5U
+#define HAL_DMAMUX1_SYNC_EXTI6                6U
+#define HAL_DMAMUX1_SYNC_EXTI7                7U
+#define HAL_DMAMUX1_SYNC_EXTI8                8U
+#define HAL_DMAMUX1_SYNC_EXTI9                9U
+#define HAL_DMAMUX1_SYNC_EXTI10              10U
+#define HAL_DMAMUX1_SYNC_EXTI11              11U
+#define HAL_DMAMUX1_SYNC_EXTI12              12U
+#define HAL_DMAMUX1_SYNC_EXTI13              13U
+#define HAL_DMAMUX1_SYNC_EXTI14              14U
+#define HAL_DMAMUX1_SYNC_EXTI15              15U
+#define HAL_DMAMUX1_SYNC_DMAMUX1_CH0_EVT     16U
+#define HAL_DMAMUX1_SYNC_DMAMUX1_CH1_EVT     17U
+#define HAL_DMAMUX1_SYNC_DMAMUX1_CH2_EVT     18U
+#define HAL_DMAMUX1_SYNC_DMAMUX1_CH3_EVT     19U
+#define HAL_DMAMUX1_SYNC_LPTIM1_OUT          20U
+#define HAL_DMAMUX1_SYNC_LPTIM2_OUT          21U
 #if defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
-#define HAL_DMAMUX1_SYNC_DSI_TE              22U           /*!<  Synchronization Signal is DSI Tearing Effect      */
-#define HAL_DMAMUX1_SYNC_DSI_EOT             23U           /*!<  Synchronization Signal is DSI End of refresh      */
-#endif /* STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
-#define HAL_DMAMUX1_SYNC_DMA2D_EOT           24U           /*!<  Synchronization Signal is DMA2D End of Transfer   */
-#define HAL_DMAMUX1_SYNC_LDTC_IT             25U           /*!<  Synchronization Signal is LDTC IT    */
+#define HAL_DMAMUX1_SYNC_DSI_TE              22U
+#define HAL_DMAMUX1_SYNC_DSI_EOT             23U
+#endif
+#define HAL_DMAMUX1_SYNC_DMA2D_EOT           24U
+#define HAL_DMAMUX1_SYNC_LDTC_IT             25U
 
 /**
   * @}
@@ -136,10 +136,10 @@ typedef struct
 /** @defgroup DMAEx_DMAMUX_SyncPolarity_selection DMAMUX SyncPolarity selection
   * @{
   */
-#define HAL_DMAMUX_SYNC_NO_EVENT                               0U    /*!< block synchronization events        */
-#define HAL_DMAMUX_SYNC_RISING                 DMAMUX_CxCR_SPOL_0    /*!< synchronize with rising edge events */
-#define HAL_DMAMUX_SYNC_FALLING                DMAMUX_CxCR_SPOL_1    /*!< synchronize with falling edge events */
-#define HAL_DMAMUX_SYNC_RISING_FALLING         DMAMUX_CxCR_SPOL      /*!< synchronize with rising and falling edge events */
+#define HAL_DMAMUX_SYNC_NO_EVENT                               0U
+#define HAL_DMAMUX_SYNC_RISING                 DMAMUX_CxCR_SPOL_0
+#define HAL_DMAMUX_SYNC_FALLING                DMAMUX_CxCR_SPOL_1
+#define HAL_DMAMUX_SYNC_RISING_FALLING         DMAMUX_CxCR_SPOL
 
 /**
   * @}
@@ -149,34 +149,34 @@ typedef struct
   * @{
   */
 
-#define HAL_DMAMUX1_REQ_GEN_EXTI0                0U        /*!< Request generator Signal is EXTI0 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI1                1U        /*!< Request generator Signal is EXTI1 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI2                2U        /*!< Request generator Signal is EXTI2 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI3                3U        /*!< Request generator Signal is EXTI3 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI4                4U        /*!< Request generator Signal is EXTI4 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI5                5U        /*!< Request generator Signal is EXTI5 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI6                6U        /*!< Request generator Signal is EXTI6 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI7                7U        /*!< Request generator Signal is EXTI7 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI8                8U        /*!< Request generator Signal is EXTI8 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI9                9U        /*!< Request generator Signal is EXTI9 IT    */
-#define HAL_DMAMUX1_REQ_GEN_EXTI10              10U        /*!< Request generator Signal is EXTI10 IT   */
-#define HAL_DMAMUX1_REQ_GEN_EXTI11              11U        /*!< Request generator Signal is EXTI11 IT   */
-#define HAL_DMAMUX1_REQ_GEN_EXTI12              12U        /*!< Request generator Signal is EXTI12 IT   */
-#define HAL_DMAMUX1_REQ_GEN_EXTI13              13U        /*!< Request generator Signal is EXTI13 IT   */
-#define HAL_DMAMUX1_REQ_GEN_EXTI14              14U        /*!< Request generator Signal is EXTI14 IT   */
-#define HAL_DMAMUX1_REQ_GEN_EXTI15              15U        /*!< Request generator Signal is EXTI15 IT   */
-#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH0_EVT     16U        /*!< Request generator Signal is DMAMUX1 Channel0 Event */
-#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH1_EVT     17U        /*!< Request generator Signal is DMAMUX1 Channel1 Event */
-#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH2_EVT     18U        /*!< Request generator Signal is DMAMUX1 Channel2 Event */
-#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH3_EVT     19U        /*!< Request generator Signal is DMAMUX1 Channel3 Event */
-#define HAL_DMAMUX1_REQ_GEN_LPTIM1_OUT          20U        /*!< Request generator Signal is LPTIM1 OUT  */
-#define HAL_DMAMUX1_REQ_GEN_LPTIM2_OUT          21U        /*!< Request generator Signal is LPTIM2 OUT  */
+#define HAL_DMAMUX1_REQ_GEN_EXTI0                0U
+#define HAL_DMAMUX1_REQ_GEN_EXTI1                1U
+#define HAL_DMAMUX1_REQ_GEN_EXTI2                2U
+#define HAL_DMAMUX1_REQ_GEN_EXTI3                3U
+#define HAL_DMAMUX1_REQ_GEN_EXTI4                4U
+#define HAL_DMAMUX1_REQ_GEN_EXTI5                5U
+#define HAL_DMAMUX1_REQ_GEN_EXTI6                6U
+#define HAL_DMAMUX1_REQ_GEN_EXTI7                7U
+#define HAL_DMAMUX1_REQ_GEN_EXTI8                8U
+#define HAL_DMAMUX1_REQ_GEN_EXTI9                9U
+#define HAL_DMAMUX1_REQ_GEN_EXTI10              10U
+#define HAL_DMAMUX1_REQ_GEN_EXTI11              11U
+#define HAL_DMAMUX1_REQ_GEN_EXTI12              12U
+#define HAL_DMAMUX1_REQ_GEN_EXTI13              13U
+#define HAL_DMAMUX1_REQ_GEN_EXTI14              14U
+#define HAL_DMAMUX1_REQ_GEN_EXTI15              15U
+#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH0_EVT     16U
+#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH1_EVT     17U
+#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH2_EVT     18U
+#define HAL_DMAMUX1_REQ_GEN_DMAMUX1_CH3_EVT     19U
+#define HAL_DMAMUX1_REQ_GEN_LPTIM1_OUT          20U
+#define HAL_DMAMUX1_REQ_GEN_LPTIM2_OUT          21U
 #if defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
-#define HAL_DMAMUX1_REQ_GEN_DSI_TE              22U        /*!< Request generator Signal is DSI Tearing Effect      */
-#define HAL_DMAMUX1_REQ_GEN_DSI_EOT             23U        /*!< Request generator Signal is DSI End of refresh      */
-#endif /* STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
-#define HAL_DMAMUX1_REQ_GEN_DMA2D_EOT           24U        /*!< Request generator Signal is DMA2D End of Transfer   */
-#define HAL_DMAMUX1_REQ_GEN_LTDC_IT             25U        /*!< Request generator Signal is LTDC IT     */
+#define HAL_DMAMUX1_REQ_GEN_DSI_TE              22U
+#define HAL_DMAMUX1_REQ_GEN_DSI_EOT             23U
+#endif
+#define HAL_DMAMUX1_REQ_GEN_DMA2D_EOT           24U
+#define HAL_DMAMUX1_REQ_GEN_LTDC_IT             25U
 
 /**
   * @}
@@ -185,10 +185,10 @@ typedef struct
 /** @defgroup DMAEx_DMAMUX_RequestGeneneratorPolarity_selection DMAMUX RequestGeneneratorPolarity selection
   * @{
   */
-#define HAL_DMAMUX_REQ_GEN_NO_EVENT       0U                     /*!< block request generator events        */
-#define HAL_DMAMUX_REQ_GEN_RISING         DMAMUX_RGxCR_GPOL_0    /*!< generate request on rising edge events */
-#define HAL_DMAMUX_REQ_GEN_FALLING        DMAMUX_RGxCR_GPOL_1    /*!< generate request on falling edge events */
-#define HAL_DMAMUX_REQ_GEN_RISING_FALLING DMAMUX_RGxCR_GPOL      /*!< generate request on rising and falling edge events */
+#define HAL_DMAMUX_REQ_GEN_NO_EVENT       0U
+#define HAL_DMAMUX_REQ_GEN_RISING         DMAMUX_RGxCR_GPOL_0
+#define HAL_DMAMUX_REQ_GEN_FALLING        DMAMUX_RGxCR_GPOL_1
+#define HAL_DMAMUX_REQ_GEN_RISING_FALLING DMAMUX_RGxCR_GPOL
 
 /**
   * @}
@@ -198,28 +198,28 @@ typedef struct
   * @}
   */
 
-/* Exported macro ------------------------------------------------------------*/
 
-/* Exported functions --------------------------------------------------------*/
+
+
 /** @addtogroup DMAEx_Exported_Functions
   * @{
   */
 
-/* IO operation functions *****************************************************/
+
 /** @addtogroup DMAEx_Exported_Functions_Group1
   * @{
   */
 
-/* ------------------------- REQUEST -----------------------------------------*/
+
 HAL_StatusTypeDef HAL_DMAEx_ConfigMuxRequestGenerator (DMA_HandleTypeDef *hdma,
              HAL_DMA_MuxRequestGeneratorConfigTypeDef *pRequestGeneratorConfig);
 HAL_StatusTypeDef HAL_DMAEx_EnableMuxRequestGenerator (DMA_HandleTypeDef *hdma);
 HAL_StatusTypeDef HAL_DMAEx_DisableMuxRequestGenerator (DMA_HandleTypeDef *hdma);
-/* -------------------------------------------------------------------------- */
 
-/* ------------------------- SYNCHRO -----------------------------------------*/
+
+
 HAL_StatusTypeDef HAL_DMAEx_ConfigMuxSync(DMA_HandleTypeDef *hdma, HAL_DMA_MuxSyncConfigTypeDef *pSyncConfig);
-/* -------------------------------------------------------------------------- */
+
 
 void HAL_DMAEx_MUX_IRQHandler(DMA_HandleTypeDef *hdma);
 
@@ -232,8 +232,8 @@ void HAL_DMAEx_MUX_IRQHandler(DMA_HandleTypeDef *hdma);
   */
 
 
-/* Private defines -----------------------------------------------------------*/
-/* Private macros ------------------------------------------------------------*/
+
+
 /** @defgroup DMAEx_Private_Macros DMAEx Private Macros
   * @brief    DMAEx private macros
   * @{
@@ -275,10 +275,10 @@ void HAL_DMAEx_MUX_IRQHandler(DMA_HandleTypeDef *hdma);
   * @}
   */
 
-#endif /* DMAMUX1 */
+#endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* STM32L4xx_HAL_DMA_H */
+#endif

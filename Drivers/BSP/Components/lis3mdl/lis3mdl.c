@@ -18,7 +18,7 @@
  ******************************************************************************
  */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "lis3mdl.h"
 
 /** @addtogroup BSP
@@ -81,16 +81,16 @@ void LIS3MDL_MagDeInit(void)
 {
   uint8_t ctrl = 0x00;
   
-  /* Read control register 1 value */
+
   ctrl = SENSOR_IO_Read(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_CTRL_REG3);
 
-  /* Clear Selection Mode bits */
+
   ctrl &= ~(LIS3MDL_MAG_SELECTION_MODE);
 
-  /* Set Power down */
+
   ctrl |= LIS3MDL_MAG_POWERDOWN2_MODE;
   
-  /* write back control register */
+
   SENSOR_IO_Write(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_CTRL_REG3, ctrl);  
 }
 
@@ -100,9 +100,9 @@ void LIS3MDL_MagDeInit(void)
   */
 uint8_t LIS3MDL_MagReadID(void)
 {
-  /* IO interface initialization */
+
   SENSOR_IO_Init();  
-  /* Read value at Who am I register address */
+
   return (SENSOR_IO_Read(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_WHO_AM_I_REG));
 }
 
@@ -114,13 +114,13 @@ void LIS3MDL_MagLowPower(uint16_t status)
 {  
   uint8_t ctrl = 0;
   
-  /* Read control register 1 value */
+
   ctrl = SENSOR_IO_Read(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_CTRL_REG3);
 
-  /* Clear Low Power Mode bit */
+
   ctrl &= ~(0x20);
 
-  /* Set Low Power Mode */
+
   if(status)
   {
     ctrl |= LIS3MDL_MAG_CONFIG_LOWPOWER_MODE;
@@ -129,7 +129,7 @@ void LIS3MDL_MagLowPower(uint16_t status)
     ctrl |= LIS3MDL_MAG_CONFIG_NORMAL_MODE;
   }
   
-  /* write back control register */
+
   SENSOR_IO_Write(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_CTRL_REG3, ctrl);  
 }
 
@@ -145,10 +145,10 @@ void LIS3MDL_MagReadXYZ(int16_t* pData)
   uint8_t i = 0;
   float sensitivity = 0;
   
-  /* Read the magnetometer control register content */
+
   ctrlm = SENSOR_IO_Read(LIS3MDL_MAG_I2C_ADDRESS_HIGH, LIS3MDL_MAG_CTRL_REG2);
   
-  /* Read output register X, Y & Z acceleration */
+
   SENSOR_IO_ReadMultiple(LIS3MDL_MAG_I2C_ADDRESS_HIGH, (LIS3MDL_MAG_OUTX_L | 0x80), buffer, 6);
   
   for(i=0; i<3; i++)
@@ -156,8 +156,8 @@ void LIS3MDL_MagReadXYZ(int16_t* pData)
     pnRawData[i]=((((uint16_t)buffer[2*i+1]) << 8) + (uint16_t)buffer[2*i]);
   }
   
-  /* Normal mode */
-  /* Switch the sensitivity value set in the CRTL_REG2 */
+
+
   switch(ctrlm & 0x60)
   {
   case LIS3MDL_MAG_FS_4_GA:
@@ -174,7 +174,7 @@ void LIS3MDL_MagReadXYZ(int16_t* pData)
     break;    
   }
   
-  /* Obtain the mGauss value for the three axis */
+
   for(i=0; i<3; i++)
   {
     pData[i]=( int16_t )(pnRawData[i] * sensitivity);
@@ -198,5 +198,5 @@ void LIS3MDL_MagReadXYZ(int16_t* pData)
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
   

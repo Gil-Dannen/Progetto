@@ -20,92 +20,92 @@
 
 #include <cmsis_compiler.h>
 
-/* Registers i2c address */
-/** @brief ST25DV GPO register address. */
+
+
 #define ST25DV_GPO_REG                       0x0000
-/** @brief ST25DV IT duration register address. */
+
 #define ST25DV_ITTIME_REG                    0x0001
-/** @brief ST25DV Energy Harvesting register address. */
+
 #define ST25DV_EH_MODE_REG                   0x0002
-/** @brief ST25DV RF management register address. */
+
 #define ST25DV_RF_MNGT_REG                   0x0003
-/** @brief ST25DV Area 1 security register address. */
+
 #define ST25DV_RFA1SS_REG                    0x0004
-/** @brief ST25DV Area 1 end address register address. */
+
 #define ST25DV_ENDA1_REG                      0x0005
-/** @brief ST25DV Area 2 security register address. */
+
 #define ST25DV_RFA2SS_REG                    0x0006
-/** @brief ST25DV Area 2 end address register address. */
+
 #define ST25DV_ENDA2_REG                      0x0007
-/** @brief ST25DV Area 3 security register address. */
+
 #define ST25DV_RFA3SS_REG                    0x0008
-/** @brief ST25DV Area 3 end address register address. */
+
 #define ST25DV_ENDA3_REG                      0x0009
-/** @brief ST25DV Area 4 security register address. */
+
 #define ST25DV_RFA4SS_REG                    0x000A
-/** @brief ST25DV I2C security register address. */
+
 #define ST25DV_I2CSS_REG                    0x000B
-/** @brief ST25DV Capability Container lock register address. */
+
 #define ST25DV_LOCKCCFILE_REG                0x000C
-/** @brief ST25DV Mailbox mode register address. */
+
 #define ST25DV_MB_MODE_REG                   0x000D
-/** @brief ST25DV Mailbox Watchdog register address. */
+
 #define ST25DV_MB_WDG_REG                    0x000E
-/** @brief ST25DV Configuration lock register address. */
+
 #define ST25DV_LOCKCFG_REG                   0x000F
-/** @brief ST25DV DSFID lock register address. */
+
 #define ST25DV_LOCKDSFID_REG                 0x0010
-/** @brief ST25DV AFI lock register address. */
+
 #define ST25DV_LOCKAFI_REG                   0x0011
-/** @brief ST25DV DSFID register address. */
+
 #define ST25DV_DSFID_REG                     0x0012
-/** @brief ST25DV AFI register address. */
+
 #define ST25DV_AFI_REG                       0x0013
-/** @brief ST25DV Memory size register address. */
+
 #define ST25DV_MEM_SIZE_LSB_REG              0x0014
-/** @brief ST25DV Memory size register address. */
+
 #define ST25DV_MEM_SIZE_MSB_REG              0x0015
-/** @brief ST25DV Block size register address. */
+
 #define ST25DV_BLK_SIZE_REG                  0x0016
 //** @brief ST25DV ICref register address. */
 #define ST25DV_ICREF_REG                     0x0017
-/** @brief ST25DV UID register address. */
+
 #define ST25DV_UID_REG                       0x0018
-/** @brief ST25DV IC revision register address. */
+
 #define ST25DV_ICREV_REG                     0x0020
-/** @brief ST25DV I2C password register address. */
+
 #define ST25DV_I2CPASSWD_REG                 0x0900
 
-/* Dynamic Registers i2c address */
-/** @brief ST25DV GPO dynamic register address. */
+
+
 #define ST25DV_GPO_DYN_REG                   0x2000
-/** @brief ST25DV Energy Harvesting control dynamic register address. */
+
 #define ST25DV_EH_CTRL_DYN_REG               0x2002
-/** @brief ST25DV RF management dynamic register address. */
+
 #define ST25DV_RF_MNGT_DYN_REG               0x2003
-/** @brief ST25DV I2C secure session opened dynamic register address. */
+
 #define ST25DV_I2C_SSO_DYN_REG               0x2004
-/** @brief ST25DV Interrupt status dynamic register address. */
+
 #define ST25DV_ITSTS_DYN_REG                 0x2005
-/** @brief ST25DV Mailbox control dynamic register address. */
+
 #define ST25DV_MB_CTRL_DYN_REG               0x2006
-/** @brief ST25DV Mailbox message length dynamic register address. */
+
 #define ST25DV_MBLEN_DYN_REG                 0x2007
-/** @brief ST25DV Mailbox buffer address. */
+
 #define ST25DV_MAILBOX_RAM_REG               0x2008
 
-/* Registers fields definitions */
-/* MB_MODE */
+
+
 #define ST25DV_MB_MODE_RW_SHIFT              (0)
 #define ST25DV_MB_MODE_RW_FIELD              0xFE
 #define ST25DV_MB_MODE_RW_MASK               0x01
 
-/* MB_LEN_Dyn */
+
 #define ST25DV_MBLEN_DYN_MBLEN_SHIFT         (0)
 #define ST25DV_MBLEN_DYN_MBLEN_FIELD         0x00
 #define ST25DV_MBLEN_DYN_MBLEN_MASK          0xFF
 
-/* MB_CTRL_Dyn */
+
 #define ST25DV_MB_CTRL_DYN_MBEN_SHIFT        (0)
 #define ST25DV_MB_CTRL_DYN_MBEN_FIELD        0xFE
 #define ST25DV_MB_CTRL_DYN_MBEN_MASK         0x01
@@ -129,12 +129,12 @@
 #define ST25DV_MB_CTRL_DYN_CURRENTMSG_MASK   0xC0
 
 
-/* MB_WDG */
+
 #define ST25DV_MB_WDG_DELAY_SHIFT            (0)
 #define ST25DV_MB_WDG_DELAY_FIELD            0xF8
 #define ST25DV_MB_WDG_DELAY_MASK             0x07
 
-/* GPO */
+
 #define ST25DV_GPO_RFUSERSTATE_SHIFT         (0)
 #define ST25DV_GPO_RFUSERSTATE_FIELD         0xFE
 #define ST25DV_GPO_RFUSERSTATE_MASK          0x01
@@ -162,7 +162,7 @@
 #define ST25DV_GPO_ALL_SHIFT                 (0)
 #define ST25DV_GPO_ALL_MASK                  0xFF
 
-/* GPO_Dyn */
+
 #define ST25DV_GPO_DYN_RFUSERSTATE_SHIFT     (0)
 #define ST25DV_GPO_DYN_RFUSERSTATE_FIELD     0xFE
 #define ST25DV_GPO_DYN_RFUSERSTATE_MASK      0x01
@@ -190,12 +190,12 @@
 #define ST25DV_GPO_DYN_ALL_SHIFT             (0)
 #define ST25DV_GPO_DYN_ALL_MASK              0xFF
 
-/* ITTIME */
+
 #define ST25DV_ITTIME_DELAY_SHIFT            (0)
 #define ST25DV_ITTIME_DELAY_FIELD            0xFC
 #define ST25DV_ITTIME_DELAY_MASK             0x03
 
-/* ITSTS_Dyn */
+
 #define ST25DV_ITSTS_DYN_RFUSERSTATE_SHIFT       (0)
 #define ST25DV_ITSTS_DYN_RFUSERSTATE_FIELD       0xFE
 #define ST25DV_ITSTS_DYN_RFUSERSTATE_MASK        0x01
@@ -221,12 +221,12 @@
 #define ST25DV_ITSTS_DYN_RFWRITE_FIELD           0x7F
 #define ST25DV_ITSTS_DYN_RFWRITE_MASK            0x80
 
-/* EH_MODE */
+
 #define ST25DV_EH_MODE_SHIFT                 (0)
 #define ST25DV_EH_MODE_FIELD                 0xFE
 #define ST25DV_EH_MODE_MASK                  0x01
 
-/* EH_CTRL_Dyn */
+
 #define ST25DV_EH_CTRL_DYN_EH_EN_SHIFT       (0)
 #define ST25DV_EH_CTRL_DYN_EH_EN_FIELD       0xFE
 #define ST25DV_EH_CTRL_DYN_EH_EN_MASK        0x01
@@ -242,7 +242,7 @@
 #define ST25DV_EH_CTRL_DYN_ALL_SHIFT         (0)
 #define ST25DV_EH_CTRL_DYN_ALL_MASK          0x0F
 
-/* RF_MNGT */
+
 #define ST25DV_RF_MNGT_RFDIS_SHIFT           (0)
 #define ST25DV_RF_MNGT_RFDIS_FIELD           0xFE
 #define ST25DV_RF_MNGT_RFDIS_MASK            0x01
@@ -252,7 +252,7 @@
 #define ST25DV_RF_MNGT_ALL_SHIFT             (0)
 #define ST25DV_RF_MNGT_ALL_MASK              0x03
 
-/* RF_MNGT_Dyn */
+
 #define ST25DV_RF_MNGT_DYN_RFDIS_SHIFT       (0)
 #define ST25DV_RF_MNGT_DYN_RFDIS_FIELD       0xFE
 #define ST25DV_RF_MNGT_DYN_RFDIS_MASK        0x01
@@ -262,7 +262,7 @@
 #define ST25DV_RF_MNGT_DYN_ALL_SHIFT         (0)
 #define ST25DV_RF_MNGT_DYN_ALL_MASK          0x03
 
-/* RFA1SS */
+
 #define ST25DV_RFA1SS_PWDCTRL_SHIFT           (0)
 #define ST25DV_RFA1SS_PWDCTRL_FIELD           0xFC
 #define ST25DV_RFA1SS_PWDCTRL_MASK            0x03
@@ -272,7 +272,7 @@
 #define ST25DV_RFA1SS_ALL_SHIFT               (0)
 #define ST25DV_RFA1SS_ALL_MASK                0x0F
 
-/* RFA2SS */
+
 #define ST25DV_RFA2SS_PWDCTRL_SHIFT           (0)
 #define ST25DV_RFA2SS_PWDCTRL_FIELD           0xFC
 #define ST25DV_RFA2SS_PWDCTRL_MASK            0x03
@@ -282,7 +282,7 @@
 #define ST25DV_RFA2SS_ALL_SHIFT               (0)
 #define ST25DV_RFA2SS_ALL_MASK                0x0F
 
-/* RFA3SS */
+
 #define ST25DV_RFA3SS_PWDCTRL_SHIFT           (0)
 #define ST25DV_RFA3SS_PWDCTRL_FIELD           0xFC
 #define ST25DV_RFA3SS_PWDCTRL_MASK            0x03
@@ -292,7 +292,7 @@
 #define ST25DV_RFA3SS_ALL_SHIFT               (0)
 #define ST25DV_RFA3SS_ALL_MASK                0x0F
 
-/* RFA4SS */
+
 #define ST25DV_RFA4SS_PWDCTRL_SHIFT           (0)
 #define ST25DV_RFA4SS_PWDCTRL_FIELD           0xFC
 #define ST25DV_RFA4SS_PWDCTRL_MASK            0x03
@@ -302,7 +302,7 @@
 #define ST25DV_RFA4SS_ALL_SHIFT               (0)
 #define ST25DV_RFA4SS_ALL_MASK                0x0F
 
-/* I2CSS */
+
 #define ST25DV_I2CSS_PZ1_SHIFT              (0)
 #define ST25DV_I2CSS_PZ1_FIELD              0xFC
 #define ST25DV_I2CSS_PZ1_MASK               0x03
@@ -316,7 +316,7 @@
 #define ST25DV_I2CSS_PZ4_FIELD              0x3F
 #define ST25DV_I2CSS_PZ4_MASK               0xC0
 
-/* LOCKCCFILE */
+
 #define ST25DV_LOCKCCFILE_BLCK0_SHIFT        (0)
 #define ST25DV_LOCKCCFILE_BLCK0_FIELD        0xFE
 #define ST25DV_LOCKCCFILE_BLCK0_MASK         0x01
@@ -326,12 +326,12 @@
 #define ST25DV_LOCKCCFILE_ALL_SHIFT          (0)
 #define ST25DV_LOCKCCFILE_ALL_MASK           0x03
 
-/* LOCKCFG */
+
 #define ST25DV_LOCKCFG_B0_SHIFT              (0)
 #define ST25DV_LOCKCFG_B0_FIELD              0xFE
 #define ST25DV_LOCKCFG_B0_MASK               0x01
 
-/* I2C_SSO_Dyn */
+
 #define ST25DV_I2C_SSO_DYN_I2CSSO_SHIFT      (0)
 #define ST25DV_I2C_SSO_DYN_I2CSSO_FIELD      0xFE
 #define ST25DV_I2C_SSO_DYN_I2CSSO_MASK       0x01

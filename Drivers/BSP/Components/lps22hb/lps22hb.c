@@ -18,7 +18,7 @@
  ******************************************************************************
  */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "lps22hb.h"
 
 /** @addtogroup BSP
@@ -44,7 +44,7 @@ static void LPS22HB_Init(uint16_t DeviceAddr);
 /** @defgroup LPS22HB_Private_Variables LPS22HB Private Variables
   * @{
   */
-/* Pressure Private Variables */
+
 PSENSOR_DrvTypeDef LPS22HB_P_Drv =
 {
   LPS22HB_P_Init,
@@ -52,7 +52,7 @@ PSENSOR_DrvTypeDef LPS22HB_P_Drv =
   LPS22HB_P_ReadPressure
 };
 
-/* Temperature Private Variables */ 
+
 TSENSOR_DrvTypeDef LPS22HB_T_Drv =
 {
   LPS22HB_T_Init,
@@ -83,10 +83,10 @@ uint8_t LPS22HB_P_ReadID(uint16_t DeviceAddr)
 {  
   uint8_t ctrl = 0x00;
 
-  /* IO interface initialization */
+
   SENSOR_IO_Init();  
   
-  /* Read value at Who am I register address */
+
   ctrl = SENSOR_IO_Read(DeviceAddr, LPS22HB_WHO_AM_I_REG);
   
   return ctrl;
@@ -108,11 +108,11 @@ float LPS22HB_P_ReadPressure(uint16_t DeviceAddr)
     buffer[i] = SENSOR_IO_Read(DeviceAddr, (LPS22HB_PRESS_OUT_XL_REG + i));
   }
 
-  /* Build the raw data */
+
   for(i = 0; i < 3; i++)
     tmp |= (((uint32_t)buffer[i]) << (8 * i));
 
-  /* convert the 2's complement 24 bit to 2's complement 32 bit */
+
   if(tmp & 0x00800000)
     tmp |= 0xFF000000;
 
@@ -161,7 +161,7 @@ float LPS22HB_T_ReadTemp(uint16_t DeviceAddr)
     buffer[i] = SENSOR_IO_Read(DeviceAddr, (LPS22HB_TEMP_OUT_L_REG + i));
   }
 
-  /* Build the raw tmp */
+
   tmp = (((uint16_t)buffer[1]) << 8) + (uint16_t)buffer[0];
 
   raw_data = (tmp * 10) / 100;
@@ -186,7 +186,7 @@ static void LPS22HB_Init(uint16_t DeviceAddr)
 {
   uint8_t tmp;
 
-  /* Set Power mode */
+
   tmp = SENSOR_IO_Read(DeviceAddr, LPS22HB_RES_CONF_REG);
 
   tmp &= ~LPS22HB_LCEN_MASK;
@@ -194,18 +194,18 @@ static void LPS22HB_Init(uint16_t DeviceAddr)
 
   SENSOR_IO_Write(DeviceAddr, LPS22HB_RES_CONF_REG, tmp);
 
-  /* Read CTRL_REG1 */
+
   tmp = SENSOR_IO_Read(DeviceAddr, LPS22HB_CTRL_REG1);
 
-  /* Set default ODR */
+
   tmp &= ~LPS22HB_ODR_MASK;
   tmp |= (uint8_t)0x30; /* Set ODR to 25Hz */
 
-  /* Enable BDU */
+
   tmp &= ~LPS22HB_BDU_MASK;
   tmp |= ((uint8_t)0x02);
 
-  /* Apply settings to CTRL_REG1 */
+
   SENSOR_IO_Write(DeviceAddr, LPS22HB_CTRL_REG1, tmp);
 }  
 
@@ -225,4 +225,4 @@ static void LPS22HB_Init(uint16_t DeviceAddr)
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

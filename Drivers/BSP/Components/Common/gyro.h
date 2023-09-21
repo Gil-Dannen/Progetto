@@ -18,7 +18,7 @@
   */
   
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __GYRO_H
 #define __GYRO_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -83,14 +83,14 @@ typedef struct
   uint8_t Full_Scale;                         /* Full Scale selection */
 }GYRO_InitTypeDef;
 
-/* GYRO High Pass Filter struct */
+
 typedef struct
 {
   uint8_t HighPassFilter_Mode_Selection;      /* Internal filter mode */
   uint8_t HighPassFilter_CutOff_Frequency;    /* High pass filter cut-off frequency */
 }GYRO_FilterConfigTypeDef;
 
-/*GYRO Interrupt struct */
+
 typedef struct
 {
   uint8_t Latch_Request;                      /* Latch interrupt request into CLICK_SRC register */
@@ -124,4 +124,4 @@ typedef struct
 
 #endif /* __GYRO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

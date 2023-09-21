@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_PSENSOR_H
 #define __STM32L475E_IOT01_PSENSOR_H
 
@@ -25,7 +25,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"
 #include "../Components/lps22hb/lps22hb.h"
 
@@ -41,7 +41,7 @@
   * @{
   */
    
-/* Exported types ------------------------------------------------------------*/
+
 /** @defgroup STM32L475E_IOT01_PRESSURE_Exported_Types PRESSURE Exported Types
   * @{
   */
@@ -62,7 +62,7 @@ typedef enum
 /** @defgroup STM32L475E_IOT01_PRESSURE_Exported_Functions PRESSURE Exported Functions
   * @{
   */
-/* Sensor Configuration Functions */
+
 uint32_t BSP_PSENSOR_Init(void);
 uint8_t  BSP_PSENSOR_ReadID(void);
 float    BSP_PSENSOR_ReadPressure(void);
@@ -88,4 +88,4 @@ float    BSP_PSENSOR_ReadPressure(void);
 
 #endif /* __STM32L475E_IOT01_PSENSOR_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

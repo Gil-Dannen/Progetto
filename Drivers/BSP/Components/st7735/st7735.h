@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __ST7735_H
 #define __ST7735_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/lcd.h"
 
 /** @addtogroup BSP
@@ -163,10 +163,10 @@ uint16_t st7735_GetLcdPixelWidth(void);
 uint16_t st7735_GetLcdPixelHeight(void);
 void     st7735_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp);
 
-/* LCD driver structure */
+
 extern LCD_DrvTypeDef   st7735_drv;
 
-/* LCD IO functions */
+
 void     LCD_IO_Init(void);
 void     LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size);
 void     LCD_IO_WriteReg(uint8_t Reg);
@@ -193,4 +193,4 @@ void     LCD_Delay(uint32_t delay);
   * @}
   */ 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

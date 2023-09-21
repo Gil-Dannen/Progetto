@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stmpe1600.h"
 
 /** @addtogroup BSP
@@ -33,32 +33,32 @@
   * @{
   */   
   
-/* Private typedef -----------------------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Private_Types_Definitions
   * @{
   */ 
   
-/* Private define ------------------------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Private_Defines
   * @{
   */ 
 #define STMPE1600_MAX_INSTANCE        2
 
-/* Private macro -------------------------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Private_Macros
   * @{
   */ 
   
-/* Private variables ---------------------------------------------------------*/
+
 static uint16_t tmp = 0;
 
 /** @defgroup STMPE1600_Private_Variables
   * @{
   */ 
-/* IO driver structure initialization */  
+
 IO_DrvTypeDef stmpe1600_io_drv = 
 {
   stmpe1600_Init,
@@ -79,14 +79,14 @@ uint8_t stmpe1600[STMPE1600_MAX_INSTANCE] = {0};
   * @}
   */ 
     
-/* Private function prototypes -----------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Private_Function_Prototypes
   * @{
   */
 static uint8_t stmpe1600_GetInstance(uint16_t DeviceAddr);
 
-/* Private functions ---------------------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Private_Functions
   * @{
@@ -102,23 +102,23 @@ void stmpe1600_Init(uint16_t DeviceAddr)
   uint8_t instance;
   uint8_t empty;
   
-  /* Check if device instance already exists */
+
   instance = stmpe1600_GetInstance(DeviceAddr);
   
   if(instance == 0xFF)
   {
-    /* Look for empty instance */
+
     empty = stmpe1600_GetInstance(0);
     
     if(empty < STMPE1600_MAX_INSTANCE)
     {
-      /* Register the current device instance */
+
       stmpe1600[empty] = DeviceAddr;
       
-      /* Initialize IO BUS layer */
+
       IOE_Init(); 
       
-      /* Generate stmpe1600 Software reset */
+
       stmpe1600_Reset(DeviceAddr);
     }
   } 
@@ -131,7 +131,7 @@ void stmpe1600_Init(uint16_t DeviceAddr)
   */
 void stmpe1600_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
-  /*Configuration already done during the initialization */ 
+
 }
 
 /**
@@ -141,16 +141,16 @@ void stmpe1600_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
   */
 void stmpe1600_Reset(uint16_t DeviceAddr)
 {
-  /* Power Down the stmpe1600 */
+
   IOE_Write(DeviceAddr, STMPE1600_REG_SYS_CTRL, (uint16_t)0x80);
 
-  /* Wait for a delay to ensure registers erasing */
+
   IOE_Delay(2); 
   
-  /* Power On the Codec after the power off: all registers are reinitialized */
+
   IOE_Write(DeviceAddr, STMPE1600_REG_SYS_CTRL, (uint16_t)0x00); 
   
-  /* Wait for a delay to ensure registers erasing */
+
   IOE_Delay(2); 
 }
 
@@ -163,13 +163,13 @@ uint16_t stmpe1600_ReadID(uint16_t DeviceAddr)
 {
   uint8_t tmpData[2] = {0 , 0};
 
-  /* Initialize IO BUS layer */
+
   IOE_Init(); 
   
-  /* Read the stmpe1600 device ID */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_CHP_ID, tmpData, 2);
   
-  /* Return the device ID value */
+
   return((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
 }
 
@@ -185,16 +185,16 @@ void stmpe1600_SetITPolarity(uint16_t DeviceAddr, uint8_t Polarity)
 {
   uint8_t tmp = 0;
   
-  /* Get the current register value */ 
+
   tmp = IOE_Read(DeviceAddr, STMPE1600_REG_SYS_CTRL);
   
-  /* Mask the polarity bit */
+
   tmp &= ~(uint16_t)0x01;
     
-  /* Set the Interrupt Output line polarity */
+
   tmp |= (uint8_t)Polarity;
   
-  /* Set the new register value */
+
   IOE_Write(DeviceAddr, STMPE1600_REG_SYS_CTRL, tmp);
 }
 
@@ -207,18 +207,18 @@ void stmpe1600_EnableGlobalIT(uint16_t DeviceAddr)
 {
   uint8_t tmpData[2] = {0 , 0};
 
-  /* Configure NVIC IT for IOE */
+
   IOE_ITConfig();
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_SYS_CTRL, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Set the global interrupts to be Enabled */    
+
   tmp |= (uint16_t)STMPE1600_IT_ENABLE;
   
-  /* Write Back the Interrupt Control register */
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_SYS_CTRL, (uint8_t *)&tmp, 2); 
 }
 
@@ -231,15 +231,15 @@ void stmpe1600_DisableGlobalIT(uint16_t DeviceAddr)
 { 
   uint8_t tmpData[2] = {0 , 0};
 
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_SYS_CTRL, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Set the global interrupts to be Enabled */    
+
   tmp &= ~(uint16_t)STMPE1600_IT_ENABLE;
   
-  /* Write Back the Interrupt Control register */
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_SYS_CTRL, (uint8_t *)&tmp, 2); 
 }
 
@@ -256,12 +256,12 @@ void stmpe1600_IO_InitPin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Directio
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_GPDR, tmpData, 2);
 
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Set the Pin direction */
+
   if (Direction != STMPE1600_DIRECTION_IN)
   {
     tmp |= (uint16_t)IO_Pin;
@@ -271,7 +271,7 @@ void stmpe1600_IO_InitPin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Directio
     tmp &= ~(uint16_t)IO_Pin;
   }
     
-  /* Set the new register value */
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_GPDR, (uint8_t *)&tmp, 2);      
 }
 
@@ -293,7 +293,7 @@ uint8_t stmpe1600_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeTypedef
   uint8_t error_code = 0;
     uint8_t buffer[2] = {0,0};  
     
-  /* Configure IO pin according to selected IO mode */
+
   switch(IO_Mode)
   {
   case IO_MODE_INPUT: /* Input mode */
@@ -310,10 +310,10 @@ uint8_t stmpe1600_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeTypedef
     stmpe1600_SetITPolarity(DeviceAddr, STMPE1600_POLARITY_HIGH);
     stmpe1600_IO_EnablePinIT(DeviceAddr, IO_Pin);
     stmpe1600_IO_InitPin(DeviceAddr, IO_Pin, STMPE1600_DIRECTION_IN); 
-    /* Clear all IO IT pending bits if any */
+
     stmpe1600_IO_ClearIT(DeviceAddr, IO_Pin);
     
-    /* Read GMPR to enable interrupt */
+
     IOE_ReadMultiple(DeviceAddr , STMPE1600_REG_GPMR, buffer, 2);
     break; 
     
@@ -322,10 +322,10 @@ uint8_t stmpe1600_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeTypedef
     stmpe1600_IO_EnablePinIT(DeviceAddr, IO_Pin);
     stmpe1600_IO_InitPin(DeviceAddr, IO_Pin, STMPE1600_DIRECTION_IN); 
     
-    /* Clear all IO IT pending bits if any */
+
     stmpe1600_IO_ClearIT(DeviceAddr, IO_Pin);
     
-    /* Read GMPR to enable interrupt */
+
     IOE_ReadMultiple(DeviceAddr , STMPE1600_REG_GPMR, buffer, 2);    
     break;
 
@@ -348,15 +348,15 @@ void stmpe1600_IO_PolarityInv_Enable(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_GPPIR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));  
 
-  /* Enable pin polarity inversion */
+
   tmp |= (uint16_t)IO_Pin;
     
-  /* Set the new register value */  
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_GPPIR, (uint8_t *)&tmp, 2);
 }
 
@@ -372,15 +372,15 @@ void stmpe1600_IO_PolarityInv_Disable(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_GPPIR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));  
 
-  /* Disable pin polarity inversion */
+
    tmp &= ~ (uint16_t)IO_Pin;
     
-  /* Set the new register value */  
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_GPPIR, (uint8_t *)&tmp, 2);  
 }
 
@@ -397,12 +397,12 @@ void stmpe1600_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinStat
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_GPMR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));  
   
-  /* Set the pin state */
+
   if(PinState != 0)
   {
     tmp |= (uint16_t)IO_Pin;
@@ -412,7 +412,7 @@ void stmpe1600_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinStat
     tmp &= ~(uint16_t)IO_Pin;
   }
     
-  /* Set the new register value */  
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_GPSR, (uint8_t *)&tmp, 2);
 }
 
@@ -428,12 +428,12 @@ uint32_t stmpe1600_IO_ReadPin(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_GPMR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Return the pin(s) state */
+
   return(tmp & IO_Pin);  
 }
 
@@ -449,18 +449,18 @@ void stmpe1600_IO_EnablePinIT(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
     
-  /* Enable global interrupt */
+
   stmpe1600_EnableGlobalIT(DeviceAddr);
 
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_IEGPIOR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));  
   
-  /* Put pin in IT mode */
+
   tmp |= (uint16_t)IO_Pin;
     
-  /* Write the new register value */
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_IEGPIOR, (uint8_t *)&tmp, 2);
 }
 
@@ -476,15 +476,15 @@ void stmpe1600_IO_DisablePinIT(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the current register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_IEGPIOR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));  
   
-  /* Disable the IT pin mode */
+
   tmp &= ~(uint16_t)IO_Pin;
     
-  /* Set the new register value */
+
   IOE_WriteMultiple(DeviceAddr, STMPE1600_REG_IEGPIOR, (uint8_t *)&tmp, 2); 
 }
 
@@ -501,12 +501,12 @@ uint32_t stmpe1600_IO_ITStatus(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_ISGPIOR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Return the pin IT status */
+
   return((tmp & IO_Pin) == IO_Pin);  
 }
 
@@ -523,12 +523,12 @@ uint8_t stmpe1600_IO_ReadIT(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
   
-  /* Get the register value */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_ISGPIOR, tmpData, 2);
   
   tmp = ((uint16_t)tmpData[0] | (((uint16_t)tmpData[1]) << 8));
   
-  /* Return if there is an IT pending bit or not */
+
   return(tmp & IO_Pin);
 }
 
@@ -541,7 +541,7 @@ void stmpe1600_IO_ClearIT(uint16_t DeviceAddr, uint32_t IO_Pin)
 {
   uint8_t tmpData[2] = {0 , 0};
     
-  /* Get the register value to clear all pending bits */
+
   IOE_ReadMultiple(DeviceAddr, STMPE1600_REG_ISGPIOR, tmpData, 2);
 }
 
@@ -555,10 +555,10 @@ static uint8_t stmpe1600_GetInstance(uint16_t DeviceAddr)
 {
   uint8_t idx = 0;
   
-  /* Check all the registered instances */
+
   for(idx = 0; idx < STMPE1600_MAX_INSTANCE ; idx ++)
   {
-    /* Return index if there is address match */
+
     if(stmpe1600[idx] == DeviceAddr)
     {
       return idx; 
@@ -583,4 +583,4 @@ static uint8_t stmpe1600_GetInstance(uint16_t DeviceAddr)
 /**
   * @}
   */      
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

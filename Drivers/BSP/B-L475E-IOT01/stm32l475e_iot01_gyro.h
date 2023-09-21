@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STM32L475E_IOT01_GYRO_H
 #define __STM32L475E_IOT01_GYRO_H
 
@@ -25,9 +25,9 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"
-/* Include Gyro component driver */
+
 #include "../Components/lsm6dsl/lsm6dsl.h"   
 
 /** @addtogroup BSP
@@ -85,4 +85,4 @@ void BSP_GYRO_GetXYZ(float* pfData);
 
 #endif /* __STM32L475E_IOT01_GYRO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

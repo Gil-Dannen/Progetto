@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "st25dv.h"
 
 
@@ -34,13 +34,13 @@
   * @{
   */
 
-/* External variables --------------------------------------------------------*/
-/* Private typedef -----------------------------------------------------------*/
-/* Private defines -----------------------------------------------------------*/
+
+
+
 
   
-/* Private macros ------------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
+
+
 static int32_t ReadRegWrap(void *Handle, uint16_t Reg, uint8_t *pData, uint16_t Length);
 static int32_t WriteRegWrap(void *Handle, uint16_t Reg, const uint8_t *pData, uint16_t Length);
 static int32_t ST25DV_Init( ST25DV_Object_t* );
@@ -51,7 +51,7 @@ static int32_t ST25DV_ConfigureGPO(ST25DV_Object_t* pObj,  const uint16_t ITConf
 static int32_t ST25DV_ReadData(ST25DV_Object_t* pObj,  uint8_t * const pData, const uint16_t TarAddr, const uint16_t NbByte );
 static int32_t ST25DV_WriteData(ST25DV_Object_t* pObj,  const uint8_t * const pData, const uint16_t TarAddr, const uint16_t NbByte );
 
-/* Global variables ---------------------------------------------------------*/
+
 /**
   * @brief    Standard NFC tag driver API for the ST25DV.
   * @details  Provides a generic way to access the ST25DV implementation of the NFC tag standard driver functions. 
@@ -68,7 +68,7 @@ ST25DV_Drv_t St25Dv_Drv =
 };
 
 
-/* Public functions ---------------------------------------------------------*/
+
 
 /**
  * @brief  Register Component Bus IO operations
@@ -144,7 +144,7 @@ static int32_t ST25DV_Init( ST25DV_Object_t *pObj )
   */
 static int32_t ST25DV_ReadID(ST25DV_Object_t* pObj, uint8_t * const pICRef )
 {
-  /* Read ICRef on device */
+
   return st25dv_get_icref(&(pObj->Ctx), pICRef);
 }
 
@@ -158,7 +158,7 @@ static int32_t ST25DV_ReadID(ST25DV_Object_t* pObj, uint8_t * const pICRef )
   */
 static int32_t ST25DV_IsDeviceReady(ST25DV_Object_t* pObj,  const uint32_t Trials )
 {
-  /* Test communication with device */
+
   return pObj->IO.IsReady(ST25DV_ADDR_DATA_I2C, Trials );
 }
 
@@ -182,11 +182,11 @@ static int32_t ST25DV_GetGPOStatus(ST25DV_Object_t* pObj,  uint16_t * const pGPO
   uint8_t reg_value;
   int32_t status;
   
-  /* Read value of GPO register */
+
   status = st25dv_get_gpo_all(&(pObj->Ctx),  &reg_value);
   if( status == ST25DV_OK )
   {
-    /* Extract GPO configuration */
+
     *pGPOStatus = (uint16_t)reg_value;
   }
   return status;
@@ -210,7 +210,7 @@ static int32_t ST25DV_GetGPOStatus(ST25DV_Object_t* pObj,  uint16_t * const pGPO
   */
 static int32_t ST25DV_ConfigureGPO(ST25DV_Object_t* pObj,  const uint16_t ITConf )
 {
-  /* Write GPO configuration to register */
+
   return st25dv_set_gpo_all( &(pObj->Ctx),  (uint8_t *)&ITConf);
 }
 
@@ -224,7 +224,7 @@ static int32_t ST25DV_ConfigureGPO(ST25DV_Object_t* pObj,  const uint16_t ITConf
   */
 static int32_t ST25DV_ReadData(ST25DV_Object_t* pObj,  uint8_t * const pData, const uint16_t TarAddr, const uint16_t NbByte )
 {
-  /* Read Data in user memory */
+
   return pObj->IO.Read(ST25DV_ADDR_DATA_I2C, TarAddr, pData, NbByte );
 }
 
@@ -244,29 +244,29 @@ static int32_t ST25DV_WriteData(ST25DV_Object_t* pObj,  const uint8_t * const pD
   uint16_t bytes_to_write = NbByte;
   uint16_t mem_addr = TarAddr;
   
-  /* ST25DV can write a maximum of 256 bytes in EEPROM per i2c communication */
+
   do
   {
-    /* Split write if data to write is superior of max write bytes for ST25DV */
+
     if( bytes_to_write > ST25DV_MAX_WRITE_BYTE )
     {
-      /* DataSize higher than max page write, copy data by page */
+
       split_data_nb = (uint16_t)ST25DV_MAX_WRITE_BYTE;
     }
     else
     {
-      /* DataSize lower or equal to max page write, copy only last bytes */
+
       split_data_nb = bytes_to_write;
     }
-    /* Write split_data_nb bytes in memory */
+
     ret = pObj->IO.Write( ST25DV_ADDR_DATA_I2C, mem_addr, pdata_index, split_data_nb);
 
     if( ret == ST25DV_OK )
     {
       int32_t pollstatus;
-      /* Poll until EEPROM is available */
+
       uint32_t tickstart = pObj->IO.GetTick();
-      /* Wait until ST25DV is ready or timeout occurs */
+
       do
       {
         pollstatus = pObj->IO.IsReady( ST25DV_ADDR_DATA_I2C, 1 );
@@ -278,7 +278,7 @@ static int32_t ST25DV_WriteData(ST25DV_Object_t* pObj,  const uint8_t * const pD
       }
     }
 
-    /* update index, dest address, size for next write */
+
     pdata_index += split_data_nb;
     mem_addr += split_data_nb;
     bytes_to_write -= split_data_nb;
@@ -296,7 +296,7 @@ static int32_t ST25DV_WriteData(ST25DV_Object_t* pObj,  const uint8_t * const pD
   */
 int32_t ST25DV_ReadICRev(ST25DV_Object_t* pObj,  uint8_t * const pICRev )
 {
-  /* Read ICRev on device */
+
   return st25dv_get_icrev(&(pObj->Ctx), pICRev);
 }
 
@@ -312,11 +312,11 @@ int32_t ST25DV_ReadITPulse(ST25DV_Object_t* pObj, ST25DV_PULSE_DURATION * const 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read ITtime register value */
+
   status = st25dv_get_ittime_delay( &(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {  
-    /* Extract delay coefficient value */
+
     *pITtime = (ST25DV_PULSE_DURATION)reg_value;
   }
   return status;
@@ -333,10 +333,10 @@ int32_t ST25DV_WriteITPulse( ST25DV_Object_t* pObj, const ST25DV_PULSE_DURATION 
 {
   uint8_t reg_value;
   
-  /* prepare data to write */
+
   reg_value = (uint8_t)ITtime;
   
-  /* Write value for ITtime register */
+
   return st25dv_set_ittime_delay( &(pObj->Ctx), &reg_value );
 }
 
@@ -351,7 +351,7 @@ int32_t ST25DV_WriteITPulse( ST25DV_Object_t* pObj, const ST25DV_PULSE_DURATION 
   */
 int32_t ST25DV_ReadRegister(ST25DV_Object_t* pObj,  uint8_t * const pData, const uint16_t TarAddr, const uint16_t NbByte )
 {  
-  /* Read Data in system memory */
+
   return pObj->IO.Read( ST25DV_ADDR_SYST_I2C, TarAddr, pData,  NbByte );
 }
 
@@ -372,28 +372,28 @@ int32_t ST25DV_WriteRegister(ST25DV_Object_t* pObj,  const uint8_t * const pData
   uint16_t mem_addr = TarAddr;
   const uint8_t *pdata_index = (const uint8_t *)pData;
   
-  /* ST25DV can write a maximum of 256 bytes in EEPROM per i2c communication */
+
   do
   {
-    /* Split write if data to write is superior of max write bytes for ST25DV */
+
     if( bytes_to_write > ST25DV_MAX_WRITE_BYTE )
     {
-      /* DataSize higher than max page write, copy data by page */
+
       split_data_nb = (uint8_t)ST25DV_MAX_WRITE_BYTE;
     }
     else
     {
-      /* DataSize lower or equal to max page write, copy only last bytes */
+
       split_data_nb = bytes_to_write;
     }
-    /* Write split_data_nb bytes in register */
+
     ret = pObj->IO.Write( ST25DV_ADDR_SYST_I2C, mem_addr, pdata_index,  split_data_nb);
     if( ret == ST25DV_OK )
     {
       int32_t pollstatus;
-      /* Poll until EEPROM is available */
+
       uint32_t tickstart = pObj->IO.GetTick();
-      /* Wait until ST25DV is ready or timeout occurs */
+
       do
       {
         pollstatus = pObj->IO.IsReady( ST25DV_ADDR_DATA_I2C, 1 );
@@ -405,7 +405,7 @@ int32_t ST25DV_WriteRegister(ST25DV_Object_t* pObj,  const uint8_t * const pData
       }
     }
 
-    /* update index, dest address, size for next write */
+
     pdata_index += split_data_nb;
     mem_addr += split_data_nb;
     bytes_to_write -= split_data_nb;
@@ -427,11 +427,11 @@ int32_t ST25DV_ReadUID(ST25DV_Object_t* pObj,  ST25DV_UID * const pUid )
   uint8_t i;
   int32_t status;
   
-  /* Read value of UID registers */
+
   status = st25dv_get_uid( &(pObj->Ctx), reg_value);
   if( status == ST25DV_OK )
   {
-    /* Store information in 2 WORD */
+
     pUid->MsbUid = 0;
   
     for( i = 0; i < 4; i++ )
@@ -457,7 +457,7 @@ int32_t ST25DV_ReadUID(ST25DV_Object_t* pObj,  ST25DV_UID * const pUid )
   */
 int32_t ST25DV_ReadDSFID(ST25DV_Object_t* pObj,  uint8_t * const pDsfid )
 {
-  /* Read DSFID register */
+
   return st25dv_get_dsfid(&(pObj->Ctx), pDsfid);
 }
 
@@ -472,12 +472,12 @@ int32_t ST25DV_ReadDsfidRFProtection(ST25DV_Object_t* pObj,  ST25DV_LOCK_STATUS 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read register */
+
   status = st25dv_get_lockdsfid(&(pObj->Ctx), &reg_value );
   if( status == ST25DV_OK )
   {
   
-    /* Extract Lock Status */
+
     if( reg_value == 0 )
     {
       *pLockDsfid = ST25DV_UNLOCKED;
@@ -498,7 +498,7 @@ int32_t ST25DV_ReadDsfidRFProtection(ST25DV_Object_t* pObj,  ST25DV_LOCK_STATUS 
   */
 int32_t ST25DV_ReadAFI(ST25DV_Object_t* pObj,  uint8_t * const pAfi )
 {
-  /* Read AFI register */
+
   return st25dv_get_afi(&(pObj->Ctx), pAfi);
 }
 
@@ -513,12 +513,12 @@ int32_t ST25DV_ReadAfiRFProtection(ST25DV_Object_t* pObj,  ST25DV_LOCK_STATUS * 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read register */
+
   status = st25dv_get_lockafi( &(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
  
-    /* Extract Lock Status */
+
     if( reg_value == 0 )
     {
       *pLockAfi = ST25DV_UNLOCKED;
@@ -542,12 +542,12 @@ int32_t ST25DV_ReadI2CProtectZone(ST25DV_Object_t* pObj,  ST25DV_I2C_PROT_ZONE *
   uint8_t reg_value;
   int32_t status;
   
-  /* Read value of I2c Protected Zone register */
+
   status = st25dv_get_i2css_all( &(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
   
-    /* Dispatch information to corresponding struct member */
+
     pProtZone->ProtectZone1 = (ST25DV_PROTECTION_CONF)( (reg_value & ST25DV_I2CSS_PZ1_MASK) >> ST25DV_I2CSS_PZ1_SHIFT );
     pProtZone->ProtectZone2 = (ST25DV_PROTECTION_CONF)( (reg_value & ST25DV_I2CSS_PZ2_MASK) >> ST25DV_I2CSS_PZ2_SHIFT );
     pProtZone->ProtectZone3 = (ST25DV_PROTECTION_CONF)( (reg_value & ST25DV_I2CSS_PZ3_MASK) >> ST25DV_I2CSS_PZ3_SHIFT );
@@ -569,11 +569,11 @@ int32_t ST25DV_WriteI2CProtectZonex(ST25DV_Object_t* pObj,  const ST25DV_PROTECT
   int32_t status;
   uint8_t reg_value = 0;
    
-  /* Compute and update new i2c Zone Security Status */
+
   switch( Zone )
   {
     case ST25DV_PROT_ZONE1:
-      /* Read protection is not allowed for Zone 1 */
+
       reg_value = (ReadWriteProtection & 0x01);
       status = st25dv_set_i2css_pz1( &(pObj->Ctx), &reg_value);
       break;
@@ -594,7 +594,7 @@ int32_t ST25DV_WriteI2CProtectZonex(ST25DV_Object_t* pObj,  const ST25DV_PROTECT
       return ST25DV_ERROR;
   }
   
-  /* Write I2CZSS register */
+
   return status;
 }
 
@@ -609,12 +609,12 @@ int32_t ST25DV_ReadLockCCFile(ST25DV_Object_t* pObj,  ST25DV_LOCK_CCFILE * const
   uint8_t reg_value;
   int32_t status;
   
-  /* Get actual LOCKCCFILE register value */
+
   status = st25dv_get_lockccfile_all( &(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
   
-    /* Extract CCFile block information */
+
     if( reg_value & ST25DV_LOCKCCFILE_BLCK0_MASK )
     {
       pLockCCFile->LckBck0 = ST25DV_LOCKED;
@@ -648,7 +648,7 @@ int32_t ST25DV_WriteLockCCFile(ST25DV_Object_t* pObj,  const ST25DV_CCFILE_BLOCK
 {
   uint8_t reg_value;
   
-  /* Configure value to write on register */
+
   if( NbBlockCCFile == ST25DV_CCFILE_1BLCK )
   {
     if( LockCCFile == ST25DV_LOCKED )
@@ -672,7 +672,7 @@ int32_t ST25DV_WriteLockCCFile(ST25DV_Object_t* pObj,  const ST25DV_CCFILE_BLOCK
     }
   }
   
-  /* Write LOCKCCFILE register */
+
   return st25dv_set_lockccfile_all( &(pObj->Ctx), &reg_value);
 }
 
@@ -687,12 +687,12 @@ int32_t ST25DV_ReadLockCFG(ST25DV_Object_t* pObj,  ST25DV_LOCK_STATUS * const pL
   uint8_t reg_value;
   int32_t status;
   
-  /* Get actual LOCKCCFILE register value */
+
   status = st25dv_get_lockcfg_b0(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
 
-    /* Extract LOCKCFG block information */
+
     if( reg_value )
     {
       *pLockCfg = ST25DV_LOCKED;
@@ -716,10 +716,10 @@ int32_t ST25DV_WriteLockCFG(ST25DV_Object_t* pObj,  const ST25DV_LOCK_STATUS Loc
 {
   uint8_t reg_value;
   
-  /* Configure value to write on register */
+
   reg_value = (uint8_t)LockCfg;
   
-  /* Write LOCKCFG register */
+
   return st25dv_set_lockcfg_b0(&(pObj->Ctx), &reg_value );
 }
 
@@ -734,7 +734,7 @@ int32_t ST25DV_PresentI2CPassword(ST25DV_Object_t* pObj,  const ST25DV_PASSWD Pa
   uint8_t ai2c_message[17] = {0};
   uint8_t i;
   
-  /* Build I2C Message with Password + Validation code 0x09 + Password */
+
   ai2c_message[8] = 0x09;
   for( i = 0; i < 4; i++ )
   {
@@ -744,7 +744,7 @@ int32_t ST25DV_PresentI2CPassword(ST25DV_Object_t* pObj,  const ST25DV_PASSWD Pa
     ai2c_message[i + 13] = ai2c_message[i + 4];
   };
   
-  /* Present password to ST25DV */
+
   return ST25DV_WriteRegister(pObj, ai2c_message, ST25DV_I2CPASSWD_REG, 17 );
 }
 
@@ -760,7 +760,7 @@ int32_t ST25DV_WriteI2CPassword( ST25DV_Object_t* pObj, const ST25DV_PASSWD Pass
   uint8_t ai2c_message[17] = {0};
   uint8_t i;
   
-  /* Build I2C Message with Password + Validation code 0x07 + Password */
+
   ai2c_message[8] = 0x07;
 
   for( i = 0; i < 4; i++ )
@@ -771,7 +771,7 @@ int32_t ST25DV_WriteI2CPassword( ST25DV_Object_t* pObj, const ST25DV_PASSWD Pass
     ai2c_message[i + 13] = ai2c_message[i + 4];
   };
   
-  /* Write new password in I2CPASSWD register */
+
   return ST25DV_WriteRegister(pObj, ai2c_message, ST25DV_I2CPASSWD_REG, 17 );
 }
 
@@ -787,7 +787,7 @@ int32_t ST25DV_ReadRFZxSS( ST25DV_Object_t* pObj, const ST25DV_PROTECTION_ZONE Z
   uint8_t reg_value;
   int32_t status;
   
-  /* Read actual value of Sector Security Status register */
+
   switch( Zone )
   {
     case ST25DV_PROT_ZONE1:
@@ -808,7 +808,7 @@ int32_t ST25DV_ReadRFZxSS( ST25DV_Object_t* pObj, const ST25DV_PROTECTION_ZONE Z
   
   if( status == ST25DV_OK )
   {
-    /* Extract Sector Security Status configuration */
+
     pRfprotZone->PasswdCtrl = (ST25DV_PASSWD_PROT_STATUS)((reg_value & ST25DV_RFA1SS_PWDCTRL_MASK) >> ST25DV_RFA1SS_PWDCTRL_SHIFT);
     pRfprotZone->RWprotection = (ST25DV_PROTECTION_CONF)((reg_value & ST25DV_RFA1SS_RWPROT_MASK) >> ST25DV_RFA1SS_RWPROT_SHIFT);
   }
@@ -829,11 +829,11 @@ int32_t ST25DV_WriteRFZxSS( ST25DV_Object_t* pObj, const ST25DV_PROTECTION_ZONE 
   int32_t status;
   
 
-  /* Update Sector Security Status */
+
   reg_value = (RfProtZone.RWprotection << ST25DV_RFA1SS_RWPROT_SHIFT) & ST25DV_RFA1SS_RWPROT_MASK;
   reg_value |= ((RfProtZone.PasswdCtrl << ST25DV_RFA1SS_PWDCTRL_SHIFT) & ST25DV_RFA1SS_PWDCTRL_MASK);
   
-  /* Write Sector Security register */
+
   switch( Zone )
   {
     case ST25DV_PROT_ZONE1:
@@ -866,7 +866,7 @@ int32_t ST25DV_ReadEndZonex( ST25DV_Object_t* pObj, const ST25DV_END_ZONE EndZon
 {
   int32_t status;
 
-  /* Read the corresponding End zone */ 
+
   switch( EndZone )
   {
     case ST25DV_ZONE_END1:
@@ -900,7 +900,7 @@ int32_t ST25DV_WriteEndZonex( ST25DV_Object_t* pObj, const ST25DV_END_ZONE EndZo
 {
   int32_t status;
   
-  /* Write the corresponding End zone value in register */  
+
   switch( EndZone )
   {
     case ST25DV_ZONE_END1:
@@ -938,14 +938,14 @@ int32_t ST25DV_InitEndZone( ST25DV_Object_t* pObj )
   memsize.Mem_Size = 0;
   memsize.BlockSize = 0;
 
-  /* Get EEPROM mem size */
+
   ST25DV_ReadMemSize(pObj, &memsize );
   maxmemlength = (memsize.Mem_Size + 1) * (memsize.BlockSize + 1);
   
-  /* Compute Max value for endzone register */
+
   endval = (maxmemlength / 32) - 1;
   
-  /* Write EndZone value to ST25DV registers */
+
   ret = ST25DV_WriteEndZonex(pObj, ST25DV_ZONE_END3, endval );
   if( (ret == ST25DV_OK) || (ret == ST25DV_NACK) )
   {
@@ -982,14 +982,14 @@ int32_t ST25DV_CreateUserZone( ST25DV_Object_t* pObj, uint16_t Zone1Length, uint
   
   maxmemlength = (memsize.Mem_Size + 1) * (memsize.BlockSize + 1);
   
-  /* Checks that values of different zones are in bounds */
+
   if( ( Zone1Length < 32 ) || ( Zone1Length > maxmemlength ) || ( Zone2Length > (maxmemlength - 32) ) 
       || ( Zone3Length > (maxmemlength - 64) ) || ( Zone4Length > (maxmemlength - 96) ) )
   {
     ret = ST25DV_ERROR;
   }
 
-  /* Checks that the total is less than the authorised maximum */
+
   if( ( Zone1Length + Zone2Length + Zone3Length + Zone4Length ) > maxmemlength )
   {
     ret = ST25DV_ERROR;
@@ -997,7 +997,7 @@ int32_t ST25DV_CreateUserZone( ST25DV_Object_t* pObj, uint16_t Zone1Length, uint
   
   if ( ret == ST25DV_OK)
   {
-    /* if The value for each Length is not a multiple of 64 correct it. */
+
     if( (Zone1Length % 32) != 0 )
     {
       Zone1Length = Zone1Length - ( Zone1Length % 32 );
@@ -1013,11 +1013,11 @@ int32_t ST25DV_CreateUserZone( ST25DV_Object_t* pObj, uint16_t Zone1Length, uint
       Zone3Length = Zone3Length - ( Zone3Length % 32 );
     }
   
-    /* First right 0xFF in each Endx value */
+
     ret = ST25DV_InitEndZone( pObj);
     if( (ret == ST25DV_OK) || (ret == ST25DV_NACK) )
     {
-      /* Then Write corresponding value for each zone */
+
       EndVal = (uint8_t)( (Zone1Length / 32 ) - 1 );
       ret = ST25DV_WriteEndZonex(pObj, ST25DV_ZONE_END1, EndVal );
       if( (ret == ST25DV_OK) || (ret == ST25DV_NACK) )
@@ -1048,7 +1048,7 @@ int32_t ST25DV_ReadMemSize( ST25DV_Object_t* pObj, ST25DV_MEM_SIZE * const pSize
   uint8_t memsize_lsb;
   int32_t status;
   
-  /* Read actual value of MEM_SIZE register */
+
   status = st25dv_get_mem_size_lsb(&(pObj->Ctx), &memsize_lsb);
   if( status == ST25DV_OK )
   {
@@ -1058,7 +1058,7 @@ int32_t ST25DV_ReadMemSize( ST25DV_Object_t* pObj, ST25DV_MEM_SIZE * const pSize
       status = st25dv_get_blk_size(&(pObj->Ctx), &(pSizeInfo->BlockSize));
       if( status == ST25DV_OK )
       {
-        /* Extract Memory information */
+
         pSizeInfo->Mem_Size = memsize_msb;
         pSizeInfo->Mem_Size = (pSizeInfo->Mem_Size << 8) |memsize_lsb;
       }
@@ -1078,11 +1078,11 @@ int32_t ST25DV_ReadEHMode( ST25DV_Object_t* pObj, ST25DV_EH_MODE_STATUS * const 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read actual value of EH_MODE register */
+
   status = st25dv_get_eh_mode( &(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
-    /* Extract EH_mode configuration */
+
     if( reg_value )
     {
       *pEH_mode = ST25DV_EH_ON_DEMAND;
@@ -1107,10 +1107,10 @@ int32_t ST25DV_WriteEHMode( ST25DV_Object_t* pObj, const ST25DV_EH_MODE_STATUS E
 {
   uint8_t reg_value;
   
-  /* Update EH_mode */
+
   reg_value = (uint8_t)EH_mode;
   
-  /* Write EH_MODE register */
+
   return st25dv_set_eh_mode(&(pObj->Ctx), &reg_value);
 }
 
@@ -1125,12 +1125,12 @@ int32_t ST25DV_ReadRFMngt( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF_Mng
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of RF_MNGT register */
+
   status = st25dv_get_rf_mngt_all(&(pObj->Ctx), &reg_value);
 
   if( status == ST25DV_OK )
   {
-    /* Extract RF Disable information */
+
     if( (reg_value & ST25DV_RF_MNGT_RFDIS_MASK) == ST25DV_RF_MNGT_RFDIS_MASK )
     {
       pRF_Mngt->RfDisable = ST25DV_ENABLE;
@@ -1140,7 +1140,7 @@ int32_t ST25DV_ReadRFMngt( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF_Mng
       pRF_Mngt->RfDisable = ST25DV_DISABLE;
     }
     
-    /* Extract RF Sleep information */
+
     if( (reg_value & ST25DV_RF_MNGT_RFSLEEP_MASK) == ST25DV_RF_MNGT_RFSLEEP_MASK )
     {
       pRF_Mngt->RfSleep = ST25DV_ENABLE;
@@ -1163,7 +1163,7 @@ int32_t ST25DV_ReadRFMngt( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF_Mng
   */
 int32_t ST25DV_WriteRFMngt( ST25DV_Object_t* pObj, const uint8_t Rfmngt )
 {
-  /* Write RF_MNGT register */
+
   return st25dv_set_rf_mngt_all(&(pObj->Ctx), &Rfmngt);
 }
 
@@ -1177,10 +1177,10 @@ int32_t ST25DV_GetRFDisable( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pRF
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of RF_MNGT register */
+
   status = st25dv_get_rf_mngt_rfdis(&(pObj->Ctx), &reg_value);
   
-  /* Extract RFDisable information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1206,7 +1206,7 @@ int32_t ST25DV_SetRFDisable( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 1;
   
-  /* Write RF_MNGT register */  
+
   return st25dv_set_rf_mngt_rfdis(&(pObj->Ctx), &reg_value);
 }
 
@@ -1220,7 +1220,7 @@ int32_t ST25DV_ResetRFDisable( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 0;
   
-  /* Write RF_MNGT register */  
+
   return st25dv_set_rf_mngt_rfdis(&(pObj->Ctx), &reg_value);
 }
 
@@ -1236,10 +1236,10 @@ int32_t ST25DV_GetRFSleep( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pRFSl
   uint8_t reg_value = 0;
   
   
-  /* Read actual value of RF_MNGT register */
+
   status = st25dv_get_rf_mngt_rfsleep(&(pObj->Ctx), &reg_value);
   
-  /* Extract RFDisable information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1265,7 +1265,7 @@ int32_t ST25DV_SetRFSleep(ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 1;
   
-  /* Write RF_MNGT register */  
+
   return st25dv_set_rf_mngt_rfsleep(&(pObj->Ctx), &reg_value);
 }
 
@@ -1279,7 +1279,7 @@ int32_t ST25DV_ResetRFSleep( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 0;
   
-  /* Write RF_MNGT register */  
+
   return st25dv_set_rf_mngt_rfsleep(&(pObj->Ctx), &reg_value);
 }
 
@@ -1294,11 +1294,11 @@ int32_t ST25DV_ReadMBMode( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pMB_m
   uint8_t reg_value;
   int32_t status;
   
-  /* Read actual value of MB_MODE register */
+
   status = st25dv_get_mb_mode_rw(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
-    /* Extract Mailbox mode status */
+
     if( reg_value  )
     {
       *pMB_mode = ST25DV_ENABLE;
@@ -1322,10 +1322,10 @@ int32_t ST25DV_WriteMBMode( ST25DV_Object_t* pObj, const ST25DV_EN_STATUS MB_mod
 {
   uint8_t reg_value;
   int32_t status;
-  /* Update Mailbox mode status */
+
   reg_value = (uint8_t)MB_mode;
   
-  /* Write MB_MODE register */
+
   status = st25dv_set_mb_mode_rw(&(pObj->Ctx), &reg_value);
 
   return status;
@@ -1339,7 +1339,7 @@ int32_t ST25DV_WriteMBMode( ST25DV_Object_t* pObj, const ST25DV_EN_STATUS MB_mod
   */
 int32_t ST25DV_ReadMBWDG( ST25DV_Object_t* pObj, uint8_t * const pWdgDelay )
 {  
-  /* Read actual value of MB_WDG register */  
+
   return st25dv_get_mb_wdg_delay(&(pObj->Ctx), pWdgDelay);
 }
 
@@ -1352,7 +1352,7 @@ int32_t ST25DV_ReadMBWDG( ST25DV_Object_t* pObj, uint8_t * const pWdgDelay )
   */
 int32_t ST25DV_WriteMBWDG( ST25DV_Object_t* pObj, const uint8_t WdgDelay )
 {
-   /* Write MB_WDG register */
+
   return st25dv_set_mb_wdg_delay(&(pObj->Ctx), &WdgDelay);
 }
 
@@ -1371,7 +1371,7 @@ int32_t ST25DV_ReadMailboxData( ST25DV_Object_t* pObj, uint8_t * const pData, co
   {
     status =  pObj->IO.Read( ST25DV_ADDR_DATA_I2C, ST25DV_MAILBOX_RAM_REG + Offset, pData,  NbByte );
   } 
-  /* Read Data in user memory */
+
   return status;
 }
 
@@ -1386,10 +1386,10 @@ int32_t ST25DV_WriteMailboxData( ST25DV_Object_t* pObj, const uint8_t * const pD
 { 
   int32_t status = ST25DV_ERROR;
   
-  /* ST25DV can write a maximum of 256 bytes in Mailbox */
+
   if( NbByte <= ST25DV_MAX_MAILBOX_LENGTH )
   {
-    /* Write NbByte data in memory */
+
     status =  pObj->IO.Write( ST25DV_ADDR_DATA_I2C, ST25DV_MAILBOX_RAM_REG, pData,  NbByte );
   }
   
@@ -1431,7 +1431,7 @@ int32_t ST25DV_WriteMailboxRegister( ST25DV_Object_t* pObj, const uint8_t * cons
     status =   pObj->IO.Write( ST25DV_ADDR_DATA_I2C, TarAddr,pData,  NbByte);
   }
   
-  /* Write NbByte data in memory */
+
   return status;
 }
 
@@ -1446,12 +1446,12 @@ int32_t ST25DV_ReadI2CSecuritySession_Dyn( ST25DV_Object_t* pObj, ST25DV_I2CSSO_
   uint8_t reg_value;
   int32_t status;
 
-  /* Read actual value of I2C_SSO_DYN register */
+
   status = st25dv_get_i2c_sso_dyn_i2csso(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
   
-    /* Extract Open session information */
+
     if( reg_value )
     {
       *pSession = ST25DV_SESSION_OPEN;
@@ -1481,7 +1481,7 @@ int32_t ST25DV_ReadI2CSecuritySession_Dyn( ST25DV_Object_t* pObj, ST25DV_I2CSSO_
   */
 int32_t ST25DV_ReadITSTStatus_Dyn( ST25DV_Object_t* pObj, uint8_t * const pITStatus )
 {
-  /* Read value of ITStatus register */
+
   return st25dv_get_itsts_dyn_all(&(pObj->Ctx), pITStatus );
 }
 
@@ -1493,7 +1493,7 @@ int32_t ST25DV_ReadITSTStatus_Dyn( ST25DV_Object_t* pObj, uint8_t * const pITSta
   */
 int32_t ST25DV_ReadGPO_Dyn( ST25DV_Object_t* pObj, uint8_t *GPOConfig )
 {
-  /* Read actual value of ST25DV_GPO_DYN_REG register */
+
   return st25dv_get_gpo_dyn_all(&(pObj->Ctx), GPOConfig);
 }
 
@@ -1508,11 +1508,11 @@ int32_t ST25DV_GetGPO_en_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pG
   uint8_t reg_value;
   int32_t status;
   
-  /* Read actual value of GPO_DYN register */
+
   status = st25dv_get_gpo_dyn_enable(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
-    /* Extract GPO enable status information */
+
     if( reg_value )
     {
       *pGPO_en = ST25DV_ENABLE;
@@ -1535,7 +1535,7 @@ int32_t ST25DV_SetGPO_en_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 1;
   
-  /* Write GPO_DYN Register */
+
   return st25dv_set_gpo_dyn_enable(&(pObj->Ctx), &reg_value);
 }
 
@@ -1549,7 +1549,7 @@ int32_t ST25DV_ResetGPO_en_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 0;
   
-  /* Write GPO_DYN Register */
+
   return st25dv_set_gpo_dyn_enable(&(pObj->Ctx), &reg_value);
 }
 
@@ -1564,12 +1564,12 @@ int32_t ST25DV_ReadEHCtrl_Dyn( ST25DV_Object_t* pObj, ST25DV_EH_CTRL * const pEH
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of ST25DV_EH_CTRL_DYN_REG register */
+
   status = st25dv_get_eh_ctrl_dyn_all(&(pObj->Ctx), &reg_value);
   
   if( status == ST25DV_OK )
   {
-    /* Extract EH EN Mode configuration */
+
     if( (reg_value & ST25DV_EH_CTRL_DYN_EH_EN_MASK) == ST25DV_EH_CTRL_DYN_EH_EN_MASK )
     {
       pEH_CTRL->EH_EN_Mode = ST25DV_ENABLE;
@@ -1579,7 +1579,7 @@ int32_t ST25DV_ReadEHCtrl_Dyn( ST25DV_Object_t* pObj, ST25DV_EH_CTRL * const pEH
       pEH_CTRL->EH_EN_Mode = ST25DV_DISABLE;
     }
     
-    /* Extract EH_ON configuration */
+
     if( (reg_value & ST25DV_EH_CTRL_DYN_EH_ON_MASK) == ST25DV_EH_CTRL_DYN_EH_ON_MASK )
     {
       pEH_CTRL->EH_on = ST25DV_ENABLE;
@@ -1589,7 +1589,7 @@ int32_t ST25DV_ReadEHCtrl_Dyn( ST25DV_Object_t* pObj, ST25DV_EH_CTRL * const pEH
       pEH_CTRL->EH_on = ST25DV_DISABLE;
     }
     
-    /* Extract FIELD_ON configuration */
+
     if( (reg_value & ST25DV_EH_CTRL_DYN_FIELD_ON_MASK) == ST25DV_EH_CTRL_DYN_FIELD_ON_MASK )
     {
       pEH_CTRL->Field_on = ST25DV_ENABLE;
@@ -1599,7 +1599,7 @@ int32_t ST25DV_ReadEHCtrl_Dyn( ST25DV_Object_t* pObj, ST25DV_EH_CTRL * const pEH
       pEH_CTRL->Field_on = ST25DV_DISABLE;
     }
     
-    /* Extract VCC_ON configuration */
+
     if( (reg_value & ST25DV_EH_CTRL_DYN_VCC_ON_MASK) == ST25DV_EH_CTRL_DYN_VCC_ON_MASK )
     {
       pEH_CTRL->VCC_on = ST25DV_ENABLE;
@@ -1624,12 +1624,12 @@ int32_t ST25DV_GetEHENMode_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read actual value of EH_CTRL_DYN register */
+
   status = st25dv_get_eh_ctrl_dyn_eh_en(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
   
-    /* Extract Energy Harvesting status information */
+
     if( reg_value )
     {
       *pEH_Val = ST25DV_ENABLE;
@@ -1651,7 +1651,7 @@ int32_t ST25DV_SetEHENMode_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 1;
   
-  /* Write EH_CTRL_DYN Register */
+
   return st25dv_set_eh_ctrl_dyn_eh_en(&(pObj->Ctx), &reg_value);
 }
 
@@ -1664,7 +1664,7 @@ int32_t ST25DV_ResetEHENMode_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 0;
   
-  /* Write EH_CTRL_DYN Register */
+
   return st25dv_set_eh_ctrl_dyn_eh_en(&(pObj->Ctx), &reg_value);
 }
 
@@ -1679,10 +1679,10 @@ int32_t ST25DV_GetEHON_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pEHO
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of EH_CTRL_DYN register */
+
   status = st25dv_get_eh_ctrl_dyn_eh_on(&(pObj->Ctx), &reg_value);
   
-  /* Extract RF Field information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1709,10 +1709,10 @@ int32_t ST25DV_GetRFField_Dyn( ST25DV_Object_t* pObj, ST25DV_FIELD_STATUS * cons
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of EH_CTRL_DYN register */
+
   status = st25dv_get_eh_ctrl_dyn_field_on(&(pObj->Ctx), &reg_value );
   
-  /* Extract RF Field information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1739,10 +1739,10 @@ int32_t ST25DV_GetVCC_Dyn( ST25DV_Object_t* pObj, ST25DV_VCC_STATUS * const pVCC
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of EH_CTRL_DYN register */
+
   status = st25dv_get_eh_ctrl_dyn_vcc_on(&(pObj->Ctx), &reg_value );
   
-  /* Extract VCC information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1769,12 +1769,12 @@ int32_t ST25DV_ReadRFMngt_Dyn( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of RF_MNGT_DYN register */
+
   status = st25dv_get_rf_mngt_dyn_all(&(pObj->Ctx), &reg_value);
   
   if( status == ST25DV_OK )
   {
-    /* Extract RF Disable configuration */
+
     if( (reg_value & ST25DV_RF_MNGT_DYN_RFDIS_MASK) == ST25DV_RF_MNGT_DYN_RFDIS_MASK )
     {
       pRF_Mngt->RfDisable = ST25DV_ENABLE;
@@ -1784,7 +1784,7 @@ int32_t ST25DV_ReadRFMngt_Dyn( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF
       pRF_Mngt->RfDisable = ST25DV_DISABLE;
     }
     
-    /* Extract RF Sleep configuration */
+
     if( (reg_value & ST25DV_RF_MNGT_DYN_RFSLEEP_MASK) == ST25DV_RF_MNGT_DYN_RFSLEEP_MASK )
     {
       pRF_Mngt->RfSleep = ST25DV_ENABLE;
@@ -1806,7 +1806,7 @@ int32_t ST25DV_ReadRFMngt_Dyn( ST25DV_Object_t* pObj, ST25DV_RF_MNGT * const pRF
   */
 int32_t ST25DV_WriteRFMngt_Dyn( ST25DV_Object_t* pObj, const uint8_t RF_Mngt )
 {
-  /* Write value to RF_MNGT_DYN register */
+
   return st25dv_set_rf_mngt_dyn_all(&(pObj->Ctx), &RF_Mngt);
 }
 
@@ -1821,10 +1821,10 @@ int32_t ST25DV_GetRFDisable_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of RF_MNGT_DYN register */
+
   status = st25dv_get_rf_mngt_dyn_rfdis(&(pObj->Ctx), &reg_value);
   
-  /* Extract RFDisable information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1875,10 +1875,10 @@ int32_t ST25DV_GetRFSleep_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const p
   int32_t status;
   uint8_t reg_value = 0;
   
-  /* Read actual value of RF_MNGT_DYN register */
+
   status = st25dv_get_rf_mngt_dyn_rfsleep(&(pObj->Ctx), &reg_value);
   
-  /* Extract RFSleep information */
+
   if( status == ST25DV_OK )
   {
     if( reg_value )
@@ -1929,11 +1929,11 @@ int32_t ST25DV_ReadMBCtrl_Dyn( ST25DV_Object_t* pObj, ST25DV_MB_CTRL_DYN_STATUS 
   uint8_t reg_value;
   int32_t status;
   
-  /* Read MB_CTRL_DYN register */
+
   status = st25dv_get_mb_ctrl_dyn_all(&(pObj->Ctx), &reg_value);
   if( status == ST25DV_OK )
   {
-    /* Extract Mailbox ctrl information */
+
     pCtrlStatus->MbEnable = (reg_value & ST25DV_MB_CTRL_DYN_MBEN_MASK) >> ST25DV_MB_CTRL_DYN_MBEN_SHIFT;
     pCtrlStatus->HostPutMsg = (reg_value & ST25DV_MB_CTRL_DYN_HOSTPUTMSG_MASK) >> ST25DV_MB_CTRL_DYN_HOSTPUTMSG_SHIFT;
     pCtrlStatus->RfPutMsg = (reg_value & ST25DV_MB_CTRL_DYN_RFPUTMSG_MASK) >> ST25DV_MB_CTRL_DYN_RFPUTMSG_SHIFT;
@@ -1954,7 +1954,7 @@ int32_t ST25DV_GetMBEN_Dyn( ST25DV_Object_t* pObj, ST25DV_EN_STATUS * const pMBE
   uint8_t reg_value;
   int32_t status;
   
-  /* Read MB_CTRL_DYN register */
+
   status = st25dv_get_mb_ctrl_dyn_mben( &(pObj->Ctx),&reg_value );
   if( status == ST25DV_OK )
   {
@@ -1979,7 +1979,7 @@ int32_t ST25DV_SetMBEN_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 1;
     
-  /* Write MB_CTRL_DYN register */
+
   return st25dv_set_mb_ctrl_dyn_mben( &(pObj->Ctx),&reg_value );
 }
 
@@ -1992,7 +1992,7 @@ int32_t ST25DV_ResetMBEN_Dyn( ST25DV_Object_t* pObj )
 {
   uint8_t reg_value = 0;
     
-  /* Write MB_CTRL_DYN register */
+
   return st25dv_set_mb_ctrl_dyn_mben( &(pObj->Ctx),&reg_value );
 }
 
@@ -2004,7 +2004,7 @@ int32_t ST25DV_ResetMBEN_Dyn( ST25DV_Object_t* pObj )
   */
 int32_t ST25DV_ReadMBLength_Dyn( ST25DV_Object_t* pObj, uint8_t * const pMBLength )
 {
-  /* Read actual value of MBLEN_DYN register */
+
   return st25dv_get_mblen_dyn_mblen( &(pObj->Ctx),pMBLength );
 }
 
@@ -2033,9 +2033,9 @@ static int32_t WriteRegWrap(void *handle, uint16_t Reg, const uint8_t* pData, ui
     if( ret == ST25DV_OK )
     {
       int32_t pollstatus;
-      /* Poll until EEPROM is available */
+
       uint32_t tickstart = pObj->IO.GetTick();
-      /* Wait until ST25DV is ready or timeout occurs */
+
       do
       {
         pollstatus = pObj->IO.IsReady( ST25DV_ADDR_SYST_I2C, 1 );
@@ -2060,4 +2060,4 @@ static int32_t WriteRegWrap(void *handle, uint16_t Reg, const uint8_t* pData, ui
  */
 
 
-/******************* (C) COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/
+

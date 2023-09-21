@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_CORTEX_H
 #define STM32L4xx_HAL_CORTEX_H
 
@@ -24,7 +24,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -36,7 +36,7 @@
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 /** @defgroup CORTEX_Exported_Types CORTEX Exported Types
   * @{
   */
@@ -52,7 +52,7 @@ typedef struct
                                                      This parameter can be a value of @ref CORTEX_MPU_Region_Enable                 */
   uint8_t                Number;                /*!< Specifies the number of the region to protect. 
                                                      This parameter can be a value of @ref CORTEX_MPU_Region_Number                 */
-  uint32_t               BaseAddress;           /*!< Specifies the base address of the region to protect.                           */
+  uint32_t               BaseAddress;
   uint8_t                Size;                  /*!< Specifies the size of the region to protect. 
                                                      This parameter can be a value of @ref CORTEX_MPU_Region_Size                   */
   uint8_t                SubRegionDisable;      /*!< Specifies the number of the subregion protection to disable. 
@@ -73,13 +73,13 @@ typedef struct
 /**
   * @}
   */
-#endif /* __MPU_PRESENT */
+#endif
 
 /**
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 
 /** @defgroup CORTEX_Exported_Constants CORTEX Exported Constants
   * @{
@@ -242,13 +242,13 @@ typedef struct
 /**
   * @}
   */
-#endif /* __MPU_PRESENT */
+#endif
 
 /**
   * @}
   */
 
-/* Exported macros -----------------------------------------------------------*/
+
 /** @defgroup CORTEX_Exported_Macros CORTEX Exported Macros
   * @{
   */
@@ -257,7 +257,7 @@ typedef struct
   * @}
   */
 
-/* Exported functions --------------------------------------------------------*/
+
 /** @defgroup CORTEX_Exported_Functions CORTEX Exported Functions
   * @{
   */
@@ -266,7 +266,7 @@ typedef struct
   * @brief    Initialization and Configuration functions
   * @{
   */
-/* Initialization and Configuration functions *****************************/
+
 void HAL_NVIC_SetPriorityGrouping(uint32_t PriorityGroup);
 void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority);
 void HAL_NVIC_EnableIRQ(IRQn_Type IRQn);
@@ -282,7 +282,7 @@ uint32_t HAL_SYSTICK_Config(uint32_t TicksNumb);
   * @brief   Cortex control functions
   * @{
   */
-/* Peripheral Control functions ***********************************************/
+
 uint32_t HAL_NVIC_GetPriorityGrouping(void);
 void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t* pPreemptPriority, uint32_t* pSubPriority);
 uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn);
@@ -297,7 +297,7 @@ void HAL_SYSTICK_Callback(void);
 void HAL_MPU_Enable(uint32_t MPU_Control);
 void HAL_MPU_Disable(void);
 void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
-#endif /* __MPU_PRESENT */
+#endif
 /**
   * @}
   */
@@ -306,10 +306,10 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
   * @}
   */
 
-/* Private types -------------------------------------------------------------*/ 
-/* Private variables ---------------------------------------------------------*/
-/* Private constants ---------------------------------------------------------*/
-/* Private macros ------------------------------------------------------------*/
+
+
+
+
 /** @defgroup CORTEX_Private_Macros CORTEX Private Macros
   * @{
   */
@@ -395,13 +395,13 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
                                      ((SIZE) == MPU_REGION_SIZE_4GB))
 
 #define IS_MPU_SUB_REGION_DISABLE(SUBREGION)  ((SUBREGION) < (uint16_t)0x00FF)
-#endif /* __MPU_PRESENT */
+#endif
 
 /**
   * @}
   */
 
-/* Private functions ---------------------------------------------------------*/
+
 
 /**
   * @}
@@ -415,6 +415,6 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
 }
 #endif
 
-#endif /* STM32L4xx_HAL_CORTEX_H */
+#endif
 
 

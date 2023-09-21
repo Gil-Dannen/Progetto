@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __AUDIO_H
 #define __AUDIO_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -45,7 +45,7 @@
   * @{
   */
 
-/* Codec audio Standards */
+
 #define CODEC_STANDARD                0x04
 #define I2S_STANDARD                  I2S_STANDARD_PHILIPS
 
@@ -101,4 +101,4 @@ typedef struct
 
 #endif /* __AUDIO_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

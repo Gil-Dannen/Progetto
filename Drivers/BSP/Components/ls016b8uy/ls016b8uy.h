@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __LS016B8UY_H
 #define __LS016B8UY_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdio.h>
 #include "../Common/lcd.h"
 
@@ -125,10 +125,10 @@ void     ls016b8uy_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width
 uint16_t ls016b8uy_GetLcdPixelWidth(void);
 uint16_t ls016b8uy_GetLcdPixelHeight(void);
 
-/* LCD driver structure */
+
 extern LCD_DrvTypeDef   ls016b8uy_drv;
 
-/* LCD IO functions */
+
 void     LCD_IO_Init(void);
 void     LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size);
 void     LCD_IO_WriteReg(uint8_t Reg);
@@ -158,4 +158,4 @@ void     LCD_IO_Delay(uint32_t delay);
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

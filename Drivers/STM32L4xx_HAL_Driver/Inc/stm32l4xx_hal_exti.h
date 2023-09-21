@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef STM32L4xx_HAL_EXTI_H
 #define STM32L4xx_HAL_EXTI_H
 
@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -36,7 +36,7 @@ extern "C" {
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /** @defgroup EXTI_Exported_Types EXTI Exported Types
   * @{
@@ -54,8 +54,8 @@ typedef enum
   */
 typedef struct
 {
-  uint32_t Line;                    /*!<  Exti line number */
-  void (* PendingCallback)(void);   /*!<  Exti pending callback */
+  uint32_t Line;
+  void (* PendingCallback)(void);
 } EXTI_HandleTypeDef;
 
 /**
@@ -78,7 +78,7 @@ typedef struct
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
+
 /** @defgroup EXTI_Exported_Constants EXTI Exported Constants
   * @{
   */
@@ -130,7 +130,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L412xx || STM32L422xx */
+#endif
 
 #if defined(STM32L431xx)
 
@@ -176,7 +176,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L431xx */
+#endif
 
 #if defined(STM32L432xx) || defined(STM32L442xx)
 
@@ -222,7 +222,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L432xx || STM32L442xx */
+#endif
 
 #if defined(STM32L433xx) || defined(STM32L443xx)
 
@@ -268,7 +268,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L433xx || STM32L443xx */
+#endif
 
 #if defined(STM32L451xx)
 
@@ -314,7 +314,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x08u)
 
-#endif /* STM32L451xx */
+#endif
 
 #if defined(STM32L452xx) || defined(STM32L462xx)
 
@@ -360,7 +360,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x08u)
 
-#endif /* STM32L452xx || STM32L462xx */
+#endif
 
 #if defined(STM32L471xx)
 
@@ -406,7 +406,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L471xx */
+#endif
 
 #if defined(STM32L475xx) || defined(STM32L485xx)
 
@@ -452,7 +452,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /* STM32L475xx || STM32L485xx  */
+#endif
 
 #if defined(STM32L476xx) || defined(STM32L486xx)
 
@@ -498,7 +498,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x07u)
 #define EXTI_LINE_40                        (EXTI_RESERVED | EXTI_REG2              | 0x08u)
 
-#endif /*  STM32L476xx || STM32L486xx */
+#endif
 
 #if defined(STM32L496xx) || defined(STM32L4A6xx)
 
@@ -544,7 +544,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x07u)
 #define EXTI_LINE_40                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x08u)
 
-#endif /*  STM32L496xx || STM32L4A6xx */
+#endif
 
 #if defined (STM32L4P5xx) || defined (STM32L4Q5xx) || defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
 
@@ -590,7 +590,7 @@ typedef struct
 #define EXTI_LINE_39                        (EXTI_RESERVED | EXTI_REG2              | 0x07u)
 #define EXTI_LINE_40                        (EXTI_DIRECT   | EXTI_REG2 | EXTI_EVENT | 0x08u)
 
-#endif /* STM32L4P5xx || STM32L4Q5xx || STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
 
 /**
   * @}
@@ -638,7 +638,7 @@ typedef struct
   * @}
   */
 
-/* Exported macro ------------------------------------------------------------*/
+
 /** @defgroup EXTI_Exported_Macros EXTI Exported Macros
   * @{
   */
@@ -647,7 +647,7 @@ typedef struct
   * @}
   */
 
-/* Private constants --------------------------------------------------------*/
+
 /** @defgroup EXTI_Private_Constants EXTI Private Constants
   * @{
   */
@@ -696,7 +696,7 @@ typedef struct
   * @}
   */
 
-/* Private macros ------------------------------------------------------------*/
+
 /** @defgroup EXTI_Private_Macros EXTI Private Macros
   * @{
   */
@@ -724,7 +724,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOD) || \
                                          ((__PORT__) == EXTI_GPIOH))
 
-#endif /* STM32L412xx || STM32L422xx */
+#endif
 
 #if defined(STM32L431xx) || defined(STM32L433xx) || defined(STM32L443xx)
 
@@ -735,7 +735,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOE) || \
                                          ((__PORT__) == EXTI_GPIOH))
 
-#endif /* STM32L431xx || STM32L433xx || STM32L443xx */
+#endif
 
 #if defined(STM32L432xx) || defined(STM32L442xx)
 
@@ -744,7 +744,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOC) || \
                                          ((__PORT__) == EXTI_GPIOH))
 
-#endif /* STM32L432xx || STM32L442xx */
+#endif
 
 #if defined(STM32L451xx) || defined(STM32L452xx) || defined(STM32L462xx)
 
@@ -755,7 +755,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOE) || \
                                          ((__PORT__) == EXTI_GPIOH))
 
-#endif /* STM32L451xx || STM32L452xx || STM32L462xx */
+#endif
 
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
 
@@ -768,7 +768,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOG) || \
                                          ((__PORT__) == EXTI_GPIOH))
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+#endif
 
 #if defined(STM32L496xx) || defined(STM32L4A6xx)
 
@@ -782,7 +782,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOH) || \
                                          ((__PORT__) == EXTI_GPIOI))
 
-#endif /* STM32L496xx || STM32L4A6xx */
+#endif
 
 #if defined (STM32L4P5xx) || defined (STM32L4Q5xx) || defined (STM32L4R5xx) || defined (STM32L4R7xx) || defined (STM32L4R9xx) || defined (STM32L4S5xx) || defined (STM32L4S7xx) || defined (STM32L4S9xx)
 
@@ -796,7 +796,7 @@ typedef struct
                                          ((__PORT__) == EXTI_GPIOH) || \
                                          ((__PORT__) == EXTI_GPIOI))
 
-#endif /* STM32L4P5xx || STM32L4Q5xx || STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx */
+#endif
 
 #define IS_EXTI_GPIO_PIN(__PIN__)       ((__PIN__) < 16u)
 /**
@@ -804,7 +804,7 @@ typedef struct
   */
 
 
-/* Exported functions --------------------------------------------------------*/
+
 /** @defgroup EXTI_Exported_Functions EXTI Exported Functions
   * @brief    EXTI Exported Functions
   * @{
@@ -814,7 +814,7 @@ typedef struct
   * @brief    Configuration functions
   * @{
   */
-/* Configuration functions ****************************************************/
+
 HAL_StatusTypeDef HAL_EXTI_SetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig);
 HAL_StatusTypeDef HAL_EXTI_GetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig);
 HAL_StatusTypeDef HAL_EXTI_ClearConfigLine(EXTI_HandleTypeDef *hexti);
@@ -828,7 +828,7 @@ HAL_StatusTypeDef HAL_EXTI_GetHandle(EXTI_HandleTypeDef *hexti, uint32_t ExtiLin
   * @brief    IO operation functions
   * @{
   */
-/* IO operation functions *****************************************************/
+
 void              HAL_EXTI_IRQHandler(EXTI_HandleTypeDef *hexti);
 uint32_t          HAL_EXTI_GetPending(EXTI_HandleTypeDef *hexti, uint32_t Edge);
 void              HAL_EXTI_ClearPending(EXTI_HandleTypeDef *hexti, uint32_t Edge);
@@ -854,5 +854,5 @@ void              HAL_EXTI_GenerateSWI(EXTI_HandleTypeDef *hexti);
 }
 #endif
 
-#endif /* STM32L4xx_HAL_EXTI_H */
+#endif
 

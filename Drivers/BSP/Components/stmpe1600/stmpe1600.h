@@ -18,7 +18,7 @@
   ******************************************************************************
   */ 
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __STMPE1600_H
 #define __STMPE1600_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif   
    
-/* Includes ------------------------------------------------------------------*/
+
 #include "../Common/io.h"
 
 /** @addtogroup BSP
@@ -41,13 +41,13 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
+
 
 /** @defgroup STMPE1600_Exported_Types
   * @{
   */ 
 
-/* Exported constants --------------------------------------------------------*/
+
   
 /** @defgroup STMPE1600_Exported_Constants
   * @{
@@ -122,13 +122,13 @@
   * @}
   */ 
   
-/* Exported macro ------------------------------------------------------------*/
+
   
 /** @defgroup STMPE1600_Exported_Macros
   * @{
   */ 
 
-/* Exported functions --------------------------------------------------------*/
+
   
 /** @defgroup STMPE1600_Exported_Functions
   * @{
@@ -168,7 +168,7 @@ uint8_t  IOE_Read(uint8_t addr, uint8_t reg);
 uint16_t IOE_ReadMultiple(uint8_t addr, uint8_t reg, uint8_t *buffer, uint16_t length);
 void     IOE_WriteMultiple(uint8_t addr, uint8_t reg, uint8_t *buffer, uint16_t length);
 
-/* STMPE1600 driver structure */
+
 extern IO_DrvTypeDef stmpe1600_io_drv;
 
 
@@ -192,4 +192,4 @@ extern IO_DrvTypeDef stmpe1600_io_drv;
 /**
   * @}
   */       
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

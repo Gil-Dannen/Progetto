@@ -18,7 +18,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __PWRMON_H
 #define __PWRMON_H
 
@@ -26,7 +26,7 @@
  extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+
 #include <stdint.h>
 
 /** @addtogroup BSP
@@ -243,4 +243,4 @@ uint8_t                     (*GetFlag)(uint16_t, PWRMON_Flag_t);
 
 #endif /* __PWRMON_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -17,7 +17,7 @@
   ******************************************************************************
   */ 
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "hx8347g.h"
 
 /** @addtogroup BSP
@@ -108,13 +108,13 @@ void hx8347g_Init(void)
   {
     Is_hx8347g_Initialized = 1;
     
-    /* Initialise HX8347G low level bus layer --------------------------------*/
+
     LCD_IO_Init();
     
-    /* HX8347G requests 120ms (worst case) after reset */
+
     LCD_Delay(120);
     
-    /* Driving ability setting */
+
     hx8347g_WriteReg(LCD_REG_234, 0x00);
     hx8347g_WriteReg(LCD_REG_235, 0x20);
     hx8347g_WriteReg(LCD_REG_236, 0x0C);
@@ -125,7 +125,7 @@ void hx8347g_Init(void)
     hx8347g_WriteReg(LCD_REG_242, 0x10);
     hx8347g_WriteReg(LCD_REG_39, 0xA3);
 
-    /* Adjust the Gamma Curve */
+
     hx8347g_WriteReg(LCD_REG_64, 0x01);
     hx8347g_WriteReg(LCD_REG_65, 0x00);
     hx8347g_WriteReg(LCD_REG_66, 0x00);
@@ -154,26 +154,26 @@ void hx8347g_Init(void)
     hx8347g_WriteReg(LCD_REG_92, 0x1D);
     hx8347g_WriteReg(LCD_REG_93, 0xCC);
 
-    /* Power voltage setting */
+
     hx8347g_WriteReg(LCD_REG_27, 0x1B);
     hx8347g_WriteReg(LCD_REG_26, 0x01);
     hx8347g_WriteReg(LCD_REG_36, 0x2F);
     hx8347g_WriteReg(LCD_REG_37, 0x57);
-    /*****VCOM offset ****/
+
     hx8347g_WriteReg(LCD_REG_35, 0x86);
 
     hx8347g_DisplayOn();
 
-    /* Set GRAM Area - Partial Display Control */
+
     hx8347g_WriteReg(LCD_REG_1, 0x00); /* DP_STB = 0, DP_STB_S = 0, SCROLL = 0, */
     hx8347g_SetDisplayWindow(0, 0, hx8347g_GetLcdPixelWidth(), hx8347g_GetLcdPixelHeight());
     hx8347g_WriteReg(LCD_REG_22, 0xA0); /* Memory access control: MY = 1, MX = 0, MV = 1, ML = 0 */
   }
   
-  /* Set the Cursor */ 
+
   hx8347g_SetCursor(0, 0);
     
-  /* Prepare to write GRAM */
+
   LCD_IO_WriteReg(LCD_REG_34);
 }
 
@@ -184,18 +184,18 @@ void hx8347g_Init(void)
   */
 void hx8347g_DisplayOn(void)
 {
-  /* Power On sequence ---------------------------------------------------------*/
+
   hx8347g_WriteReg(LCD_REG_24, 0x36); /* Display frame rate = 70Hz RADJ = '0110' */
   hx8347g_WriteReg(LCD_REG_25, 0x01); /* OSC_EN = 1 */
   hx8347g_WriteReg(LCD_REG_28, 0x06); /* AP[2:0] = 111 */
   hx8347g_WriteReg(LCD_REG_31, 0x90); /* GAS=1, VOMG=00, PON=1, DK=0, XDK=0, DVDH_TRI=0, STB=0*/
   LCD_Delay(10);
-  /* 262k/65k color selection */
+
   hx8347g_WriteReg(LCD_REG_23, 0x05); /* default 0x06 262k color,  0x05 65k color */
-  /* SET PANEL */
+
   hx8347g_WriteReg(LCD_REG_54, 0x09); /* SS_PANEL = 1, GS_PANEL = 0,REV_PANEL = 0, BGR_PANEL = 1 */
  
-  /* Display On */
+
   hx8347g_WriteReg(LCD_REG_40, 0x38);
   LCD_Delay(60);
   hx8347g_WriteReg(LCD_REG_40, 0x3C);
@@ -208,12 +208,12 @@ void hx8347g_DisplayOn(void)
   */
 void hx8347g_DisplayOff(void)
 {
-  /* Display Off */
+
   hx8347g_WriteReg(LCD_REG_40, 0x38);
   LCD_Delay(60);
   hx8347g_WriteReg(LCD_REG_40, 0x04);
 
-  /* Power Off sequence ---------------------------------------------------------*/
+
   hx8347g_WriteReg(LCD_REG_23, 0x0000); /* default 0x06 262k color,  0x05 65k color */
   hx8347g_WriteReg(LCD_REG_24, 0x0000); /* Display frame rate = 70Hz RADJ = '0110' */
   hx8347g_WriteReg(LCD_REG_25, 0x0000); /* OSC_EN = 1 */
@@ -253,7 +253,7 @@ uint16_t hx8347g_ReadID(void)
   {
     LCD_IO_Init();
 
-    /* HX8347G requests 120ms (worst case) after reset */
+
     LCD_Delay(120);
   }
   return (hx8347g_ReadReg(0x00));
@@ -282,13 +282,13 @@ void hx8347g_SetCursor(uint16_t Xpos, uint16_t Ypos)
   */
 void hx8347g_WritePixel(uint16_t Xpos, uint16_t Ypos, uint16_t RGBCode)
 {
-  /* Set Cursor */
+
   hx8347g_SetCursor(Xpos, Ypos);
   
-  /* Prepare to write GRAM */
+
   LCD_IO_WriteReg(LCD_REG_34);
 
-  /* Write 16-bit GRAM Reg */
+
   LCD_IO_WriteMultipleData((uint8_t*)&RGBCode, 2);
 }
 
@@ -299,13 +299,13 @@ void hx8347g_WritePixel(uint16_t Xpos, uint16_t Ypos, uint16_t RGBCode)
   */
 uint16_t hx8347g_ReadPixel(uint16_t Xpos, uint16_t Ypos)
 {
-  /* Set Cursor */
+
   hx8347g_SetCursor(Xpos, Ypos);
 
-  /* Dummy read */
+
   LCD_IO_ReadData(LCD_REG_34);
   
-  /* Read 16-bit Reg */
+
   return (LCD_IO_ReadData(LCD_REG_34));
 }
 
@@ -319,7 +319,7 @@ void hx8347g_WriteReg(uint8_t LCDReg, uint16_t LCDRegValue)
 {
   LCD_IO_WriteReg(LCDReg);
   
-  /* Write 16-bit GRAM Reg */
+
   LCD_IO_WriteMultipleData((uint8_t*)&LCDRegValue, 2);
 }
 
@@ -330,10 +330,10 @@ void hx8347g_WriteReg(uint8_t LCDReg, uint16_t LCDRegValue)
   */
 uint16_t hx8347g_ReadReg(uint8_t LCDReg)
 {
-  /* Write 16-bit Index (then Read Reg) */
+
   LCD_IO_WriteReg(LCDReg);
 
-  /* Read 16-bit Reg */
+
   return (LCD_IO_ReadData(LCDReg));
 }
 
@@ -347,19 +347,19 @@ uint16_t hx8347g_ReadReg(uint8_t LCDReg)
   */
 void hx8347g_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
-  /* Horizontal GRAM Start Address */
+
   hx8347g_WriteReg(LCD_REG_6, (Xpos) >> 8); /* SP */
   hx8347g_WriteReg(LCD_REG_7, (Xpos) & 0xFF); /* SP */
 
-  /* Horizontal GRAM End Address */
+
   hx8347g_WriteReg(LCD_REG_8, (Xpos + Height - 1) >> 8); /* EP */
   hx8347g_WriteReg(LCD_REG_9, (Xpos + Height - 1) & 0xFF); /* EP */
 
-  /* Vertical GRAM Start Address */
+
   hx8347g_WriteReg(LCD_REG_2, (Ypos) >> 8); /* SC */
   hx8347g_WriteReg(LCD_REG_3, (Ypos) & 0xFF); /* SC */
 
-  /* Vertical GRAM End Address */
+
   hx8347g_WriteReg(LCD_REG_4, (Ypos + Width - 1) >> 8); /* EC */
   hx8347g_WriteReg(LCD_REG_5, (Ypos + Width - 1) & 0xFF); /* EC */
 }
@@ -376,13 +376,13 @@ void hx8347g_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t 
 {
   uint32_t i = 0;
   
-  /* Set Cursor */
+
   hx8347g_SetCursor(Xpos, Ypos); 
   
-  /* Prepare to write GRAM */
+
   LCD_IO_WriteReg(LCD_REG_34);
 
-  /* Sent a complete line */
+
   for(i = 0; i < Length; i++)
   {
     ArrayRGB[i] = RGBCode;
@@ -403,19 +403,19 @@ void hx8347g_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t 
 {
   uint16_t counter = 0;
   
-  /* Set Cursor */
+
   hx8347g_SetCursor(Xpos, Ypos);
 
-  /* Prepare to write GRAM */
+
   LCD_IO_WriteReg(LCD_REG_34);
 
-  /* Fill a complete vertical line */
+
   for(counter = 0; counter < Length; counter++)
   {
     ArrayRGB[counter] = RGBCode;
   }
   
-  /* Write 16-bit GRAM Reg */
+
   LCD_IO_WriteMultipleData((uint8_t*)&ArrayRGB[0], Length * 2);
 }
 
@@ -428,29 +428,29 @@ void hx8347g_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
 {
   uint32_t index = 0, size = 0;
   
-  /* Read bitmap size */
+
   size = *(volatile uint16_t *) (pbmp + 2);
   size |= (*(volatile uint16_t *) (pbmp + 4)) << 16;
-  /* Get bitmap data address offset */
+
   index = *(volatile uint16_t *) (pbmp + 10);
   index |= (*(volatile uint16_t *) (pbmp + 12)) << 16;
   size = (size - index)/2;
   pbmp += index;
   
-  /* Set GRAM write direction and BGR = 0 */
-  /* Memory access control: MY = 1, MX = 0, MV = 1, ML = 0 */
+
+
   hx8347g_WriteReg(LCD_REG_22, 0xE0);
 
-  /* Set Cursor */
+
   hx8347g_SetCursor(Xpos, Ypos);  
   
-  /* Prepare to write GRAM */
+
   LCD_IO_WriteReg(LCD_REG_34);
  
   LCD_IO_WriteMultipleData((uint8_t*)pbmp, size*2);
  
-  /* Set GRAM write direction and BGR = 0 */
-  /* Memory access control: MY = 1, MX = 1, MV = 1, ML = 0 */
+
+
   hx8347g_WriteReg(LCD_REG_22, 0xA0);
 }
 
@@ -470,4 +470,4 @@ void hx8347g_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
   * @}
   */
   
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

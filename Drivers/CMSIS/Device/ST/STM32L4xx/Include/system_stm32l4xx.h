@@ -54,11 +54,11 @@
                is no need to call the 2 first functions listed above, since SystemCoreClock
                variable is updated automatically.
   */
-extern uint32_t SystemCoreClock;            /*!< System Clock Frequency (Core Clock) */
+extern uint32_t SystemCoreClock;
 
-extern const uint8_t  AHBPrescTable[16];    /*!< AHB prescalers table values */
-extern const uint8_t  APBPrescTable[8];     /*!< APB prescalers table values */
-extern const uint32_t MSIRangeTable[12];    /*!< MSI ranges table values     */
+extern const uint8_t  AHBPrescTable[16];
+extern const uint8_t  APBPrescTable[8];
+extern const uint32_t MSIRangeTable[12];
 
 /**
   * @}
@@ -94,7 +94,7 @@ extern void SystemCoreClockUpdate(void);
 }
 #endif
 
-#endif /*__SYSTEM_STM32L4XX_H */
+#endif
 
 /**
   * @}

@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+
 #include "stm32l475e_iot01.h"
 
 /** @defgroup BSP BSP
@@ -98,7 +98,7 @@ static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler, uint
 static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint16_t DevAddress, uint32_t Trials);
 static void              I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr);
 
-/* Sensors IO functions */
+
 void     SENSOR_IO_Init(void);
 void     SENSOR_IO_DeInit(void);
 void     SENSOR_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
@@ -145,7 +145,7 @@ void BSP_LED_Init(Led_TypeDef Led)
   GPIO_InitTypeDef  gpio_init_structure;
   
   LEDx_GPIO_CLK_ENABLE(Led);
-  /* Configure the GPIO_LED pin */
+
   gpio_init_structure.Pin   = GPIO_PIN[Led];
   gpio_init_structure.Mode  = GPIO_MODE_OUTPUT_PP;
   gpio_init_structure.Pull  = GPIO_NOPULL;
@@ -164,10 +164,10 @@ void BSP_LED_DeInit(Led_TypeDef Led)
 {
   GPIO_InitTypeDef  gpio_init_structure;
   
-  /* DeInit the GPIO_LED pin */
+
   gpio_init_structure.Pin = GPIO_PIN[Led];
   
-  /* Turn off LED */
+
   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_RESET);
   HAL_GPIO_DeInit(GPIO_PORT[Led], gpio_init_structure.Pin);
 }
@@ -220,12 +220,12 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
 {
   GPIO_InitTypeDef gpio_init_structure;
   
-  /* Enable the BUTTON clock */
+
   USER_BUTTON_GPIO_CLK_ENABLE();
   
   if(ButtonMode == BUTTON_MODE_GPIO)
   {
-    /* Configure Button pin as input */
+
     gpio_init_structure.Pin = BUTTON_PIN[Button];
     gpio_init_structure.Mode = GPIO_MODE_INPUT;
     gpio_init_structure.Pull = GPIO_PULLUP;
@@ -235,7 +235,7 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
   
   if(ButtonMode == BUTTON_MODE_EXTI)
   {
-    /* Configure Button pin as input with External interrupt */
+
     gpio_init_structure.Pin = BUTTON_PIN[Button];
     gpio_init_structure.Pull = GPIO_PULLUP;
     gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -244,7 +244,7 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
     
     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
     
-    /* Enable and set Button EXTI Interrupt to the lowest priority */
+
     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
   }
@@ -291,14 +291,14 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
 {
   GPIO_InitTypeDef gpio_init_structure;
 
-  /* Enable GPIO clock */
+
   DISCOVERY_COMx_TX_GPIO_CLK_ENABLE(COM);
   DISCOVERY_COMx_RX_GPIO_CLK_ENABLE(COM);
 
-  /* Enable USART clock */
+
   DISCOVERY_COMx_CLK_ENABLE(COM);
 
-  /* Configure USART Tx as alternate function */
+
   gpio_init_structure.Pin = COM_TX_PIN[COM];
   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -306,13 +306,13 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
   gpio_init_structure.Alternate = COM_TX_AF[COM];
   HAL_GPIO_Init(COM_TX_PORT[COM], &gpio_init_structure);
 
-  /* Configure USART Rx as alternate function */
+
   gpio_init_structure.Pin = COM_RX_PIN[COM];
   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
   gpio_init_structure.Alternate = COM_RX_AF[COM];
   HAL_GPIO_Init(COM_RX_PORT[COM], &gpio_init_structure);
 
-  /* USART configuration */
+
   huart->Instance = COM_USART[COM];
   HAL_UART_Init(huart);
 }
@@ -327,11 +327,11 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
   */
 void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
 {
-  /* USART configuration */
+
   huart->Instance = COM_USART[COM];
   HAL_UART_DeInit(huart);
 
-  /* Enable USART clock */
+
   DISCOVERY_COMx_CLK_DISABLE(COM);
 
   /* DeInit GPIO pins can be done in the application 
@@ -346,7 +346,7 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
                             BUS OPERATIONS
 *******************************************************************************/
 
-/******************************* I2C Routines *********************************/
+
 /**
   * @brief  Initializes I2C MSP.
   * @param  i2c_handler  I2C handler
@@ -356,11 +356,11 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
 {
   GPIO_InitTypeDef  gpio_init_structure;
 
-  /*** Configure the GPIOs ***/
-  /* Enable GPIO clock */
+
+
   DISCOVERY_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
 
-  /* Configure I2C Tx, Rx as alternate function */
+
   gpio_init_structure.Pin = DISCOVERY_I2Cx_SCL_PIN | DISCOVERY_I2Cx_SDA_PIN;
   gpio_init_structure.Mode = GPIO_MODE_AF_OD;
   gpio_init_structure.Pull = GPIO_PULLUP;
@@ -370,21 +370,21 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
 
   HAL_GPIO_Init(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
 
-  /*** Configure the I2C peripheral ***/
-  /* Enable I2C clock */
+
+
   DISCOVERY_I2Cx_CLK_ENABLE();
 
-  /* Force the I2C peripheral clock reset */
+
   DISCOVERY_I2Cx_FORCE_RESET();
 
-  /* Release the I2C peripheral clock reset */
+
   DISCOVERY_I2Cx_RELEASE_RESET();
 
-  /* Enable and set I2Cx Interrupt to a lower priority */
+
   HAL_NVIC_SetPriority(DISCOVERY_I2Cx_EV_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
 
-  /* Enable and set I2Cx Interrupt to a lower priority */
+
   HAL_NVIC_SetPriority(DISCOVERY_I2Cx_ER_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
 }
@@ -398,13 +398,13 @@ static void I2Cx_MspDeInit(I2C_HandleTypeDef *i2c_handler)
 {
   GPIO_InitTypeDef  gpio_init_structure;
   
-  /* Configure I2C Tx, Rx as alternate function */
+
   gpio_init_structure.Pin = DISCOVERY_I2Cx_SCL_PIN | DISCOVERY_I2Cx_SDA_PIN;
   HAL_GPIO_DeInit(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, gpio_init_structure.Pin);
-  /* Disable GPIO clock */
+
   DISCOVERY_I2Cx_SCL_SDA_GPIO_CLK_DISABLE();
   
-  /* Disable I2C clock */
+
   DISCOVERY_I2Cx_CLK_DISABLE();
 }
 
@@ -415,7 +415,7 @@ static void I2Cx_MspDeInit(I2C_HandleTypeDef *i2c_handler)
   */
 static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
 {
-  /* I2C configuration */
+
   i2c_handler->Instance              = DISCOVERY_I2Cx;
   i2c_handler->Init.Timing           = DISCOVERY_I2Cx_TIMING;
   i2c_handler->Init.OwnAddress1      = 0;
@@ -425,11 +425,11 @@ static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
   i2c_handler->Init.GeneralCallMode  = I2C_GENERALCALL_DISABLE;
   i2c_handler->Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
 
-  /* Init the I2C */
+
   I2Cx_MspInit(i2c_handler);
   HAL_I2C_Init(i2c_handler);
   
-  /**Configure Analogue filter */
+
   HAL_I2CEx_ConfigAnalogFilter(i2c_handler, I2C_ANALOGFILTER_ENABLE);  
 }
 
@@ -460,10 +460,10 @@ static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler, uint8
 
   status = HAL_I2C_Mem_Read(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
 
-  /* Check the communication status */
+
   if(status != HAL_OK)
   {
-    /* I2C error occurred */
+
     I2Cx_Error(i2c_handler, Addr);
   }
   return status;
@@ -486,10 +486,10 @@ static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler, uint
 
   status = HAL_I2C_Mem_Write(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
 
-  /* Check the communication status */
+
   if(status != HAL_OK)
   {
-    /* Re-Initiaize the I2C Bus */
+
     I2Cx_Error(i2c_handler, Addr);
   }
   return status;
@@ -516,10 +516,10 @@ static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint
   */
 static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
 {
-  /* De-initialize the I2C communication bus */
+
   HAL_I2C_DeInit(i2c_handler);
   
-  /* Re-Initialize the I2C communication bus */
+
   I2Cx_Init(i2c_handler);
 }
 
@@ -530,7 +530,7 @@ static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
 /*******************************************************************************
                             LINK OPERATIONS
 *******************************************************************************/
-/******************************** LINK Sensors ********************************/
+
 
 /**
   * @brief  Initializes Sensors low level.
@@ -627,7 +627,7 @@ void SENSOR_IO_Delay(uint32_t Delay)
   HAL_Delay(Delay);
 }
 
-/******************************** LINK NFC ********************************/
+
 
 /**
   * @brief  Initializes Sensors low level.
@@ -638,13 +638,13 @@ void NFC_IO_Init(uint8_t GpoIrqEnable)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
 
-  /* I2C init */
+
   I2Cx_Init(&hI2cHandler);
   
-  /* GPIO Ports Clock Enable */
+
   NFC_GPIO_CLK_ENABLE();
   
-  /* Configure GPIO pins for GPO (PE4) */
+
   if(GpoIrqEnable == 0)
   {
     GPIO_InitStruct.Pin = NFC_GPIO_GPO_PIN;
@@ -660,12 +660,12 @@ void NFC_IO_Init(uint8_t GpoIrqEnable)
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(NFC_GPIO_GPO_PIN_PORT, &GPIO_InitStruct);
-    /* Enable and set EXTI4_IRQn Interrupt to the lowest priority */
+
     HAL_NVIC_SetPriority(EXTI4_IRQn, 3, 0);
     HAL_NVIC_EnableIRQ(EXTI4_IRQn);    
   }
   
-  /* Configure GPIO pins for DISABLE (PE2)*/
+
   GPIO_InitStruct.Pin = NFC_GPIO_RFDISABLE_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -692,7 +692,7 @@ uint16_t NFC_IO_ReadMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length )
 {
   uint16_t status ;
     
-    /* Before calling this function M24SR must be ready: check to detect potential issues */
+
   status = NFC_IO_IsDeviceReady(Addr, NFC_I2C_TRIALS);
   if (status != NFC_I2C_STATUS_SUCCESS)
   {
@@ -718,7 +718,7 @@ uint16_t  NFC_IO_WriteMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length)
 {
   uint16_t status ;
     
-  /* Before calling this function M24SR must be ready: check to detect potential issues */
+
   status = NFC_IO_IsDeviceReady(Addr, NFC_I2C_TRIALS);
   if (status != NFC_I2C_STATUS_SUCCESS)
   {
@@ -745,10 +745,10 @@ uint16_t   NFC_IO_IsDeviceReady (uint8_t Addr, uint32_t Trials)
     uint32_t tickstart = 0;
     uint32_t currenttick = 0;
     
-    /* Get tick */
+
     tickstart = HAL_GetTick();
     
-    /* Wait until M24SR is ready or timeout occurs */
+
     do
     {
         status = HAL_I2C_IsDeviceReady(&hI2cHandler, Addr, Trials, NFC_I2C_TIMEOUT_STD);
@@ -803,4 +803,4 @@ void NFC_IO_Delay(uint32_t Delay)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

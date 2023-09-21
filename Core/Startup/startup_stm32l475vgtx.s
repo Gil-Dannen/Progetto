@@ -36,13 +36,13 @@
 /* start address for the initialization values of the .data section.
 defined in linker script */
 .word	_sidata
-/* start address for the .data section. defined in linker script */
+
 .word	_sdata
-/* end address for the .data section. defined in linker script */
+
 .word	_edata
-/* start address for the .bss section. defined in linker script */
+
 .word	_sbss
-/* end address for the .bss section. defined in linker script */
+
 .word	_ebss
 
 .equ  BootRAM,        0xF1E0F85F
@@ -61,10 +61,10 @@ defined in linker script */
 Reset_Handler:
   ldr   sp, =_estack    /* Set stack pointer */
 
-/* Call the clock system initialization function.*/
+
     bl  SystemInit
 
-/* Copy the data segment initializers from flash to SRAM */
+
   ldr r0, =_sdata
   ldr r1, =_edata
   ldr r2, =_sidata
@@ -81,7 +81,7 @@ LoopCopyDataInit:
   cmp r4, r1
   bcc CopyDataInit
   
-/* Zero fill the bss segment. */
+
   ldr r2, =_sbss
   ldr r4, =_ebss
   movs r3, #0
@@ -95,9 +95,9 @@ LoopFillZerobss:
   cmp r2, r4
   bcc FillZerobss
 
-/* Call static constructors */
+
     bl __libc_init_array
-/* Call the application's entry point.*/
+
 	bl	main
 
 LoopForever:
