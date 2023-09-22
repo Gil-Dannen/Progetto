@@ -12,7 +12,8 @@
 			".project": true,
 			"*.arxml": true,
 			"*.code-workspace": true,
-			".vscode": true
+			".vscode": true,
+			"*.ld": true
 		},
 		"C_Cpp.intelliSenseEngineFallback": "Enabled",
 		"C_Cpp.vcFormat.indent.preserveComments": true,
