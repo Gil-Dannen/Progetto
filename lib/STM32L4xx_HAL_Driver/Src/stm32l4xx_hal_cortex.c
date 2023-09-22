@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_cortex.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    16-September-2015
   * @brief   CORTEX HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the CORTEX:
@@ -22,28 +20,7 @@
     This section provides functions allowing to configure the NVIC interrupts (IRQ).
     The Cortex-M4 exceptions are managed by CMSIS functions.
 
-    (#) Configure the NVIC Priority Grouping using HAL_NVIC_SetPriorityGrouping()
-        function according to the following table.
-     The table below gives the allowed values of the pre-emption priority and subpriority according
-     to the Priority Grouping configuration performed by HAL_NVIC_SetPriorityGrouping() function.
-       ==========================================================================================================================
-         NVIC_PriorityGroup   | NVIC_IRQChannelPreemptionPriority | NVIC_IRQChannelSubPriority  |       Description
-       ==========================================================================================================================
-        NVIC_PRIORITYGROUP_0  |                0                  |            0-15             | 0 bit for pre-emption priority
-                              |                                   |                             | 4 bits for subpriority
-       --------------------------------------------------------------------------------------------------------------------------
-        NVIC_PRIORITYGROUP_1  |                0-1                |            0-7              | 1 bit for pre-emption priority
-                              |                                   |                             | 3 bits for subpriority
-       --------------------------------------------------------------------------------------------------------------------------    
-        NVIC_PRIORITYGROUP_2  |                0-3                |            0-3              | 2 bits for pre-emption priority
-                              |                                   |                             | 2 bits for subpriority
-       --------------------------------------------------------------------------------------------------------------------------    
-        NVIC_PRIORITYGROUP_3  |                0-7                |            0-1              | 3 bits for pre-emption priority
-                              |                                   |                             | 1 bit for subpriority
-       --------------------------------------------------------------------------------------------------------------------------    
-        NVIC_PRIORITYGROUP_4  |                0-15               |            0                | 4 bits for pre-emption priority
-                              |                                   |                             | 0 bit for subpriority                       
-       ==========================================================================================================================
+    (#) Configure the NVIC Priority Grouping using HAL_NVIC_SetPriorityGrouping() function.
     (#) Configure the priority of the selected IRQ Channels using HAL_NVIC_SetPriority().
     (#) Enable the selected IRQ Channels using HAL_NVIC_EnableIRQ().
 
@@ -87,31 +64,38 @@
 
   @endverbatim
   ******************************************************************************
+
+  The table below gives the allowed values of the pre-emption priority and subpriority according
+  to the Priority Grouping configuration performed by HAL_NVIC_SetPriorityGrouping() function.
+  
+    ==========================================================================================================================
+      NVIC_PriorityGroup   | NVIC_IRQChannelPreemptionPriority | NVIC_IRQChannelSubPriority  |       Description
+    ==========================================================================================================================
+     NVIC_PRIORITYGROUP_0  |                0                  |            0-15             | 0 bit for pre-emption priority
+                           |                                   |                             | 4 bits for subpriority
+    --------------------------------------------------------------------------------------------------------------------------
+     NVIC_PRIORITYGROUP_1  |                0-1                |            0-7              | 1 bit for pre-emption priority
+                           |                                   |                             | 3 bits for subpriority
+    --------------------------------------------------------------------------------------------------------------------------    
+     NVIC_PRIORITYGROUP_2  |                0-3                |            0-3              | 2 bits for pre-emption priority
+                           |                                   |                             | 2 bits for subpriority
+    --------------------------------------------------------------------------------------------------------------------------    
+     NVIC_PRIORITYGROUP_3  |                0-7                |            0-1              | 3 bits for pre-emption priority
+                           |                                   |                             | 1 bit for subpriority
+    --------------------------------------------------------------------------------------------------------------------------    
+     NVIC_PRIORITYGROUP_4  |                0-15               |            0                | 4 bits for pre-emption priority
+                           |                                   |                             | 0 bit for subpriority                       
+    ==========================================================================================================================
+
+  ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file in
+  * the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -334,6 +318,9 @@ void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t *pPre
   */
 void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn)
 {
+  /* Check the parameters */
+  assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
+  
   /* Set interrupt pending */
   NVIC_SetPendingIRQ(IRQn);
 }
@@ -349,6 +336,9 @@ void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn)
   */
 uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
 {
+  /* Check the parameters */
+  assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
+  
   /* Return 1 if pending else 0 */
   return NVIC_GetPendingIRQ(IRQn);
 }
@@ -362,6 +352,9 @@ uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
   */
 void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn)
 {
+  /* Check the parameters */
+  assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
+  
   /* Clear pending interrupt */
   NVIC_ClearPendingIRQ(IRQn);
 }
@@ -424,6 +417,42 @@ __weak void HAL_SYSTICK_Callback(void)
 
 #if (__MPU_PRESENT == 1)
 /**
+  * @brief  Enable the MPU.
+  * @param  MPU_Control: Specifies the control mode of the MPU during hard fault, 
+  *          NMI, FAULTMASK and privileged accessto the default memory 
+  *          This parameter can be one of the following values:
+  *            @arg MPU_HFNMI_PRIVDEF_NONE
+  *            @arg MPU_HARDFAULT_NMI
+  *            @arg MPU_PRIVILEGED_DEFAULT
+  *            @arg MPU_HFNMI_PRIVDEF
+  * @retval None
+  */
+void HAL_MPU_Enable(uint32_t MPU_Control)
+{
+  /* Enable the MPU */
+  MPU->CTRL = (MPU_Control | MPU_CTRL_ENABLE_Msk);
+
+  /* Ensure MPU setting take effects */
+  __DSB();
+  __ISB();
+}
+
+
+/**
+  * @brief  Disable the MPU.
+  * @retval None
+  */
+void HAL_MPU_Disable(void)
+{
+  /* Make sure outstanding transfers are done */
+  __DMB();
+
+  /* Disable the MPU and clear the control register*/
+  MPU->CTRL  = 0;
+}
+
+
+/**
   * @brief  Initialize and configure the Region and the memory to be protected.
   * @param  MPU_Init: Pointer to a MPU_Region_InitTypeDef structure that contains
   *                the initialization and configuration information.
@@ -485,6 +514,4 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
