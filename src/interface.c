@@ -56,16 +56,17 @@ uint8_t button = 0;
 void beforeLoop(uint8_t deltaMs)
 {
     timer += deltaMs;
+    if (readDigital(MF_BlePins))
+	{ // if an event occurs let's catch it
+		catchBLE();
+		return;
+	}
 }
 
 void loop(uint8_t deltaMs)
 {
 
-    if (readDigital(MF_BlePins))
-    { // if an event occurs let's catch it
-        catchBLE();
-        return;
-    }
+
 
     if (timer >= timeout || (readDigital(MF_Button) && !button))
     {
@@ -76,7 +77,7 @@ void loop(uint8_t deltaMs)
     if(update)
     {
     	update = 0;
-    	//updateCharValue(CUSTOM_SERVICE_HANDLE, TEMP_CHAR_HANDLE, 0, (17), sprintf("%d",(int)bspGetValue(BSP_temperature)*10));
+    	updateCharValue(CUSTOM_SERVICE_HANDLE, TEMP_CHAR_HANDLE, 0, (17), sprintf("%d",(int)bspGetValue(BSP_temperature)*10));
     }
 
     button = readDigital(MF_Button);
