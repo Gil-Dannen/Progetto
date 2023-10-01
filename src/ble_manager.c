@@ -55,23 +55,21 @@ uint8_t EVENT_DISCONNECTED[] = {0x04, 0x05, 0x04, 0x00};
 
 #define EVENT_STARTUP_SIZE 6
 
-
-                                                // 1 atribute service +2 attribute char readable+3*(2 NOTIFYABLE READABLE charachteristics)
+// 1 atribute service +2 attribute char readable+3*(2 NOTIFYABLE READABLE charachteristics)
 
 void resetBleModule()
 {
     HAL_GPIO_WritePin(BLE_RESET_GPIO_Port, BLE_RESET_Pin, GPIO_PIN_RESET);
-    HAL_Delay(10);
+    sleep(10);
     HAL_GPIO_WritePin(BLE_RESET_GPIO_Port, BLE_RESET_Pin, GPIO_PIN_SET);
 }
 
 extern SPI_HandleTypeDef hspi3;
-uint8_t deviceName[] = {'S', 'T', 'M', '3', '2','L','4','7','5'};
+uint8_t deviceName[] = {'S', 'T', 'M', '3', '2', 'L', '4', '7', '5'};
 // char deviceName[]={'S','T','M','3','2'};//NOT REVERSED, INCREDIBLE STRINGS ARE NOT LITTLE ENDIAN
 // attributes are 1 for service, 2 for readable char and 3 for notify/readable characteristcs
 
 uint8_t buffer[255];
-
 
 uint16_t stackInitCompleteFlag = 0;
 uint8_t *rxEvent;
@@ -94,7 +92,7 @@ void ble_init()
             stackInitCompleteFlag |= 0x01;
         }
     }
-    HAL_Delay(10);
+    sleep(10);
     free(rxEvent);
 
     // INIT GATT
@@ -148,9 +146,7 @@ void ble_init()
     // This will start the advertisment,
     setConnectable();
 
-    
-
-    HAL_Delay(10);
+    sleep(10);
 }
 
 int fetchBleEvent(uint8_t *container, int size)
@@ -163,7 +159,7 @@ int fetchBleEvent(uint8_t *container, int size)
     if (HAL_GPIO_ReadPin(BLE_INT_GPIO_Port, BLE_INT_Pin))
     {
 
-        HAL_Delay(5);
+        sleep(5);
         // PIN_CS of SPI2 LOW
         HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 0);
 
@@ -171,7 +167,7 @@ int fetchBleEvent(uint8_t *container, int size)
         // we send a byte containing a request of reading followed by 4 dummy bytes
         HAL_SPI_TransmitReceive(&hspi3, master_header, slave_header, 5, 1);
         HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 1);
-        HAL_Delay(1);
+        sleep(1);
         HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 0);
 
         HAL_SPI_TransmitReceive(&hspi3, master_header, slave_header, 5, 1);
@@ -316,7 +312,7 @@ void setConnectable()
     free(rxEvent);
     free(discoverableCommand);
     free(localname);
-    HAL_Delay(10);
+    sleep(10);
 }
 
 int BLE_command(uint8_t *command, int size, uint8_t *result, int sizeRes, int returnHandles)
@@ -341,7 +337,7 @@ int BLE_command(uint8_t *command, int size, uint8_t *result, int sizeRes, int re
     {
         response = checkEventResp(rxEvent, result, sizeRes);
     }
-    HAL_Delay(10);
+    sleep(10);
 
     return response;
 }

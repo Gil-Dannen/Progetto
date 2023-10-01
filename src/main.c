@@ -2,12 +2,12 @@
 #include "main.h"
 #include "ble_interface.h"
 #include "ble_manager.h"
+#include "time_manager.h"
 
 TIM_HandleTypeDef htim6;
 I2C_HandleTypeDef hi2c2;
 UART_HandleTypeDef huart1;
 SPI_HandleTypeDef hspi3;
-
 
 static const uint8_t dt = 2;
 
@@ -28,26 +28,18 @@ int main(void)
     MX_I2C2_Init();
     MX_TIM6_Init();
 
-
-    ble_init();
-    HAL_Delay(10);
-    bleProjectSetup();
-
     setup();
-
 
     HAL_TIM_Base_Start_IT(&htim6);
 
     while (1)
     {
-        HAL_Delay(dt);
+        sleep(dt);
         beforeLoop(dt);
         loop(dt);
         afterLoop(dt);
-
     }
 }
-
 
 void SystemClock_Config(void)
 {
@@ -102,7 +94,8 @@ void SystemClock_Config(void)
  * @brief GPIO Initialization Function
  * @param None
  * @retval None
- *//**
+ */
+/**
  * @brief I2C2 Initialization Function
  * @param None
  * @retval None
@@ -110,44 +103,43 @@ void SystemClock_Config(void)
 static void MX_I2C2_Init(void)
 {
 
- /* USER CODE BEGIN I2C2_Init 0 */
+    /* USER CODE BEGIN I2C2_Init 0 */
 
- /* USER CODE END I2C2_Init 0 */
+    /* USER CODE END I2C2_Init 0 */
 
- /* USER CODE BEGIN I2C2_Init 1 */
+    /* USER CODE BEGIN I2C2_Init 1 */
 
- /* USER CODE END I2C2_Init 1 */
- hi2c2.Instance = I2C2;
- hi2c2.Init.Timing = 0x10909CEC;
- hi2c2.Init.OwnAddress1 = 0;
- hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
- hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
- hi2c2.Init.OwnAddress2 = 0;
- hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
- hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
- hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
- if (HAL_I2C_Init(&hi2c2) != HAL_OK)
- {
-   Error_Handler();
- }
+    /* USER CODE END I2C2_Init 1 */
+    hi2c2.Instance = I2C2;
+    hi2c2.Init.Timing = 0x10909CEC;
+    hi2c2.Init.OwnAddress1 = 0;
+    hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    hi2c2.Init.OwnAddress2 = 0;
+    hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+    hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+    {
+        Error_Handler();
+    }
 
- /** Configure Analogue filter
- */
- if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
- {
-   Error_Handler();
- }
+    /** Configure Analogue filter
+     */
+    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+    {
+        Error_Handler();
+    }
 
- /** Configure Digital filter
- */
- if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
- {
-   Error_Handler();
- }
- /* USER CODE BEGIN I2C2_Init 2 */
+    /** Configure Digital filter
+     */
+    if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    /* USER CODE BEGIN I2C2_Init 2 */
 
- /* USER CODE END I2C2_Init 2 */
-
+    /* USER CODE END I2C2_Init 2 */
 }
 
 /**
@@ -158,36 +150,35 @@ static void MX_I2C2_Init(void)
 static void MX_SPI3_Init(void)
 {
 
- /* USER CODE BEGIN SPI3_Init 0 */
+    /* USER CODE BEGIN SPI3_Init 0 */
 
- /* USER CODE END SPI3_Init 0 */
+    /* USER CODE END SPI3_Init 0 */
 
- /* USER CODE BEGIN SPI3_Init 1 */
+    /* USER CODE BEGIN SPI3_Init 1 */
 
- /* USER CODE END SPI3_Init 1 */
- /* SPI3 parameter configuration*/
- hspi3.Instance = SPI3;
- hspi3.Init.Mode = SPI_MODE_MASTER;
- hspi3.Init.Direction = SPI_DIRECTION_2LINES;
- hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
- hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
- hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
- hspi3.Init.NSS = SPI_NSS_SOFT;
- hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
- hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
- hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
- hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
- hspi3.Init.CRCPolynomial = 7;
- hspi3.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
- hspi3.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
- if (HAL_SPI_Init(&hspi3) != HAL_OK)
- {
-   Error_Handler();
- }
- /* USER CODE BEGIN SPI3_Init 2 */
+    /* USER CODE END SPI3_Init 1 */
+    /* SPI3 parameter configuration*/
+    hspi3.Instance = SPI3;
+    hspi3.Init.Mode = SPI_MODE_MASTER;
+    hspi3.Init.Direction = SPI_DIRECTION_2LINES;
+    hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
+    hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
+    hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
+    hspi3.Init.NSS = SPI_NSS_SOFT;
+    hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+    hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
+    hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
+    hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+    hspi3.Init.CRCPolynomial = 7;
+    hspi3.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+    hspi3.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+    if (HAL_SPI_Init(&hspi3) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    /* USER CODE BEGIN SPI3_Init 2 */
 
- /* USER CODE END SPI3_Init 2 */
-
+    /* USER CODE END SPI3_Init 2 */
 }
 
 /**
@@ -198,34 +189,33 @@ static void MX_SPI3_Init(void)
 static void MX_TIM6_Init(void)
 {
 
- /* USER CODE BEGIN TIM6_Init 0 */
+    /* USER CODE BEGIN TIM6_Init 0 */
 
- /* USER CODE END TIM6_Init 0 */
+    /* USER CODE END TIM6_Init 0 */
 
- TIM_MasterConfigTypeDef sMasterConfig = {0};
+    TIM_MasterConfigTypeDef sMasterConfig = {0};
 
- /* USER CODE BEGIN TIM6_Init 1 */
+    /* USER CODE BEGIN TIM6_Init 1 */
 
- /* USER CODE END TIM6_Init 1 */
- htim6.Instance = TIM6;
- htim6.Init.Prescaler = 0;
- htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
- htim6.Init.Period = 65535;
- htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
- if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
- {
-   Error_Handler();
- }
- sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
- sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
- {
-   Error_Handler();
- }
- /* USER CODE BEGIN TIM6_Init 2 */
+    /* USER CODE END TIM6_Init 1 */
+    htim6.Instance = TIM6;
+    htim6.Init.Prescaler = 0;
+    htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+    htim6.Init.Period = 65535;
+    htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+    if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+    sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+    if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    /* USER CODE BEGIN TIM6_Init 2 */
 
- /* USER CODE END TIM6_Init 2 */
-
+    /* USER CODE END TIM6_Init 2 */
 }
 
 /**
@@ -235,78 +225,78 @@ static void MX_TIM6_Init(void)
  */
 static void MX_GPIO_Init(void)
 {
- GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    /* USER CODE BEGIN MX_GPIO_Init_1 */
+    /* USER CODE END MX_GPIO_Init_1 */
 
- /* GPIO Ports Clock Enable */
- __HAL_RCC_GPIOE_CLK_ENABLE();
- __HAL_RCC_GPIOC_CLK_ENABLE();
- __HAL_RCC_GPIOA_CLK_ENABLE();
- __HAL_RCC_GPIOB_CLK_ENABLE();
- __HAL_RCC_GPIOD_CLK_ENABLE();
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
 
- /*Configure GPIO pin Output Level */
- HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
- /*Configure GPIO pin Output Level */
- HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 
- /*Configure GPIO pin Output Level */
- HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
 
- /*Configure GPIO pin Output Level */
- HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
 
- /*Configure GPIO pin Output Level */
- HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
 
- /*Configure GPIO pin : PE6 */
- GPIO_InitStruct.Pin = GPIO_PIN_6;
- GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+    /*Configure GPIO pin : PE6 */
+    GPIO_InitStruct.Pin = GPIO_PIN_6;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
- /*Configure GPIO pin : PC13 */
- GPIO_InitStruct.Pin = GPIO_PIN_13;
- GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    /*Configure GPIO pin : PC13 */
+    GPIO_InitStruct.Pin = GPIO_PIN_13;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
- /*Configure GPIO pins : PA5 PA8 */
- GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_8;
- GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    /*Configure GPIO pins : PA5 PA8 */
+    GPIO_InitStruct.Pin = GPIO_PIN_5 | GPIO_PIN_8;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
- /*Configure GPIO pin : PB14 */
- GPIO_InitStruct.Pin = GPIO_PIN_14;
- GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    /*Configure GPIO pin : PB14 */
+    GPIO_InitStruct.Pin = GPIO_PIN_14;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
- /*Configure GPIO pin : PD13 */
- GPIO_InitStruct.Pin = GPIO_PIN_13;
- GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
- HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    /*Configure GPIO pin : PD13 */
+    GPIO_InitStruct.Pin = GPIO_PIN_13;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
- /*Configure GPIO pin : PC6 */
- GPIO_InitStruct.Pin = GPIO_PIN_6;
- GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- GPIO_InitStruct.Pull = GPIO_NOPULL;
- GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    /*Configure GPIO pin : PC6 */
+    GPIO_InitStruct.Pin = GPIO_PIN_6;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
- /* EXTI interrupt init*/
- HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
- HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+    /* USER CODE BEGIN MX_GPIO_Init_2 */
+    /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -323,15 +313,16 @@ static void MX_GPIO_Init(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
- /* USER CODE BEGIN Callback 0 */
+    /* USER CODE BEGIN Callback 0 */
 
- /* USER CODE END Callback 0 */
- if (htim->Instance == TIM1) {
-   HAL_IncTick();
- }
- /* USER CODE BEGIN Callback 1 */
+    /* USER CODE END Callback 0 */
+    if (htim->Instance == TIM1)
+    {
+        HAL_IncTick();
+    }
+    /* USER CODE BEGIN Callback 1 */
 
- /* USER CODE END Callback 1 */
+    /* USER CODE END Callback 1 */
 }
 
 /**
@@ -340,16 +331,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  */
 void Error_Handler(void)
 {
- /* USER CODE BEGIN Error_Handler_Debug */
- /* User can add his own implementation to report the HAL error return state */
- __disable_irq();
- while (1)
- {
- }
- /* USER CODE END Error_Handler_Debug */
+    /* USER CODE BEGIN Error_Handler_Debug */
+    /* User can add his own implementation to report the HAL error return state */
+    __disable_irq();
+    while (1)
+    {
+    }
+    /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
  * @brief  Reports the name of the source file and the source line number
  *         where the assert_param error has occurred.
@@ -359,9 +350,9 @@ void Error_Handler(void)
  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
- /* USER CODE BEGIN 6 */
- /* User can add his own implementation to report the file name and line number,
-    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
- /* USER CODE END 6 */
+    /* USER CODE BEGIN 6 */
+    /* User can add his own implementation to report the file name and line number,
+       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
