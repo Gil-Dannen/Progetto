@@ -2,14 +2,15 @@
 #include "main.h"
 #include <string.h>
 
-UART_HandleTypeDef huart1;
 
+extern UART_HandleTypeDef huart1;
 
 
 HAL_StatusTypeDef sendMessage(char * text)
 {
 	return HAL_UART_Transmit(&huart1,(uint8_t*)text,strlen(text),1000);
 }
+
 
 void uart_init(void)
 {

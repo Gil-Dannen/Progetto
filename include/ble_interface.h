@@ -15,6 +15,6 @@ void bleLoop(uint8_t);
 
 void initObject(BM bleMessage,uint8_t * uid,uint8_t handle[2], char * message);
 
-BLE_Object objects[BLE_COUNT];
+//BLE_Object objects[BLE_COUNT];
 
 #endif

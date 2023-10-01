@@ -19,7 +19,7 @@ typedef struct
 #define NOTIFIBLE 0x10
 #define WRITABLE 0x04
 
-uint8_t CUSTOM_SERVICE_HANDLE[2];
+extern uint8_t CUSTOM_SERVICE_HANDLE[2];
 
 void resetBleModule();
 

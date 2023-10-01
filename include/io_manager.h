@@ -14,6 +14,7 @@ typedef enum MappedFunction{
 	MF_undefined = 0,
 	MF_Button,
 	MF_led1,
+	MF_BlePins,
 	MF_COUNT
 }MF;
 

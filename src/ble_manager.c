@@ -1,7 +1,10 @@
 #include "ble_manager.h"
 #include "ble_interface.h"
+#include "stm32l4xx_hal_spi.h"
 
 // BLE Commands
+
+uint8_t CUSTOM_SERVICE_HANDLE[2];
 
 uint8_t EVENT_STATUP_DATA[] = {0x04, 0xff, 0x03, 0x01, 0x00, 0x01};
 
@@ -62,7 +65,7 @@ void resetBleModule()
     HAL_GPIO_WritePin(BLE_RESET_GPIO_Port, BLE_RESET_Pin, GPIO_PIN_SET);
 }
 
-SPI_HandleTypeDef hspi3;
+extern SPI_HandleTypeDef hspi3;
 uint8_t deviceName[] = {'S', 'T', 'M', '3', '2','L','4','7','5'};
 // char deviceName[]={'S','T','M','3','2'};//NOT REVERSED, INCREDIBLE STRINGS ARE NOT LITTLE ENDIAN
 // attributes are 1 for service, 2 for readable char and 3 for notify/readable characteristcs
