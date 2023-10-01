@@ -1,10 +1,13 @@
 #include "interface.h"
 #include <stdio.h>
 #include "ble_interface.h"
+#include "ble_manager.h"
+
 
 static const unsigned int timeout = 3000;
 static unsigned int timer = 0;
-uint8_t update = 0;
+int dataAvailable=0;
+int update=0;
 
 void setup()
 {
@@ -16,8 +19,8 @@ void setup()
     setMappedFunction(MF_Button, GPIOC, GPIO_PIN_13, 0, 1);
     setMappedFunction(MF_led1, GPIOA, GPIO_PIN_5, 0, 1);
     setMappedFunction(MF_BlePins, GPIOE, GPIO_PIN_6, 0, 1);
-    ble_init();
-    bleProjectSetup();
+
+
 }
 
 static uint8_t UUID_CHAR_TEMP[] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x05, 0x00};
@@ -58,11 +61,11 @@ void beforeLoop(uint8_t deltaMs)
 void loop(uint8_t deltaMs)
 {
 
-    /*if (readDigital(MF_BlePins))
+    if (readDigital(MF_BlePins))
     { // if an event occurs let's catch it
         catchBLE();
+        return;
     }
-    __WFI();*/
 
     if (timer >= timeout || (readDigital(MF_Button) && !button))
     {
@@ -73,13 +76,15 @@ void loop(uint8_t deltaMs)
     if(update)
     {
     	update = 0;
-    	updateCharValue(CUSTOM_SERVICE_HANDLE, TEMP_CHAR_HANDLE, 0, (17), sprintf("%d",(int)bspGetValue(BSP_temperature)*10));
+    	//updateCharValue(CUSTOM_SERVICE_HANDLE, TEMP_CHAR_HANDLE, 0, (17), sprintf("%d",(int)bspGetValue(BSP_temperature)*10));
     }
 
     button = readDigital(MF_Button);
     setDigital(MF_led1, !button);
+
 }
 
 void afterLoop(uint8_t deltaMs)
 {
+	__WFI();
 }

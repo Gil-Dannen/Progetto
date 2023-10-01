@@ -25,6 +25,9 @@ void resetBleModule();
 
 void ble_init();
 
+
+
+
 int fetchBleEvent(uint8_t *container, int size);
 
 // check if the event that was fetched is what I expected
