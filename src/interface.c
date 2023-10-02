@@ -34,6 +34,13 @@ void testBSPfunctions()
 
 void setup()
 {
+    setMappedFunction(MF_Button, GPIOC, GPIO_PIN_13, 0, 1);
+    setMappedFunction(MF_led1, GPIOA, GPIO_PIN_5, 0, 1);
+    setMappedFunction(MF_led2, GPIOB, GPIO_PIN_14, 0, 1);
+    setMappedFunction(MF_BleInt, GPIOE, GPIO_PIN_6, 0, 1);
+    setMappedFunction(MF_BleCS, GPIOD, GPIO_PIN_13, 0, 1);
+    setMappedFunction(MF_BleReset, GPIOA, GPIO_PIN_8, 0, 1);
+
     ble_init();
 
     sleep(10);
@@ -46,10 +53,7 @@ void setup()
 
     bspFunctionInit();
 
-    setMappedFunction(MF_Button, GPIOC, GPIO_PIN_13, 0, 1);
-    setMappedFunction(MF_led1, GPIOA, GPIO_PIN_5, 0, 1);
-    setMappedFunction(MF_led2, GPIOB, GPIO_PIN_14, 0, 1);
-    setMappedFunction(MF_BlePins, GPIOE, GPIO_PIN_6, 0, 1);
+    
 
     setTimer(TF_Main, testBSPfunctions, 3000);
 
@@ -64,7 +68,7 @@ uint8_t button = 0;
 
 void beforeLoop(uint8_t deltaMs)
 {
-    if (readDigital(MF_BlePins))
+    if (readDigital(MF_BleInt))
     { // if an event occurs let's catch it
         catchBLE();
         return;

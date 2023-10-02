@@ -1,6 +1,7 @@
 #include "ble_manager.h"
 #include "ble_interface.h"
 #include "stm32l4xx_hal_spi.h"
+#include "io_manager.h"
 
 // BLE Commands
 
@@ -43,14 +44,6 @@ uint8_t UPDATE_CHAR[] = {0x01, 0x06, 0xFD, 0x09, 0xff, 0xff, 0xff, 0xff, 0x01, 0
 
 uint8_t EVENT_DISCONNECTED[] = {0x04, 0x05, 0x04, 0x00};
 
-#define BLE_INT_Pin GPIO_PIN_6
-#define BLE_INT_GPIO_Port GPIOE
-#define BLE_INT_EXTI_IRQn EXTI9_5_IRQn
-#define BLE_CS_Pin GPIO_PIN_13
-#define BLE_CS_GPIO_Port GPIOD
-#define BLE_RESET_Pin GPIO_PIN_8
-#define BLE_RESET_GPIO_Port GPIOA
-
 #define BLE_OK 0
 
 #define EVENT_STARTUP_SIZE 6
@@ -59,9 +52,9 @@ uint8_t EVENT_DISCONNECTED[] = {0x04, 0x05, 0x04, 0x00};
 
 void resetBleModule()
 {
-    HAL_GPIO_WritePin(BLE_RESET_GPIO_Port, BLE_RESET_Pin, GPIO_PIN_RESET);
+    setDigital(MF_BleReset,GPIO_PIN_RESET);
     sleep(10);
-    HAL_GPIO_WritePin(BLE_RESET_GPIO_Port, BLE_RESET_Pin, GPIO_PIN_SET);
+    setDigital(MF_BleReset,GPIO_PIN_SET);
 }
 
 extern SPI_HandleTypeDef hspi3;
@@ -156,19 +149,19 @@ int fetchBleEvent(uint8_t *container, int size)
     uint8_t slave_header[5];
 
     // Wait until it is available an event coming from the BLE module (GPIO PIN COULD CHANGE ACCORDING TO THE BOARD)
-    if (HAL_GPIO_ReadPin(BLE_INT_GPIO_Port, BLE_INT_Pin))
+    if (readDigital(MF_BleInt))
     {
 
         sleep(5);
         // PIN_CS of SPI2 LOW
-        HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 0);
+        setDigital(MF_BleCS, GPIO_PIN_RESET);
 
         // SPI2 in this case, it could change according to the board
         // we send a byte containing a request of reading followed by 4 dummy bytes
         HAL_SPI_TransmitReceive(&hspi3, master_header, slave_header, 5, 1);
-        HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 1);
+        setDigital(MF_BleCS, GPIO_PIN_SET);
         sleep(1);
-        HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 0);
+        setDigital(MF_BleCS, GPIO_PIN_RESET);
 
         HAL_SPI_TransmitReceive(&hspi3, master_header, slave_header, 5, 1);
 
@@ -190,11 +183,11 @@ int fetchBleEvent(uint8_t *container, int size)
             {
                 HAL_SPI_TransmitReceive(&hspi3, (uint8_t *)&dummy, container + i, 1, 1);
             }
-            HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 1);
+            setDigital(MF_BleCS, GPIO_PIN_SET);
         }
         else
         {
-            HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 1);
+            setDigital(MF_BleCS, GPIO_PIN_SET);
             return -1;
         }
 
@@ -236,7 +229,7 @@ void sendCommand(uint8_t *command, int size)
     do
     {
 
-        HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 0);
+        setDigital(MF_BleCS, GPIO_PIN_RESET);
 
         // wait until it is possible to write
 
@@ -252,7 +245,7 @@ void sendCommand(uint8_t *command, int size)
             result = -1;
         }
         // HAL_GPIO_WritePin(CPU_LED_GPIO_Port,CPU_LED_Pin,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(BLE_CS_GPIO_Port, BLE_CS_Pin, 1);
+        setDigital(MF_BleCS, GPIO_PIN_SET);
     } while (result != 0);
 }
 
@@ -323,7 +316,7 @@ int BLE_command(uint8_t *command, int size, uint8_t *result, int sizeRes, int re
     rxEvent = (uint8_t *)malloc(sizeRes + 2 * returnHandles);
 
     long contatore = 0;
-    while (!HAL_GPIO_ReadPin(BLE_INT_GPIO_Port, BLE_INT_Pin))
+    while (!readDigital(MF_BleInt))
     {
         contatore++;
         if (contatore > 30000)

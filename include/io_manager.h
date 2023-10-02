@@ -15,7 +15,9 @@ typedef enum MappedFunction{
 	MF_Button,
 	MF_led1,
     MF_led2,
-	MF_BlePins,
+	MF_BleInt,
+    MF_BleCS,
+    MF_BleReset,
 	MF_COUNT
 }MF;
 
