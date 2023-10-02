@@ -2,5 +2,6 @@
     "files.associations": {
         "stm32l475e_iot01_accelero.h": "c",
         "io_manager.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
