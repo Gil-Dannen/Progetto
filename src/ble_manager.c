@@ -5,7 +5,7 @@
 #include "time_manager.h"
 
 // BLE Commands
-
+extern int dataAvailable;
 uint8_t CUSTOM_SERVICE_HANDLE[2];
 
 uint8_t EVENT_STATUP_DATA[] = {0x04, 0xff, 0x03, 0x01, 0x00, 0x01};
@@ -192,6 +192,8 @@ int fetchBleEvent(uint8_t *container, int size)
         setDigital(MF_BleCS, GPIO_PIN_SET);
         return BE_ERROR_NO_DATA;
     }
+
+    dataAvailable = 0;
 
     // let's stop the SPI2
     return BE_OK;
