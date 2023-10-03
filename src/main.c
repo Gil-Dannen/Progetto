@@ -34,10 +34,7 @@ int main(void)
 
     while (1)
     {
-        sleep(dt);
-        beforeLoop(dt);
         loop(dt);
-        afterLoop(dt);
     }
 }
 

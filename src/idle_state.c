@@ -1,8 +1,9 @@
-#include "interface.h"
+#include "startup_state.h"
 #include <stdio.h>
 #include "ble_interface.h"
 #include "ble_manager.h"
 #include "time_manager.h"
+#include "state_machine.h"
 
 int dataAvailable = 0;
 int update = 0;
@@ -32,29 +33,8 @@ void testBSPfunctions()
     sendMessage(Test);
 }
 
-void setup()
+void idle_enter()
 {
-    setMappedFunction(MF_Button, GPIOC, GPIO_PIN_13, 0, 1);
-    setMappedFunction(MF_led1, GPIOA, GPIO_PIN_5, 0, 1);
-    setMappedFunction(MF_led2, GPIOB, GPIO_PIN_14, 0, 1);
-    setMappedFunction(MF_BleInt, GPIOE, GPIO_PIN_6, 0, 1);
-    setMappedFunction(MF_BleCS, GPIOD, GPIO_PIN_13, 0, 1);
-    setMappedFunction(MF_BleReset, GPIOA, GPIO_PIN_8, 0, 1);
-
-    ble_init();
-
-    sleep(10);
-
-    bleProjectSetup();
-
-    initTimers();
-
-    uart_init();
-
-    bspFunctionInit();
-
-    
-
     setTimer(TF_Main, testBSPfunctions, 3000);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
@@ -66,7 +46,7 @@ static uint8_t VALUE_TEMP[] = {'{', '\"', 'T', 'e', 'm', 'p', '"', ':', '\"', '+
 
 uint8_t button = 0;
 
-void beforeLoop(uint8_t deltaMs)
+void idle_beforeLoop(uint8_t deltaMs)
 {
     if (readDigital(MF_BleInt))
     { // if an event occurs let's catch it
@@ -75,7 +55,7 @@ void beforeLoop(uint8_t deltaMs)
     }
 }
 
-void loop(uint8_t deltaMs)
+void idle_loop(uint8_t deltaMs)
 {
     if (readDigital(MF_Button) && !button)
     {
@@ -92,7 +72,7 @@ void loop(uint8_t deltaMs)
     setDigital(MF_led1, !button);
 }
 
-void afterLoop(uint8_t deltaMs)
+void idle_afterLoop(uint8_t deltaMs)
 {
     __WFI();
 }

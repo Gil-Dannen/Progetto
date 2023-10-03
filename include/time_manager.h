@@ -12,6 +12,8 @@ typedef enum
 
 void initTimers();
 
+void setStateMachineTimer(uint64_t * stateTimer);
+
 void setTimer(Timer_Function,void (*)(void),uint64_t);
 
 void resetTimer(Timer_Function);

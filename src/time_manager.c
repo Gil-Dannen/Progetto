@@ -1,6 +1,6 @@
 #include "time_manager.h"
 
-
+uint64_t * stateMachineTimer = NULL;
 struct Timer
 {
 	uint64_t value;
@@ -42,11 +42,20 @@ void resetTimer(Timer_Function function)
 	timers[function].value = 0;
 }
 
+
+
+void setStateMachineTimer(uint64_t * stateTimer)
+{
+    stateMachineTimer = stateTimer;
+    *stateMachineTimer = 0;
+}
+
 void sleep(uint32_t time)
 {
 
 	for(uint8_t tick = 0; tick <= time; tick ++){
 		HAL_Delay(tick);
+        *stateMachineTimer += tick;
 
 		for(uint8_t i = 0; i < TF_COUNT; i++){
 			timers[i].value += tick;
