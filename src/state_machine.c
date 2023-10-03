@@ -58,9 +58,17 @@ void setup()
     states[ST_IDLE].beforeLoop = idle_beforeLoop;
     states[ST_IDLE].loop = idle_loop;
     states[ST_IDLE].afterLoop = idle_afterLoop;
+
     setStateMachineTimer(&timeInCurrentState_timer);
-    setState(ST_STARTUP);
+
     initDone = 1;
+    for(int i = ST_UNDEFINED + 1; i < ST_COUNT; i++)
+    {
+        initDone &= states[i].enter && states[i].beforeLoop && states[i].loop && states[i].afterLoop;
+    }
+    
+    setState(ST_STARTUP);
+    
     
 }
 

@@ -8,7 +8,6 @@ typedef enum
     ST_UNDEFINED,
     ST_STARTUP,
     ST_IDLE,
-    ST_EMERGENCY,
     ST_COUNT,
 }States;
 
