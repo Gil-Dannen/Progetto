@@ -1,15 +1,7 @@
 #ifndef INCLUDE_STATE_MACHINE_H_
 #define INCLUDE_STATE_MACHINE_H_
 
-#include "stm32l4xx_hal.h"
-
-typedef enum
-{
-    ST_UNDEFINED,
-    ST_STARTUP,
-    ST_IDLE,
-    ST_COUNT,
-}States;
+#include "state_all.h"
 
 void setup();
 

@@ -1,6 +1,4 @@
 #include "state_machine.h"
-#include "startup_state.h"
-#include "idle_state.h"
 #include "time_manager.h"
 #include "uart_manager.h"
 #include <stdio.h>
@@ -13,15 +11,7 @@ static uint64_t timeInCurrentState_timer = 0;
 
 uint8_t initDone = 0;
 
-typedef struct 
-{
-    void (*enter)();
-    void (*beforeLoop)(uint8_t);
-    void (*loop)(uint8_t);
-    void (*afterLoop)(uint8_t);
-    uint64_t timeout;
-    States nextState;
-}StateStruct;
+
 
 StateStruct states[ST_COUNT];
 
@@ -65,15 +55,7 @@ void setStateTimeout(States state, uint64_t timeout)
 
 void setup()
 {
-    states[ST_STARTUP].enter = startup_enter;
-    states[ST_STARTUP].beforeLoop = startup_beforeLoop;
-    states[ST_STARTUP].loop = startup_loop;
-    states[ST_STARTUP].afterLoop = startup_afterLoop;
-
-    states[ST_IDLE].enter = idle_enter;
-    states[ST_IDLE].beforeLoop = idle_beforeLoop;
-    states[ST_IDLE].loop = idle_loop;
-    states[ST_IDLE].afterLoop = idle_afterLoop;
+    externalSetup(states);
 
     setStateMachineTimer(&timeInCurrentState_timer);
 
