@@ -1,5 +1,7 @@
 #include "time_manager.h"
 
+static uint64_t deltaTimeCounter = 0; 
+
 uint64_t * stateMachineTimer = NULL;
 struct Timer
 {
@@ -8,6 +10,16 @@ struct Timer
 	uint64_t timeout;
 
 }timers[TF_COUNT];
+
+void resetDeltaTime()
+{
+    deltaTimeCounter = 0;
+}
+
+uint64_t deltaTime()
+{
+    return deltaTimeCounter;
+}
 
 uint8_t isValidTimer(Timer_Function function)
 {
@@ -56,6 +68,7 @@ void sleep(uint32_t time)
 	for(uint8_t tick = 0; tick <= time; tick ++){
 		HAL_Delay(tick);
         *stateMachineTimer += tick;
+        deltaTimeCounter += tick;
 
 		for(uint8_t i = 0; i < TF_COUNT; i++){
 			timers[i].value += tick;
