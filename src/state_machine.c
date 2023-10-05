@@ -76,7 +76,9 @@ void loop(uint8_t dt)
 {
     if(!initDone)
         return;
+    resetDeltaTime();
     sleep(dt);
+    
     
     if(debugEnabled)
         if((timeInCurrentState_timer % 10) == 0){
@@ -100,7 +102,7 @@ void loop(uint8_t dt)
     if(stActualState->timeout 
     && stActualState->nextState
     && stActualState->nextState != actualState
-    && timeInCurrentState_timer>= stActualState->timeout)
+    && timeInCurrentState_timer >= stActualState->timeout)
         setState(stActualState->nextState);
     
 

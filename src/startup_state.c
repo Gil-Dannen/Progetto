@@ -37,7 +37,6 @@ void startup_enter()
 
 void startup_beforeLoop(uint8_t deltaMs)
 {
-
 }
 
 void startup_loop(uint8_t deltaMs)
