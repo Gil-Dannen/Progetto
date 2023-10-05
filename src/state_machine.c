@@ -13,13 +13,19 @@ static uint64_t timeInCurrentState_timer = 0;
 
 uint8_t initDone = 0;
 
-struct 
+typedef struct 
 {
     void (*enter)();
     void (*beforeLoop)(uint8_t);
     void (*loop)(uint8_t);
     void (*afterLoop)(uint8_t);
-}states[ST_COUNT];
+    uint64_t timeout;
+    States nextState;
+}StateStruct;
+
+StateStruct states[ST_COUNT];
+
+// This struct must be only in this file
 
 uint8_t isValidState(States state)
 {
@@ -47,6 +53,16 @@ States state()
     return actualState;
 }
 
+void setStateTimeout(States state, uint64_t timeout)
+{
+    if(isValidState(state) && timeout)
+    {
+        states[actualState].nextState = state;
+        states[actualState].timeout = timeout;
+    }
+}
+// This function must be called in enter
+
 void setup()
 {
     states[ST_STARTUP].enter = startup_enter;
@@ -64,6 +80,8 @@ void setup()
     initDone = 1;
     for(int i = ST_UNDEFINED + 1; i < ST_COUNT; i++)
     {
+        states[i].timeout = 0;
+        states[i].nextState = ST_UNDEFINED;
         initDone &= states[i].enter && states[i].beforeLoop && states[i].loop && states[i].afterLoop;
     }
     
@@ -84,16 +102,25 @@ void loop(uint8_t dt)
             sprintf(text,"Actual state: %d",actualState);
             sendMessage(text);
         }
+
+    StateStruct * stActualState = &states[actualState];
     
     if(actualState != previousState){
         timeInCurrentState_timer = 0;
-        states[actualState].enter();
+        stActualState->enter();
         previousState = actualState;
     }
     
-    states[actualState].beforeLoop(dt);
-    states[actualState].loop(dt);
-    states[actualState].afterLoop(dt);
+    stActualState->beforeLoop(dt);
+    stActualState->loop(dt);
+    stActualState->afterLoop(dt);
+
+    if(stActualState->timeout 
+    && stActualState->nextState
+    && stActualState->nextState != actualState
+    && timeInCurrentState_timer>= stActualState->timeout)
+        setState(stActualState->nextState);
+    
 
 }
 

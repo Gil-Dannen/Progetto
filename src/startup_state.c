@@ -29,6 +29,9 @@ void startup_enter()
     resetTimer(TF_Main);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
+
+    setStateTimeout(ST_IDLE,1000);
+
 }
 
 
@@ -39,8 +42,6 @@ void startup_beforeLoop(uint8_t deltaMs)
 
 void startup_loop(uint8_t deltaMs)
 {
-    if(isTimerExpired(TF_Main,1000))
-        setState(ST_IDLE);
 }
 
 void startup_afterLoop(uint8_t deltaMs)
