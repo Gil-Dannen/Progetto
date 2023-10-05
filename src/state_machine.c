@@ -7,7 +7,7 @@ uint8_t debugEnabled = 0;
 
 States actualState = ST_UNDEFINED;
 States previousState = ST_UNDEFINED;
-static uint64_t timeInCurrentState_timer = 0;
+static uint64_t timeInCurrentStateTimer = 0;
 
 uint8_t initDone = 0;
 
@@ -24,7 +24,7 @@ uint8_t isValidState(States state)
 
 uint64_t timeInCurrentState()
 {
-    return timeInCurrentState_timer;
+    return timeInCurrentStateTimer;
 }
 
 uint8_t setState(States newState)
@@ -57,7 +57,7 @@ void setup()
 {
     externalSetup(states);
 
-    setStateMachineTimer(&timeInCurrentState_timer);
+    setStateMachineTimer(&timeInCurrentStateTimer);
 
     initDone = 1;
     for(int i = ST_UNDEFINED + 1; i < ST_COUNT; i++)
@@ -81,7 +81,7 @@ void loop(uint8_t dt)
     
     
     if(debugEnabled)
-        if((timeInCurrentState_timer % 10) == 0){
+        if((timeInCurrentStateTimer % 10) == 0){
             char text[30];
             sprintf(text,"Actual state: %d",actualState);
             sendMessage(text);
@@ -90,7 +90,7 @@ void loop(uint8_t dt)
     StateStruct * stActualState = &states[actualState];
     
     if(actualState != previousState){
-        timeInCurrentState_timer = 0;
+        timeInCurrentStateTimer = 0;
         stActualState->enter();
         previousState = actualState;
     }
@@ -102,7 +102,7 @@ void loop(uint8_t dt)
     if(stActualState->timeout 
     && stActualState->nextState
     && stActualState->nextState != actualState
-    && timeInCurrentState_timer >= stActualState->timeout)
+    && timeInCurrentStateTimer >= stActualState->timeout)
         setState(stActualState->nextState);
     
 
