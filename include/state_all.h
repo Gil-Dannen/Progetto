@@ -28,6 +28,7 @@ typedef struct
     void (*beforeLoop)(uint8_t);
     void (*loop)(uint8_t);
     void (*afterLoop)(uint8_t);
+    uint8_t (*exitCondition)();
     uint64_t timeout;
     States nextState;
 }StateStruct;

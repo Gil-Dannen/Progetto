@@ -25,15 +25,22 @@ uint64_t timeInCurrentState()
     return timeInCurrentStateTimer;
 }
 
+void setExitCondition(States nextState,uint8_t (*exitCondition)() )
+{
+	if(!isValidState(nextState) || !exitCondition)
+		return;
+	states[actualState].exitCondition = exitCondition;
+	states[actualState].nextState = nextState;
+}
+
 uint8_t setState(States newState)
 {
-    if(isValidState(newState))
-    {
-        previousState = actualState;
-        actualState = newState;  
-        return 1;
-    }
-    return 0;
+    if(!isValidState(newState))
+    	return 0;
+	previousState = actualState;
+	actualState = newState;
+	return 1;
+
 }
 
 States state()
@@ -97,12 +104,27 @@ void loop(uint8_t dt)
     stActualState->loop(dt);
     stActualState->afterLoop(dt);
 
-    if(stActualState->timeout 
-    && stActualState->nextState
-    && stActualState->nextState != actualState
-    && timeInCurrentStateTimer >= stActualState->timeout)
-        setState(stActualState->nextState);
     
+    if(isValidState(stActualState->nextState)
+    	&& stActualState->nextState != actualState)
+    // controlling if nextState exist and it's valid
+    {
+    	if(stActualState->timeout
+    		&& timeInCurrentStateTimer >= stActualState->timeout){
+    	// Automatic timeout exit
+    		setState(stActualState->nextState);
+    	}
+
+    	if(!stActualState->exitCondition)
+    		return;
+
+		if(stActualState->exitCondition())
+		// Automatic exit on callback condition
+			setState(stActualState->nextState);
+
+    }
+
+
 
 }
 

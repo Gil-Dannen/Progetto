@@ -1,7 +1,8 @@
 #include "ble_check_state.h"
 #include "ble_interface.h"
 #include "ble_manager.h"
-#include "state_machine.h"
+#include "state_machine.h"ù
+#include "general_functions.h"
 
 int dataAvailable = 0;
 int update = 0;
@@ -23,29 +24,25 @@ void ble_check_enter()
 
     setDigital(MF_led2, GPIO_PIN_RESET);
 
+    setExitCondition(ST_IDLE, buttonToggled);
+
 }
 
-static uint8_t button = 0;
 
 void ble_check_beforeLoop(uint8_t deltaMs)
 {
-    if (readDigital(MF_BleInt))
-    {
-        catchBLE();
-        return;
-    }
+
 }
 
 void ble_check_loop(uint8_t deltaMs)
 {
-    if (readDigital(MF_Button) && !button)
-    {
-        setState(ST_IDLE);
-    }
 
-    button = readDigital(MF_Button);
-
-    if (update)
+    if (readDigital(MF_BleInt))
+	{
+		catchBLE();
+		return;
+	}
+    else if (update)
     {
         update = 0;
         updateSignedFloat(CUSTOM_SERVICE_HANDLE,TEMP_CHAR_HANDLE,VALUE_TEMP,9,bspGetValue(BSP_temperature) *10);

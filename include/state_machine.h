@@ -16,6 +16,7 @@ uint8_t setState(States state);
 uint64_t timeInCurrentState();
 
 void setStateTimeout(States state, uint64_t timeout);
+void setExitCondition(States nextState,uint8_t (*exitCondition)() );
 
 States state();
 

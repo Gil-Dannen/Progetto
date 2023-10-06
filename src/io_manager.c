@@ -86,5 +86,6 @@ float *bspGetTripleValue(bspTF function)
 
 float readAnalog(MF mf)
 {
+	// (Hal read)* factor + offset
     return 0.f;
 }
