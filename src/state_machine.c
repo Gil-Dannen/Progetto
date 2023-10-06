@@ -1,6 +1,4 @@
 #include "state_machine.h"
-#include "time_manager.h"
-#include "uart_manager.h"
 #include <stdio.h>
 
 uint8_t debugEnabled = 0;

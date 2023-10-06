@@ -1,15 +1,12 @@
 
 #include "main.h"
-#include "ble_interface.h"
-#include "ble_manager.h"
-#include "time_manager.h"
 
 TIM_HandleTypeDef htim6;
 I2C_HandleTypeDef hi2c2;
 UART_HandleTypeDef huart1;
 SPI_HandleTypeDef hspi3;
 
-static const uint8_t dt = 2;
+static const uint8_t dt = 0;
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -281,12 +278,10 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-    /*Configure GPIO pin : PC6 */
     GPIO_InitStruct.Pin = GPIO_PIN_6;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
     /* EXTI interrupt init*/
     HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);

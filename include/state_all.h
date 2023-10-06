@@ -1,5 +1,5 @@
-#ifndef _STATE_ALL_H_
-#define _STATE_ALL_H_
+#ifndef STATE_ALL_H_
+#define STATE_ALL_H_
 
 // In this file you must include all your state header
 // You also must create the Enum indentifire and set all the callbacks in other to
@@ -8,13 +8,15 @@
 
 #include "startup_state.h"
 #include "idle_state.h"
-#include "stm32l4xx_hal.h"
+#include "ble_check_state.h"
+#include <stdint.h>
 
 typedef enum
 {
     ST_UNDEFINED,
     ST_STARTUP,
     ST_IDLE,
+	ST_BLE_CHECK,
     ST_COUNT,
 }States;
 
@@ -29,7 +31,7 @@ typedef struct
     uint64_t timeout;
     States nextState;
 }StateStruct;
-// Do not use this strutct
+// Do not use this struct
 
 void externalSetup(StateStruct states[]);
 

@@ -1,8 +1,6 @@
 #include "startup_state.h"
-#include <stdio.h>
 #include "ble_interface.h"
 #include "ble_manager.h"
-#include "time_manager.h"
 #include "state_machine.h"
 
 void startup_enter()

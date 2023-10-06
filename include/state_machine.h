@@ -2,6 +2,9 @@
 #define INCLUDE_STATE_MACHINE_H_
 
 #include "state_all.h"
+#include "io_manager.h"
+#include "uart_manager.h"
+#include "time_manager.h"
 
 void setup();
 

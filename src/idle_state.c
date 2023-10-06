@@ -1,8 +1,4 @@
-#include "startup_state.h"
-#include <stdio.h>
-#include "ble_interface.h"
-#include "ble_manager.h"
-#include "time_manager.h"
+#include "idle_state.h"
 #include "state_machine.h"
 
 int dataAvailable = 0;
@@ -40,41 +36,22 @@ void idle_enter()
     setDigital(MF_led2, GPIO_PIN_RESET);
 }
 
-static uint8_t UUID_CHAR_TEMP[] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x05, 0x00};
-static uint8_t TEMP_CHAR_HANDLE[2];
-static uint8_t VALUE_TEMP[] = {'{', '\"', 'T', 'e', 'm', 'p', '"', ':', '\"', '+', '0', '0', '0', '.', '0', '\"', '}'};
-
 uint8_t button = 0;
 
 void idle_beforeLoop(uint8_t deltaMs)
 {
-    if (readDigital(MF_BleInt))
-    { // if an event occurs let's catch it
-        catchBLE();
-        return;
-    }
 }
 
 void idle_loop(uint8_t deltaMs)
 {
     if (readDigital(MF_Button) && !button)
     {
-        testBSPfunctions();
+        setState(ST_BLE_CHECK);
     }
-
-    if (update)
-    {
-        update = 0;
-        updateCharValue(CUSTOM_SERVICE_HANDLE, TEMP_CHAR_HANDLE, 0, (17), sprintf("%d", (int)bspGetValue(BSP_temperature) * 10));
-    }
-
-    button = readDigital(MF_Button);
-    setDigital(MF_led1, !button);
 }
 
 void idle_afterLoop(uint8_t deltaMs)
 {
-    __WFI();
 }
 
 

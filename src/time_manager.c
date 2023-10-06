@@ -39,7 +39,13 @@ void initTimers()
 void setTimer(Timer_Function function,void (*callback)(void),uint64_t timeout)
 {
 	if(!isValidTimer(function) || !callback)
+	{
+		timers[function].value = 0;
+		timers[function].callback = NULL;
+		timers[function].timeout = 0;
 		return;
+	}
+
 	timers[function].value = 0;
 	timers[function].callback = callback;
 	timers[function].timeout = timeout;
@@ -64,7 +70,8 @@ void setStateMachineTimer(uint64_t * stateTimer)
 
 void sleep(uint32_t time)
 {
-
+	if(!time)
+		return;
 	for(uint8_t tick = 0; tick <= time; tick ++){
 		HAL_Delay(tick);
         *stateMachineTimer += tick;

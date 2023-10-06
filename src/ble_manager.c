@@ -149,6 +149,182 @@ void ble_init()
 }
 
 
+void updateSignedFloat(uint8_t *service, uint8_t*characteristic,uint8_t *defaultValue,uint8_t offset, float data){
+	 uint8_t *newstring;
+	 newstring=(uint8_t*)malloc(offset+8);
+	 memcpy(newstring,defaultValue,offset);
+
+
+    int16_t newdata=(int16_t)(data*10);
+	uint8_t numberInChar[8];
+	int flagEmpty=0;
+	if(newdata<0){
+    numberInChar[0]=45;
+    newdata=-newdata;
+	}else{
+	numberInChar[0]=43;
+	}
+
+	numberInChar[1]=newdata/1000;
+    numberInChar[2]=(newdata-numberInChar[1]*1000)/100;
+    numberInChar[3]=(newdata-numberInChar[2]*100-numberInChar[1]*1000)/10;
+    numberInChar[5]=(newdata-numberInChar[2]*100-numberInChar[3]*10-numberInChar[1]*1000);
+
+    if(numberInChar[1]==0){
+    	flagEmpty++;
+
+    	if(numberInChar[2]==0){
+    		flagEmpty++;
+    	}
+    }
+
+    switch(flagEmpty){
+    case 0:{
+        numberInChar[1]+='0';
+    	numberInChar[2]+='0';
+    	numberInChar[3]+='0';
+    	numberInChar[4]='.';
+    	numberInChar[5]+='0';
+    	numberInChar[6]='\"';
+    	numberInChar[7]='}';
+    }break;
+    case 1:{
+        numberInChar[1]='0'+numberInChar[2];
+    	numberInChar[2]='0'+numberInChar[3];
+    	numberInChar[3]='.';
+    	numberInChar[4]='0'+numberInChar[5];
+    	numberInChar[5]='\"';
+    	numberInChar[6]='}';
+    	numberInChar[7]=' ';
+
+    }break;
+    case 2:{
+        numberInChar[1]='0'+numberInChar[3];
+    	numberInChar[2]='.';
+    	numberInChar[3]='0'+numberInChar[5];
+    	numberInChar[4]='\"';
+    	numberInChar[5]='}';
+    	numberInChar[6]=' ';
+    	numberInChar[7]=' ';
+
+    }break;
+    default:{
+        numberInChar[1]+='0';
+    	numberInChar[2]+='0';
+    	numberInChar[3]+='0';
+    	numberInChar[4]='.';
+    	numberInChar[5]+='0';
+    	numberInChar[6]='\"';
+    	numberInChar[7]='}';
+    }
+
+    }
+
+
+
+    memcpy(newstring+offset,numberInChar,8-flagEmpty);
+
+
+	updateCharValue(service, characteristic, 0, offset+8-flagEmpty, newstring);
+	free(newstring);
+}
+
+
+void updateSignedMillesimal(uint8_t *service, uint8_t*characteristic,uint8_t *defaultValue,uint8_t offset, int16_t data){
+    uint8_t *newstring;
+    newstring=(uint8_t*)malloc(offset+7);
+    memcpy(newstring,defaultValue,offset);
+
+
+	//aumentare di 1 anche per il } e unire alla stringa la nuova stringa
+	int flagEmpty=0;
+	uint8_t numberInChar[7];
+	if(data<0){
+    numberInChar[0]=45;
+    data=-data;
+	}else{
+	numberInChar[0]=43;
+	}
+
+	numberInChar[1]=data/1000;
+    numberInChar[2]=(data-numberInChar[1]*1000)/100;
+    numberInChar[3]=(data-numberInChar[2]*100-numberInChar[1]*1000)/10;
+    numberInChar[4]=(data-numberInChar[2]*100-numberInChar[3]*10-numberInChar[1]*1000);
+
+
+    if(numberInChar[1]==0){
+    	flagEmpty++;
+
+    	if(numberInChar[2]==0){
+    		flagEmpty++;
+        	if(numberInChar[3]==0){
+        		flagEmpty++;
+        	}
+    	}
+    }
+
+
+
+    switch(flagEmpty){
+    case 0:{
+        numberInChar[1]+='0';
+    	numberInChar[2]+='0';
+    	numberInChar[3]+='0';
+    	numberInChar[4]+='0';
+    	numberInChar[5]='\"';
+    	numberInChar[6]='}';
+    }break;
+    case 1:{
+        numberInChar[1]='0'+numberInChar[2];
+    	numberInChar[2]='0'+numberInChar[3];
+    	numberInChar[3]='0'+numberInChar[4];
+    	numberInChar[4]='\"';
+    	numberInChar[5]='}';
+    	numberInChar[6]=' ';
+
+
+    }break;
+    case 2:{
+        numberInChar[1]='0'+numberInChar[3];
+    	numberInChar[2]='0'+numberInChar[4];
+    	numberInChar[3]='\"';
+    	numberInChar[4]='}';
+    	numberInChar[5]=' ';
+    	numberInChar[6]=' ';
+
+    }break;
+    case 3:{
+        numberInChar[1]='0'+numberInChar[4];
+    	numberInChar[2]='\"';
+    	numberInChar[3]='}';
+    	numberInChar[4]=' ';
+    	numberInChar[5]=' ';
+    	numberInChar[6]=' ';
+
+    }break;
+
+
+    default:{
+        numberInChar[1]+='0';
+    	numberInChar[2]+='0';
+    	numberInChar[3]+='0';
+    	numberInChar[4]+='0';
+    	numberInChar[5]='\"';
+    	numberInChar[6]='}';
+
+    }
+
+    }
+
+    memcpy(newstring+offset,numberInChar,7-flagEmpty);
+
+
+    //non 7 ma dipende
+	updateCharValue(service, characteristic, 0,offset+7-flagEmpty, newstring);
+	free(newstring);
+}
+
+
 int fetchBleEvent(uint8_t *container, int size)
 {
 
