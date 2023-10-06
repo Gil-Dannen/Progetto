@@ -18,6 +18,7 @@ typedef enum MappedFunction{
 	MF_BleInt,
     MF_BleCS,
     MF_BleReset,
+	MF_TOF,
 	MF_COUNT
 }MF;
 

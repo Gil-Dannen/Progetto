@@ -1,5 +1,7 @@
 #include "startup_state.h"
 #include "state_machine.h"
+#include "ble_manager.h"
+#include "ble_interface.h"
 
 void startup_enter()
 {
@@ -9,6 +11,7 @@ void startup_enter()
     setMappedFunction(MF_BleInt, GPIOE, GPIO_PIN_6, 0, 1);
     setMappedFunction(MF_BleCS, GPIOD, GPIO_PIN_13, 0, 1);
     setMappedFunction(MF_BleReset, GPIOA, GPIO_PIN_8, 0, 1);
+	setMappedFunction(MF_TOF, GPIOC, GPIO_PIN_8, 0, 1);
 
     ble_init();
 
