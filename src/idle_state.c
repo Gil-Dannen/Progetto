@@ -32,6 +32,8 @@ void idle_enter()
     setTimer(TF_Main, testBSPfunctions, 3000);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
+
+    setDigital(MF_led1,GPIO_PIN_RESET);
 }
 
 
@@ -47,6 +49,8 @@ void idle_loop(uint8_t deltaMs)
     {
         setState(ST_BLE_CHECK);
     }
+
+    button = readDigital(MF_Button);
 }
 
 void idle_afterLoop(uint8_t deltaMs)

@@ -46,9 +46,6 @@ uint8_t UPDATE_CHAR[] = {0x01, 0x06, 0xFD, 0x09, 0xff, 0xff, 0xff, 0xff, 0x01, 0
 uint8_t EVENT_DISCONNECTED[] = {0x04, 0x05, 0x04, 0x00};
 
 
-static uint8_t fetchMasterHeader[] = {0x0b, 0x00, 0x00, 0x00, 0x00};
-
-static uint8_t sendMasterHeader[] = {0x0a, 0x00, 0x00, 0x00, 0x00};
 
 typedef enum
 {
@@ -328,7 +325,7 @@ void updateSignedMillesimal(uint8_t *service, uint8_t*characteristic,uint8_t *de
 int fetchBleEvent(uint8_t *container, int size)
 {
 
-    uint8_t * master_header = fetchMasterHeader;
+    uint8_t master_header[] = {0x0b, 0x00, 0x00, 0x00, 0x00};
     uint8_t slave_header[5];
 
     // Wait until it is available an event coming from the BLE module (GPIO PIN COULD CHANGE ACCORDING TO THE BOARD)
@@ -389,7 +386,7 @@ int checkEventResp(uint8_t *event, uint8_t *reference, int size)
 void sendCommand(uint8_t *command, int size)
 {
 
-    uint8_t * master_header = sendMasterHeader;
+    uint8_t master_header[] = {0x0a, 0x00, 0x00, 0x00, 0x00};
     uint8_t slave_header[5];
 
     int result;

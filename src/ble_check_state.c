@@ -16,9 +16,13 @@ void blink()
 
 void ble_check_enter()
 {
-    setTimer(TF_Main, blink, 1000);
+
+	setDigital(MF_led1,GPIO_PIN_SET);
+
+    setTimer(TF_Main, blink, 500);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
+
 }
 
 static uint8_t button = 0;
@@ -38,6 +42,8 @@ void ble_check_loop(uint8_t deltaMs)
     {
         setState(ST_IDLE);
     }
+
+    button = readDigital(MF_Button);
 
     if (update)
     {

@@ -1,6 +1,4 @@
 #include "startup_state.h"
-#include "ble_interface.h"
-#include "ble_manager.h"
 #include "state_machine.h"
 
 void startup_enter()
@@ -14,17 +12,15 @@ void startup_enter()
 
     ble_init();
 
-    sleep(10);
+	sleep(10);
 
-    bleProjectSetup();
+	bleProjectSetup();
 
     initTimers();
 
     uart_init();
 
     bspFunctionInit();
-
-    resetTimer(TF_Main);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
 
