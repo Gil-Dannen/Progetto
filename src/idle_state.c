@@ -1,8 +1,6 @@
 #include "idle_state.h"
 #include "state_machine.h"
 
-int dataAvailable = 0;
-int update = 0;
 
 void testBSPfunctions()
 {
@@ -36,11 +34,12 @@ void idle_enter()
     setDigital(MF_led2, GPIO_PIN_RESET);
 }
 
-uint8_t button = 0;
 
 void idle_beforeLoop(uint8_t deltaMs)
 {
 }
+
+static uint8_t button = 0;
 
 void idle_loop(uint8_t deltaMs)
 {

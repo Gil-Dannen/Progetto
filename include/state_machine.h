@@ -6,6 +6,7 @@
 #include "uart_manager.h"
 #include "time_manager.h"
 
+
 void setup();
 
 void loop(uint8_t delta);

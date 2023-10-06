@@ -21,7 +21,7 @@ void ble_check_enter()
     setDigital(MF_led2, GPIO_PIN_RESET);
 }
 
-uint8_t button = 0;
+static uint8_t button = 0;
 
 void ble_check_beforeLoop(uint8_t deltaMs)
 {

@@ -6,10 +6,7 @@
 // init correctly the state machine
 // you will find the callbacks setup in the function externalSetup();
 
-#include "startup_state.h"
-#include "idle_state.h"
-#include "ble_check_state.h"
-#include <stdint.h>
+
 
 typedef enum
 {
@@ -20,7 +17,10 @@ typedef enum
     ST_COUNT,
 }States;
 
-
+#include "startup_state.h"
+#include "idle_state.h"
+#include "ble_check_state.h"
+#include <stdint.h>
 
 typedef struct 
 {
