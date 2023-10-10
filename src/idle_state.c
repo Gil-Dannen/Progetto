@@ -4,29 +4,40 @@
 
 
 static float temperature = 0, humidity = 0, pressure = 0,
-		*acceleremeter, *magnetometer , *gyroscope;
+		*acceleremeter = NULL, *magnetometer = NULL , *gyroscope = NULL;
+
+void myConcat(char * a, char * b)
+{
+	size_t size = strlen(a) +strlen(b);
+	realloc(a,(char)size);
+	strcat(a,b);
+}
 
 void testBSPfunctions()
 {
-    char Test[100];
-    sprintf(Test, "Temperature = %d\n", (int)temperature);
-    sendMessage(Test);
-    sprintf(Test, "Humidity = %d\n", (int)humidity);
-    sendMessage(Test);
-    sprintf(Test, "Pressure = %d\n", (int)pressure);
+    char Test[50];
+    char * testo = malloc(sizeof(char) * 1);
 
-    sendMessage(Test);
+    sprintf(Test, "Temperature = %d\n", (int)temperature);
+    myConcat(testo,Test);
+    sprintf(Test, "Humidity = %d\n", (int)humidity);
+    myConcat(testo,Test);
+    sprintf(Test, "Pressure = %d\n", (int)pressure);
+    myConcat(testo,Test);
     sprintf(Test, "Accellerometer = %d,%d,%d\n",
     	(int)acceleremeter[0], (int)acceleremeter[1], (int)acceleremeter[2]);
-    sendMessage(Test);
+    myConcat(testo,Test);
 
     sprintf(Test, "Magneto = %d,%d,%d\n",
     	(int)magnetometer[0], (int)magnetometer[1], (int)magnetometer[2]);
-    sendMessage(Test);
+    myConcat(testo,Test);
 
     sprintf(Test, "Gyro = %d,%d,%d\n",
     	(int)gyroscope[0], (int)gyroscope[1], (int)gyroscope[2]);
-    sendMessage(Test);
+    myConcat(testo,Test);
+
+    sendMessage(testo);
+    free(testo);
 }
 
 
