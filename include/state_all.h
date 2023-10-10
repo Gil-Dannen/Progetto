@@ -2,10 +2,9 @@
 #define STATE_ALL_H_
 
 // In this file you must include all your state header
-// You also must create the Enum indentifire and set all the callbacks in other to
+// You must also create the Enum indentifire and set all the callbacks in other to
 // init correctly the state machine
 // you will find the callbacks setup in the function externalSetup();
-
 
 
 typedef enum

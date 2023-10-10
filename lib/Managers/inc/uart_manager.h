@@ -4,7 +4,10 @@
 
 #include "stm32l4xx_hal.h"
 
-HAL_StatusTypeDef sendMessage(char * text);
+HAL_StatusTypeDef sendMessage();
+
+void appendMessage(char *);
+
 void uart_init(void);
 
 

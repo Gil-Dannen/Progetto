@@ -5,10 +5,32 @@
 
 extern UART_HandleTypeDef huart1;
 
+static char * txt;
 
-HAL_StatusTypeDef sendMessage(char * text)
+
+static void concat(char * a, char * b)
 {
-	return HAL_UART_Transmit(&huart1,(uint8_t*)text,strlen(text),1000);
+	realloc(a,(char) (strlen(a) +strlen(b)));
+	strcat(a,b);
+}
+
+
+HAL_StatusTypeDef sendMessage()
+{
+	return HAL_UART_Transmit(&huart1,(char*)txt,strlen(txt),1000);
+	reset();
+}
+
+void appendMessage(char * text)
+{
+	concat(txt,text);
+}
+
+void reset()
+{
+	if(txt)
+		free(txt);
+	txt = malloc(sizeof(char) * 1);
 }
 
 
@@ -29,6 +51,8 @@ void uart_init(void)
   {
     Error_Handler();
   }
+  reset();
+
 
 
 }
