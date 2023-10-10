@@ -9,22 +9,22 @@ static float temperature = 0, humidity = 0, pressure = 0,
 void testBSPfunctions()
 {
     char Test[100];
-    sprintf(Test, "     Temperature = %d", (int)temperature);
+    sprintf(Test, "Temperature = %d\n", (int)temperature);
     sendMessage(Test);
-    sprintf(Test, "     Humidity = %d", (int)humidity);
+    sprintf(Test, "Humidity = %d\n", (int)humidity);
     sendMessage(Test);
-    sprintf(Test, "     Pressure = %d", (int)pressure);
+    sprintf(Test, "Pressure = %d\n", (int)pressure);
 
     sendMessage(Test);
-    sprintf(Test, "     Accellerometer = %d,%d,%d",
+    sprintf(Test, "Accellerometer = %d,%d,%d\n",
     	(int)acceleremeter[0], (int)acceleremeter[1], (int)acceleremeter[2]);
     sendMessage(Test);
 
-    sprintf(Test, "     Magneto = %d,%d,%d",
+    sprintf(Test, "Magneto = %d,%d,%d\n",
     	(int)magnetometer[0], (int)magnetometer[1], (int)magnetometer[2]);
     sendMessage(Test);
 
-    sprintf(Test, "     Gyro = %d,%d,%d",
+    sprintf(Test, "Gyro = %d,%d,%d\n",
     	(int)gyroscope[0], (int)gyroscope[1], (int)gyroscope[2]);
     sendMessage(Test);
 }

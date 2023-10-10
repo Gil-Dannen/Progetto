@@ -50,11 +50,12 @@ States state()
 
 void setStateTimeout(States state, uint64_t timeout)
 {
-    if(isValidState(state) && timeout)
-    {
-        states[actualState].nextState = state;
-        states[actualState].timeout = timeout;
-    }
+    if(!isValidState(state) || !timeout)
+        return;
+
+    states[actualState].nextState = state;
+    states[actualState].timeout = timeout;
+    
 }
 // This function must be called in enter
 
@@ -69,6 +70,7 @@ void setup()
     {
         states[i].timeout = 0;
         states[i].nextState = ST_UNDEFINED;
+        states[i].exitCondition = NULL;
         initDone &= states[i].enter && states[i].beforeLoop && states[i].loop && states[i].afterLoop;
     }
     
@@ -79,7 +81,7 @@ void setup()
 
 void loop(uint8_t dt)
 {
-    if(!initDone)
+    if(!initDone || !isValidState(actualState))
         return;
     resetDeltaTime();
     sleep(dt);

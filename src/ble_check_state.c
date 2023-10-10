@@ -1,7 +1,7 @@
 #include "ble_check_state.h"
 #include "ble_interface.h"
 #include "ble_manager.h"
-#include "state_machine.h"ù
+#include "state_machine.h"
 #include "general_functions.h"
 
 int dataAvailable = 0;
