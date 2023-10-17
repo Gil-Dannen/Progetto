@@ -5,5 +5,5 @@
 ../Core/Src/state_machine.c:46:8:state	0	static
 ../Core/Src/state_machine.c:51:6:setStateTimeout	16	static
 ../Core/Src/state_machine.c:62:6:setup	8	static
-../Core/Src/state_machine.c:84:6:loop	56	static
-../Core/Src/state_machine.c:139:6:setDebugEnabled	0	static
+../Core/Src/state_machine.c:82:6:loop	48	static
+../Core/Src/state_machine.c:133:6:setDebugEnabled	0	static

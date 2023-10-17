@@ -3,8 +3,6 @@
 
 #include "stm32l4xx_hal.h"
 
-
-
 typedef enum
 {
 	TF_Main = 0,
@@ -14,8 +12,6 @@ typedef enum
 
 void initTimers();
 
-uint8_t timePassed();
-
 void setStateMachineTimer(uint64_t * stateTimer);
 
 void setTimer(Timer_Function,void (*)(void),uint64_t);
@@ -24,6 +20,7 @@ void resetTimer(Timer_Function);
 
 uint64_t deltaTime();
 
+void resetDeltaTime();
 
 void sleep(uint32_t);
 

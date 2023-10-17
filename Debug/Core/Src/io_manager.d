@@ -31,23 +31,23 @@ Core/Src/io_manager.o: ../Core/Src/io_manager.c ../Core/Inc/io_manager.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_tsensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/hts221.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/hsensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/tsensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_hsensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_psensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lps22hb.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/psensor.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_accelero.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lsm6dsl.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/accelero.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/gyro.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_gyro.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_magneto.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lis3mdl.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/magneto.h
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_tsensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/hts221.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/hsensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/tsensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_hsensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_psensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lps22hb.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/psensor.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_accelero.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lsm6dsl.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/accelero.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/gyro.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_gyro.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_magneto.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lis3mdl.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/magneto.h
 ../Core/Inc/io_manager.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -81,20 +81,20 @@ Core/Src/io_manager.o: ../Core/Src/io_manager.c ../Core/Inc/io_manager.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_tsensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/hts221.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/hsensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/tsensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_hsensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_psensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lps22hb.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/psensor.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_accelero.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lsm6dsl.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/accelero.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/gyro.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_gyro.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_magneto.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lis3mdl.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/magneto.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_tsensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/hts221.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/hsensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/tsensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_hsensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_psensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lps22hb.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/psensor.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_accelero.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lsm6dsl.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/accelero.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/gyro.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_gyro.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_magneto.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lis3mdl.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/magneto.h:

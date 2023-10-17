@@ -79,15 +79,13 @@ void setup()
     
 }
 
-uint8_t ticksPassed = 0;
-
 void loop(uint8_t dt)
 {
     if(!initDone || !isValidState(actualState))
         return;
+    resetDeltaTime();
+    sleep(dt);
     
-    ticksPassed += timePassed();
-
     
     if(debugEnabled)
         if((timeInCurrentStateTimer % 10) == 0){
@@ -104,13 +102,9 @@ void loop(uint8_t dt)
         previousState = actualState;
     }
     
-    if(ticksPassed >= dt)
-    {
-		stActualState->beforeLoop(dt);
-		stActualState->loop(dt);
-		stActualState->afterLoop(dt);
-		ticksPassed = 0;
-    }
+    stActualState->beforeLoop(dt);
+    stActualState->loop(dt);
+    stActualState->afterLoop(dt);
 
     
     if(isValidState(stActualState->nextState)

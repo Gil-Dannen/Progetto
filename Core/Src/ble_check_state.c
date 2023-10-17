@@ -1,7 +1,7 @@
 #include "ble_check_state.h"
 #include "state_machine.h"
 #include "general_functions.h"
-
+#include "main.h"
 #include "enable.h"
 #include "sensors.h"
 /* USER CODE END Includes */
@@ -47,8 +47,6 @@ extern uint8_t Z_VALUE[];
 int update = 0;
 int dataAvailable = 0;
 
-//int dataAvailable=0;
-//int update=0;
 
 
 uint8_t blinkStatus = 0;

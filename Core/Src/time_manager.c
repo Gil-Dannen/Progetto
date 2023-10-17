@@ -2,9 +2,6 @@
 
 static uint64_t deltaTimeCounter = 0; 
 
-uint64_t generalTimer = 0;
-static uint64_t generalTimerBefore = 0;
-
 uint64_t * stateMachineTimer = NULL;
 struct Timer
 {
@@ -13,6 +10,11 @@ struct Timer
 	uint64_t timeout;
 
 }timers[TF_COUNT];
+
+void resetDeltaTime()
+{
+    deltaTimeCounter = 0;
+}
 
 uint64_t deltaTime()
 {
@@ -66,39 +68,29 @@ void setStateMachineTimer(uint64_t * stateTimer)
     *stateMachineTimer = 0;
 }
 
-static uint8_t tick = 0;
-
-uint8_t timePassed()
-{
-	return tick;
-}
-
-void timersloop(uint8_t dt)
-{
-	tick = generalTimer - generalTimerBefore;
-
-	*stateMachineTimer += tick;
-
-
-	for(uint8_t i = 0; i < TF_COUNT; i++){
-		timers[i].value += tick;
-		if(timers[i].value >= timers[i].timeout
-				&& timers[i].timeout
-				&& timers[i].callback)
-		{
-			timers[i].value = 0;
-			timers[i].callback();
-		}
-
-	}
-	generalTimerBefore = generalTimer;
-}
-
 void sleep(uint32_t time)
 {
 	if(!time)
 		return;
-	HAL_Delay(time);
+	for(uint8_t tick = 0; tick <= time; tick ++){
+		HAL_Delay(tick);
+        *stateMachineTimer += tick;
+        deltaTimeCounter += tick;
+
+		for(uint8_t i = 0; i < TF_COUNT; i++){
+			timers[i].value += tick;
+			if(timers[i].value >= timers[i].timeout
+					&& timers[i].timeout
+					&& timers[i].callback)
+			{
+				timers[i].value = 0;
+				timers[i].callback();
+			}
+
+		}
+	}
+
+
 }
 
 uint8_t isTimerExpired(Timer_Function function, uint64_t timeout)

@@ -1,7 +1,7 @@
 Drivers/BSP/source/stm32l475e_iot01_gyro.o: \
  ../Drivers/BSP/source/stm32l475e_iot01_gyro.c \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_gyro.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_gyro.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -34,11 +34,11 @@ Drivers/BSP/source/stm32l475e_iot01_gyro.o: \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lsm6dsl.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/accelero.h \
- C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/gyro.h
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01_gyro.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/stm32l475e_iot01.h:
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lsm6dsl.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/accelero.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/gyro.h
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01_gyro.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:
@@ -71,6 +71,6 @@ C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sen
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/lsm6dsl.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/accelero.h:
-C:/Users/mattia.sacchi/Desktop/WorkspaceVSC/BLE-IOT/STM32_B-L475E-IOT01A/BLE-sender/Drivers/BSP/include/gyro.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/lsm6dsl.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/accelero.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/gyro.h:
