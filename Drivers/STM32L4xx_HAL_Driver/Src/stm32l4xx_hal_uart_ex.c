@@ -40,7 +40,7 @@
   ******************************************************************************
   */
 
-
+/* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -54,37 +54,37 @@
 
 #ifdef HAL_UART_MODULE_ENABLED
 
-
-
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
 #if defined(USART_CR1_FIFOEN)
 /** @defgroup UARTEX_Private_Constants UARTEx Private Constants
   * @{
   */
-
+/* UART RX FIFO depth */
 #define RX_FIFO_DEPTH 8U
 
-
+/* UART TX FIFO depth */
 #define TX_FIFO_DEPTH 8U
 /**
   * @}
   */
-#endif
+#endif /* USART_CR1_FIFOEN */
 
-
-
-
+/* Private macros ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
 /** @defgroup UARTEx_Private_Functions UARTEx Private Functions
   * @{
   */
 static void UARTEx_Wakeup_AddressConfig(UART_HandleTypeDef *huart, UART_WakeUpTypeDef WakeUpSelection);
 #if defined(USART_CR1_FIFOEN)
 static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart);
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @}
   */
 
-
+/* Exported functions --------------------------------------------------------*/
 
 /** @defgroup UARTEx_Exported_Functions  UARTEx Exported Functions
   * @{
@@ -172,26 +172,26 @@ HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity,
 {
   uint32_t temp;
 
-
+  /* Check the UART handle allocation */
   if (huart == NULL)
   {
     return HAL_ERROR;
   }
-
+  /* Check the Driver Enable UART instance */
   assert_param(IS_UART_DRIVER_ENABLE_INSTANCE(huart->Instance));
 
-
+  /* Check the Driver Enable polarity */
   assert_param(IS_UART_DE_POLARITY(Polarity));
 
-
+  /* Check the Driver Enable assertion time */
   assert_param(IS_UART_ASSERTIONTIME(AssertionTime));
 
-
+  /* Check the Driver Enable deassertion time */
   assert_param(IS_UART_DEASSERTIONTIME(DeassertionTime));
 
   if (huart->gState == HAL_UART_STATE_RESET)
   {
-
+    /* Allocate lock resource and initialize it */
     huart->Lock = HAL_UNLOCKED;
 
 #if (USE_HAL_UART_REGISTER_CALLBACKS == 1)
@@ -202,20 +202,20 @@ HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity,
       huart->MspInitCallback = HAL_UART_MspInit;
     }
 
-
+    /* Init the low level hardware */
     huart->MspInitCallback(huart);
 #else
-
+    /* Init the low level hardware : GPIO, CLOCK, CORTEX */
     HAL_UART_MspInit(huart);
-#endif
+#endif /* (USE_HAL_UART_REGISTER_CALLBACKS) */
   }
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Disable the Peripheral */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Set the UART Communication parameters */
   if (UART_SetConfig(huart) == HAL_ERROR)
   {
     return HAL_ERROR;
@@ -226,21 +226,21 @@ HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity,
     UART_AdvFeatureConfig(huart);
   }
 
-
+  /* Enable the Driver Enable mode by setting the DEM bit in the CR3 register */
   SET_BIT(huart->Instance->CR3, USART_CR3_DEM);
 
-
+  /* Set the Driver Enable polarity */
   MODIFY_REG(huart->Instance->CR3, USART_CR3_DEP, Polarity);
 
-
+  /* Set the Driver Enable assertion and deassertion times */
   temp = (AssertionTime << UART_CR1_DEAT_ADDRESS_LSB_POS);
   temp |= (DeassertionTime << UART_CR1_DEDT_ADDRESS_LSB_POS);
   MODIFY_REG(huart->Instance->CR1, (USART_CR1_DEDT | USART_CR1_DEAT), temp);
 
-
+  /* Enable the Peripheral */
   __HAL_UART_ENABLE(huart);
 
-
+  /* TEACK and/or REACK to check before moving huart->gState and huart->RxState to Ready */
   return (UART_CheckIdleState(huart));
 }
 
@@ -275,7 +275,7 @@ HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity,
   */
 __weak void HAL_UARTEx_WakeupCallback(UART_HandleTypeDef *huart)
 {
-
+  /* Prevent unused argument(s) compilation warning */
   UNUSED(huart);
 
   /* NOTE : This function should not be modified, when the callback is needed,
@@ -291,7 +291,7 @@ __weak void HAL_UARTEx_WakeupCallback(UART_HandleTypeDef *huart)
   */
 __weak void HAL_UARTEx_RxFifoFullCallback(UART_HandleTypeDef *huart)
 {
-
+  /* Prevent unused argument(s) compilation warning */
   UNUSED(huart);
 
   /* NOTE : This function should not be modified, when the callback is needed,
@@ -306,14 +306,14 @@ __weak void HAL_UARTEx_RxFifoFullCallback(UART_HandleTypeDef *huart)
   */
 __weak void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart)
 {
-
+  /* Prevent unused argument(s) compilation warning */
   UNUSED(huart);
 
   /* NOTE : This function should not be modified, when the callback is needed,
             the HAL_UARTEx_TxFifoEmptyCallback can be implemented in the user file.
    */
 }
-#endif
+#endif /* USART_CR1_FIFOEN */
 
 /**
   * @}
@@ -391,13 +391,13 @@ __weak void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef HAL_UARTEx_EnableClockStopMode(UART_HandleTypeDef *huart)
 {
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
-
+  /* Set UCESM bit */
   ATOMIC_SET_BIT(huart->Instance->CR3, USART_CR3_UCESM);
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -410,19 +410,19 @@ HAL_StatusTypeDef HAL_UARTEx_EnableClockStopMode(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef HAL_UARTEx_DisableClockStopMode(UART_HandleTypeDef *huart)
 {
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
-
+  /* Clear UCESM bit */
   ATOMIC_CLEAR_BIT(huart->Instance->CR3, USART_CR3_UCESM);
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
 }
 
-#endif
+#endif /* USART_CR3_UCESM */
 /**
   * @brief By default in multiprocessor mode, when the wake up method is set
   *        to address mark, the UART handles only 4-bit long addresses detection;
@@ -438,27 +438,27 @@ HAL_StatusTypeDef HAL_UARTEx_DisableClockStopMode(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef HAL_MultiProcessorEx_AddressLength_Set(UART_HandleTypeDef *huart, uint32_t AddressLength)
 {
-
+  /* Check the UART handle allocation */
   if (huart == NULL)
   {
     return HAL_ERROR;
   }
 
-
+  /* Check the address length parameter */
   assert_param(IS_UART_ADDRESSLENGTH_DETECT(AddressLength));
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Disable the Peripheral */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Set the address length */
   MODIFY_REG(huart->Instance->CR2, USART_CR2_ADDM7, AddressLength);
 
-
+  /* Enable the Peripheral */
   __HAL_UART_ENABLE(huart);
 
-
+  /* TEACK and/or REACK to check before moving huart->gState to Ready */
   return (UART_CheckIdleState(huart));
 }
 
@@ -479,20 +479,20 @@ HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huar
   HAL_StatusTypeDef status = HAL_OK;
   uint32_t tickstart;
 
-
+  /* check the wake-up from stop mode UART instance */
   assert_param(IS_UART_WAKEUP_FROMSTOP_INSTANCE(huart->Instance));
-
+  /* check the wake-up selection parameter */
   assert_param(IS_UART_WAKEUP_SELECTION(WakeUpSelection.WakeUpEvent));
 
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Disable the Peripheral */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Set the wake-up selection scheme */
   MODIFY_REG(huart->Instance->CR3, USART_CR3_WUS, WakeUpSelection.WakeUpEvent);
 
   if (WakeUpSelection.WakeUpEvent == UART_WAKEUP_ON_ADDRESS)
@@ -500,24 +500,24 @@ HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huar
     UARTEx_Wakeup_AddressConfig(huart, WakeUpSelection);
   }
 
-
+  /* Enable the Peripheral */
   __HAL_UART_ENABLE(huart);
 
-
+  /* Init tickstart for timeout management */
   tickstart = HAL_GetTick();
 
-
+  /* Wait until REACK flag is set */
   if (UART_WaitOnFlagUntilTimeout(huart, USART_ISR_REACK, RESET, tickstart, HAL_UART_TIMEOUT_VALUE) != HAL_OK)
   {
     status = HAL_TIMEOUT;
   }
   else
   {
-
+    /* Initialize the UART State */
     huart->gState = HAL_UART_STATE_READY;
   }
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return status;
@@ -531,13 +531,13 @@ HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huar
   */
 HAL_StatusTypeDef HAL_UARTEx_EnableStopMode(UART_HandleTypeDef *huart)
 {
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
-
+  /* Set UESM bit */
   ATOMIC_SET_BIT(huart->Instance->CR1, USART_CR1_UESM);
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -550,13 +550,13 @@ HAL_StatusTypeDef HAL_UARTEx_EnableStopMode(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef HAL_UARTEx_DisableStopMode(UART_HandleTypeDef *huart)
 {
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
-
+  /* Clear UESM bit */
   ATOMIC_CLEAR_BIT(huart->Instance->CR1, USART_CR1_UESM);
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -572,33 +572,33 @@ HAL_StatusTypeDef HAL_UARTEx_EnableFifoMode(UART_HandleTypeDef *huart)
 {
   uint32_t tmpcr1;
 
-
+  /* Check parameters */
   assert_param(IS_UART_FIFO_INSTANCE(huart->Instance));
 
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Save actual UART configuration */
   tmpcr1 = READ_REG(huart->Instance->CR1);
 
-
+  /* Disable UART */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Enable FIFO mode */
   SET_BIT(tmpcr1, USART_CR1_FIFOEN);
   huart->FifoMode = UART_FIFOMODE_ENABLE;
 
-
+  /* Restore UART configuration */
   WRITE_REG(huart->Instance->CR1, tmpcr1);
 
-
+  /* Determine the number of data to process during RX/TX ISR execution */
   UARTEx_SetNbDataToProcess(huart);
 
   huart->gState = HAL_UART_STATE_READY;
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -613,30 +613,30 @@ HAL_StatusTypeDef HAL_UARTEx_DisableFifoMode(UART_HandleTypeDef *huart)
 {
   uint32_t tmpcr1;
 
-
+  /* Check parameters */
   assert_param(IS_UART_FIFO_INSTANCE(huart->Instance));
 
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Save actual UART configuration */
   tmpcr1 = READ_REG(huart->Instance->CR1);
 
-
+  /* Disable UART */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Enable FIFO mode */
   CLEAR_BIT(tmpcr1, USART_CR1_FIFOEN);
   huart->FifoMode = UART_FIFOMODE_DISABLE;
 
-
+  /* Restore UART configuration */
   WRITE_REG(huart->Instance->CR1, tmpcr1);
 
   huart->gState = HAL_UART_STATE_READY;
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -659,33 +659,33 @@ HAL_StatusTypeDef HAL_UARTEx_SetTxFifoThreshold(UART_HandleTypeDef *huart, uint3
 {
   uint32_t tmpcr1;
 
-
+  /* Check parameters */
   assert_param(IS_UART_FIFO_INSTANCE(huart->Instance));
   assert_param(IS_UART_TXFIFO_THRESHOLD(Threshold));
 
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Save actual UART configuration */
   tmpcr1 = READ_REG(huart->Instance->CR1);
 
-
+  /* Disable UART */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Update TX threshold configuration */
   MODIFY_REG(huart->Instance->CR3, USART_CR3_TXFTCFG, Threshold);
 
-
+  /* Determine the number of data to process during RX/TX ISR execution */
   UARTEx_SetNbDataToProcess(huart);
 
-
+  /* Restore UART configuration */
   WRITE_REG(huart->Instance->CR1, tmpcr1);
 
   huart->gState = HAL_UART_STATE_READY;
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
@@ -708,39 +708,39 @@ HAL_StatusTypeDef HAL_UARTEx_SetRxFifoThreshold(UART_HandleTypeDef *huart, uint3
 {
   uint32_t tmpcr1;
 
-
+  /* Check the parameters */
   assert_param(IS_UART_FIFO_INSTANCE(huart->Instance));
   assert_param(IS_UART_RXFIFO_THRESHOLD(Threshold));
 
-
+  /* Process Locked */
   __HAL_LOCK(huart);
 
   huart->gState = HAL_UART_STATE_BUSY;
 
-
+  /* Save actual UART configuration */
   tmpcr1 = READ_REG(huart->Instance->CR1);
 
-
+  /* Disable UART */
   __HAL_UART_DISABLE(huart);
 
-
+  /* Update RX threshold configuration */
   MODIFY_REG(huart->Instance->CR3, USART_CR3_RXFTCFG, Threshold);
 
-
+  /* Determine the number of data to process during RX/TX ISR execution */
   UARTEx_SetNbDataToProcess(huart);
 
-
+  /* Restore UART configuration */
   WRITE_REG(huart->Instance->CR1, tmpcr1);
 
   huart->gState = HAL_UART_STATE_READY;
 
-
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   return HAL_OK;
 }
 
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @brief Receive an amount of data in blocking mode till either the expected number of data
   *        is received or an IDLE event occurs.
@@ -770,7 +770,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
   uint16_t uhMask;
   uint32_t tickstart;
 
-
+  /* Check that a Rx process is not already ongoing */
   if (huart->RxState == HAL_UART_STATE_READY)
   {
     if ((pData == NULL) || (Size == 0U))
@@ -784,17 +784,17 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
     huart->RxState = HAL_UART_STATE_BUSY_RX;
     huart->ReceptionType = HAL_UART_RECEPTION_TOIDLE;
 
-
+    /* Init tickstart for timeout management */
     tickstart = HAL_GetTick();
 
     huart->RxXferSize  = Size;
     huart->RxXferCount = Size;
 
-
+    /* Computation of UART mask to apply to RDR register */
     UART_MASK_COMPUTATION(huart);
     uhMask = huart->Mask;
 
-
+    /* In case of 9bits/No Parity transfer, pRxData needs to be handled as a uint16_t pointer */
     if ((huart->Init.WordLength == UART_WORDLENGTH_9B) && (huart->Init.Parity == UART_PARITY_NONE))
     {
       pdata8bits  = NULL;
@@ -808,20 +808,20 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
 
     __HAL_UNLOCK(huart);
 
-
+    /* Initialize output number of received elements */
     *RxLen = 0U;
 
-
+    /* as long as data have to be received */
     while (huart->RxXferCount > 0U)
     {
-
+      /* Check if IDLE flag is set */
       if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE))
       {
-
+        /* Clear IDLE flag in ISR */
         __HAL_UART_CLEAR_FLAG(huart, UART_CLEAR_IDLEF);
 
-
-
+        /* If Set, but no data ever received, clear flag without exiting loop */
+        /* If Set, and data has already been received, this means Idle Event is valid : End reception */
         if (*RxLen > 0U)
         {
           huart->RxState = HAL_UART_STATE_READY;
@@ -830,7 +830,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
         }
       }
 
-
+      /* Check if RXNE flag is set */
       if (__HAL_UART_GET_FLAG(huart, UART_FLAG_RXNE))
       {
         if (pdata8bits == NULL)
@@ -843,12 +843,12 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
           *pdata8bits = (uint8_t)(huart->Instance->RDR & (uint8_t)uhMask);
           pdata8bits++;
         }
-
+        /* Increment number of received elements */
         *RxLen += 1U;
         huart->RxXferCount--;
       }
 
-
+      /* Check for the Timeout */
       if (Timeout != HAL_MAX_DELAY)
       {
         if (((HAL_GetTick() - tickstart) > Timeout) || (Timeout == 0U))
@@ -860,9 +860,9 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
       }
     }
 
-
+    /* Set number of received elements in output parameter : RxLen */
     *RxLen = huart->RxXferSize - huart->RxXferCount;
-
+    /* At end of Rx process, restore huart->RxState to Ready */
     huart->RxState = HAL_UART_STATE_READY;
 
     return HAL_OK;
@@ -891,7 +891,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t
 {
   HAL_StatusTypeDef status;
 
-
+  /* Check that a Rx process is not already ongoing */
   if (huart->RxState == HAL_UART_STATE_READY)
   {
     if ((pData == NULL) || (Size == 0U))
@@ -901,12 +901,12 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t
 
     __HAL_LOCK(huart);
 
-
+    /* Set Reception type to reception till IDLE Event*/
     huart->ReceptionType = HAL_UART_RECEPTION_TOIDLE;
 
     status =  UART_Start_Receive_IT(huart, pData, Size);
 
-
+    /* Check Rx process has been successfully started */
     if (status == HAL_OK)
     {
       if (huart->ReceptionType == HAL_UART_RECEPTION_TOIDLE)
@@ -953,7 +953,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 {
   HAL_StatusTypeDef status;
 
-
+  /* Check that a Rx process is not already ongoing */
   if (huart->RxState == HAL_UART_STATE_READY)
   {
     if ((pData == NULL) || (Size == 0U))
@@ -963,12 +963,12 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 
     __HAL_LOCK(huart);
 
-
+    /* Set Reception type to reception till IDLE Event*/
     huart->ReceptionType = HAL_UART_RECEPTION_TOIDLE;
 
     status =  UART_Start_Receive_DMA(huart, pData, Size);
 
-
+    /* Check Rx process has been successfully started */
     if (status == HAL_OK)
     {
       if (huart->ReceptionType == HAL_UART_RECEPTION_TOIDLE)
@@ -1016,10 +1016,10 @@ static void UARTEx_Wakeup_AddressConfig(UART_HandleTypeDef *huart, UART_WakeUpTy
 {
   assert_param(IS_UART_ADDRESSLENGTH_DETECT(WakeUpSelection.AddressLength));
 
-
+  /* Set the USART address length */
   MODIFY_REG(huart->Instance->CR2, USART_CR2_ADDM7, WakeUpSelection.AddressLength);
 
-
+  /* Set the USART address node */
   MODIFY_REG(huart->Instance->CR2, USART_CR2_ADD, ((uint32_t)WakeUpSelection.Address << UART_CR2_ADDRESS_LSB_POS));
 }
 
@@ -1057,12 +1057,12 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
                                (uint16_t)denominator[rx_fifo_threshold];
   }
 }
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @}
   */
 
-#endif
+#endif /* HAL_UART_MODULE_ENABLED */
 
 /**
   * @}

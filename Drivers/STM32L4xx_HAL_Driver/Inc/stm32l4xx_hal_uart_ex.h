@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 
-
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef STM32L4xx_HAL_UART_EX_H
 #define STM32L4xx_HAL_UART_EX_H
 
@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-
+/* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal_def.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
@@ -35,7 +35,7 @@ extern "C" {
   * @{
   */
 
-
+/* Exported types ------------------------------------------------------------*/
 /** @defgroup UARTEx_Exported_Types UARTEx Exported Types
   * @{
   */
@@ -53,14 +53,14 @@ typedef struct
   uint16_t AddressLength;      /*!< Specifies whether the address is 4 or 7-bit long.
                                     This parameter can be a value of @ref UARTEx_WakeUp_Address_Length.  */
 
-  uint8_t Address;
+  uint8_t Address;             /*!< UART/USART node address (7-bit long max). */
 } UART_WakeUpTypeDef;
 
 /**
   * @}
   */
 
-
+/* Exported constants --------------------------------------------------------*/
 /** @defgroup UARTEx_Exported_Constants UARTEx Exported Constants
   * @{
   */
@@ -68,9 +68,9 @@ typedef struct
 /** @defgroup UARTEx_Word_Length UARTEx Word Length
   * @{
   */
-#define UART_WORDLENGTH_7B          USART_CR1_M1
-#define UART_WORDLENGTH_8B          0x00000000U
-#define UART_WORDLENGTH_9B          USART_CR1_M0
+#define UART_WORDLENGTH_7B          USART_CR1_M1   /*!< 7-bit long UART frame */
+#define UART_WORDLENGTH_8B          0x00000000U    /*!< 8-bit long UART frame */
+#define UART_WORDLENGTH_9B          USART_CR1_M0   /*!< 9-bit long UART frame */
 /**
   * @}
   */
@@ -78,8 +78,8 @@ typedef struct
 /** @defgroup UARTEx_WakeUp_Address_Length UARTEx WakeUp Address Length
   * @{
   */
-#define UART_ADDRESS_DETECT_4B      0x00000000U
-#define UART_ADDRESS_DETECT_7B      USART_CR2_ADDM7
+#define UART_ADDRESS_DETECT_4B      0x00000000U      /*!< 4-bit long wake-up address */
+#define UART_ADDRESS_DETECT_7B      USART_CR2_ADDM7  /*!< 7-bit long wake-up address */
 /**
   * @}
   */
@@ -89,8 +89,8 @@ typedef struct
   * @brief    UART FIFO mode
   * @{
   */
-#define UART_FIFOMODE_DISABLE       0x00000000U
-#define UART_FIFOMODE_ENABLE        USART_CR1_FIFOEN
+#define UART_FIFOMODE_DISABLE       0x00000000U       /*!< FIFO mode disable */
+#define UART_FIFOMODE_ENABLE        USART_CR1_FIFOEN  /*!< FIFO mode enable  */
 /**
   * @}
   */
@@ -99,12 +99,12 @@ typedef struct
   * @brief    UART TXFIFO threshold level
   * @{
   */
-#define UART_TXFIFO_THRESHOLD_1_8   0x00000000U
-#define UART_TXFIFO_THRESHOLD_1_4   USART_CR3_TXFTCFG_0
-#define UART_TXFIFO_THRESHOLD_1_2   USART_CR3_TXFTCFG_1
-#define UART_TXFIFO_THRESHOLD_3_4   (USART_CR3_TXFTCFG_0|USART_CR3_TXFTCFG_1)
-#define UART_TXFIFO_THRESHOLD_7_8   USART_CR3_TXFTCFG_2
-#define UART_TXFIFO_THRESHOLD_8_8   (USART_CR3_TXFTCFG_2|USART_CR3_TXFTCFG_0)
+#define UART_TXFIFO_THRESHOLD_1_8   0x00000000U                               /*!< TX FIFO reaches 1/8 of its depth */
+#define UART_TXFIFO_THRESHOLD_1_4   USART_CR3_TXFTCFG_0                       /*!< TX FIFO reaches 1/4 of its depth */
+#define UART_TXFIFO_THRESHOLD_1_2   USART_CR3_TXFTCFG_1                       /*!< TX FIFO reaches 1/2 of its depth */
+#define UART_TXFIFO_THRESHOLD_3_4   (USART_CR3_TXFTCFG_0|USART_CR3_TXFTCFG_1) /*!< TX FIFO reaches 3/4 of its depth */
+#define UART_TXFIFO_THRESHOLD_7_8   USART_CR3_TXFTCFG_2                       /*!< TX FIFO reaches 7/8 of its depth */
+#define UART_TXFIFO_THRESHOLD_8_8   (USART_CR3_TXFTCFG_2|USART_CR3_TXFTCFG_0) /*!< TX FIFO becomes empty            */
 /**
   * @}
   */
@@ -113,23 +113,23 @@ typedef struct
   * @brief    UART RXFIFO threshold level
   * @{
   */
-#define UART_RXFIFO_THRESHOLD_1_8   0x00000000U
-#define UART_RXFIFO_THRESHOLD_1_4   USART_CR3_RXFTCFG_0
-#define UART_RXFIFO_THRESHOLD_1_2   USART_CR3_RXFTCFG_1
-#define UART_RXFIFO_THRESHOLD_3_4   (USART_CR3_RXFTCFG_0|USART_CR3_RXFTCFG_1)
-#define UART_RXFIFO_THRESHOLD_7_8   USART_CR3_RXFTCFG_2
-#define UART_RXFIFO_THRESHOLD_8_8   (USART_CR3_RXFTCFG_2|USART_CR3_RXFTCFG_0)
+#define UART_RXFIFO_THRESHOLD_1_8   0x00000000U                               /*!< RX FIFO reaches 1/8 of its depth */
+#define UART_RXFIFO_THRESHOLD_1_4   USART_CR3_RXFTCFG_0                       /*!< RX FIFO reaches 1/4 of its depth */
+#define UART_RXFIFO_THRESHOLD_1_2   USART_CR3_RXFTCFG_1                       /*!< RX FIFO reaches 1/2 of its depth */
+#define UART_RXFIFO_THRESHOLD_3_4   (USART_CR3_RXFTCFG_0|USART_CR3_RXFTCFG_1) /*!< RX FIFO reaches 3/4 of its depth */
+#define UART_RXFIFO_THRESHOLD_7_8   USART_CR3_RXFTCFG_2                       /*!< RX FIFO reaches 7/8 of its depth */
+#define UART_RXFIFO_THRESHOLD_8_8   (USART_CR3_RXFTCFG_2|USART_CR3_RXFTCFG_0) /*!< RX FIFO becomes full             */
 /**
   * @}
   */
 
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @}
   */
 
-
-
+/* Exported macros -----------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
 /** @addtogroup UARTEx_Exported_Functions
   * @{
   */
@@ -138,7 +138,7 @@ typedef struct
   * @{
   */
 
-
+/* Initialization and de-initialization functions  ****************************/
 HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity, uint32_t AssertionTime,
                                    uint32_t DeassertionTime);
 
@@ -156,7 +156,7 @@ void HAL_UARTEx_WakeupCallback(UART_HandleTypeDef *huart);
 void HAL_UARTEx_RxFifoFullCallback(UART_HandleTypeDef *huart);
 void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart);
 
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @}
   */
@@ -165,7 +165,7 @@ void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart);
   * @{
   */
 
-
+/* Peripheral Control functions  **********************************************/
 HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huart, UART_WakeUpTypeDef WakeUpSelection);
 HAL_StatusTypeDef HAL_UARTEx_EnableStopMode(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UARTEx_DisableStopMode(UART_HandleTypeDef *huart);
@@ -174,7 +174,7 @@ HAL_StatusTypeDef HAL_UARTEx_DisableStopMode(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UARTEx_EnableClockStopMode(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UARTEx_DisableClockStopMode(UART_HandleTypeDef *huart);
 
-#endif
+#endif /* USART_CR3_UCESM */
 HAL_StatusTypeDef HAL_MultiProcessorEx_AddressLength_Set(UART_HandleTypeDef *huart, uint32_t AddressLength);
 
 #if defined(USART_CR1_FIFOEN)
@@ -182,7 +182,7 @@ HAL_StatusTypeDef HAL_UARTEx_EnableFifoMode(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UARTEx_DisableFifoMode(UART_HandleTypeDef *huart);
 HAL_StatusTypeDef HAL_UARTEx_SetTxFifoThreshold(UART_HandleTypeDef *huart, uint32_t Threshold);
 HAL_StatusTypeDef HAL_UARTEx_SetRxFifoThreshold(UART_HandleTypeDef *huart, uint32_t Threshold);
-#endif
+#endif /* USART_CR1_FIFOEN */
 
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint16_t *RxLen,
                                            uint32_t Timeout);
@@ -198,7 +198,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
   * @}
   */
 
-
+/* Private macros ------------------------------------------------------------*/
 /** @defgroup UARTEx_Private_Macros UARTEx Private Macros
   * @{
   */
@@ -720,12 +720,12 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
                                                  ((__THRESHOLD__) == UART_RXFIFO_THRESHOLD_7_8) || \
                                                  ((__THRESHOLD__) == UART_RXFIFO_THRESHOLD_8_8))
 
-#endif
+#endif /* USART_CR1_FIFOEN */
 /**
   * @}
   */
 
-
+/* Private functions ---------------------------------------------------------*/
 
 /**
   * @}
@@ -739,5 +739,5 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 }
 #endif
 
-#endif
+#endif /* STM32L4xx_HAL_UART_EX_H */
 

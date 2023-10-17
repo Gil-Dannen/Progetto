@@ -1,0 +1,9 @@
+../Core/Src/state_machine.c:18:9:isValidState	0	static
+../Core/Src/state_machine.c:23:10:timeInCurrentState	0	static
+../Core/Src/state_machine.c:28:6:setExitCondition	16	static
+../Core/Src/state_machine.c:36:9:setState	8	static
+../Core/Src/state_machine.c:46:8:state	0	static
+../Core/Src/state_machine.c:51:6:setStateTimeout	16	static
+../Core/Src/state_machine.c:62:6:setup	8	static
+../Core/Src/state_machine.c:84:6:loop	56	static
+../Core/Src/state_machine.c:139:6:setDebugEnabled	0	static

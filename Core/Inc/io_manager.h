@@ -14,6 +14,11 @@ typedef enum MappedFunction{
 	MF_undefined = 0,
 	MF_Button,
 	MF_led1,
+    MF_led2,
+	MF_BleInt,
+    MF_BleCS,
+    MF_BleReset,
+	MF_TOF,
 	MF_COUNT
 }MF;
 
@@ -40,7 +45,7 @@ struct IOS_Man_type{
 
 void bspFunctionInit();
 float bspGetValue(bspF);
-float * bspGetTripleValue(bspTF);
+float* bspGetTripleValue(bspTF);
 
 void setMappedFunction(MF mf,GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin,double offset,double factor);
 

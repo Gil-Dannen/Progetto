@@ -1,0 +1,12 @@
+../Core/Src/enable.c:365:5:fetchBleEvent	5
+../Core/Src/enable.c:419:5:checkEventResp	4
+../Core/Src/enable.c:433:6:sendCommand	3
+../Core/Src/enable.c:481:6:setConnectable	4
+../Core/Src/enable.c:462:6:catchBLE	3
+../Core/Src/enable.c:699:5:BLE_command	4
+../Core/Src/enable.c:724:6:addService	2
+../Core/Src/enable.c:740:6:addCharacteristic	2
+../Core/Src/enable.c:764:6:updateCharValue	1
+../Core/Src/enable.c:138:6:ble_init	9
+../Core/Src/enable.c:522:6:updateSignedMillesimal	5
+../Core/Src/enable.c:616:6:updateSignedFloat	4

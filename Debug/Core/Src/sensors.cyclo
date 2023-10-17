@@ -1,0 +1,13 @@
+../Core/Src/sensors.c:31:6:initLPS22hh	1
+../Core/Src/sensors.c:38:6:getPressure	2
+../Core/Src/sensors.c:70:6:initHTS221	1
+../Core/Src/sensors.c:172:6:getHumidity	1
+../Core/Src/sensors.c:196:6:getTemperature	1
+../Core/Src/sensors.c:219:6:startToF	1
+../Core/Src/sensors.c:226:6:getDistance	3
+../Core/Src/sensors.c:247:6:init_accelerometer	1
+../Core/Src/sensors.c:257:6:getAxisAccelerometer	4
+../Core/Src/sensors.c:327:5:getfirstValidBit	2
+../Core/Src/sensors.c:314:9:getMicrophonedb	2
+../Core/Src/sensors.c:338:6:init_magnetometer	1
+../Core/Src/sensors.c:348:6:getAxisMagnetometer	4

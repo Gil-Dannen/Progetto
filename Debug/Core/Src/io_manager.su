@@ -1,0 +1,7 @@
+../Core/Src/io_manager.c:19:6:bspFunctionInit	8	static
+../Core/Src/io_manager.c:32:6:setMappedFunction	4	static
+../Core/Src/io_manager.c:40:6:setDigital	8	static
+../Core/Src/io_manager.c:45:15:readDigital	8	static
+../Core/Src/io_manager.c:53:7:bspGetValue	8	static
+../Core/Src/io_manager.c:60:8:bspGetTripleValue	8	static
+../Core/Src/io_manager.c:87:7:readAnalog	0	static

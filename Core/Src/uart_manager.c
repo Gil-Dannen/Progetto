@@ -1,13 +1,40 @@
 #include "uart_manager.h"
+#include "main.h"
+#include <string.h>
+#include <stdlib.h>
 
-UART_HandleTypeDef huart1;
 
+extern UART_HandleTypeDef huart1;
 
+static char * txt;
 
-HAL_StatusTypeDef sendMessage(char * text)
+static void reset()
 {
-	return HAL_UART_Transmit(&huart1,(uint8_t*)text,strlen(text),1000);
+	free(txt);
+	txt = malloc(sizeof(char) * 1);
 }
+
+
+
+static void concat(char * a, char * b)
+{
+	realloc(a,(char) (strlen(a) +strlen(b)));
+	strcat(a,b);
+}
+
+
+HAL_StatusTypeDef sendMessage()
+{
+	return HAL_UART_Transmit(&huart1,(char*)txt,strlen(txt),1000);
+	reset();
+}
+
+void appendMessage(char * text)
+{
+	concat(txt,text);
+}
+
+
 
 void uart_init(void)
 {
@@ -26,6 +53,8 @@ void uart_init(void)
   {
     Error_Handler();
   }
+  reset();
+
 
 
 }

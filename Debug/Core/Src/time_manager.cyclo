@@ -1,0 +1,10 @@
+../Core/Src/time_manager.c:17:10:deltaTime	1
+../Core/Src/time_manager.c:22:9:isValidTimer	1
+../Core/Src/time_manager.c:27:6:initTimers	2
+../Core/Src/time_manager.c:37:6:setTimer	3
+../Core/Src/time_manager.c:54:6:resetTimer	2
+../Core/Src/time_manager.c:63:6:setStateMachineTimer	1
+../Core/Src/time_manager.c:71:9:timePassed	1
+../Core/Src/time_manager.c:76:6:timersloop	5
+../Core/Src/time_manager.c:97:6:sleep	2
+../Core/Src/time_manager.c:104:9:isTimerExpired	2
