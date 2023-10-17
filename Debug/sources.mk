@@ -23,7 +23,9 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Core/Src \
+Core/Main/Src \
+Core/States/Src \
+Core/Systems/Src \
 Drivers/BSP/source \
 Drivers/STM32L4xx_HAL_Driver/Src \
 startup \

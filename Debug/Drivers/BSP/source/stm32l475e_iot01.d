@@ -2,7 +2,7 @@ Drivers/BSP/source/stm32l475e_iot01.o: \
  ../Drivers/BSP/source/stm32l475e_iot01.c \
  C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
- ../Core/Inc/stm32l4xx_hal_conf.h \
+ C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Core/Systems/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h \
@@ -35,7 +35,7 @@ Drivers/BSP/source/stm32l475e_iot01.o: \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
 C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Drivers/BSP/include/stm32l475e_iot01.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
-../Core/Inc/stm32l4xx_hal_conf.h:
+C:/Users/Mattia\ Sacchi/Workspace/C\ Workspace/Progetto/Core/Systems/Inc/stm32l4xx_hal_conf.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h:

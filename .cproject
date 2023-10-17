@@ -51,6 +51,9 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="&quot;C:\Users\mattia.sacchi\Desktop\WorkspaceVSC\BLE-IOT\STM32_B-L475E-IOT01A\BLE-sender\Drivers\BSP\include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Progetto/Drivers/BSP/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Progetto/Core/Main/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Progetto/Core/Systems/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Progetto/Core/States/Inc}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols.323392524" name="Define symbols (-D)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
