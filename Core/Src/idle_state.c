@@ -42,7 +42,7 @@ void idle_enter()
 
     setDigital(MF_led1,GPIO_PIN_RESET);
 
-    setExitCondition(ST_BLE_CHECK, buttonToggled);
+    //setExitCondition(ST_BLE_CHECK, buttonToggled);
 }
 
 

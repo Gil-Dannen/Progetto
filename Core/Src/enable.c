@@ -13,7 +13,7 @@
 
 extern SPI_HandleTypeDef hspi3;
 extern int dataAvailable;
-uint8_t deviceName[]={'S','T','M','3','2','T','o','T','a','n','g','l','e'};
+uint8_t deviceName[]={'S','T','M','3','2','S','o','c','c','i','a','3','3'};
 //char deviceName[]={'S','T','M','3','2'};//NOT REVERSED, INCREDIBLE STRINGS ARE NOT LITTLE ENDIAN
 //attributes are 1 for service, 2 for readable char and 3 for notify/readable characteristcs
 

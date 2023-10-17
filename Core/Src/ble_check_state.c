@@ -102,8 +102,8 @@ void ble_check_loop(uint8_t deltaMs)
 
 	  }else{
 
-		  if(/*update*/ 0){
-			  //update=0;
+		  if(update){
+			  update=0;
 
 			  getDistance(&distanceComplete);
 			  updateSignedMillesimal(CUSTOM_SERVICE_HANDLE,TOF_CHAR_HANDLE,TOF_VALUE,13,distanceComplete);
@@ -137,7 +137,7 @@ void ble_check_loop(uint8_t deltaMs)
 			  if(distanceComplete>500){
 				  pwm=500;
 			  }
-			  //__HAL_TIM_SetCompare(&htim15,TIM_CHANNEL_1,pwm);
+			  	  __HAL_TIM_SetCompare(&htim15,TIM_CHANNEL_1,pwm);
 			   }
 
 
