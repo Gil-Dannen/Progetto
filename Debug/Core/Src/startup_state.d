@@ -35,7 +35,9 @@ Core/Src/startup_state.o: ../Core/Src/startup_state.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- ../Core/Inc/uart_manager.h ../Core/Inc/time_manager.h
+ ../Core/Inc/uart_manager.h ../Core/Inc/time_manager.h \
+ ../Core/Inc/enable.h ../Core/Inc/main.h ../Core/Inc/sensors.h \
+ ../Core/Inc/main.h
 ../Core/Inc/startup_state.h:
 ../Core/Inc/state_machine.h:
 ../Core/Inc/state_all.h:
@@ -78,3 +80,7 @@ Core/Src/startup_state.o: ../Core/Src/startup_state.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../Core/Inc/uart_manager.h:
 ../Core/Inc/time_manager.h:
+../Core/Inc/enable.h:
+../Core/Inc/main.h:
+../Core/Inc/sensors.h:
+../Core/Inc/main.h:

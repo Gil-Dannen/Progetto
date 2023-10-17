@@ -31,7 +31,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- ../Core/Inc/enable.h ../Core/Inc/main.h ../Core/Inc/sensors.h
+ ../Core/Inc/state_machine.h ../Core/Inc/state_all.h \
+ ../Core/Inc/startup_state.h ../Core/Inc/idle_state.h \
+ ../Core/Inc/state_machine.h ../Core/Inc/ble_check_state.h \
+ ../Core/Inc/io_manager.h ../Core/Inc/uart_manager.h \
+ ../Core/Inc/time_manager.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -65,6 +69,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-../Core/Inc/enable.h:
-../Core/Inc/main.h:
-../Core/Inc/sensors.h:
+../Core/Inc/state_machine.h:
+../Core/Inc/state_all.h:
+../Core/Inc/startup_state.h:
+../Core/Inc/idle_state.h:
+../Core/Inc/state_machine.h:
+../Core/Inc/ble_check_state.h:
+../Core/Inc/io_manager.h:
+../Core/Inc/uart_manager.h:
+../Core/Inc/time_manager.h:

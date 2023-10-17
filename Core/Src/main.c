@@ -22,8 +22,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "enable.h"
-#include "sensors.h"
+
+#include "state_machine.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -37,37 +37,11 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-extern uint8_t TOF_CHAR_HANDLE[2];
-extern uint8_t CUSTOM_SERVICE_HANDLE[2];
-extern uint8_t TOF_VALUE[];
-extern uint8_t TEMP_CHAR_HANDLE[];
-extern uint8_t HUM_CHAR_HANDLE[];
-extern uint8_t VALUE_TEMP[];
-extern uint8_t VALUE_HUM[];
-
-extern uint8_t PRESS_CHAR_HANDLE[2];
-extern uint8_t VALUE_PRESS[];
-
-
-extern uint8_t INERTIAL_SERVICE_HANDLE[2];
-extern uint8_t ACCX_CHAR_HANDLE[2];
-extern uint8_t ACCY_CHAR_HANDLE[2];
-extern uint8_t ACCZ_CHAR_HANDLE[2];
-
-extern uint8_t MAGNETIC_SERVICE_HANDLE[2];
-
-extern uint8_t MAGX_CHAR_HANDLE[2];
-extern uint8_t MAGY_CHAR_HANDLE[2];
-extern uint8_t MAGZ_CHAR_HANDLE[2];
-
-extern uint8_t X_VALUE[];
-extern uint8_t Y_VALUE[];
-extern uint8_t Z_VALUE[];
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c2;
-
+UART_HandleTypeDef huart1;
 SPI_HandleTypeDef hspi3;
 
 TIM_HandleTypeDef htim6;
@@ -90,8 +64,6 @@ static void MX_TIM15_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int dataAvailable=0;
-int update=0;
 /* USER CODE END 0 */
 
 /**
@@ -128,91 +100,15 @@ int main(void)
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
   //RESET BLE MODULE
-  HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_RESET);
-  HAL_Delay(10);
-  HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_SET);
-
-  ble_init();
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  HAL_GPIO_WritePin(TOF_RESET_GPIO_Port,TOF_RESET_Pin,GPIO_PIN_SET);
-
-  HAL_Delay(10);
-
-  startToF();
-  initLPS22hh();
 
 
+  setup();
 
-  int distanceComplete=0;
 
-  HAL_TIM_Base_Start_IT(&htim6);
-  float press;
-  float hum;
-  float temp;
-  int16_t accx,accy,accz;
-  int16_t magx,magy,magz;
-  initHTS221();
-  init_accelerometer();
-  init_magnetometer();
-
-  HAL_TIM_PWM_Start(&htim15,TIM_CHANNEL_1);
 
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-	  if(HAL_GPIO_ReadPin(BLE_INT_GPIO_Port,BLE_INT_Pin)){//if an event occurs let's catch it
-		  catchBLE();
-
-	  }else{
-
-		  if(update){
-			  update=0;
-
-			  getDistance(&distanceComplete);
-			  updateSignedMillesimal(CUSTOM_SERVICE_HANDLE,TOF_CHAR_HANDLE,TOF_VALUE,13,distanceComplete);
-			  HAL_Delay(10);
-			  getTemperature(&temp);
-			  updateSignedFloat(CUSTOM_SERVICE_HANDLE,TEMP_CHAR_HANDLE,VALUE_TEMP,9,temp);
-			  HAL_Delay(10);
-
-			  getHumidity(&hum);
-			  updateSignedFloat(CUSTOM_SERVICE_HANDLE,HUM_CHAR_HANDLE,VALUE_HUM,8,hum);
-
-			  HAL_Delay(10);
-			  getAxisAccelerometer(&accx,&accy,&accz);
-			  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCX_CHAR_HANDLE,X_VALUE,10,accx);
-			  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCY_CHAR_HANDLE,Y_VALUE,10,accy);
-			  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCZ_CHAR_HANDLE,Z_VALUE,10,accz);
-
-			  getPressure(&press);
-			  updateSignedFloat(CUSTOM_SERVICE_HANDLE,PRESS_CHAR_HANDLE,VALUE_PRESS,10,press);
-
-              HAL_Delay(10);
-			  getAxisMagnetometer(&magx,&magy,&magz);
-			  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGX_CHAR_HANDLE,X_VALUE,10,magx);
-			  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGY_CHAR_HANDLE,Y_VALUE,10,magy);
-			  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGZ_CHAR_HANDLE,Z_VALUE,10,magz);
-
-
-			  startToF();
-			  int pwm=0;
-			  pwm=distanceComplete;
-			  if(distanceComplete>500){
-				  pwm=500;
-			  }
-			  __HAL_TIM_SetCompare(&htim15,TIM_CHANNEL_1,pwm);
-		  	   }
-
-
-
-	  }
-	  __WFI();
-
+	  loop(1);
 
 
 
@@ -509,6 +405,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(BLE_RESET_GPIO_Port, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
