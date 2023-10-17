@@ -1,4 +1,0 @@
-../Drivers/BSP/source/ov9655.c:684:17:ov9655_ConvertValue	0	static
-../Drivers/BSP/source/ov9655.c:617:6:ov9655_Config	40	static
-../Drivers/BSP/source/ov9655.c:556:6:ov9655_Init	16	static
-../Drivers/BSP/source/ov9655.c:666:10:ov9655_ReadID	8	static
