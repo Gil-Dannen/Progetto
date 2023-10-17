@@ -9,6 +9,13 @@ static float temperature = 0, humidity = 0, pressure = 0,
 
 void testBSPfunctions()
 {
+
+	temperature = bspGetValue(BSP_temperature);
+	humidity = bspGetValue(BSP_humidity);
+	pressure = bspGetValue(BSP_pressure);
+	magnetometer = bspGetTripleValue(BSPT_magneto);
+	acceleremeter = bspGetTripleValue(BSPT_accellero);
+	gyroscope = bspGetTripleValue(BSPT_gyro);
     char Test[50];
     sprintf(Test, "Temperature = %d\n\r", (int)temperature);
     appendMessage(Test);
@@ -36,7 +43,7 @@ void testBSPfunctions()
 
 void idle_enter()
 {
-    setTimer(TF_Main, testBSPfunctions, 3000);
+    setTimer(TF_Main, testBSPfunctions, 1000);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
 
@@ -48,12 +55,7 @@ void idle_enter()
 
 void idle_beforeLoop(uint8_t deltaMs)
 {
-	temperature = bspGetValue(BSP_temperature);
-	humidity = bspGetValue(BSP_humidity);
-	pressure = bspGetValue(BSP_pressure);
-	magnetometer = bspGetTripleValue(BSPT_magneto);
-	acceleremeter = bspGetTripleValue(BSPT_accellero);
-	gyroscope = bspGetTripleValue(BSPT_gyro);
+
 }
 
 

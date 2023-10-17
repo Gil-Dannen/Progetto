@@ -1,5 +1,0 @@
-ble_check_state.c:54:6:blink	1
-ble_check_state.c:60:6:ble_check_enter	1
-ble_check_state.c:75:6:ble_check_beforeLoop	1
-ble_check_state.c:80:6:ble_check_loop	4
-ble_check_state.c:150:6:ble_check_afterLoop	1

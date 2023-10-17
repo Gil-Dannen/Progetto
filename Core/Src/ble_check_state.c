@@ -57,6 +57,8 @@ void blink()
 	setDigital(MF_led1,blinkStatus);
 }
 
+static uint8_t initDone = 0;
+
 void ble_check_enter()
 {
 
@@ -67,6 +69,30 @@ void ble_check_enter()
     setDigital(MF_led2, GPIO_PIN_RESET);
 
     setExitCondition(ST_IDLE, buttonToggled);
+
+    if(!initDone)
+    {
+    	initDone = 1;
+    	HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_RESET);
+		HAL_Delay(10);
+		HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_SET);
+
+
+		HAL_GPIO_WritePin(TOF_RESET_GPIO_Port,TOF_RESET_Pin,GPIO_PIN_SET);
+
+		HAL_Delay(10);
+
+		startToF();
+		initLPS22hh();
+
+		HAL_TIM_Base_Start_IT(&htim6);
+
+		HAL_TIM_PWM_Start(&htim15,TIM_CHANNEL_1);
+
+		initHTS221();
+		init_accelerometer();
+		init_magnetometer();
+    }
 
 
 }

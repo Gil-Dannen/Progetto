@@ -5,18 +5,15 @@
 #include "main.h"
 
 
-
-
-
 void startup_enter()
 {
     setMappedFunction(MF_Button, GPIOC, GPIO_PIN_13, 0, 1);
     setMappedFunction(MF_led1, GPIOA, GPIO_PIN_5, 0, 1);
     setMappedFunction(MF_led2, GPIOB, GPIO_PIN_14, 0, 1);
-    setMappedFunction(MF_BleInt, GPIOE, GPIO_PIN_6, 0, 1);
-    setMappedFunction(MF_BleCS, GPIOD, GPIO_PIN_13, 0, 1);
-    setMappedFunction(MF_BleReset, GPIOA, GPIO_PIN_8, 0, 1);
-	setMappedFunction(MF_TOF, GPIOC, GPIO_PIN_8, 0, 1);
+    setMappedFunction(MF_BleInt, BLE_INT_GPIO_Port, BLE_INT_Pin, 0, 1);
+    setMappedFunction(MF_BleCS, BLE_CS_GPIO_Port, BLE_CS_Pin, 0, 1);
+    setMappedFunction(MF_BleReset, BLE_RESET_GPIO_Port, BLE_RESET_Pin, 0, 1);
+	setMappedFunction(MF_TOF, TOF_RESET_GPIO_Port, TOF_RESET_Pin, 0, 1);
 
 
     initTimers();
@@ -29,29 +26,7 @@ void startup_enter()
 
     setStateTimeout(ST_IDLE,200);
 
-    HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_RESET);
-	HAL_Delay(10);
-	HAL_GPIO_WritePin(BLE_RESET_GPIO_Port,BLE_RESET_Pin,GPIO_PIN_SET);
 
-	ble_init();
-	/* USER CODE END 2 */
-
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
-	HAL_GPIO_WritePin(TOF_RESET_GPIO_Port,TOF_RESET_Pin,GPIO_PIN_SET);
-
-	HAL_Delay(10);
-
-	startToF();
-	initLPS22hh();
-
-	HAL_TIM_Base_Start_IT(&htim6);
-
-	HAL_TIM_PWM_Start(&htim15,TIM_CHANNEL_1);
-
-	initHTS221();
-	init_accelerometer();
-	init_magnetometer();
 
 }
 
