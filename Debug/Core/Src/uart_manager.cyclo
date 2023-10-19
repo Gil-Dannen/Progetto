@@ -1,5 +1,0 @@
-uart_manager.c:19:13:concat	1
-uart_manager.c:11:13:reset	1
-uart_manager.c:26:19:sendMessage	1
-uart_manager.c:32:6:appendMessage	1
-uart_manager.c:39:6:uart_init	2

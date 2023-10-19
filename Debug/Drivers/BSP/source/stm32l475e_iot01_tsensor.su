@@ -1,2 +1,0 @@
-../Drivers/BSP/source/stm32l475e_iot01_tsensor.c:51:10:BSP_TSENSOR_Init	8	static
-../Drivers/BSP/source/stm32l475e_iot01_tsensor.c:76:7:BSP_TSENSOR_ReadTemp	8	static

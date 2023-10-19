@@ -1,5 +1,0 @@
-../Core/Src/uart_manager.c:19:13:concat	16	static
-../Core/Src/uart_manager.c:11:13:reset	8	static
-../Core/Src/uart_manager.c:26:19:sendMessage	8	static
-../Core/Src/uart_manager.c:32:6:appendMessage	8	static
-../Core/Src/uart_manager.c:39:6:uart_init	8	static
