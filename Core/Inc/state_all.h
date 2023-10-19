@@ -12,13 +12,11 @@ typedef enum
     ST_UNDEFINED,
     ST_STARTUP,
     ST_IDLE,
-	ST_BLE_CHECK,
     ST_COUNT,
 }States;
 
 #include "startup_state.h"
 #include "idle_state.h"
-#include "ble_check_state.h"
 #include <stdint.h>
 
 typedef struct 

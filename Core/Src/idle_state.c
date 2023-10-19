@@ -4,8 +4,47 @@
 
 
 static float temperature = 0, humidity = 0, pressure = 0,
-		*acceleremeter = NULL, *magnetometer = NULL , *gyroscope = NULL;
+		*accelerometer = NULL, *magnetometer = NULL , *gyroscope = NULL;
 
+extern uint8_t TOF_CHAR_HANDLE[2];
+extern uint8_t CUSTOM_SERVICE_HANDLE[2];
+extern uint8_t TEMP_CHAR_HANDLE[];
+extern uint8_t HUM_CHAR_HANDLE[];
+extern uint8_t TOF_VALUE[];
+extern uint8_t VALUE_TEMP[];
+extern uint8_t VALUE_HUM[];
+
+extern uint8_t PRESS_CHAR_HANDLE[2];
+extern uint8_t VALUE_PRESS[];
+
+
+extern uint8_t INERTIAL_SERVICE_HANDLE[2];
+extern uint8_t ACCX_CHAR_HANDLE[2];
+extern uint8_t ACCY_CHAR_HANDLE[2];
+extern uint8_t ACCZ_CHAR_HANDLE[2];
+
+extern uint8_t MAGNETIC_SERVICE_HANDLE[2];
+
+extern uint8_t MAGX_CHAR_HANDLE[2];
+extern uint8_t MAGY_CHAR_HANDLE[2];
+extern uint8_t MAGZ_CHAR_HANDLE[2];
+
+extern uint8_t X_VALUE[];
+extern uint8_t Y_VALUE[];
+extern uint8_t Z_VALUE[];
+
+int update = 0;
+int dataAvailable = 0;
+
+
+
+uint8_t blinkStatus = 0;
+
+void blink()
+{
+	blinkStatus = !blinkStatus;
+	setDigital(MF_led1,blinkStatus);
+}
 
 void testBSPfunctions()
 {
@@ -17,7 +56,7 @@ void testBSPfunctions()
     sprintf(Test, "Pressure = %d\n\r", (int)pressure);
     appendMessage(Test);
     sprintf(Test, "Accellerometer = %d,%d,%d\n\r",
-    	(int)acceleremeter[0], (int)acceleremeter[1], (int)acceleremeter[2]);
+    	(int)accelerometer[0], (int)accelerometer[1], (int)accelerometer[2]);
     appendMessage(Test);
 
     sprintf(Test, "Magneto = %d,%d,%d\n\r",
@@ -42,7 +81,8 @@ void idle_enter()
 
     setDigital(MF_led1,GPIO_PIN_SET);
 
-    setExitCondition(ST_BLE_CHECK, buttonToggled);
+    setTimer(TF_Main, blink, 500);
+
 }
 
 
@@ -52,7 +92,7 @@ void idle_beforeLoop(uint8_t deltaMs)
 	humidity = bspGetValue(BSP_humidity);
 	pressure = bspGetValue(BSP_pressure);
 	magnetometer = bspGetTripleValue(BSPT_magneto);
-	acceleremeter = bspGetTripleValue(BSPT_accellero);
+	accelerometer = bspGetTripleValue(BSPT_accellero);
 	gyroscope = bspGetTripleValue(BSPT_gyro);
 }
 
@@ -60,6 +100,35 @@ void idle_beforeLoop(uint8_t deltaMs)
 void idle_loop(uint8_t deltaMs)
 {
 
+	  if(readDigital(MF_BleInt)){//if an event occurs let's catch it
+		  catchBLE();
+		  return;
+
+	  }
+
+	  if(update){
+		  update=0;
+
+		  updateSignedMillesimal(CUSTOM_SERVICE_HANDLE,TOF_CHAR_HANDLE,TOF_VALUE,13,0);
+		  sleep(10);
+		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,TEMP_CHAR_HANDLE,VALUE_TEMP,9,temperature);
+		  sleep(10);
+
+		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,HUM_CHAR_HANDLE,VALUE_HUM,8,humidity);
+
+		  sleep(10);
+		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCX_CHAR_HANDLE,X_VALUE,10,accelerometer[0]);
+		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCY_CHAR_HANDLE,Y_VALUE,10,accelerometer[1]);
+		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCZ_CHAR_HANDLE,Z_VALUE,10,accelerometer[2]);
+
+		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,PRESS_CHAR_HANDLE,VALUE_PRESS,10,pressure);
+
+		  sleep(10);
+		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGX_CHAR_HANDLE,X_VALUE,10,magnetometer[0]);
+		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGY_CHAR_HANDLE,Y_VALUE,10,magnetometer[1]);
+		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGZ_CHAR_HANDLE,Z_VALUE,10,magnetometer[2]);
+
+	  }
 }
 
 void idle_afterLoop(uint8_t deltaMs)

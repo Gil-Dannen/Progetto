@@ -1,8 +1,7 @@
 Core/Src/state_machine.o: ../Core/Src/state_machine.c \
  ../Core/Inc/state_machine.h ../Core/Inc/state_all.h \
  ../Core/Inc/startup_state.h ../Core/Inc/idle_state.h \
- ../Core/Inc/state_machine.h ../Core/Inc/ble_check_state.h \
- ../Core/Inc/io_manager.h \
+ ../Core/Inc/state_machine.h ../Core/Inc/io_manager.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -41,7 +40,6 @@ Core/Src/state_machine.o: ../Core/Src/state_machine.c \
 ../Core/Inc/startup_state.h:
 ../Core/Inc/idle_state.h:
 ../Core/Inc/state_machine.h:
-../Core/Inc/ble_check_state.h:
 ../Core/Inc/io_manager.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:

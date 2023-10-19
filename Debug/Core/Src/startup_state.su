@@ -1,4 +1,0 @@
-../Core/Src/startup_state.c:11:6:startup_enter	24	static
-../Core/Src/startup_state.c:59:6:startup_beforeLoop	0	static
-../Core/Src/startup_state.c:63:6:startup_loop	0	static
-../Core/Src/startup_state.c:67:6:startup_afterLoop	0	static

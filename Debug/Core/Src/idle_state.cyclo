@@ -1,5 +1,6 @@
-idle_state.c:10:6:testBSPfunctions	1
-idle_state.c:37:6:idle_enter	1
-idle_state.c:49:6:idle_beforeLoop	1
-idle_state.c:60:6:idle_loop	1
-idle_state.c:65:6:idle_afterLoop	1
+idle_state.c:43:6:blink	1
+idle_state.c:49:6:testBSPfunctions	1
+idle_state.c:76:6:idle_enter	1
+idle_state.c:89:6:idle_beforeLoop	1
+idle_state.c:100:6:idle_loop	3
+idle_state.c:134:6:idle_afterLoop	1

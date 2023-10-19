@@ -1,7 +1,7 @@
 #include "general_functions.h"
 #include "state_machine.h"
 
-static uint8_t button = 0;
+static uint8_t button = 1;
 
 uint8_t buttonToggled()
 {
