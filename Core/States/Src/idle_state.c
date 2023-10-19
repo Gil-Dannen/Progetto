@@ -109,9 +109,9 @@ void idle_loop(uint8_t deltaMs)
 	  if(update){
 		  update=0;
 
-		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,TEMP_CHAR_HANDLE,VALUE_TEMP,9,temperature);
-		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,HUM_CHAR_HANDLE,VALUE_HUM,8,humidity);
-		  updateSignedFloat(CUSTOM_SERVICE_HANDLE,PRESS_CHAR_HANDLE,VALUE_PRESS,10,pressure);
+		  updateMessage(BM_Temperature,temperature);
+		  updateMessage(BM_Humidity,humidity);
+		  updateMessage(BM_Pressure,pressure);
 
 		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCX_CHAR_HANDLE,X_VALUE,10,accelerometer[0]);
 		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCY_CHAR_HANDLE,Y_VALUE,10,accelerometer[1]);
