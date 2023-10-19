@@ -9,6 +9,9 @@
 #define INC_ENABLE_H_
 #include "main.h"
 
+#define READABLE 0x02
+#define NOTIFIBLE 0x10
+#define WRITABLE  0x04
 
 #define BLE_OK 0
 
@@ -17,48 +20,7 @@
 #define SET_ATTRIBUTES(n) (n)
 #define SET_CONTENT_LENGTH(n) (n)
 
-typedef enum
-{
-	BS_ENVIRONMENT = 0,
-	BS_INTERTIAL,
-	BS_MAGNETIC,
-	BS_COUNT
 
-}BleServices;
-
-typedef enum
-{
-	BM_Temperature,
-	BM_Humidity,
-	BM_Pressure,
-	BM_COUNT,
-
-}BleMessages;
-
-typedef struct
-{
-	uint8_t * uuid;
-	uint8_t handle[2];
-	uint8_t charateristicHandle[2];
-	uint8_t * charateristicId;
-
-}BleService;
-
-typedef struct
-{
-	uint8_t * uuid;
-	uint8_t handle[2];
-	char * defaultMessage;
-	BleServices service;
-
-}BleMessage;
-
-
-void setupNewService(BleServices service,uint8_t * uuid, int attributes,uint8_t * charateristicId, char * name);
-
-void setupNewMessage(BleMessages msg,BleServices service,uint8_t * uuid, char * name);
-
-void updateMessage(BleMessages msg, float data);
 
 
 //function for starting the BLE protocol

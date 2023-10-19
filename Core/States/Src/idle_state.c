@@ -1,22 +1,11 @@
 #include "idle_state.h"
 #include "state_machine.h"
 #include "general_functions.h"
-#include "enable.h"
+#include "ble_Project_interface.h"
 
 
 static float temperature = 0, humidity = 0, pressure = 0,
 		*accelerometer = NULL, *magnetometer = NULL , *gyroscope = NULL;
-
-extern uint8_t CUSTOM_SERVICE_HANDLE[2];
-extern uint8_t TEMP_CHAR_HANDLE[];
-extern uint8_t HUM_CHAR_HANDLE[];
-
-extern uint8_t VALUE_TEMP[];
-extern uint8_t VALUE_HUM[];
-
-extern uint8_t PRESS_CHAR_HANDLE[2];
-extern uint8_t VALUE_PRESS[];
-
 
 extern uint8_t INERTIAL_SERVICE_HANDLE[2];
 extern uint8_t ACCX_CHAR_HANDLE[2];

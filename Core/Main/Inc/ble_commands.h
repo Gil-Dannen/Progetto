@@ -9,9 +9,7 @@
 #define INC_BLE_COMMANDS_H_
 
 
-#define READABLE 0x02
-#define NOTIFIBLE 0x10
-#define WRITABLE  0x04
+
 
 uint8_t EVENT_STATUP_DATA[]={0x04,0xff,0x03,0x01,0x00,0x01};
 
