@@ -1,12 +1,13 @@
+#include <ble_project_interface.h>
 #include "idle_state.h"
 #include "state_machine.h"
 #include "general_functions.h"
-#include "ble_Project_interface.h"
 #include "enable.h"
+#include <stdlib.h>
 
 
 static float temperature = 0, humidity = 0, pressure = 0,
-		*accelerometer = NULL, *magnetometer = NULL , *gyroscope = NULL;
+		accelerometer[3], magnetometer[3] , gyroscope[3];
 
 int update = 0;
 int dataAvailable = 0;
@@ -64,9 +65,12 @@ void idle_beforeLoop(uint8_t deltaMs)
 	temperature = bspGetValue(BSP_temperature);
 	humidity = bspGetValue(BSP_humidity);
 	pressure = bspGetValue(BSP_pressure);
-	magnetometer = bspGetTripleValue(BSPT_magneto);
-	accelerometer = bspGetTripleValue(BSPT_accellero);
-	gyroscope = bspGetTripleValue(BSPT_gyro);
+	float * temp = bspGetTripleValue(BSPT_gyro);
+	memcpy(gyroscope,temp,sizeof(float)*3);
+	temp = bspGetTripleValue(BSPT_magneto);
+	memcpy(magnetometer,temp,sizeof(float)*3);
+	temp = bspGetTripleValue(BSPT_accellero);
+	memcpy(accelerometer,temp,sizeof(float)*3);
 }
 
 
@@ -76,7 +80,6 @@ void idle_loop(uint8_t deltaMs)
 	  if(readDigital(MF_BleInt)){//if an event occurs let's catch it
 		  catchBLE();
 		  return;
-
 	  }
 
 	  if(update){
@@ -86,6 +89,7 @@ void idle_loop(uint8_t deltaMs)
 		  updateMessage(BM_Humidity,humidity);
 		  updateMessage(BM_Pressure,pressure);
 
+
 		  updateMessage(BM_Accelero_x, accelerometer[0]);
 		  updateMessage(BM_Accelero_y, accelerometer[1]);
 		  updateMessage(BM_Accelero_z, accelerometer[2]);
@@ -93,6 +97,7 @@ void idle_loop(uint8_t deltaMs)
 		  updateMessage(BM_Magneto_x, magnetometer[0]);
 		  updateMessage(BM_Magneto_y, magnetometer[1]);
 		  updateMessage(BM_Magneto_z, magnetometer[2]);
+
 
 		  updateMessage(BM_Gyroscope_x, gyroscope[0]);
 		  updateMessage(BM_Gyroscope_y, gyroscope[1]);

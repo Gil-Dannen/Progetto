@@ -57,6 +57,13 @@ float bspGetValue(bspF function)
     return (bspFunctionArray[function])();
 }
 
+
+void convertInt16PtrToFloatPrt()
+{
+	for (int i = 0; i < 3; i++)
+	        placeHolderFloat[i] =(float) placeHolderInt16[i];
+}
+
 float *bspGetTripleValue(bspTF function)
 {
     switch (function)
@@ -76,9 +83,7 @@ float *bspGetTripleValue(bspTF function)
     default:
         return NULL;
     }
-
-    for (int i = 0; i < 3; i++)
-        placeHolderFloat[i] =(float) placeHolderInt16[i];
+    convertInt16PtrToFloatPrt();
     return placeHolderFloat;
 }
 

@@ -1,10 +1,10 @@
+#include <ble_project_interface.h>
 #include "enable.h"
 #include "stm32l4xx_hal.h"
 #include <stdlib.h>
 #include <string.h>
 #include "ble_commands.h"
 #include "time_manager.h"
-#include "ble_Project_interface.h"
 
 
 extern SPI_HandleTypeDef hspi3;
