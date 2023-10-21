@@ -8,6 +8,10 @@ BleMessage Messages[BM_COUNT];
 
 char MessageString[64];
 
+
+uint8_t uuidServiceDefault[]={0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
+uint8_t uuidServiceDefaultCharateristic[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x0FF,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
+
 uint8_t uuidServiceEnvinronment[]={0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};//Reversed UUID of the service
 uint8_t uuidEvironmentCharateristic[]={0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
 char valueEnvirontment[]="Name: Environment";
@@ -49,10 +53,13 @@ uint8_t uuidCharateristicGyroscopeAxisX[]={0x01,0x00,0x00,0x00,0x00,0x00,0x04,0x
 uint8_t uuidCharateristicGyroscopeAxisY[]={0x02,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
 uint8_t uuidCharateristicGyroscopeAxisZ[]={0x03,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
 
-void setupNewService(BleServices service,uint8_t * uuid, int attributes,uint8_t * charateristicId, char * name)
+void setupNewService(BleServices service,int attributes, char * name)
 {
-	Service[service].uuid = uuid;
-	Service[service].charateristicId = charateristicId;
+	uint8_t * tempServiceID = uuidServiceDefault, *tempCharateristicID = uuidServiceDefaultCharateristic;
+	tempServiceID[6] = service;
+	tempCharateristicID[6] = service;
+	Service[service].uuid = tempServiceID;
+	Service[service].charateristicId = tempCharateristicID;
 
 	addService(Service[service].uuid,
 			Service[service].handle,
@@ -116,7 +123,7 @@ void updateMessage(BleMessages msg, float data)
 
 void ble_setup()
 {
-	setupNewService(BS_ENVIRONMENT,uuidServiceEnvinronment,SET_ATTRIBUTES(1+2+3*2+3+3),uuidEvironmentCharateristic,valueEnvirontment);
+	setupNewService(BS_ENVIRONMENT,SET_ATTRIBUTES(1+2+3*2+3+3),valueEnvirontment);
 
 	setupNewMessage(BM_Temperature, BS_ENVIRONMENT, uuidCharateristicTemperature, valueTemperature);
 
@@ -124,7 +131,7 @@ void ble_setup()
 
 	setupNewMessage(BM_Pressure, BS_ENVIRONMENT, uuidCharateristicPressure, valuePressure);
 
-	setupNewService(BS_INTERTIAL,uuidServiceInertial,SET_ATTRIBUTES(1+2+3*2+3+3),uuidInertialCharateristic,valueInertial);
+	setupNewService(BS_INTERTIAL,SET_ATTRIBUTES(1+2+3*2+3+3),valueInertial);
 
 	setupNewMessage(BM_Accelero_x, BS_INTERTIAL, uuidCharateristicAccAxisX, axisX);
 
@@ -132,7 +139,7 @@ void ble_setup()
 
 	setupNewMessage(BM_Accelero_z, BS_INTERTIAL, uuidCharateristicAccAxisZ, axisZ);
 
-	setupNewService(BS_MAGNETIC,uuidServiceMagnetic,SET_ATTRIBUTES(1+2+3*3),uuidMagneticCharateristic,valueMagnetic);
+	setupNewService(BS_MAGNETIC,SET_ATTRIBUTES(1+2+3*3),valueMagnetic);
 
 	setupNewMessage(BM_Magneto_x, BS_MAGNETIC, uuidCharateristicMagneticAxisX, axisX);
 

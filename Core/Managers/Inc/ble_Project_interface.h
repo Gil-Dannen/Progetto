@@ -12,7 +12,8 @@
 
 typedef enum
 {
-	BS_ENVIRONMENT = 0,
+	BS_INVALID = 0,
+	BS_ENVIRONMENT,
 	BS_INTERTIAL,
 	BS_MAGNETIC,
 	BS_GYROSCOPE,
@@ -58,7 +59,7 @@ typedef struct
 }BleMessage;
 
 
-void setupNewService(BleServices service,uint8_t * uuid, int attributes,uint8_t * charateristicId, char * name);
+void setupNewService(BleServices service, int attributes, char * name);
 
 void setupNewMessage(BleMessages msg,BleServices service,uint8_t * uuid, char * name);
 
