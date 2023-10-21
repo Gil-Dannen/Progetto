@@ -102,15 +102,13 @@ void idle_loop(uint8_t deltaMs)
 		  updateMessage(BM_Humidity,humidity);
 		  updateMessage(BM_Pressure,pressure);
 
-		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCX_CHAR_HANDLE,X_VALUE,10,accelerometer[0]);
-		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCY_CHAR_HANDLE,Y_VALUE,10,accelerometer[1]);
-		  updateSignedMillesimal(INERTIAL_SERVICE_HANDLE,ACCZ_CHAR_HANDLE,Z_VALUE,10,accelerometer[2]);
+		  updateMessage(BM_Accelero_x, accelerometer[0]);
+		  updateMessage(BM_Accelero_y, accelerometer[1]);
+		  updateMessage(BM_Accelero_z, accelerometer[2]);
 
-
-
-		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGX_CHAR_HANDLE,X_VALUE,10,magnetometer[0]);
-		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGY_CHAR_HANDLE,Y_VALUE,10,magnetometer[1]);
-		  updateSignedMillesimal(MAGNETIC_SERVICE_HANDLE,MAGZ_CHAR_HANDLE,Z_VALUE,10,magnetometer[2]);
+		  updateMessage(BM_Magneto_x, magnetometer[0]);
+		  updateMessage(BM_Magneto_y, magnetometer[1]);
+		  updateMessage(BM_Magneto_z, magnetometer[2]);
 
 	  }
 }

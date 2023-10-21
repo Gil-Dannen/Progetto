@@ -23,68 +23,7 @@ uint8_t buffer[255];
 
 
 
-uint8_t UUID_INERTIAL_SERVICE[]={0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t INERTIAL_SERVICE_HANDLE[2];
 
-
-uint8_t UUID_CHAR_INERTIAL_NAME[]={0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t NAME_INERTIAL_HANDLE[2];
-uint8_t NAME_INERTIAL_VALUE[]={'{','\"','N','a','m','e','\"',':','\"','A','c','c','e','l','e','r','o','m','e','t','e','r','\"','}'};
-
-
-
-uint8_t UUID_CHAR_INERTIAL_ACCX[]={0x01,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t ACCX_CHAR_HANDLE[2];
-uint8_t ACCX_INERTIAL_VALUE[]={'{','\"','A','x','i','s','X','\"',':','\"','+','0','0','0','0','\"','}'};
-
-uint8_t UUID_CHAR_INERTIAL_ACCY[]={0x02,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t ACCY_CHAR_HANDLE[2];
-uint8_t ACCY_INERTIAL_VALUE[]={'{','\"','A','x','i','s','Y','\"',':','\"','+','0','0','0','0','\"','}'};
-
-uint8_t UUID_CHAR_INERTIAL_ACCZ[]={0x03,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t ACCZ_CHAR_HANDLE[2];
-uint8_t ACCZ_INERTIAL_VALUE[]={'{','\"','A','x','i','s','Z','\"',':','\"','+','0','0','0','0','\"','}'};
-
-uint8_t X_VALUE[]={'{','\"','A','x','i','s','X','\"',':','\"','+','0','0','0','0','\"','}'};
-uint8_t Y_VALUE[]={'{','\"','A','x','i','s','Y','\"',':','\"','+','0','0','0','0','\"','}'};
-uint8_t Z_VALUE[]={'{','\"','A','x','i','s','Z','\"',':','\"','+','0','0','0','0','\"','}'};
-uint8_t MIC_VALUE[]={'{','\"','M','i','c','r','o','p','h','o','n','e','\"',':','\"','+','0','0','0','0','\"','}'};
-
-
-uint8_t UUID_MAGNETIC_SERVICE[]={0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t MAGNETIC_SERVICE_HANDLE[2];
-
-uint8_t UUID_CHAR_MAGNETIC_NAME[]={0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t NAME_MAGNETIC_HANDLE[2];
-uint8_t NAME_MAGNETIC_VALUE[]={'{','\"','N','a','m','e','\"',':','\"','M','a','g','n','e','t','o','m','e','t','e','r','\"','}'};
-
-uint8_t UUID_CHAR_MAGNETIC_MAGX[]={0x01,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t MAGX_CHAR_HANDLE[2];
-
-uint8_t UUID_CHAR_MAGNETIC_MAGY[]={0x02,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t MAGY_CHAR_HANDLE[2];
-
-uint8_t UUID_CHAR_MAGNETIC_MAGZ[]={0x03,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t MAGZ_CHAR_HANDLE[2];
-
-
-
-
-uint8_t UUID_GYROSCOPE_SERVICE[]={0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t GYROSCOPE_SERVICE_HANDLE[2];
-
-uint8_t UUID_CHAR_GYROSCOPE_NAME[]={0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t NAME_GYROSCOPE_HANDLE[2];
-uint8_t NAME_GYROSCOPE_VALUE[]={'{','\"','N','a','m','e','\"',':','\"','G','y','r','o','s','c','o','p','e','\"','}'};
-
-uint8_t UUID_CHAR_GYROSCOPE_GYROX[]={0x01,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t GYROX_CHAR_HANDLE[2];
-
-uint8_t UUID_CHAR_GYROSCOPE_GYROY[]={0x02,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t GYROY_CHAR_HANDLE[2];
-
-uint8_t UUID_CHAR_GYROSCOPE_GYROZ[]={0x03,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
-uint8_t GYROZ_CHAR_HANDLE[2];
 
 uint16_t stackInitCompleteFlag=0;
 uint8_t* rxEvent;
@@ -174,75 +113,6 @@ void ble_init(){
 
 	ble_setup();
 
-	//let's add the second service
-	 addService(UUID_INERTIAL_SERVICE,INERTIAL_SERVICE_HANDLE,SET_ATTRIBUTES(1+2+3+3+3));//1 the service 2 the readable char e 3x3 the readable notifiable chars
-
-	//add the charachteristic of the name
-	 addCharacteristic(UUID_CHAR_INERTIAL_NAME,NAME_INERTIAL_HANDLE,INERTIAL_SERVICE_HANDLE,SET_CONTENT_LENGTH(24),READABLE);
-
-
-	 //set the characteristic
-	updateCharValue(INERTIAL_SERVICE_HANDLE,NAME_INERTIAL_HANDLE,0,SET_CONTENT_LENGTH(24),NAME_INERTIAL_VALUE);
-
-
-	//add the charachteristic of the accelerometer
-	 addCharacteristic(UUID_CHAR_INERTIAL_ACCX,ACCX_CHAR_HANDLE,INERTIAL_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(INERTIAL_SERVICE_HANDLE,ACCX_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),ACCX_INERTIAL_VALUE);
-
-
-	//add the charachteristic of the accelerometer Y
-	 addCharacteristic(UUID_CHAR_INERTIAL_ACCY,ACCY_CHAR_HANDLE,INERTIAL_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(INERTIAL_SERVICE_HANDLE,ACCY_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),ACCY_INERTIAL_VALUE);
-
-	//add the charachteristic of the accelerometer Z
-	 addCharacteristic(UUID_CHAR_INERTIAL_ACCZ,ACCZ_CHAR_HANDLE,INERTIAL_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(INERTIAL_SERVICE_HANDLE,ACCZ_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),ACCZ_INERTIAL_VALUE);
-
-
-
-
-
-
-	//let's add the third service
-	 addService(UUID_MAGNETIC_SERVICE,MAGNETIC_SERVICE_HANDLE,SET_ATTRIBUTES(1+2+3*3));//1 the service 2 the readable char e 3x3 the readable notifiable chars
-
-	//add the charachteristic of the name
-	 addCharacteristic(UUID_CHAR_MAGNETIC_NAME,NAME_MAGNETIC_HANDLE,MAGNETIC_SERVICE_HANDLE,SET_CONTENT_LENGTH(23),READABLE);
-
-
-	 //set the characteristic
-	updateCharValue(MAGNETIC_SERVICE_HANDLE,NAME_MAGNETIC_HANDLE,0,SET_CONTENT_LENGTH(23),NAME_MAGNETIC_VALUE);
-
-
-	//add the charachteristic of the accelerometer
-	 addCharacteristic(UUID_CHAR_MAGNETIC_MAGX,MAGX_CHAR_HANDLE,MAGNETIC_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(MAGNETIC_SERVICE_HANDLE,MAGX_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),X_VALUE);
-
-	//add the charachteristic of the accelerometer
-	 addCharacteristic(UUID_CHAR_MAGNETIC_MAGY,MAGY_CHAR_HANDLE,MAGNETIC_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(MAGNETIC_SERVICE_HANDLE,MAGY_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),Y_VALUE);
-
-	//add the charachteristic of the accelerometer
-	 addCharacteristic(UUID_CHAR_MAGNETIC_MAGZ,MAGZ_CHAR_HANDLE,MAGNETIC_SERVICE_HANDLE,SET_CONTENT_LENGTH(17),READABLE|NOTIFIBLE);
-
-
-	 //set the characteristic
-	updateCharValue(MAGNETIC_SERVICE_HANDLE,MAGZ_CHAR_HANDLE,0,SET_CONTENT_LENGTH(17),Z_VALUE);
 
 
 

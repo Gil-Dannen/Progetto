@@ -15,6 +15,7 @@ typedef enum
 	BS_ENVIRONMENT = 0,
 	BS_INTERTIAL,
 	BS_MAGNETIC,
+	BS_GYROSCOPE,
 	BS_COUNT
 
 }BleServices;
@@ -24,6 +25,16 @@ typedef enum
 	BM_Temperature,
 	BM_Humidity,
 	BM_Pressure,
+	BM_Magneto_x,
+	BM_Magneto_y,
+	BM_Magneto_z,
+	BM_Accelero_x,
+	BM_Accelero_y,
+	BM_Accelero_z,
+	BM_Gyroscope_x,
+	BM_Gyroscope_y,
+	BM_Gyroscope_z,
+
 	BM_COUNT,
 
 }BleMessages;
