@@ -59,8 +59,6 @@ float bspGetValue(bspF function)
 
 float *bspGetTripleValue(bspTF function)
 {
-    if (function >= BSPT_COUNT)
-        return NULL;
     switch (function)
     {
     case BSPT_gyro:
@@ -76,11 +74,11 @@ float *bspGetTripleValue(bspTF function)
         break;
 
     default:
-        break;
+        return NULL;
     }
 
     for (int i = 0; i < 3; i++)
-        placeHolderFloat[i] = placeHolderInt16[i];
+        placeHolderFloat[i] =(float) placeHolderInt16[i];
     return placeHolderFloat;
 }
 

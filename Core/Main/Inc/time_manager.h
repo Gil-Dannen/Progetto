@@ -5,7 +5,8 @@
 
 typedef enum
 {
-	TF_Main = 0,
+	TF_Blink = 0,
+	TF_SerialSend,
 	TF_COUNT
 
 }Timer_Function;

@@ -2,30 +2,14 @@
 #include "state_machine.h"
 #include "general_functions.h"
 #include "ble_Project_interface.h"
+#include "enable.h"
 
 
 static float temperature = 0, humidity = 0, pressure = 0,
 		*accelerometer = NULL, *magnetometer = NULL , *gyroscope = NULL;
 
-extern uint8_t INERTIAL_SERVICE_HANDLE[2];
-extern uint8_t ACCX_CHAR_HANDLE[2];
-extern uint8_t ACCY_CHAR_HANDLE[2];
-extern uint8_t ACCZ_CHAR_HANDLE[2];
-
-extern uint8_t MAGNETIC_SERVICE_HANDLE[2];
-
-extern uint8_t MAGX_CHAR_HANDLE[2];
-extern uint8_t MAGY_CHAR_HANDLE[2];
-extern uint8_t MAGZ_CHAR_HANDLE[2];
-
-extern uint8_t X_VALUE[];
-extern uint8_t Y_VALUE[];
-extern uint8_t Z_VALUE[];
-
 int update = 0;
 int dataAvailable = 0;
-
-
 
 uint8_t blinkStatus = 0;
 
@@ -64,13 +48,13 @@ void testBSPfunctions()
 
 void idle_enter()
 {
-    setTimer(TF_Main, testBSPfunctions, 3000);
+    setTimer(TF_SerialSend, testBSPfunctions, 3000);
 
     setDigital(MF_led2, GPIO_PIN_RESET);
 
     setDigital(MF_led1,GPIO_PIN_SET);
 
-    setTimer(TF_Main, blink, 500);
+    setTimer(TF_Blink, blink, 500);
 
 }
 
@@ -109,6 +93,10 @@ void idle_loop(uint8_t deltaMs)
 		  updateMessage(BM_Magneto_x, magnetometer[0]);
 		  updateMessage(BM_Magneto_y, magnetometer[1]);
 		  updateMessage(BM_Magneto_z, magnetometer[2]);
+
+		  updateMessage(BM_Gyroscope_x, gyroscope[0]);
+		  updateMessage(BM_Gyroscope_y, gyroscope[1]);
+		  updateMessage(BM_Gyroscope_z, gyroscope[2]);
 
 	  }
 }

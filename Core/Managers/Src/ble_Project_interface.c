@@ -8,7 +8,6 @@ BleMessage Messages[BM_COUNT];
 
 char MessageString[64];
 
-
 uint8_t uuidServiceDefault[]={0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
 uint8_t uuidServiceDefaultCharateristic[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x0FF,0x00,0x00,0x00,0x00,0x00,0x00,0x50,0x05,0x00};
 
@@ -120,5 +119,13 @@ void ble_setup()
 	setupNewMessage(BM_Magneto_y, BS_MAGNETIC, axisY);
 
 	setupNewMessage(BM_Magneto_z, BS_MAGNETIC, axisZ);
+
+	setupNewService(BS_GYROSCOPE,SET_ATTRIBUTES(1+2+3*3),valueGyroscope);
+
+	setupNewMessage(BM_Gyroscope_x, BS_GYROSCOPE, axisX);
+
+	setupNewMessage(BM_Gyroscope_y, BS_GYROSCOPE, axisY);
+
+	setupNewMessage(BM_Gyroscope_z, BS_GYROSCOPE, axisZ);
 
 }
