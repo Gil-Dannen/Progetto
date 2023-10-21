@@ -3,27 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ble_commands.h"
-
+#include "time_manager.h"
 #include "ble_Project_interface.h"
-
-
-
 
 
 extern SPI_HandleTypeDef hspi3;
 extern int dataAvailable;
-uint8_t deviceName[]={'S','T','M','3','2','S','o','c','c','i','a','3','3'};
-
-
+uint8_t deviceName[]={'P','r','o','g','e','t','t','o','L','i','g','m','a'};
 
 uint8_t buffer[255];
-
-
-
-
-
-
-
 
 uint16_t stackInitCompleteFlag=0;
 uint8_t* rxEvent;
@@ -37,25 +25,23 @@ void ble_init(){
 	int res;
 
 	while(!dataAvailable);
-	res=fetchBleEvent(rxEvent,EVENT_STARTUP_SIZE);
+		res=fetchBleEvent(rxEvent,EVENT_STARTUP_SIZE);
 
 	if(res==BLE_OK){
-	res=checkEventResp(rxEvent,EVENT_STATUP_DATA,EVENT_STARTUP_SIZE);
-	if(res==BLE_OK){
-	   stackInitCompleteFlag|=0x01;
+		res=checkEventResp(rxEvent,EVENT_STATUP_DATA,EVENT_STARTUP_SIZE);
+		if(res==BLE_OK)
+		   stackInitCompleteFlag|=0x01;
+
 	}
-	}
-	HAL_Delay(10);
+
+	sleep(10);
 	free(rxEvent);
-
-
 
 	//INIT GATT
 
 
-	if(BLE_command(ACI_GATT_INIT,sizeof(ACI_GATT_INIT),ACI_GATT_INIT_COMPLETE,sizeof(ACI_GATT_INIT_COMPLETE),0)==BLE_OK){
+	if(BLE_command(ACI_GATT_INIT,sizeof(ACI_GATT_INIT),ACI_GATT_INIT_COMPLETE,sizeof(ACI_GATT_INIT_COMPLETE),0)==BLE_OK)
 	   stackInitCompleteFlag|=0x02;
-	}
 	free(rxEvent);
 
 
@@ -69,79 +55,36 @@ void ble_init(){
 	}
 	free(rxEvent);
 
-
-
-
-
 	//SET THE NAME OF THE BOARD IN THE SERVICE CREATED AUTOMATICALLY
 	updateCharValue(GAP_SERVICE_HANDLE,GAP_CHAR_NAME_HANDLE,0,sizeof(deviceName),deviceName);
 	stackInitCompleteFlag|=0x08;
 	free(rxEvent);
 
-
 	//INIT AUTH
-
-
 	if(BLE_command(ACI_GAP_SET_AUTH,sizeof(ACI_GAP_SET_AUTH),ACI_GAP_SET_AUTH_RESP,sizeof(ACI_GAP_SET_AUTH_RESP),0)==BLE_OK){
 	   stackInitCompleteFlag|=0x10;
 	}
 	free(rxEvent);
 
-
-
-
 	//SET_TX_LEVEL
 
-	if(BLE_command(ACI_HAL_SET_TX_POWER_LEVEL,sizeof(ACI_HAL_SET_TX_POWER_LEVEL),ACI_HAL_SET_TX_POWER_LEVEL_COMPLETE,sizeof(ACI_HAL_SET_TX_POWER_LEVEL_COMPLETE),0)==BLE_OK){
+	if(BLE_command(ACI_HAL_SET_TX_POWER_LEVEL,sizeof(ACI_HAL_SET_TX_POWER_LEVEL),ACI_HAL_SET_TX_POWER_LEVEL_COMPLETE,sizeof(ACI_HAL_SET_TX_POWER_LEVEL_COMPLETE),0)==BLE_OK)
 	   stackInitCompleteFlag|=0x20;
-	}
+
 	free(rxEvent);
-
-
 
 	//SET SCAN RESPONSE DATA
 
-	if(BLE_command(HCI_LE_SET_SCAN_RESPONSE_DATA,sizeof(HCI_LE_SET_SCAN_RESPONSE_DATA),HCI_LE_SET_SCAN_RESPONSE_DATA_COMPLETE,sizeof(HCI_LE_SET_SCAN_RESPONSE_DATA_COMPLETE),0)==BLE_OK){
+	if(BLE_command(HCI_LE_SET_SCAN_RESPONSE_DATA,sizeof(HCI_LE_SET_SCAN_RESPONSE_DATA),HCI_LE_SET_SCAN_RESPONSE_DATA_COMPLETE,sizeof(HCI_LE_SET_SCAN_RESPONSE_DATA_COMPLETE),0)==BLE_OK)
 	   stackInitCompleteFlag|=0x40;
-	}
-	free(rxEvent);
 
+	free(rxEvent);
 
 	//This will start the advertisment,
 	setConnectable();
 
-
 	ble_setup();
 
-
-
-
-
-
-
-
-
-
-
-
-	//TOF SERVICE
-
-//	//add service of gyroscope
-//	addService(UUID_TOF_SERVICE,TOF_SERVICE_HANDLE,1+2);
-//	//add name service
-//	addCharacteristic(UUID_CHAR_TOF_NAME,NAME_TOF_HANDLE,TOF_SERVICE_HANDLE,SET_CONTENT_LENGTH(23),READABLE);
-//	//set name
-//	updateCharValue(TOF_SERVICE_HANDLE,NAME_TOF_HANDLE,0,SET_CONTENT_LENGTH(23),NAME_TOF_VALUE);
-
-
-
-
-
-
-	if(stackInitCompleteFlag==255){
-	  //turn on led blue if everything was fine
-	//  HAL_GPIO_WritePin(CPU_LED_GPIO_Port,CPU_LED_Pin,GPIO_PIN_SET);
-	}
 	return;
 }
 
@@ -153,7 +96,7 @@ int fetchBleEvent(uint8_t *container, int size){
   //Wait until it is available an event coming from the BLE module (GPIO PIN COULD CHANGE ACCORDING TO THE BOARD)
   if(HAL_GPIO_ReadPin(BLE_INT_GPIO_Port,BLE_INT_Pin)){
 
-  HAL_Delay(5);
+  sleep(5);
   //PIN_CS of SPI2 LOW
   HAL_GPIO_WritePin(BLE_CS_GPIO_Port,BLE_CS_Pin,0);
 
@@ -161,7 +104,7 @@ int fetchBleEvent(uint8_t *container, int size){
   //we send a byte containing a request of reading followed by 4 dummy bytes
   HAL_SPI_TransmitReceive(&hspi3,master_header,slave_header,5,1);
   HAL_GPIO_WritePin(BLE_CS_GPIO_Port,BLE_CS_Pin,1);
-  HAL_Delay(1);
+  sleep(1);
   HAL_GPIO_WritePin(BLE_CS_GPIO_Port,BLE_CS_Pin,0);
 
   HAL_SPI_TransmitReceive(&hspi3,master_header,slave_header,5,1);
@@ -299,185 +242,6 @@ void setConnectable(){
 	   free(localname);
 	   HAL_Delay(10);
 }
-
-
-
-void updateSignedMillesimal(uint8_t *service, uint8_t*characteristic,uint8_t *defaultValue,uint8_t offset, int16_t data){
-    uint8_t *newstring;
-    newstring=(uint8_t*)malloc(offset+7);
-    memcpy(newstring,defaultValue,offset);
-
-
-	//aumentare di 1 anche per il } e unire alla stringa la nuova stringa
-	int flagEmpty=0;
-	uint8_t numberInChar[7];
-	if(data<0){
-    numberInChar[0]=45;
-    data=-data;
-	}else{
-	numberInChar[0]=43;
-	}
-
-	numberInChar[1]=data/1000;
-    numberInChar[2]=(data-numberInChar[1]*1000)/100;
-    numberInChar[3]=(data-numberInChar[2]*100-numberInChar[1]*1000)/10;
-    numberInChar[4]=(data-numberInChar[2]*100-numberInChar[3]*10-numberInChar[1]*1000);
-
-
-    if(numberInChar[1]==0){
-    	flagEmpty++;
-
-    	if(numberInChar[2]==0){
-    		flagEmpty++;
-        	if(numberInChar[3]==0){
-        		flagEmpty++;
-        	}
-    	}
-    }
-
-
-
-    switch(flagEmpty){
-    case 0:{
-        numberInChar[1]+='0';
-    	numberInChar[2]+='0';
-    	numberInChar[3]+='0';
-    	numberInChar[4]+='0';
-    	numberInChar[5]='\"';
-    	numberInChar[6]='}';
-    }break;
-    case 1:{
-        numberInChar[1]='0'+numberInChar[2];
-    	numberInChar[2]='0'+numberInChar[3];
-    	numberInChar[3]='0'+numberInChar[4];
-    	numberInChar[4]='\"';
-    	numberInChar[5]='}';
-    	numberInChar[6]=' ';
-
-
-    }break;
-    case 2:{
-        numberInChar[1]='0'+numberInChar[3];
-    	numberInChar[2]='0'+numberInChar[4];
-    	numberInChar[3]='\"';
-    	numberInChar[4]='}';
-    	numberInChar[5]=' ';
-    	numberInChar[6]=' ';
-
-    }break;
-    case 3:{
-        numberInChar[1]='0'+numberInChar[4];
-    	numberInChar[2]='\"';
-    	numberInChar[3]='}';
-    	numberInChar[4]=' ';
-    	numberInChar[5]=' ';
-    	numberInChar[6]=' ';
-
-    }break;
-
-
-    default:{
-        numberInChar[1]+='0';
-    	numberInChar[2]+='0';
-    	numberInChar[3]+='0';
-    	numberInChar[4]+='0';
-    	numberInChar[5]='\"';
-    	numberInChar[6]='}';
-
-    }
-
-    }
-
-    memcpy(newstring+offset,numberInChar,7-flagEmpty);
-
-
-    //non 7 ma dipende
-	updateCharValue(service, characteristic, 0,offset+7-flagEmpty, newstring);
-	free(newstring);
-}
-
-void updateSignedFloat(uint8_t *service, uint8_t*characteristic,uint8_t *defaultValue,uint8_t offset, float data){
-	 uint8_t *newstring;
-	 newstring=(uint8_t*)malloc(offset+8);
-	 memcpy(newstring,defaultValue,offset);
-
-
-    int16_t newdata=(int16_t)(data*10);
-	uint8_t numberInChar[8];
-	int flagEmpty=0;
-	if(newdata<0){
-    numberInChar[0]=45;
-    newdata=-newdata;
-	}else{
-	numberInChar[0]=43;
-	}
-
-	numberInChar[1]=newdata/1000;
-    numberInChar[2]=(newdata-numberInChar[1]*1000)/100;
-    numberInChar[3]=(newdata-numberInChar[2]*100-numberInChar[1]*1000)/10;
-    numberInChar[5]=(newdata-numberInChar[2]*100-numberInChar[3]*10-numberInChar[1]*1000);
-
-    if(numberInChar[1]==0){
-    	flagEmpty++;
-
-    	if(numberInChar[2]==0){
-    		flagEmpty++;
-    	}
-    }
-
-    switch(flagEmpty){
-    case 0:{
-        numberInChar[1]+='0';
-    	numberInChar[2]+='0';
-    	numberInChar[3]+='0';
-    	numberInChar[4]='.';
-    	numberInChar[5]+='0';
-    	numberInChar[6]='\"';
-    	numberInChar[7]='}';
-    }break;
-    case 1:{
-        numberInChar[1]='0'+numberInChar[2];
-    	numberInChar[2]='0'+numberInChar[3];
-    	numberInChar[3]='.';
-    	numberInChar[4]='0'+numberInChar[5];
-    	numberInChar[5]='\"';
-    	numberInChar[6]='}';
-    	numberInChar[7]=' ';
-
-    }break;
-    case 2:{
-        numberInChar[1]='0'+numberInChar[3];
-    	numberInChar[2]='.';
-    	numberInChar[3]='0'+numberInChar[5];
-    	numberInChar[4]='\"';
-    	numberInChar[5]='}';
-    	numberInChar[6]=' ';
-    	numberInChar[7]=' ';
-
-    }break;
-    default:{
-        numberInChar[1]+='0';
-    	numberInChar[2]+='0';
-    	numberInChar[3]+='0';
-    	numberInChar[4]='.';
-    	numberInChar[5]+='0';
-    	numberInChar[6]='\"';
-    	numberInChar[7]='}';
-    }
-
-    }
-
-
-
-    memcpy(newstring+offset,numberInChar,8-flagEmpty);
-
-
-	updateCharValue(service, characteristic, 0, offset+8-flagEmpty, newstring);
-	free(newstring);
-}
-
-
-
 
 int BLE_command(uint8_t* command, int size, uint8_t* result, int sizeRes, int returnHandles){
 	   int response;
