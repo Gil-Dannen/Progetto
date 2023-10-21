@@ -46,6 +46,7 @@ typedef struct
 	uint8_t handle[2];
 	uint8_t charateristicHandle[2];
 	uint8_t * charateristicId;
+	uint8_t messageCount;
 
 }BleService;
 
@@ -61,7 +62,7 @@ typedef struct
 
 void setupNewService(BleServices service, int attributes, char * name);
 
-void setupNewMessage(BleMessages msg,BleServices service,uint8_t * uuid, char * name);
+void setupNewMessage(BleMessages msg,BleServices service, char * name);
 
 void updateMessage(BleMessages msg, float data);
 
