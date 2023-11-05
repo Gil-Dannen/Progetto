@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -167,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
         TextView magne =(TextView) findViewById(R.id.magne);
         TextView inerthia =(TextView) findViewById(R.id.iner);
         TextView gyro =(TextView)  findViewById(R.id.gyro);
-        temperatura.setText(rilevazione.getTemperatura());
-        pressione.setText(rilevazione.getPressione());
-        umidita.setText(rilevazione.getUmidita());
-        magne.setText(rilevazione.getMagne());
-        inerthia.setText(rilevazione.getInertia());
-        gyro.setText(rilevazione.getGyro());
+        temperatura.setText("Temperatura : "+rilevazione.getTemperatura());
+        pressione.setText("Pressione : "+rilevazione.getPressione());
+        umidita.setText("Umidità : "+rilevazione.getUmidita());
+        magne.setText("Magnetometro : "+rilevazione.getMagne());
+        inerthia.setText("Accelerometro : "+rilevazione.getInertia());
+        gyro.setText("Giroscopio : "+rilevazione.getGyro());
     }
 
 
@@ -249,11 +250,11 @@ public class MainActivity extends AppCompatActivity {
                         tempAxis = i;
                 });
 
-                rilevazione.commonSetter(objTemp,dataString.replaceAll("\\s", "").split(":")[1],tempAxis);
+                rilevazione.commonSetter(objTemp,dataString,tempAxis);
 
 
            }catch(Exception ex){
-               Log.e("Errore",ex.toString());
+               Log.e("Errore",ex.getMessage());
            }
         }
 
@@ -289,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
         // Funzione per leggere continuamente le caratteristiche in un ciclo
         private void readCharacteristicsInLoop(final BluetoothGatt gatt, final List<BluetoothGattCharacteristic> characteristics) {
 
-            final int delay = 1000; // Ritardo in millisecondi tra le letture
+            final int delay = 500; // Ritardo in millisecondi tra le letture
 
             final Runnable runnable = new Runnable() {
                 @Override
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED)
                         return;
 
-                    Log.i("Lettura.Caratteristiche :","In corso");
+                    //Log.i("Lettura.Caratteristiche :","In corso");
                     if (counter < characteristics.size()) {
 
                         try {
@@ -311,11 +312,12 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // Se hai letto tutte le caratteristiche, ripeti il ciclo
                         //Log.i("Stringa",rilevazione.toString());
-                        updateView();
+
                         if(!visible) {
                             testo.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
                         }
+                        updateView();
                         counter=0;
                         rilevazione.dump();
                     }

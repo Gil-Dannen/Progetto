@@ -1,6 +1,10 @@
 package com.example.progetto_elettronica;
 
 
+import static java.util.Arrays.asList;
+
+import android.util.Log;
+
 import java.util.ArrayList;
 
 enum BleObject {
@@ -23,11 +27,18 @@ public class Rilevazione {
 
 
     public Rilevazione() {
-        
+        gyro= new ArrayList<String>(asList("","",""));
+        magnetic= new ArrayList<String>(asList("","",""));
+        inertia= new ArrayList<String>(asList("","",""));
     }
 
     public void commonSetter(BleObject id, String val, int axis)
     {
+        if(((id==BleObject.Inertial || id == BleObject.Gyro || id == BleObject.Magnetic) &&
+                ( axis < 0 || axis > 2)) || val.contains("Name:") || val.isEmpty() || !val.contains(":"))
+            return;
+        val = val.replaceAll("\\s", "").split(":")[1];
+        Log.i("valore",val+axis);
         switch(id)
         {
             case Temperature:
@@ -40,19 +51,13 @@ public class Rilevazione {
                 setPressione(val);
                 break;
             case Gyro:
-                if(axis <0)
-                    return;
-                gyro.set(axis,val);
+                setGyro(val, axis);
                 break;
             case Inertial:
-                if(axis <0)
-                    return;
-                inertia.set(axis,val);
+                setInertia(val, axis);
                 break;
             case Magnetic:
-                if(axis <0)
-                    return;
-                magnetic.set(axis,val);
+                setMagne(val, axis);
                 break;
             default:
         }
@@ -117,9 +122,7 @@ public class Rilevazione {
         this.temperatura = "";
         this.umidita = "";
         this.pressione = "";
-        this.inertia.clear();
-        this.gyro.clear();
-        this.magnetic.clear();
+
     }
 
     @Override
