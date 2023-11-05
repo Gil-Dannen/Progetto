@@ -46,19 +46,20 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
     private boolean scanning;
-    private boolean isConnected=false;
+    private boolean isConnected = false;
     private Handler handler = new Handler();
-    private int counter=0;
+    private int counter = 0;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
     public static final int MY_PERMISSION = 100;
     private Rilevazione rilevazione;
     private String current;
     private Button button;
+    private Button button2;
     private LinearLayout testo;
-    private boolean visible=false;
-    private HashMap<BleObject,String> mapHelper;
-    private HashMap<Integer,String> axisMapHelper;
+    private boolean visible = false;
+    private HashMap<BleObject, String> mapHelper;
+    private HashMap<Integer, String> axisMapHelper;
     private BleObject objTemp;
     private int tempAxis;
 
@@ -71,23 +72,23 @@ public class MainActivity extends AppCompatActivity {
         bluetoothAdapter = manager.getAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         handler = new Handler();
-        rilevazione= new Rilevazione();
+        rilevazione = new Rilevazione();
         button = findViewById(R.id.Bottone);
-        testo=(LinearLayout) findViewById(R.id.Layout);
-
+        button2 = findViewById(R.id.Bottone2);
+        testo = (LinearLayout) findViewById(R.id.Layout);
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
-        mapHelper = new HashMap<BleObject,String>();
-        mapHelper.put(BleObject.Temperature,"Temperature");
-        mapHelper.put(BleObject.Humidity,"Humidity");
-        mapHelper.put(BleObject.Pressure,"Pressure");
-        mapHelper.put(BleObject.Inertial,"Inertia");
-        mapHelper.put(BleObject.Magnetic,"magnetic");
-        mapHelper.put(BleObject.Gyro,"gyroscope");
-        axisMapHelper = new HashMap<Integer ,String>();
-        axisMapHelper.put(0,"X");
-        axisMapHelper.put(1,"Y");
-        axisMapHelper.put(2,"Z");
+        mapHelper = new HashMap<BleObject, String>();
+        mapHelper.put(BleObject.Temperature, "Temperature");
+        mapHelper.put(BleObject.Humidity, "Humidity");
+        mapHelper.put(BleObject.Pressure, "Pressure");
+        mapHelper.put(BleObject.Inertial, "Inertia");
+        mapHelper.put(BleObject.Magnetic, "magnetic");
+        mapHelper.put(BleObject.Gyro, "gyroscope");
+        axisMapHelper = new HashMap<Integer, String>();
+        axisMapHelper.put(0, "X");
+        axisMapHelper.put(1, "Y");
+        axisMapHelper.put(2, "Z");
 
     }
 
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     private final ScanCallback leScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-           // Log.i("risultati",result.getDevice().toString());
+            // Log.i("risultati",result.getDevice().toString());
             if (!isConnected && result.getDevice().toString().equals("C8:18:76:8B:67:0B")) {
                 //Log.i("risultati","procede");
                 connectToBLEDevice();
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void scanLeDevice(View v) {
+        visible=false;
         button.setText("Ricerca");
         if (!scanning || !isConnected) {
             // Stops scanning after a predefined scan period.
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
             bluetoothLeScanner.stopScan(leScanCallback);
         }
     }
+
     private void startScanning() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= 31) {
@@ -155,28 +158,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void stopScanning() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-            Log.e("Errore :","Posizione non gradita");
+            Log.e("Errore :", "Posizione non gradita");
         }
         bluetoothLeScanner.stopScan(leScanCallback);
         //Log.i("Successo :","Scansione arestata con successo");
     }
 
-    private void updateView(){
-        TextView temperatura =(TextView) findViewById(R.id.tempe);
-        TextView pressione =(TextView) findViewById(R.id.pres);
-        TextView umidita =(TextView) findViewById(R.id.hum);
-        TextView magne =(TextView) findViewById(R.id.magne);
-        TextView inerthia =(TextView) findViewById(R.id.iner);
-        TextView gyro =(TextView)  findViewById(R.id.gyro);
-        temperatura.setText("Temperatura : "+rilevazione.getTemperatura());
-        pressione.setText("Pressione : "+rilevazione.getPressione());
-        umidita.setText("Umidità : "+rilevazione.getUmidita());
-        magne.setText("Magnetometro : "+rilevazione.getMagne());
-        inerthia.setText("Accelerometro : "+rilevazione.getInertia());
-        gyro.setText("Giroscopio : "+rilevazione.getGyro());
+    private void updateView() {
+        TextView temperatura = (TextView) findViewById(R.id.tempe);
+        TextView pressione = (TextView) findViewById(R.id.pres);
+        TextView umidita = (TextView) findViewById(R.id.hum);
+        TextView magne = (TextView) findViewById(R.id.magne);
+        TextView inerthia = (TextView) findViewById(R.id.iner);
+        TextView gyro = (TextView) findViewById(R.id.gyro);
+        temperatura.setText("Temperatura : " + rilevazione.getTemperatura());
+        pressione.setText("Pressione : " + rilevazione.getPressione());
+        umidita.setText("Umidità : " + rilevazione.getUmidita());
+        magne.setText(rilevazione.getMagne());
+        inerthia.setText(rilevazione.getInertia());
+        gyro.setText(rilevazione.getGyro());
     }
-
-
 
 
     // Metodo per connettersi a un dispositivo BLE specifico
@@ -184,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
         //Log.i("Inizio Connessione","dispositivo "+ deviceAddress);
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice("C8:18:76:8B:67:0B");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-           // Log.i("Esito","errato, niente permessi");
-            ActivityCompat.requestPermissions(this,new String[]{
+            // Log.i("Esito","errato, niente permessi");
+            ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.BLUETOOTH_CONNECT
-            },MY_PERMISSION);
+            }, MY_PERMISSION);
         }
         if (bluetoothGatt != null) {
             bluetoothGatt.close();
@@ -195,6 +196,29 @@ public class MainActivity extends AppCompatActivity {
         }
         bluetoothGatt = device.connectGatt(this, false, gattCallback);
 
+    }
+
+    private void disconnectBLEDevice() {
+        if (bluetoothGatt != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+            bluetoothGatt.disconnect();
+            bluetoothGatt.close();
+            bluetoothGatt = null; // Imposta la variabile BluetoothGatt su null per indicare che la connessione è stata chiusa.
+            Log.i("BLE", "Disconnesso dal dispositivo BLE");
+            isConnected=false;
+
+        }
+    }
+    public  void setInvisible(View v){
+        testo.setVisibility(View.GONE);
+        button.setText("Scan");
+        button.setVisibility(View.VISIBLE);
+        button2.setVisibility(View.GONE);
+
+        disconnectBLEDevice();
     }
     // Callback per la connessione al dispositivo BLE
 
@@ -252,7 +276,9 @@ public class MainActivity extends AppCompatActivity {
 
                 rilevazione.commonSetter(objTemp,dataString,tempAxis);
 
-
+                if(visible){
+                    updateView();
+                }
            }catch(Exception ex){
                Log.e("Errore",ex.getMessage());
            }
@@ -290,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
         // Funzione per leggere continuamente le caratteristiche in un ciclo
         private void readCharacteristicsInLoop(final BluetoothGatt gatt, final List<BluetoothGattCharacteristic> characteristics) {
 
-            final int delay = 500; // Ritardo in millisecondi tra le letture
+            final int delay = 85; // Ritardo in millisecondi tra le letture
 
             final Runnable runnable = new Runnable() {
                 @Override
@@ -314,12 +340,14 @@ public class MainActivity extends AppCompatActivity {
                         //Log.i("Stringa",rilevazione.toString());
 
                         if(!visible) {
+                            visible=true;
                             testo.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
+                            button2.setVisibility(View.VISIBLE);
+                            updateView();
                         }
-                        updateView();
                         counter=0;
-                        rilevazione.dump();
+
                     }
                     // Richiama il runnable con il ritardo specificato
                     handler.postDelayed(this, delay);

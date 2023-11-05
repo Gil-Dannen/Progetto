@@ -18,16 +18,29 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/Bottone2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="612dp"
+        android:text="Stop"
+        android:onClick="setInvisible"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="140dp"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -38,7 +51,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 1"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/hum"
@@ -48,7 +61,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 2"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/pres"
@@ -58,7 +71,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 3"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/gyro"
@@ -68,7 +81,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 4"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/magne"
@@ -78,7 +91,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 5"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/iner"
@@ -88,7 +101,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Testo non modificabile 6"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar

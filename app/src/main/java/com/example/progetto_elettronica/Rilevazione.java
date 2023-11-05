@@ -76,16 +76,25 @@ public class Rilevazione {
     }
 
     public String getInertia() {
-        return inertia.toString();
+        String format="Accelerometro :\n AsseX= "+inertia.get(0)+"\n";
+        format+="AsseY= "+inertia.get(1)+"\n";
+        format+="AsseZ= "+inertia.get(2);
+        return format;
     }
 
 
     public String getGyro() {
-        return gyro.toString();
+        String format="Giroscopio :\n AsseX= "+gyro.get(0)+"\n";
+        format+="AsseY= "+gyro.get(1)+"\n";
+        format+="AsseZ= "+gyro.get(2);
+        return format;
     }
 
     public String getMagne() {
-        return magnetic.toString();
+        String format="Magnetometro :\n AsseX= "+magnetic.get(0)+"\n";
+        format+="AsseY= "+magnetic.get(1)+"\n";
+        format+="AsseZ= "+magnetic.get(2);
+        return format;
     }
 
     public void setTemperatura(String temperatura) {
@@ -118,12 +127,7 @@ public class Rilevazione {
         magnetic.set(axis,val);
     }
 
-    public void dump(){
-        this.temperatura = "";
-        this.umidita = "";
-        this.pressione = "";
 
-    }
 
     @Override
     public String toString() {
