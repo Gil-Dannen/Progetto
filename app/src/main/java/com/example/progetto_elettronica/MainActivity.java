@@ -29,6 +29,9 @@ import android.os.Handler;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSION = 100;
     private Rilevazione rilevazione;
     private String current;
+    private Button button;
+    private LinearLayout testo;
+    private boolean visible=false;
 
 
     @Override
@@ -61,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         handler = new Handler();
         rilevazione= new Rilevazione();
-
+        button = findViewById(R.id.Bottone);
+        testo=(LinearLayout) findViewById(R.id.Layout);
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
 
@@ -75,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             if (!isConnected && result.getDevice().toString().equals("C8:18:76:8B:67:0B")) {
                 //Log.i("risultati","procede");
                 connectToBLEDevice();
+
             }/*else if(isConnected){
                 //Log.i("Conferma","Scansione terminata");
             }else;
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void scanLeDevice(View v) {
+        button.setText("Ricerca");
         if (!scanning || !isConnected) {
             // Stops scanning after a predefined scan period.
             handler.postDelayed(new Runnable() {
@@ -136,6 +145,21 @@ public class MainActivity extends AppCompatActivity {
         //Log.i("Successo :","Scansione arestata con successo");
     }
 
+    private void updateView(){
+        TextView temperatura =(TextView) findViewById(R.id.tempe);
+        TextView pressione =(TextView) findViewById(R.id.pres);
+        TextView umidita =(TextView) findViewById(R.id.hum);
+        TextView magne =(TextView) findViewById(R.id.magne);
+        TextView inerthia =(TextView) findViewById(R.id.iner);
+        TextView gyro =(TextView)  findViewById(R.id.gyro);
+        temperatura.setText(rilevazione.getTemperatura());
+        pressione.setText(rilevazione.getPressione());
+        umidita.setText(rilevazione.getUmidita());
+        magne.setText(rilevazione.getMagne());
+        inerthia.setText(rilevazione.getInertia());
+        gyro.setText(rilevazione.getGyro());
+    }
+
 
 
 
@@ -163,14 +187,15 @@ public class MainActivity extends AppCompatActivity {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
            // Log.i("Connessione In corso","Fin qui tutto nella norma");
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-              //  Log.i("Connesso", "Connessione avvenuta con successo");
+                Log.i("Connesso", "Connessione avvenuta con successo");
                 if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
                     isConnected = true;
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-                        Log.e("Errore", "Connessione non avvenuta con successo");
+                        //Log.e("Errore", "Connessione non avvenuta con successo");
                     }
                     stopScanning();
                     gatt.discoverServices();
+
                 }
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                //Log.i("Errore", "Connessione non avvenuta con successo");
@@ -283,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED)
                         return;
 
-                    //Log.i("Lettura.Caratteristiche :","In corso");
+                    Log.i("Lettura.Caratteristiche :","In corso");
                     if (counter < characteristics.size()) {
 
                         try {
@@ -297,6 +322,11 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // Se hai letto tutte le caratteristiche, ripeti il ciclo
                         //Log.i("Stringa",rilevazione.toString());
+                        updateView();
+                        if(!visible) {
+                            testo.setVisibility(View.VISIBLE);
+                            button.setVisibility(View.GONE);
+                        }
                         counter=0;
                         rilevazione.dump();
                     }

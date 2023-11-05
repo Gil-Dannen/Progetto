@@ -33,16 +33,19 @@ public class Rilevazione {
     }
 
     public String getInertia() {
-        return inertiaX;
+        String val="Accelerometro :   AsseX="+inertiaX+" AsseY="+ inertiaY + " AsseZ="+ inertiaZ;
+        return val;
     }
 
 
     public String getGyro() {
-        return gyroX;
+        String val="Giroscopio :   AsseX="+gyroX+" AsseY="+ gyroY + " AsseZ="+ gyroZ;
+        return val;
     }
 
     public String getMagne() {
-        return magneX;
+        String val="Magnetometro :   AsseX="+magneX +" AsseY="+ magneY + " AsseZ="+ magneZ;
+        return val;
     }
 
     public void setTemperatura(String temperatura) {
