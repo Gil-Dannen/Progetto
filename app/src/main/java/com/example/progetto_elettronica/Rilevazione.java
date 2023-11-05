@@ -1,23 +1,61 @@
 package com.example.progetto_elettronica;
 
+
+import java.util.ArrayList;
+
+enum BleObject {
+    Temperature,
+    Humidity,
+    Pressure,
+    Inertial,
+    Gyro,
+    Magnetic,
+}
+
 public class Rilevazione {
     private String temperatura;
     private String umidita;
     private String pressione;
-    private String inertiaX;
-    private String inertiaY;
-    private String inertiaZ;
-    private String gyroX;
-    private String gyroY;
-    private String gyroZ;
-    private String magneX;
-    private String magneY;
-    private String magneZ;
+    private ArrayList<String> inertia;
+    private ArrayList<String>  gyro;
+    private ArrayList<String>  magnetic;
 
 
 
     public Rilevazione() {
         
+    }
+
+    public void commonSetter(BleObject id, String val, int axis)
+    {
+        switch(id)
+        {
+            case Temperature:
+                setTemperatura(val);
+                break;
+            case Humidity:
+                setUmidita(val);
+                break;
+            case Pressure:
+                setPressione(val);
+                break;
+            case Gyro:
+                if(axis <0)
+                    return;
+                gyro.set(axis,val);
+                break;
+            case Inertial:
+                if(axis <0)
+                    return;
+                inertia.set(axis,val);
+                break;
+            case Magnetic:
+                if(axis <0)
+                    return;
+                magnetic.set(axis,val);
+                break;
+            default:
+        }
     }
 
     public String getTemperatura() {
@@ -33,19 +71,16 @@ public class Rilevazione {
     }
 
     public String getInertia() {
-        String val="Accelerometro :   AsseX="+inertiaX+" AsseY="+ inertiaY + " AsseZ="+ inertiaZ;
-        return val;
+        return inertia.toString();
     }
 
 
     public String getGyro() {
-        String val="Giroscopio :   AsseX="+gyroX+" AsseY="+ gyroY + " AsseZ="+ gyroZ;
-        return val;
+        return gyro.toString();
     }
 
     public String getMagne() {
-        String val="Magnetometro :   AsseX="+magneX +" AsseY="+ magneY + " AsseZ="+ magneZ;
-        return val;
+        return magnetic.toString();
     }
 
     public void setTemperatura(String temperatura) {
@@ -60,55 +95,31 @@ public class Rilevazione {
         this.pressione = pressione;
     }
 
-    public void setInertiaX(String inertiaX) {
-        this.inertiaX = inertiaX;
+    public void setInertia(String val, int axis) {
+        if(axis < 0)
+            return;
+        inertia.set(axis,val);
     }
 
-    public void setInertiaY(String inertiaY) {
-        this.inertiaY = inertiaY;
+    public void setGyro(String val, int axis) {
+        if(axis < 0)
+            return;
+        gyro.set(axis,val);
     }
 
-    public void setInertiaZ(String inertiaZ) {
-        this.inertiaZ = inertiaZ;
-    }
-
-    public void setGyroX(String gyroX) {
-        this.gyroX = gyroX;
-    }
-
-    public void setGyroY(String gyroY) {
-        this.gyroY = gyroY;
-    }
-
-    public void setGyroZ(String gyroZ) {
-        this.gyroZ = gyroZ;
-    }
-
-    public void setMagneX(String magneX) {
-        this.magneX = magneX;
-    }
-
-    public void setMagneY(String magneY) {
-        this.magneY = magneY;
-    }
-
-    public void setMagneZ(String magneZ) {
-        this.magneZ = magneZ;
+    public void setMagne(String val, int axis) {
+        if(axis < 0)
+            return;
+        magnetic.set(axis,val);
     }
 
     public void dump(){
         this.temperatura = "";
         this.umidita = "";
         this.pressione = "";
-        this.inertiaX = "";
-        this.inertiaY = "";
-        this.inertiaZ = "";
-        this.gyroX = "";
-        this.gyroY = "";
-        this.gyroZ = "";
-        this.magneX = "";
-        this.magneY = "";
-        this.magneZ = "";
+        this.inertia.clear();
+        this.gyro.clear();
+        this.magnetic.clear();
     }
 
     @Override
@@ -117,15 +128,9 @@ public class Rilevazione {
                 "temperatura=" + temperatura +
                 ", umidita=" + umidita +
                 ", pressione=" + pressione +
-                ", inertiaX=" + inertiaX +
-                ", inertiaY=" + inertiaY +
-                ", inertiaZ=" + inertiaZ +
-                ", gyroX=" + gyroX +
-                ", gyroY=" + gyroY +
-                ", gyroZ=" + gyroZ +
-                ", magneX=" + magneX +
-                ", magneY=" + magneY +
-                ", magneZ=" + magneZ +
+                ", inertia=" + inertia.toString() +
+                ", gyro=" + gyro.toString() +
+                ", magnetic=" + magnetic.toString() +
                 '}';
     }
 }

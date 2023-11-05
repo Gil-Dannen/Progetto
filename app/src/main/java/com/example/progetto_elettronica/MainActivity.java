@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private LinearLayout testo;
     private boolean visible=false;
+    private HashMap<BleObject,String> mapHelper;
+    private HashMap<Integer,String> axisMapHelper;
+    private BleObject objTemp;
+    private int tempAxis;
 
 
     @Override
@@ -69,8 +73,20 @@ public class MainActivity extends AppCompatActivity {
         rilevazione= new Rilevazione();
         button = findViewById(R.id.Bottone);
         testo=(LinearLayout) findViewById(R.id.Layout);
+
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
+        mapHelper = new HashMap<BleObject,String>();
+        mapHelper.put(BleObject.Temperature,"Temperature");
+        mapHelper.put(BleObject.Humidity,"Humidity");
+        mapHelper.put(BleObject.Pressure,"Pressure");
+        mapHelper.put(BleObject.Inertial,"Inertia");
+        mapHelper.put(BleObject.Magnetic,"magnetic");
+        mapHelper.put(BleObject.Gyro,"gyroscope");
+        axisMapHelper = new HashMap<Integer ,String>();
+        axisMapHelper.put(0,"X");
+        axisMapHelper.put(1,"Y");
+        axisMapHelper.put(2,"Z");
 
     }
 
@@ -82,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             if (!isConnected && result.getDevice().toString().equals("C8:18:76:8B:67:0B")) {
                 //Log.i("risultati","procede");
                 connectToBLEDevice();
-
             }/*else if(isConnected){
                 //Log.i("Conferma","Scansione terminata");
             }else;
@@ -220,49 +235,23 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-            if (dataString.contains("Temperature")) {
-                rilevazione.setTemperatura(dataString.replaceAll("\\s", "").split(":")[1]);
-                //Log.i("test",dataString.replaceAll("\\s","").split(":")[1]);
-            } else if (dataString.contains("Humidity")) {
-                rilevazione.setUmidita(dataString.replaceAll("\\s", "").split(":")[1]);
-            } else if (dataString.contains("Pressure")) {
-                rilevazione.setPressione(dataString.replaceAll("\\s", "").split(":")[1]);
-            } else if (dataString.contains("Inertia") || dataString.contains("magnetic") || dataString.contains("gyroscope")) {
-                current=dataString.replaceAll("\\s","").split(":")[1];
-                //Log.i("test",dataString.replaceAll("\\s","").split(":")[1]);
-            }
+                mapHelper.forEach((bleObject, s) ->
+                {
+                    if(dataString.contains(s))
+                        objTemp = bleObject;
+                });
 
-               if (dataString.contains("X")) {
-                   switch (current) {
-                       case "Inertia":
-                           rilevazione.setInertiaX(dataString.replaceAll("\\s", "").split(":")[1]);
+                tempAxis = -1;
 
-                       case "magnetic":
-                           rilevazione.setMagneX(dataString.replaceAll("\\s", "").split(":")[1]);
-                       case "gyroscope":
-                           rilevazione.setGyroX(dataString.replaceAll("\\s", "").split(":")[1]);
-                   }
-               } else if (dataString.contains("Y")) {
-                   switch (current) {
-                       case "Inertia":
-                           rilevazione.setInertiaY(dataString.replaceAll("\\s", "").split(":")[1]);
+                axisMapHelper.forEach((i, s) ->
+                {
+                    if(dataString.contains(s))
+                        tempAxis = i;
+                });
 
-                       case "magnetic":
-                           rilevazione.setMagneY(dataString.replaceAll("\\s", "").split(":")[1]);
-                       case "gyroscope":
-                           rilevazione.setGyroY(dataString.replaceAll("\\s", "").split(":")[1]);
-                   }
+                rilevazione.commonSetter(objTemp,dataString.replaceAll("\\s", "").split(":")[1],tempAxis);
 
-               } else if (dataString.contains("Z"))
-                   switch (current) {
-                       case "Inertia":
-                           rilevazione.setInertiaZ(dataString.replaceAll("\\s", "").split(":")[1]);
 
-                       case "magnetic":
-                           rilevazione.setMagneZ(dataString.replaceAll("\\s", "").split(":")[1]);
-                       case "gyroscope":
-                           rilevazione.setGyroZ(dataString.replaceAll("\\s", "").split(":")[1]);
-                   }
            }catch(Exception ex){
                Log.e("Errore",ex.toString());
            }
