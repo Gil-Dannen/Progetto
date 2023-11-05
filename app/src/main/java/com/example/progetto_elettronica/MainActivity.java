@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
         TextView magne =(TextView) findViewById(R.id.magne);
         TextView inerthia =(TextView) findViewById(R.id.iner);
         TextView gyro =(TextView)  findViewById(R.id.gyro);
-        temperatura.setText(rilevazione.getTemperatura());
-        pressione.setText(rilevazione.getPressione());
-        umidita.setText(rilevazione.getUmidita());
+        temperatura.setText("Temperatura: "+rilevazione.getTemperatura());
+        pressione.setText("Pressione: "+rilevazione.getPressione());
+        umidita.setText("Umidità: "+rilevazione.getUmidita());
         magne.setText(rilevazione.getMagne());
         inerthia.setText(rilevazione.getInertia());
         gyro.setText(rilevazione.getGyro());
